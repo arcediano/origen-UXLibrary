@@ -1,0 +1,108 @@
+/**
+ * @file tokens.css
+ * @description Design Tokens oficiales de Origen — Paleta "Índigo y Salvia" v2.0
+ *
+ * INSTRUCCIONES DE CONSUMO:
+ *   Importar en el entry-point de cada proyecto que use @origen/ux-library:
+ *
+ *   // layout.tsx (Next.js) o main.tsx (Vite)
+ *   import '@origen/ux-library/styles';
+ *
+ * PERSONALIZACIÓN (Theming):
+ *   Para sobreescribir los valores en un proyecto, redefine las variables
+ *   DESPUÉS de la importación de este archivo en tu propio CSS:
+ *
+ *   :root {
+ *     --bosque: 200 80% 25%; /* ← overrides el color primario
+ *   }
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* =========================================================
+       PALETA "ÍNDIGO Y SALVIA" — Manual de Marca Origen v2.0
+       ========================================================= */
+
+    /* --- Primarios (Manual §3.1) --- */
+    --bosque:  221 47% 20%;   /* #1B2A4B — Índigo Marino  → H1, botón primario */
+    --pino:    214 41% 31%;   /* #2E4A6E — Azul Pizarra   → H2, nav activo     */
+    --hoja:    133 20% 38%;   /* #4E7456 — Verde Salvia   → H3, éxito, enlaces */
+    --pradera: 211 35% 57%;   /* #6B90B8 — Azul Niebla    → Interactivos       */
+    --menta:   39  53% 54%;   /* #C89B4C — Oro Envejecido → CTA premium, acento*/
+    --crema:   228 38% 98%;   /* #F8F9FC — Lienzo Frío    → Fondo app          */
+
+    /* --- Apoyo (Manual §3.2) --- */
+    --oscuro:  221 49% 10%;   /* #0D1626 — Tinta  → Texto principal            */
+    --pastel:  213 38% 94%;   /* #E8EEF5 — Bruma  → Fondos suaves, separadores */
+
+    /* --- Estados Hover --- */
+    --hover-bosque:  221 47% 13%;  /* #0F1B30 */
+    --hover-pradera: 211 35% 48%;  /* #5B7FA6 */
+    --hover-menta:   39  53% 44%;  /* #A47A30 */
+
+    /* =========================================================
+       VARIABLES DEL SISTEMA (shadcn/ui compatible)
+       ========================================================= */
+
+    /* Fondo y texto */
+    --background: var(--crema);
+    --foreground:  var(--oscuro);
+
+    /* Tarjetas y popovers */
+    --card:             0 0% 100%;
+    --card-foreground:  var(--oscuro);
+    --popover:          0 0% 100%;
+    --popover-foreground: var(--oscuro);
+
+    /* Acciones — WCAG Contrast Ratios */
+    --primary:            var(--bosque);   /* 12.4:1 AAA con blanco  */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary:            var(--pradera); /* 5.6:1 AA  con tinta   */
+    --secondary-foreground: var(--oscuro);
+
+    --accent:            var(--menta);     /* Solo sobre fondos oscuros */
+    --accent-foreground: 0 0% 100%;
+
+    --muted:            var(--pastel);     /* 4.8:1 AA con salvia    */
+    --muted-foreground: var(--hoja);
+
+    --destructive:            0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Bordes e inputs */
+    --border: 214 25% 85%;   /* #C5D3E6 */
+    --input:  214 25% 85%;
+    --ring:   var(--menta);
+
+    /* Radio de borde base */
+    --radius: 0.5rem;        /* 8px */
+
+    /* Tipografía */
+    --font-sans:  Arial, "Helvetica Neue", Helvetica, sans-serif;
+    --font-serif: Georgia, "Times New Roman", serif;
+  }
+
+  /* =========================================================
+     ESTILOS BASE GLOBALES
+     ========================================================= */
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
