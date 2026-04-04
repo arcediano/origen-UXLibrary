@@ -45,28 +45,28 @@ export interface InputProps
 
 const variantClasses = (error?: string, success?: boolean) => ({
   default: cn(
-    "bg-white border border-origen-pradera/30 hover:border-origen-hoja focus:border-origen-pradera",
+    "bg-surface-alt border border-border-subtle hover:border-origen-pradera/55 focus:border-origen-pradera",
     error && "border-red-500 hover:border-red-600",
-    success && !error && "border-green-500"
+    success && !error && "border-origen-hoja"
   ),
   outline: cn(
-    "bg-transparent border-2 border-origen-bosque/30 hover:border-origen-bosque/50 focus:border-origen-pradera",
+    "bg-transparent border-2 border-origen-bosque/20 hover:border-origen-bosque/40 focus:border-origen-pradera",
     error && "border-red-500",
-    success && !error && "border-green-500"
+    success && !error && "border-origen-hoja"
   ),
   filled: cn(
-    "bg-origen-crema border border-transparent hover:bg-origen-pastel focus:bg-white focus:border-origen-pradera",
+    "bg-origen-crema border border-transparent hover:bg-origen-pastel/75 focus:bg-white focus:border-origen-pradera",
     error && "bg-red-50 border-red-500",
-    success && !error && "bg-green-50 border-green-500"
+    success && !error && "bg-origen-pastel/45 border-origen-hoja"
   ),
   minimal: cn(
     "bg-transparent border-b-2 border-origen-pradera/30 hover:border-origen-hoja focus:border-origen-pradera rounded-none",
     error && "border-red-500",
-    success && !error && "border-green-500"
+    success && !error && "border-origen-hoja"
   ),
 });
 
-const sizeClasses = { sm: "h-9 text-xs", md: "h-11 text-sm", lg: "h-12 text-base" };
+const sizeClasses = { sm: "h-10 text-small", md: "h-11 text-small", lg: "h-12 text-body" };
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
@@ -143,7 +143,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <label
                 htmlFor={inputId}
                 className={cn(
-                  "block text-sm font-medium text-origen-bosque",
+                  "block text-small font-semibold text-origen-bosque",
                   disabled && "opacity-50 cursor-not-allowed",
                   error && "text-red-600"
                 )}
@@ -156,9 +156,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
             {tooltip && (
               <div className="group relative">
-                <Info className="h-4 w-4 text-gray-400 cursor-help" aria-hidden />
+                <Info className="h-4 w-4 cursor-help text-text-subtle" aria-hidden />
                 <div
-                  className="absolute left-0 top-6 z-50 hidden group-hover:block w-56 p-2 rounded-lg bg-origen-oscuro text-white text-xs shadow-lg"
+                  className="absolute left-0 top-6 z-50 hidden w-56 rounded-xl bg-origen-oscuro p-2.5 text-micro text-white shadow-origen-lg group-hover:block"
                   role="tooltip"
                 >
                   {tooltip}
@@ -174,9 +174,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <div
               className={cn(
                 "absolute top-1/2 -translate-y-1/2 left-3 flex items-center pointer-events-none z-10",
-                isFocused ? "text-origen-pradera" : "text-gray-400",
+                isFocused ? "text-origen-pradera" : "text-text-subtle",
                 error && "text-red-500",
-                success && !error && "text-green-500"
+                success && !error && "text-origen-hoja"
               )}
             >
               {React.isValidElement(leftIcon)
@@ -199,9 +199,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-busy={loading}
             className={cn(
               "flex w-full rounded-xl transition-all duration-200",
-              "text-origen-oscuro placeholder:text-gray-400",
-              "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-50",
-              "focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+              "text-origen-oscuro placeholder:text-text-subtle",
+              "disabled:cursor-not-allowed disabled:bg-origen-nube disabled:opacity-50",
+              "focus:outline-none focus:ring-2 focus:ring-origen-pradera/45",
               variants[variant],
               sizeClasses[inputSize],
               paddingLeft,
@@ -213,7 +213,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           {/* Right elements */}
           <div className="absolute top-1/2 -translate-y-1/2 right-3 flex items-center gap-1 z-10">
-            {validationState === "success" && <Check  className={cn(iconSize, "text-green-500")} />}
+            {validationState === "success" && <Check  className={cn(iconSize, "text-origen-hoja")} />}
             {validationState === "loading" && <Loader2 className={cn(iconSize, "animate-spin text-origen-pradera")} />}
             {validationState === "error"   && <AlertCircle className={cn(iconSize, "text-red-500")} />}
             {isPassword && !validationState && (
@@ -228,7 +228,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               </Button>
             )}
             {rightIcon && !validationState && !isPassword && (
-              <span className="text-gray-400">
+              <span className="text-text-subtle">
                 {React.isValidElement(rightIcon)
                   ? React.cloneElement(rightIcon as React.ReactElement<{ className?: string }>, { className: iconSize })
                   : rightIcon}
@@ -252,21 +252,21 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
               {error && (
-                <p id={errorId} className="text-xs text-red-600 flex items-center gap-1" role="alert">
+                <p id={errorId} className="flex items-center gap-1 text-micro text-red-600" role="alert">
                   <AlertCircle className="h-3 w-3 shrink-0" aria-hidden />
                   {error}
                 </p>
               )}
               {helperText && !error && (
-                <p id={helperId} className="text-xs text-gray-500">{helperText}</p>
+                <p id={helperId} className="text-micro text-text-subtle">{helperText}</p>
               )}
             </div>
             {showCharCount && maxLength && (
               <span className={cn(
-                "text-xs tabular-nums",
+                "text-micro tabular-nums",
                 charCount === maxLength ? "text-red-600"
                   : charCount > maxLength * 0.9 ? "text-amber-600"
-                  : "text-gray-500"
+                  : "text-text-subtle"
               )}>
                 {charCount}/{maxLength}
               </span>
@@ -293,8 +293,8 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
     <div className="space-y-3">
       {(groupLabel || groupDescription) && (
         <div className="space-y-1">
-          {groupLabel    && <h4 className="text-sm font-semibold text-origen-bosque">{groupLabel}</h4>}
-          {groupDescription && <p className="text-xs text-gray-500">{groupDescription}</p>}
+          {groupLabel    && <h4 className="text-small font-semibold text-origen-bosque">{groupLabel}</h4>}
+          {groupDescription && <p className="text-micro text-text-subtle">{groupDescription}</p>}
         </div>
       )}
       <div

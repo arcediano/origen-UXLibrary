@@ -1,6 +1,6 @@
 /**
  * @file tokens.css
- * @description Design Tokens oficiales de Origen — Paleta "Índigo y Salvia" v2.0
+ * @description Design Tokens oficiales de Origen — Paleta "Bosque Comercial" v1
  *
  * INSTRUCCIONES DE CONSUMO:
  *   Importar en el entry-point de cada proyecto que use @origen/ux-library:
@@ -23,26 +23,36 @@
 
 @layer base {
   :root {
-    /* =========================================================
-       PALETA "ÍNDIGO Y SALVIA" — Manual de Marca Origen v2.0
+     /* =========================================================
+       PALETA "BOSQUE COMERCIAL" — Manual de Marca Origen v5.0
        ========================================================= */
 
-    /* --- Primarios (Manual §3.1) --- */
-    --bosque:  221 47% 20%;   /* #1B2A4B — Índigo Marino  → H1, botón primario */
-    --pino:    214 41% 31%;   /* #2E4A6E — Azul Pizarra   → H2, nav activo     */
-    --hoja:    133 20% 38%;   /* #4E7456 — Verde Salvia   → H3, éxito, enlaces */
-    --pradera: 211 35% 57%;   /* #6B90B8 — Azul Niebla    → Interactivos       */
-    --menta:   39  53% 54%;   /* #C89B4C — Oro Envejecido → CTA premium, acento*/
-    --crema:   228 38% 98%;   /* #F8F9FC — Lienzo Frío    → Fondo app          */
+     /* --- Primarios (comercial + natural) --- */
+     --bosque:  156 46% 24%;   /* CTA primario y marca */
+     --pino:    156 40% 33%;   /* Navegacion y bloques fuertes */
+     --hoja:    155 38% 41%;   /* Exito, links, estados positivos */
+     --pradera: 156 49% 63%;   /* Interacciones secundarias */
+     --menta:   31  70% 62%;   /* Acento comercial premium */
+     --crema:   42  52% 97%;   /* Fondo base mas calido y luminoso */
+     --mandarina: 34 92% 60%;  /* Oferta / accion destacada */
 
-    /* --- Apoyo (Manual §3.2) --- */
-    --oscuro:  221 49% 10%;   /* #0D1626 — Tinta  → Texto principal            */
-    --pastel:  213 38% 94%;   /* #E8EEF5 — Bruma  → Fondos suaves, separadores */
+     /* --- Extendidos comerciales --- */
+     --sol:      45 95% 56%;   /* Precio/beneficio */
+     --cereza:  352 72% 58%;   /* Urgencia y favoritos */
+     --nube:    150 35% 98%;   /* Superficies ultra claras */
+     --tierra:  156 40% 33%;   /* Alias de pino */
+     --arena:    31 70% 62%;   /* Alias de menta */
+     --texto-suave: 155 16% 46%;
+
+     /* --- Apoyo --- */
+     --oscuro:  158 40% 11%;   /* Texto principal */
+     --pastel:  152 52% 92%;   /* Fondos suaves y chips */
 
     /* --- Estados Hover --- */
-    --hover-bosque:  221 47% 13%;  /* #0F1B30 */
-    --hover-pradera: 211 35% 48%;  /* #5B7FA6 */
-    --hover-menta:   39  53% 44%;  /* #A47A30 */
+     --hover-bosque:  156 48% 19%;
+     --hover-pradera: 156 46% 56%;
+     --hover-menta:    31 64% 54%;
+     --hover-tierra:  156 37% 28%;
 
     /* =========================================================
        VARIABLES DEL SISTEMA (shadcn/ui compatible)
@@ -50,7 +60,16 @@
 
     /* Fondo y texto */
     --background: var(--crema);
-    --foreground:  var(--oscuro);
+    --foreground: var(--oscuro);
+
+    /* Tokens semanticos de superficie */
+    --surface: var(--crema);
+    --surface-alt: 0 0% 100%;
+    --surface-raised: 0 0% 100%;
+    --border-subtle: 156 26% 86%;
+    --border-strong: var(--hoja);
+    --text-subtle: var(--texto-suave);
+    --text-disabled: 156 12% 62%;
 
     /* Tarjetas y popovers */
     --card:             0 0% 100%;
@@ -62,29 +81,46 @@
     --primary:            var(--bosque);   /* 12.4:1 AAA con blanco  */
     --primary-foreground: 0 0% 100%;
 
-    --secondary:            var(--pradera); /* 5.6:1 AA  con tinta   */
+    --secondary:            var(--pradera);
     --secondary-foreground: var(--oscuro);
 
-    --accent:            var(--menta);     /* Solo sobre fondos oscuros */
+    --accent:            var(--menta);
     --accent-foreground: 0 0% 100%;
 
-    --muted:            var(--pastel);     /* 4.8:1 AA con salvia    */
+    --muted:            var(--pastel);
     --muted-foreground: var(--hoja);
 
     --destructive:            0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Bordes e inputs */
-    --border: 214 25% 85%;   /* #C5D3E6 */
-    --input:  214 25% 85%;
-    --ring:   var(--menta);
+    --border: 156 26% 86%;
+    --input:  156 26% 86%;
+    --ring:   var(--pradera);
 
     /* Radio de borde base */
     --radius: 0.5rem;        /* 8px */
 
-    /* Tipografía */
-    --font-sans:  Arial, "Helvetica Neue", Helvetica, sans-serif;
-    --font-serif: Georgia, "Times New Roman", serif;
+    /* Tipografia comercial */
+    --font-sans: "Manrope", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
+    --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+
+    /* Escala tipografica responsive */
+    --fs-h1: clamp(2rem, 5vw, 3.25rem);
+    --fs-h2: clamp(1.6rem, 3.8vw, 2.4rem);
+    --fs-h3: clamp(1.25rem, 2.8vw, 1.7rem);
+    --fs-body: clamp(1rem, 1.1vw, 1.0625rem);
+    --fs-small: clamp(0.875rem, 1vw, 0.9375rem);
+    --fs-micro: 0.75rem;
+
+    --lh-tight: 1.15;
+    --lh-heading: 1.25;
+    --lh-body: 1.6;
+    --lh-relaxed: 1.75;
+
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
   }
 
   /* =========================================================
@@ -102,7 +138,17 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    line-height: var(--lh-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Evita zoom de inputs en iOS y mejora usabilidad tactil */
+  @media (hover: none) and (pointer: coarse) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+    select,
+    textarea {
+      font-size: 16px;
+    }
   }
 }

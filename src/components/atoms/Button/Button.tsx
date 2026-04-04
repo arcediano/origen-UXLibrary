@@ -21,43 +21,41 @@ const buttonVariants = cva(
   cn(
     "inline-flex items-center justify-center",
     "rounded-xl font-semibold transition-all duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-origen-pradera/50",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-origen-pradera/45",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:scale-[0.98]",
-    "w-full sm:w-auto"
+    "w-full sm:w-auto shadow-subtle"
   ),
   {
     variants: {
       variant: {
         primary: cn(
-          "bg-origen-bosque text-white",
-          "hover:bg-hover-bosque",
-          "border border-origen-pino"
+          "border border-origen-pino/40",
+          "bg-gradient-origen text-white",
+          "hover:brightness-[1.03] hover:shadow-origen"
         ),
         secondary: cn(
-          "bg-origen-pradera text-origen-oscuro",
-          "hover:bg-origen-hoja hover:text-white",
-          "border border-origen-hoja"
+          "border border-origen-pradera/45",
+          "bg-origen-pradera/22 text-origen-bosque",
+          "hover:bg-origen-pradera/32 hover:text-origen-pino"
         ),
         outline: cn(
-          "bg-transparent text-origen-bosque",
-          "border-2 border-origen-bosque",
-          "hover:bg-origen-crema hover:border-origen-pradera"
+          "border border-border-subtle bg-surface-alt text-origen-bosque",
+          "hover:border-origen-pradera/55 hover:bg-origen-pastel/70"
         ),
         ghost: cn(
-          "bg-transparent text-origen-bosque",
-          "hover:bg-origen-crema"
+          "bg-transparent text-origen-bosque shadow-none",
+          "hover:bg-origen-pastel/60"
         ),
         destructive: cn(
-          "bg-red-600 text-white",
-          "hover:bg-red-700",
-          "border border-red-500"
+          "border border-origen-cereza/70 bg-origen-cereza text-white",
+          "hover:brightness-95"
         ),
       },
       size: {
-        sm:      "h-9 px-4 text-sm gap-2 rounded-lg",
-        md:      "h-10 px-5 text-sm gap-2.5 rounded-xl",
-        lg:      "h-11 px-6 text-base gap-3 rounded-xl",
+        sm:      "h-10 px-4 gap-2 rounded-lg text-small",
+        md:      "h-11 px-5 gap-2.5 rounded-xl text-small",
+        lg:      "h-12 px-6 gap-3 rounded-xl text-body",
         icon:    "h-10 w-10 p-0 rounded-xl",
         "icon-sm": "h-8 w-8 p-0 rounded-lg",
       },

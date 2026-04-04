@@ -35,6 +35,7 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
   const [position, setPosition] = React.useState<"top" | "bottom">("bottom");
   const [styles, setStyles]     = React.useState<React.CSSProperties>({});
   const [mounted, setMounted]   = React.useState(false);
+  const tooltipId               = React.useId();
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const timerRef   = React.useRef<ReturnType<typeof setTimeout>>();
 
@@ -58,6 +59,10 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
 
   const open  = () => { clearTimeout(timerRef.current); calculatePosition(); setIsOpen(true); };
   const close = () => { timerRef.current = setTimeout(() => setIsOpen(false), 200); };
+  const closeImmediately = () => {
+    clearTimeout(timerRef.current);
+    setIsOpen(false);
+  };
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -74,18 +79,30 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
     <div
       ref={triggerRef}
       className={cn("relative inline-block", className)}
-      onMouseEnter={open}
-      onMouseLeave={close}
     >
-      <div className="inline-flex items-center justify-center cursor-help text-gray-400 hover:text-origen-pradera transition-colors">
+      <button
+        type="button"
+        className="inline-flex items-center justify-center cursor-help text-text-subtle transition-colors hover:text-origen-pradera focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2"
+        aria-label="Mostrar ayuda"
+        aria-describedby={isOpen ? tooltipId : undefined}
+        onMouseEnter={open}
+        onMouseLeave={close}
+        onFocus={open}
+        onBlur={closeImmediately}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            closeImmediately();
+          }
+        }}
+      >
         <HelpCircle className={sizeMap[size]} aria-hidden />
-      </div>
+      </button>
 
       {isOpen && mounted &&
         createPortal(
           <div className="fixed inset-0 pointer-events-none z-[9999999]">
             <div style={styles} className="absolute w-72">
-              <div className="relative bg-origen-oscuro rounded-xl shadow-2xl border border-origen-pradera/20 overflow-hidden">
+              <div id={tooltipId} role="tooltip" className="relative bg-origen-oscuro rounded-xl shadow-2xl border border-origen-pradera/20 overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
                 <div className="p-4">
                   <p className="text-sm font-semibold text-origen-crema mb-1">{content}</p>
