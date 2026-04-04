@@ -5,5 +5,5 @@
  *
  * @see origen-UXLibrary/src/components/atoms/Separator/Separator.tsx
  */
-export { Separator } from '@ux-lib/components/atoms/Separator/Separator';
-export type { SeparatorProps } from '@ux-lib/components/atoms/Separator/Separator';
+export { Separator } from '../../../components/atoms/Separator';
+export type { SeparatorProps } from '../../../components/atoms/Separator';

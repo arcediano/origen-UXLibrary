@@ -11,13 +11,10 @@ import { cn } from '../../../lib/utils';
 import {
   CheckCircle2,
   Circle,
-  ChevronRight,
-  Loader2,
   ArrowRight,
   ArrowLeft,
 } from 'lucide-react';
 import { Button } from './button';
-import { successStates, warningStates } from '../../../lib/utils/colors';
 
 // ============================================================================
 // TIPOS
@@ -119,7 +116,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       }
     };
 
-    const getStepIcon = (step: Step, index: number) => {
+    const getStepIcon = (step: Step, _index: number) => {
       if (step.status === 'completed') {
         return (
           <CheckCircle2

@@ -13,10 +13,7 @@ import {
   Clock, 
   XCircle, 
   Package, 
-  FileText,
-  Sparkles,
-  Star,
-  Info
+  FileText
 } from 'lucide-react';
 
 // ============================================================================

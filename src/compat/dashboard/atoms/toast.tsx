@@ -11,7 +11,34 @@ import * as ToastPrimitives from '@radix-ui/react-toast';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import { cn } from '../../../lib/utils';
-import { errorStates, successStates, warningStates, infoStates } from '../../../lib/utils/colors';
+
+const successStates = {
+  bg: 'bg-origen-hoja/10',
+  border: 'border-origen-hoja/20',
+  text: 'text-origen-hoja',
+  icon: 'text-origen-hoja',
+};
+
+const errorStates = {
+  bg: 'bg-feedback-danger-subtle',
+  border: 'border-red-200',
+  text: 'text-red-700',
+  icon: 'text-red-600',
+};
+
+const warningStates = {
+  bg: 'bg-amber-50',
+  border: 'border-amber-200',
+  text: 'text-amber-700',
+  icon: 'text-amber-600',
+};
+
+const infoStates = {
+  bg: 'bg-origen-pradera/10',
+  border: 'border-origen-pradera/20',
+  text: 'text-origen-pradera',
+  icon: 'text-origen-pradera',
+};
 
 // ============================================================================
 // TIPOS
@@ -306,7 +333,7 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open) => {
+      onOpenChange: (open: boolean) => {
         if (!open) dismiss();
       },
     },
