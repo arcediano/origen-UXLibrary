@@ -4,7 +4,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
+import { useIsMobile } from "../../../lib/hooks/useIsMobile";
 
 const FOCUSABLE = [
   "button:not([disabled])",
