@@ -31,4 +31,11 @@ describe("MobileBottomNav", () => {
     await userEvent.click(screen.getByRole("button", { name: /perfil/i }));
     expect(onValueChange).toHaveBeenCalledWith("profile");
   });
+
+  it("usa texto blanco legible para el item activo con gradiente oscuro", () => {
+    render(<MobileBottomNav activeId="home" items={items} />);
+
+    const activeIconContainer = screen.getByRole("button", { name: /inicio/i }).querySelector("span.rounded-2xl");
+    expect(activeIconContainer?.className).toContain("text-white");
+  });
 });

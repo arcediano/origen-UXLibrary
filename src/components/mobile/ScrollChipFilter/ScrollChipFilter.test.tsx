@@ -76,4 +76,10 @@ describe("ScrollChipFilter", () => {
     const todosChip = screen.getByRole("checkbox", { name: "Todos" });
     expect(todosChip).toHaveAttribute("aria-checked", "true");
   });
+
+  it("usa texto blanco legible en chip activo con gradiente oscuro", () => {
+    render(<ScrollChipFilter items={items} value="organic" />);
+    const activeChip = screen.getByRole("checkbox", { name: "Orgánico" });
+    expect(activeChip.className).toContain("text-white");
+  });
 });

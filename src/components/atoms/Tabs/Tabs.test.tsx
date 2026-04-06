@@ -121,6 +121,21 @@ describe("Tabs", () => {
     expect(screen.getByRole("tab", { name: "Dos" }).className).toContain("text-origen-pino");
   });
 
+  it("mantiene texto blanco legible en tab activo con gradiente", () => {
+    render(
+      <Tabs defaultValue="uno">
+        <TabsList>
+          <TabsTrigger value="uno">Uno</TabsTrigger>
+          <TabsTrigger value="dos">Dos</TabsTrigger>
+        </TabsList>
+        <TabsContent value="uno">Panel uno</TabsContent>
+        <TabsContent value="dos">Panel dos</TabsContent>
+      </Tabs>
+    );
+
+    expect(screen.getByRole("tab", { name: "Uno" }).className).toContain("text-white");
+  });
+
   it("mantiene estado disabled con contraste suficiente", () => {
     render(
       <Tabs defaultValue="uno">
