@@ -68,4 +68,39 @@ describe("Dialog", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
+
+  it("cierra al hacer click fuera cuando closeOnOutsideClick=true", () => {
+    const onOpenChange = vi.fn();
+
+    render(
+      <Dialog open onOpenChange={onOpenChange}>
+        <DialogContent>
+          <DialogTitle>Titulo</DialogTitle>
+          <DialogDescription>Descripcion</DialogDescription>
+        </DialogContent>
+      </Dialog>
+    );
+
+    const backdrop = screen.getByRole("dialog").parentElement;
+    fireEvent.mouseDown(backdrop!);
+
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+
+  it("cierra con Escape", () => {
+    const onOpenChange = vi.fn();
+
+    render(
+      <Dialog open onOpenChange={onOpenChange}>
+        <DialogContent>
+          <DialogTitle>Titulo</DialogTitle>
+          <DialogDescription>Descripcion</DialogDescription>
+        </DialogContent>
+      </Dialog>
+    );
+
+    fireEvent.keyDown(document, { key: "Escape" });
+
+    expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
 });

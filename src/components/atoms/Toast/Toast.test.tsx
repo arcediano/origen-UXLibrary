@@ -1,6 +1,30 @@
-import { render, screen } from "@testing-library/react";
+import * as React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Toast, ToastClose, ToastProvider, ToastViewport, reducer } from "./Toast";
+import { Toast, ToastClose, ToastProvider, ToastViewport, Toaster, reducer, useToast } from "./Toast";
+
+function ToastTestControls() {
+  const { toast, dismiss } = useToast();
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() =>
+          toast({
+            title: "Saved",
+            description: "Changes persisted",
+          })
+        }
+      >
+        Open Toast
+      </button>
+      <button type="button" onClick={() => dismiss()}>
+        Dismiss All
+      </button>
+    </div>
+  );
+}
 
 describe("Toast", () => {
   it("ToastClose conserva aria-label y toast-close aunque se intenten sobrescribir", () => {
@@ -55,5 +79,23 @@ describe("Toast", () => {
 
     expect(nextState.toasts).toHaveLength(2);
     expect(nextState.toasts.every((toast) => toast.open === false)).toBe(true);
+  });
+
+  it("useToast + Toaster renderiza y permite dismiss global", async () => {
+    render(
+      <>
+        <ToastTestControls />
+        <Toaster />
+      </>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open Toast" }));
+    expect(await screen.findByText("Saved")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Dismiss All" }));
+
+    await waitFor(() => {
+      expect(screen.queryByText("Saved")).not.toBeInTheDocument();
+    });
   });
 });

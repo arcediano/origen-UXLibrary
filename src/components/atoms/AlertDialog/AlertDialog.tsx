@@ -69,31 +69,45 @@ AlertDialog.displayName = "AlertDialog";
 interface AlertDialogTriggerProps {
   asChild?: boolean;
   children: React.ReactNode;
-  onClick?: (e: React.MouseEvent) => void;
+  className?: string;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const AlertDialogTrigger = ({
   children,
   onClick,
+  className,
   asChild,
 }: AlertDialogTriggerProps) => {
   const { onOpenChange } = useAlertDialog();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
     onClick?.(e);
+    if (e.defaultPrevented) return;
     onOpenChange(true);
   };
 
   if (asChild && React.isValidElement(children)) {
+    const child = children as React.ReactElement<{
+      onClick?: React.MouseEventHandler<HTMLElement>;
+    }>;
+
     return React.cloneElement(children, {
-      onClick: handleClick,
-    } as any);
+      onClick: (e: React.MouseEvent<HTMLElement>) => {
+        child.props.onClick?.(e);
+        handleClick(e);
+      },
+    } as React.HTMLAttributes<HTMLElement>);
   }
 
   return (
-    <div onClick={handleClick} style={{ display: "inline-block", cursor: "pointer" }}>
+    <button
+      type="button"
+      onClick={handleClick}
+      className={cn("inline-flex min-h-[44px] min-w-[44px] items-center justify-center", className)}
+    >
       {children}
-    </div>
+    </button>
   );
 };
 
@@ -274,6 +288,7 @@ const AlertDialogAction = React.forwardRef<
       ref={ref}
       onClick={(e) => {
         onClick?.(e);
+        if (e.defaultPrevented) return;
         onOpenChange(false);
       }}
       {...props}
@@ -298,6 +313,7 @@ const AlertDialogCancel = React.forwardRef<
       variant="outline"
       onClick={(e) => {
         onClick?.(e);
+        if (e.defaultPrevented) return;
         onOpenChange(false);
       }}
       {...props}
