@@ -46,13 +46,13 @@ export interface BadgeProps {
 // ─── Estilos ──────────────────────────────────────────────────────────────────
 
 const variantStyles: Record<BadgeVariant, string> = {
-  success: "bg-green-50  text-green-700  border-green-200",
-  warning: "bg-amber-50  text-amber-700  border-amber-200",
-  danger:  "bg-red-50    text-red-700    border-red-200",
-  info:    "bg-blue-50   text-blue-700   border-blue-200",
-  neutral: "bg-gray-50   text-gray-600   border-gray-200",
-  leaf:    "bg-origen-pastel text-origen-hoja border-origen-pradera/30",
-  outline: "bg-transparent  text-gray-600   border-gray-200",
+  success: "bg-green-50 text-green-900 border-green-700",
+  warning: "bg-amber-50 text-amber-900 border-amber-700",
+  danger:  "bg-red-50 text-red-900 border-red-700",
+  info:    "bg-blue-50 text-blue-900 border-blue-700",
+  neutral: "bg-gray-100 text-gray-700 border-gray-400",
+  leaf:    "bg-origen-pastel text-origen-bosque border-origen-hoja",
+  outline: "bg-white text-gray-700 border-gray-400",
 };
 
 const sizeStyles: Record<BadgeSize, string> = {

@@ -21,8 +21,8 @@ const buttonVariants = cva(
   cn(
     "inline-flex items-center justify-center",
     "rounded-xl font-semibold transition-all duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-origen-pradera/45",
-    "disabled:pointer-events-none disabled:opacity-50",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-origen-pino",
+    "disabled:pointer-events-none disabled:shadow-none",
     "active:scale-[0.98]",
     "w-full sm:w-auto shadow-subtle"
   ),
@@ -32,24 +32,29 @@ const buttonVariants = cva(
         primary: cn(
           "border border-origen-pino/40",
           "bg-gradient-origen text-white",
-          "hover:brightness-[1.03] hover:shadow-origen"
+          "hover:brightness-[1.03] hover:shadow-origen",
+          "disabled:border-origen-bosque/60 disabled:bg-origen-bosque/80 disabled:text-white/85"
         ),
         secondary: cn(
-          "border border-origen-pradera/45",
-          "bg-origen-pradera/22 text-origen-bosque",
-          "hover:bg-origen-pradera/32 hover:text-origen-pino"
+          "border border-origen-pino/35",
+          "bg-origen-pastel text-origen-bosque",
+          "hover:bg-origen-pradera/35 hover:text-origen-oscuro",
+          "disabled:border-origen-pino/30 disabled:bg-origen-pastel/90 disabled:text-origen-bosque/70"
         ),
         outline: cn(
           "border border-border-subtle bg-surface-alt text-origen-bosque",
-          "hover:border-origen-pradera/55 hover:bg-origen-pastel/70"
+          "hover:border-origen-pradera/55 hover:bg-origen-pastel/70",
+          "disabled:border-border-strong disabled:bg-white disabled:text-origen-bosque/70"
         ),
         ghost: cn(
           "bg-transparent text-origen-bosque shadow-none",
-          "hover:bg-origen-pastel/60"
+          "hover:bg-origen-pastel/60",
+          "disabled:text-origen-bosque/70"
         ),
         destructive: cn(
-          "border border-origen-cereza/70 bg-origen-cereza text-white",
-          "hover:brightness-95"
+          "border border-red-800 bg-red-700 text-white",
+          "hover:bg-red-800",
+          "disabled:border-red-900/40 disabled:bg-red-800/80 disabled:text-white/85"
         ),
       },
       size: {
@@ -103,12 +108,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => (
     <button
       ref={ref}
+      {...props}
       className={cn(buttonVariants({ variant, size }), className)}
       disabled={disabled || loading}
       aria-busy={loading}
       aria-disabled={disabled || loading}
       type={type}
-      {...props}
     >
       {loading ? (
         <>

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
-import { Button } from "./Button";
+import { Button, buttonVariants } from "./Button";
 
 describe("Button", () => {
   it("renderiza el texto del hijo correctamente", () => {
@@ -34,5 +34,43 @@ describe("Button", () => {
   it("aplica la clase aria-busy durante el loading", () => {
     render(<Button loading>Guardar</Button>);
     expect(screen.getByRole("button")).toHaveAttribute("aria-busy", "true");
+  });
+
+  it("usa clases de contraste reforzado para destructive", () => {
+    expect(buttonVariants({ variant: "destructive" })).toContain("bg-red-700");
+    expect(buttonVariants({ variant: "destructive" })).toContain("border-red-800");
+  });
+
+  it("usa un focus ring visible para estados claros", () => {
+    render(<Button variant="secondary">Secundario</Button>);
+    expect(screen.getByRole("button", { name: /secundario/i }).className).toContain("focus-visible:ring-origen-pino");
+  });
+
+  it("mantiene disabled states legibles en outline y ghost", () => {
+    render(
+      <>
+        <Button variant="outline" disabled>
+          Outline
+        </Button>
+        <Button variant="ghost" disabled>
+          Ghost
+        </Button>
+      </>
+    );
+
+    expect(screen.getByRole("button", { name: /outline/i }).className).toContain("disabled:text-origen-bosque/70");
+    expect(screen.getByRole("button", { name: /ghost/i }).className).toContain("disabled:text-origen-bosque/70");
+  });
+
+  it("no permite sobrescribir aria reservadas del estado loading", () => {
+    render(
+      <Button loading aria-busy="false" aria-disabled="false">
+        Guardar
+      </Button>
+    );
+
+    const button = screen.getByRole("button", { name: /cargando/i });
+    expect(button).toHaveAttribute("aria-busy", "true");
+    expect(button).toHaveAttribute("aria-disabled", "true");
   });
 });

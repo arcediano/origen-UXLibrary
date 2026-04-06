@@ -108,6 +108,7 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
     return (
       <div
         ref={ref}
+        {...props}
         role="tablist"
         aria-orientation={orientation}
         className={cn(
@@ -117,7 +118,6 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
           fullWidth && "flex w-full",
           className
         )}
-        {...props}
       />
     );
   }
@@ -151,6 +151,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     return (
       <button
         ref={ref}
+        {...props}
         type="button"
         role="tab"
         id={`${baseId}-tab-${value}`}
@@ -161,11 +162,12 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         tabIndex={isActive ? 0 : -1}
         className={cn(
           "relative inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2.5 text-small font-semibold transition-all duration-200",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:ring-offset-2",
+          "disabled:cursor-not-allowed disabled:text-origen-bosque/65 disabled:hover:bg-transparent disabled:hover:text-origen-bosque/65",
           "whitespace-nowrap",
           isActive
             ? "bg-gradient-origen text-white shadow-origen"
-            : "text-text-subtle hover:bg-origen-pastel/70 hover:text-origen-bosque",
+            : "text-origen-pino hover:bg-origen-pastel/80 hover:text-origen-bosque",
           className
         )}
         onClick={(event) => {
@@ -209,7 +211,6 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
 
           onKeyDown?.(event);
         }}
-        {...props}
       >
         {children}
       </button>
@@ -235,12 +236,12 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
     return (
       <div
         ref={ref}
+        {...props}
         role="tabpanel"
         id={`${baseId}-panel-${value}`}
         aria-labelledby={`${baseId}-tab-${value}`}
         tabIndex={0}
         className={cn("mt-4 outline-none animate-fade-in", className)}
-        {...props}
       >
         {children}
       </div>
