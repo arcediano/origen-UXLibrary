@@ -14,6 +14,9 @@ export type { SeparatorProps }          from "./components/atoms/Separator";
 export { Input, InputGroup }            from "./components/atoms/Input";
 export type { InputProps, InputGroupProps } from "./components/atoms/Input";
 
+export { InputAffixField } from "./components/atoms/InputAffixField";
+export type { InputAffixFieldProps } from "./components/atoms/InputAffixField";
+
 export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/atoms/Tabs";
 export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps } from "./components/atoms/Tabs";
 
@@ -105,6 +108,9 @@ export type { MobileBottomNavItem, MobileBottomNavProps } from "./components/mob
 
 export { MobileTopBar } from "./components/mobile/MobileTopBar";
 export type { MobileTopBarProps } from "./components/mobile/MobileTopBar";
+
+export { ActionBar } from "./components/mobile/ActionBar";
+export type { ActionBarProps, ActionBarAction } from "./components/mobile/ActionBar";
 
 export { FilterBottomSheet } from "./components/mobile/FilterBottomSheet";
 export type { FilterBottomSheetProps } from "./components/mobile/FilterBottomSheet";
