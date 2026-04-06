@@ -186,8 +186,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
 
           <textarea
-            id={textareaId}
             ref={setRefs}
+            {...props}
+            id={textareaId}
             disabled={disabled}
             maxLength={maxLength}
             onChange={handleChange}
@@ -213,7 +214,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               icon && "pl-9 sm:pl-10",
               className
             )}
-            {...props}
           />
 
           <div className="absolute right-3 top-3 flex items-center gap-2">

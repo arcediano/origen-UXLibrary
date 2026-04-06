@@ -94,6 +94,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
     return (
       <button
         ref={ref}
+        {...props}
         type="button"
         aria-pressed={isPressed}
         disabled={disabled || loading}
@@ -111,7 +112,6 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           if (event.defaultPrevented || disabled || loading) return;
           setPressedState(!isPressed);
         }}
-        {...props}
       >
         {loading ? (
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
