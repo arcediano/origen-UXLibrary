@@ -62,6 +62,10 @@ describe("Button", () => {
     expect(screen.getByRole("button", { name: /ghost/i }).className).toContain("disabled:text-origen-bosque/70");
   });
 
+  it("fuerza texto legible en primary con gradiente oscuro", () => {
+    expect(buttonVariants({ variant: "primary" })).toContain("!text-white");
+  });
+
   it("no permite sobrescribir aria reservadas del estado loading", () => {
     render(
       <Button loading aria-busy="false" aria-disabled="false">

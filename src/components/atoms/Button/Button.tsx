@@ -31,7 +31,7 @@ const buttonVariants = cva(
       variant: {
         primary: cn(
           "border border-origen-pino/40",
-          "bg-gradient-origen text-white",
+          "bg-gradient-origen text-white !text-white",
           "hover:brightness-[1.03] hover:shadow-origen",
           "disabled:border-origen-bosque/60 disabled:bg-origen-bosque/80 disabled:text-white/85"
         ),
