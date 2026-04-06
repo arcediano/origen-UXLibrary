@@ -107,13 +107,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputType   = isPassword && showPassword ? "text" : type;
     const validationState = error ? "error" : success ? "success" : loading ? "loading" : null;
 
-    const padMap = { sm: { base: "px-3", icon: "pl-8",  pr: "pr-8"  },
-                     md: { base: "px-4", icon: "pl-10", pr: "pr-10" },
-                     lg: { base: "px-5", icon: "pl-12", pr: "pr-12" } };
+    const padMap = {
+      sm: { pl: "pl-3", plIcon: "pl-8",  pr: "pr-3", prIcon: "pr-8"  },
+      md: { pl: "pl-4", plIcon: "pl-10", pr: "pr-4", prIcon: "pr-10" },
+      lg: { pl: "pl-5", plIcon: "pl-12", pr: "pr-5", prIcon: "pr-12" },
+    };
     const pad = padMap[inputSize];
 
-    const paddingLeft  = leftIcon  ? pad.icon : pad.base;
-    const paddingRight = (rightIcon || isPassword || validationState) ? pad.pr : pad.base;
+    const paddingLeft  = leftIcon  ? pad.plIcon : pad.pl;
+    const paddingRight = (rightIcon || isPassword || validationState) ? pad.prIcon : pad.pr;
 
     const iconSizeMap = { sm: "w-3.5 h-3.5", md: "w-4 h-4", lg: "w-5 h-5" };
     const iconSize = iconSizeMap[inputSize];

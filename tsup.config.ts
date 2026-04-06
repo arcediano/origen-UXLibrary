@@ -19,7 +19,8 @@ export default defineConfig({
   treeshake: true,
   // Copiar estilos CSS al directorio dist
   async onSuccess() {
-    const { execSync } = await import("child_process");
-    execSync("mkdir -p dist/styles && cp src/styles/tokens.css dist/styles/tokens.css");
+    const { mkdirSync, copyFileSync } = await import("fs");
+    mkdirSync("dist/styles", { recursive: true });
+    copyFileSync("src/styles/tokens.css", "dist/styles/tokens.css");
   },
 });
