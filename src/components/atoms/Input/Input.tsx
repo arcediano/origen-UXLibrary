@@ -189,6 +189,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           <input
             ref={ref}
+            {...props}
             id={inputId}
             type={inputType}
             disabled={disabled}
@@ -210,7 +211,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               paddingRight,
               className
             )}
-            {...props}
           />
 
           {/* Right elements */}

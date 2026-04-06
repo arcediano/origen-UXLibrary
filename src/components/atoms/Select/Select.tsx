@@ -156,9 +156,11 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
     return (
       <button
         ref={setRefs}
+        {...props}
         type="button"
-        onClick={() => {
+        onClick={(event) => {
           if (!disabled) setOpen(!open);
+          props.onClick?.(event);
         }}
         className={cn(
           "flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border bg-white px-3 py-2 text-left transition-all duration-200 sm:px-4 sm:py-3",
@@ -173,7 +175,6 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         aria-haspopup="listbox"
         aria-invalid={!!error}
         disabled={disabled}
-        {...props}
       >
         {children ?? (
           <>
@@ -366,6 +367,7 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
     return (
       <button
         ref={ref}
+        {...props}
         type="button"
         className={cn(
           "relative flex min-h-[52px] w-full cursor-pointer select-none items-center rounded-lg py-2 pl-3 pr-9 text-sm outline-none transition-all duration-150 sm:min-h-[44px]",
@@ -375,13 +377,13 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
           isSelected && "bg-origen-crema/80 font-medium text-origen-bosque",
           className
         )}
-        onClick={() => {
+        onClick={(event) => {
           if (!disabled) onValueChange(value);
+          props.onClick?.(event);
         }}
         disabled={disabled}
         role="option"
         aria-selected={isSelected}
-        {...props}
       >
         <span className="truncate">{children}</span>
         {isSelected && (
