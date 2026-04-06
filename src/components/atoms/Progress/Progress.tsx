@@ -35,7 +35,8 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     ref
   ) => {
     const safeMax = max <= 0 ? 100 : max;
-    const percentage = Math.min(Math.max((value / safeMax) * 100, 0), 100);
+    const safeValue = Math.min(Math.max(value, 0), safeMax);
+    const percentage = Math.min(Math.max((safeValue / safeMax) * 100, 0), 100);
 
     const variantConfig: Record<
       ProgressVariant,
@@ -94,7 +95,16 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     const config = variantConfig[variant];
 
     return (
-      <div ref={ref} className={cn("w-full space-y-2", className)} {...props}>
+      <div
+        ref={ref}
+        {...props}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={safeMax}
+        aria-valuenow={Math.round(safeValue)}
+        aria-valuetext={`${Math.round(percentage)}%`}
+        className={cn("w-full space-y-2", className)}
+      >
         {(showLabel || label) && (
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">

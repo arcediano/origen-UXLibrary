@@ -115,12 +115,13 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
     return (
       <div
         ref={ref}
+        {...props}
+        role="list"
         className={cn(
           "w-full",
           orientation === "vertical" && "flex flex-col gap-8",
           className
         )}
-        {...props}
       >
         <div className={containerClass}>
           {steps.map((step, index) => {
@@ -133,6 +134,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
             return (
               <div
                 key={step.id}
+                role="listitem"
                 className={cn(
                   "flex flex-col items-center gap-2",
                   orientation === "horizontal" && "flex-1 relative",
@@ -159,6 +161,9 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                 {/* Step Circle */}
                 <button
                   type="button"
+                  aria-label={step.title}
+                  aria-current={step.status === "active" ? "step" : undefined}
+                  aria-disabled={step.disabled || undefined}
                   disabled={step.disabled}
                   onClick={() => handleStepClick(index)}
                   className={cn(
@@ -263,6 +268,7 @@ const StepperFooter = React.forwardRef<HTMLDivElement, StepperFooterProps>(
       {...props}
     >
       <button
+        type="button"
         onClick={onPrevious}
         disabled={currentStep === 0 || !showPrevious}
         className="px-4 py-2 rounded-lg border border-origin-pradera/30 text-origin-bosque hover:bg-origin-pastel/30 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -271,6 +277,7 @@ const StepperFooter = React.forwardRef<HTMLDivElement, StepperFooterProps>(
       </button>
 
       <button
+        type="button"
         onClick={onNext}
         disabled={nextDisabled || loading}
         className="px-4 py-2 rounded-lg bg-origin-pradera text-white hover:bg-origin-pradera/90 disabled:opacity-50 disabled:cursor-not-allowed"

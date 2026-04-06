@@ -31,7 +31,7 @@ export function Pagination({
   };
 
   return (
-    <div className={cn("flex items-center justify-center gap-2 sm:gap-3", className)}>
+    <nav aria-label="Paginacion" className={cn("flex items-center justify-center gap-2 sm:gap-3", className)}>
       <Button
         size="sm"
         variant="outline"
@@ -61,6 +61,6 @@ export function Pagination({
       >
         <ChevronRight className="h-5 w-5" aria-hidden="true" />
       </Button>
-    </div>
+    </nav>
   );
 }
