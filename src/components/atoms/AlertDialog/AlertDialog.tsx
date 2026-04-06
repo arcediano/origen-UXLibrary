@@ -14,6 +14,8 @@ import { X, AlertTriangle, Info, CheckCircle } from "lucide-react";
 interface AlertDialogContextType {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  titleId: string;
+  descriptionId: string;
 }
 
 const AlertDialogContext = React.createContext<
@@ -42,6 +44,8 @@ const AlertDialog = ({
   children,
 }: AlertDialogProps) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
+  const titleId = React.useId();
+  const descriptionId = React.useId();
 
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : uncontrolledOpen;
@@ -54,7 +58,7 @@ const AlertDialog = ({
   };
 
   return (
-    <AlertDialogContext.Provider value={{ open, onOpenChange: handleOpenChange }}>
+    <AlertDialogContext.Provider value={{ open, onOpenChange: handleOpenChange, titleId, descriptionId }}>
       {children}
     </AlertDialogContext.Provider>
   );
@@ -118,7 +122,7 @@ const AlertDialogContent = React.forwardRef<
     },
     ref
   ) => {
-    const { open, onOpenChange } = useAlertDialog();
+    const { open, onOpenChange, titleId, descriptionId } = useAlertDialog();
 
     const variantClasses = {
       default:
@@ -156,16 +160,21 @@ const AlertDialogContent = React.forwardRef<
       >
         <div
           ref={ref}
+          {...props}
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          aria-describedby={descriptionId}
           className={cn(
             "relative rounded-xl shadow-lg animate-in zoom-in-95",
             variantClasses[variant],
             sizeClasses[size],
             className
           )}
-          {...props}
         >
           {showClose && (
             <button
+              type="button"
               onClick={() => onOpenChange(false)}
               className="absolute right-4 top-4 rounded-lg p-1 hover:bg-black/5"
             >
@@ -207,13 +216,17 @@ interface AlertDialogTitleProps extends React.HTMLAttributes<HTMLHeadingElement>
 const AlertDialogTitle = React.forwardRef<
   HTMLHeadingElement,
   AlertDialogTitleProps
->(({ className, ...props }, ref) => (
-  <h2
-    ref={ref}
-    className={cn("text-lg font-semibold", className)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const { titleId } = useAlertDialog();
+  return (
+    <h2
+      ref={ref}
+      {...props}
+      id={titleId}
+      className={cn("text-lg font-semibold", className)}
+    />
+  );
+});
 
 AlertDialogTitle.displayName = "AlertDialogTitle";
 
@@ -223,9 +236,12 @@ interface AlertDialogDescriptionProps
 const AlertDialogDescription = React.forwardRef<
   HTMLParagraphElement,
   AlertDialogDescriptionProps
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm opacity-90", className)} {...props} />
-));
+>(({ className, ...props }, ref) => {
+  const { descriptionId } = useAlertDialog();
+  return (
+    <p ref={ref} {...props} id={descriptionId} className={cn("text-sm opacity-90", className)} />
+  );
+});
 
 AlertDialogDescription.displayName = "AlertDialogDescription";
 

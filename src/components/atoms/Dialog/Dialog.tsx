@@ -130,13 +130,13 @@ const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps>(
     return (
       <button
         ref={ref}
+        {...props}
         type="button"
         onClick={(event) => {
           onClick?.(event);
           if (!event.defaultPrevented) setOpen(!open);
         }}
         className={cn("min-h-[44px] min-w-[44px]", className)}
-        {...props}
       >
         {children}
       </button>
@@ -212,6 +212,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
       >
         <div
           ref={setRefs}
+          {...props}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
@@ -227,7 +228,6 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
               : cn("max-w-lg rounded-2xl", entered ? "translate-y-0" : "translate-y-4"),
             className
           )}
-          {...props}
         >
           {isMobile && (
             <div className="mx-auto mb-2 mt-3 h-1 w-10 rounded-full bg-border-subtle" aria-hidden />
@@ -305,13 +305,13 @@ const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>(
     return (
       <button
         ref={ref}
+        {...props}
         type="button"
         onClick={(event) => {
           onClick?.(event);
           if (!event.defaultPrevented) setOpen(false);
         }}
         className={cn("min-h-[44px] min-w-[44px]", className)}
-        {...props}
       >
         {children}
       </button>
