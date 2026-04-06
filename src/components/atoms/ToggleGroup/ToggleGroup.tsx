@@ -92,9 +92,9 @@ const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
       <ToggleGroupContext.Provider value={contextValue}>
         <div
           ref={ref}
-          className={cn("inline-flex gap-1", orientationClass, className)}
-          role="group"
           {...props}
+          role="group"
+          className={cn("inline-flex gap-1", orientationClass, className)}
         />
       </ToggleGroupContext.Provider>
     );
@@ -126,7 +126,7 @@ const toggleGroupItemVariants = cva(
   }
 );
 
-interface ToggleGroupItemProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ToggleGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
   size?: "sm" | "md" | "lg";
   variant?: "default" | "outline";
@@ -135,7 +135,7 @@ interface ToggleGroupItemProps extends React.HTMLAttributes<HTMLButtonElement> {
 const ToggleGroupItem = React.forwardRef<
   HTMLButtonElement,
   ToggleGroupItemProps
->(({ className, value, size, variant, ...props }, ref) => {
+>(({ className, value, size, variant, onClick, ...props }, ref) => {
   const context = React.useContext(ToggleGroupContext);
 
   if (!context) {
@@ -150,9 +150,15 @@ const ToggleGroupItem = React.forwardRef<
   return (
     <button
       ref={ref}
+      {...props}
       type="button"
+      aria-pressed={isPressed}
       data-state={isPressed ? "on" : "off"}
-      onClick={() => context.onValueChange(value)}
+      onClick={(event) => {
+        onClick?.(event);
+        if (event.defaultPrevented || props.disabled) return;
+        context.onValueChange(value);
+      }}
       className={cn(
         toggleGroupItemVariants({
           size: size ?? context.size,
@@ -160,7 +166,6 @@ const ToggleGroupItem = React.forwardRef<
         }),
         className
       )}
-      {...props}
     />
   );
 });

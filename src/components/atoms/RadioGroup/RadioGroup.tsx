@@ -44,13 +44,14 @@ const RadioGroup = React.forwardRef<
 
     return (
       <RadioGroupPrimitive.Root
+        {...props}
+        ref={ref}
+        role="radiogroup"
         className={cn(
           orientationClasses[orientation],
           variantClasses[variant],
           className
         )}
-        {...props}
-        ref={ref}
       />
     );
   }
@@ -123,14 +124,15 @@ const RadioGroupItem = React.forwardRef<
       <div className="flex items-center gap-3">
         <RadioGroupPrimitive.Item
           ref={ref}
+          {...props}
           id={radioId}
+          role="radio"
           className={cn(
             "aspect-square rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
             sizeClasses[size],
             variantClasses[variant],
             className
           )}
-          {...props}
         >
           <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
             <Circle className={cn("fill-current", sizeClasses[size])} />
