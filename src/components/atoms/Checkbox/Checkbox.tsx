@@ -97,13 +97,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <span
         data-state={stateValue}
         className={cn(
-          "relative inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center",
+          "relative inline-flex shrink-0 items-center justify-center",
           "has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-origen-pradera/50 has-[:focus-visible]:ring-offset-2",
           "has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50",
           className
         )}
       >
         <span
+          data-state={stateValue}
           className={cn(
             "pointer-events-none inline-flex items-center justify-center border-2 transition-all duration-200",
             variantClasses[variant],
@@ -123,7 +124,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             onChange?.(event);
             onCheckedChange?.(event.target.checked);
           }}
-          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+          className="absolute -inset-3 cursor-pointer opacity-0"
         />
       </span>
     );
@@ -156,7 +157,8 @@ const CheckboxWithLabel = React.forwardRef<HTMLInputElement, CheckboxWithLabelPr
       <div className={cn("space-y-1", className)}>
         <div
           className={cn(
-            "flex min-h-[44px] items-start gap-3",
+            "flex min-h-[44px] items-center gap-3",
+            description && "items-start",
             labelPosition === "left" && "flex-row-reverse justify-end"
           )}
         >
@@ -170,7 +172,7 @@ const CheckboxWithLabel = React.forwardRef<HTMLInputElement, CheckboxWithLabelPr
             onCheckedChange={onCheckedChange}
             disabled={disabled}
             required={required}
-            className="mt-0.5"
+            className={description ? "mt-0.5" : undefined}
             {...props}
           />
 
