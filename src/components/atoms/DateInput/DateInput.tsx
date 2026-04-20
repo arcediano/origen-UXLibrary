@@ -67,7 +67,7 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
             htmlFor={id}
             className={cn(
               "text-xs font-semibold uppercase tracking-wide",
-              error ? "text-feedback-danger" : "text-text-secondary",
+              error ? "text-feedback-danger" : "text-muted-foreground",
               disabled && "opacity-50"
             )}
           >
