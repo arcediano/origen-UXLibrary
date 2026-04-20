@@ -51,6 +51,9 @@ export type { CheckboxProps, CheckboxWithLabelProps, CheckboxGroupProps } from "
 export { CurrencyInput } from "./components/atoms/CurrencyInput";
 export type { CurrencyInputProps } from "./components/atoms/CurrencyInput";
 
+export { DateInput, DateRangeInput } from "./components/atoms/DateInput";
+export type { DateInputProps, DateRangeInputProps } from "./components/atoms/DateInput";
+
 export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "./components/atoms/Dialog";
 export type { DialogProps, DialogTriggerProps, DialogContentProps, DialogCloseProps } from "./components/atoms/Dialog";
 
