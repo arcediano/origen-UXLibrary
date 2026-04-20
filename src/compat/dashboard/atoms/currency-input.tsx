@@ -242,9 +242,11 @@ const CurrencyInput = React.forwardRef<HTMLInputElement, CurrencyInputProps>(
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true);
       
-      // Al enfocar, mostrar el valor sin formato para edición fácil
-      if (value !== undefined && !isNaN(value)) {
-        // Mostrar con punto decimal para edición
+      if (value === 0) {
+        // Si el valor es 0 (sin configurar), limpiar para que el usuario escriba directamente
+        setDisplayValue('');
+      } else if (value !== undefined && !isNaN(value)) {
+        // Mostrar valor sin separador de miles para edición cómoda
         setDisplayValue(value.toString().replace('.', ','));
       }
       

@@ -47,9 +47,19 @@ const PercentageInput = React.forwardRef<HTMLInputElement, PercentageInputProps>
 
     React.useEffect(() => {
       if (!isFocused) {
-        setDisplayValue(value ? value.toString() : "0");
+        // Mostrar vacío cuando value=0 para que el placeholder sea visible
+        setDisplayValue(value ? value.toString() : "");
       }
     }, [value, isFocused]);
+
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(true);
+      if (value === 0) {
+        // Si el valor es 0 (sin configurar), limpiar para que el usuario escriba directamente
+        setDisplayValue("");
+      }
+      props.onFocus?.(event);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const rawValue = event.target.value.replace(/[^\d.-]/g, "");
@@ -78,7 +88,8 @@ const PercentageInput = React.forwardRef<HTMLInputElement, PercentageInputProps>
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(false);
       if (displayValue === "") {
-        setDisplayValue("0");
+        // Al salir sin introducir valor, mantener vacío (placeholder visible)
+        setDisplayValue("");
         onChange(0);
       }
       props.onBlur?.(event);
@@ -131,7 +142,7 @@ const PercentageInput = React.forwardRef<HTMLInputElement, PercentageInputProps>
             inputMode="decimal"
             value={displayValue}
             onChange={handleChange}
-            onFocus={() => setIsFocused(true)}
+            onFocus={handleFocus}
             onBlur={handleBlur}
             disabled={disabled}
             placeholder={placeholder}

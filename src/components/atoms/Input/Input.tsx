@@ -125,6 +125,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange?.(e);
     };
 
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(true);
+      // Para inputs numéricos: seleccionar todo el contenido cuando el valor es 0,
+      // así el usuario puede escribir directamente sin borrar el 0 manualmente.
+      if (type === "number" && Number(e.target.value) === 0) {
+        e.target.select();
+      }
+      props.onFocus?.(e);
+    };
+
     const progressPct    = maxLength ? Math.min((charCount / maxLength) * 100, 100) : 0;
     const progressColor  = !maxLength
       ? "bg-origen-pradera"
@@ -195,7 +205,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled}
             maxLength={maxLength}
             onChange={handleChange}
-            onFocus={(e) => { setIsFocused(true); props.onFocus?.(e); }}
+            onFocus={handleFocus}
             onBlur={(e)  => { setIsFocused(false); props.onBlur?.(e); }}
             aria-invalid={!!error}
             aria-describedby={cn(error && errorId, helperText && helperId) || undefined}

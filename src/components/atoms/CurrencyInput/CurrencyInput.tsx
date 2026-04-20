@@ -154,8 +154,15 @@ const CurrencyInput = React.forwardRef<HTMLInputElement, CurrencyInputProps>(
 
     const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true);
-      if (!Number.isNaN(value)) {
-        setDisplayValue(value.toString().replace(".", ","));
+      if (value === 0) {
+        // Si el valor es 0 (sin configurar), limpiar para que el usuario escriba directamente
+        setDisplayValue("");
+      } else if (!Number.isNaN(value)) {
+        // Mostrar valor sin separador de miles para edición cómoda
+        const raw = showThousandSeparator
+          ? value.toString().replace(".", ",")
+          : value.toString().replace(".", ",");
+        setDisplayValue(raw);
       }
       props.onFocus?.(event);
     };
