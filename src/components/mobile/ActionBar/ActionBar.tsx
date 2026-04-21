@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/atoms/Button";
-import type { ButtonProps } from "@/components/atoms/Button";
+import { Button } from "../../atoms/Button";
+import type { ButtonProps } from "../../atoms/Button";
 
 export interface ActionBarAction {
   id: string;
