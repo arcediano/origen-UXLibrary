@@ -284,7 +284,17 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
       [forwardedRef]
     );
 
-    if (!open || !mounted) return null;
+    if (!mounted) return null;
+
+    // Render children hidden when closed so SelectItem components can mount
+    // and call registerLabel(). Without this, getLabel() always returns undefined
+    // and SelectValue falls back to showing the raw value (e.g. a DB ID).
+    if (!open) {
+      return createPortal(
+        <div style={{ display: 'none' }} aria-hidden="true">{children}</div>,
+        document.body
+      );
+    }
 
     return createPortal(
       <div
