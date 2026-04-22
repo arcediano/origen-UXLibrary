@@ -68,9 +68,17 @@ const Select = ({
   const isControlled = value !== undefined;
   const currentValue = isControlled ? value : internalValue;
 
+  // forceUpdate: triggers a re-render of Select (and therefore SelectValue) when
+  // a new label is registered. Without this, mutating the ref never invalidates
+  // SelectValue's render, so it keeps showing the raw value (e.g. a DB id).
+  const [, forceUpdate] = React.useReducer((x: number) => x + 1, 0);
+
   const registerLabel = React.useCallback((optionValue: string, label: string) => {
-    labelsRef.current.set(optionValue, label);
-  }, []);
+    if (labelsRef.current.get(optionValue) !== label) {
+      labelsRef.current.set(optionValue, label);
+      forceUpdate();
+    }
+  }, [forceUpdate]);
 
   const getLabel = React.useCallback((optionValue: string) => labelsRef.current.get(optionValue), []);
 
