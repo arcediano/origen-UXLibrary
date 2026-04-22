@@ -155,7 +155,7 @@ export function ConfirmDialog({
               {cancelLabel}
             </Button>
 
-            {/* Confirm — danger: native button with CSS var to guarantee white text */}
+            {/* Confirm — danger: native button, Tailwind bg-feedback-danger + text-white */}
             {isDanger ? (
               <button
                 type="button"
@@ -163,15 +163,12 @@ export function ConfirmDialog({
                 disabled={isLoading}
                 className={cn(
                   "flex-1 inline-flex items-center justify-center gap-2",
-                  "h-11 rounded-xl px-5 text-sm font-semibold",
-                  "transition-all duration-300 active:scale-[0.98]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-                  "border-0 disabled:pointer-events-none disabled:opacity-70"
+                  "h-11 rounded-xl px-5 text-sm font-semibold text-white",
+                  "bg-feedback-danger hover:bg-feedback-danger/90",
+                  "transition-all duration-200 active:scale-[0.98]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-feedback-danger/50",
+                  "border-0 disabled:pointer-events-none disabled:opacity-60"
                 )}
-                style={{
-                  backgroundColor: "var(--feedback-danger)",
-                  color: "#ffffff",
-                }}
               >
                 {isLoading ? (
                   <>
