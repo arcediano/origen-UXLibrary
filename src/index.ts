@@ -57,6 +57,9 @@ export type { DateInputProps, DateRangeInputProps } from "./components/atoms/Dat
 export { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "./components/atoms/Dialog";
 export type { DialogProps, DialogTriggerProps, DialogContentProps, DialogCloseProps } from "./components/atoms/Dialog";
 
+export { ConfirmDialog } from "./components/atoms/ConfirmDialog";
+export type { ConfirmDialogProps } from "./components/atoms/ConfirmDialog";
+
 export { Pagination } from "./components/atoms/Pagination";
 export type { PaginationProps } from "./components/atoms/Pagination";
 
