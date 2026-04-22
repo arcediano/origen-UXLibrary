@@ -60,6 +60,9 @@ export type { DialogProps, DialogTriggerProps, DialogContentProps, DialogClosePr
 export { ConfirmDialog } from "./components/atoms/ConfirmDialog";
 export type { ConfirmDialogProps } from "./components/atoms/ConfirmDialog";
 
+export { Popover, PopoverTrigger, PopoverContent, PopoverClose } from "./components/atoms/Popover";
+export type { PopoverProps, PopoverTriggerProps, PopoverContentProps, PopoverAlign, PopoverSide } from "./components/atoms/Popover";
+
 export { Pagination } from "./components/atoms/Pagination";
 export type { PaginationProps } from "./components/atoms/Pagination";
 
