@@ -5,6 +5,9 @@ export type { ButtonProps }             from "./components/atoms/Button";
 export { Badge, StatusBadge }           from "./components/atoms/Badge";
 export type { BadgeProps, BadgeVariant, BadgeSize, StatusBadgeProps, StatusType } from "./components/atoms/Badge";
 
+export { StarRating }                   from "./components/atoms/StarRating";
+export type { StarRatingProps, StarRatingSize } from "./components/atoms/StarRating";
+
 export { Label, labelVariants }         from "./components/atoms/Label";
 export type { LabelProps }              from "./components/atoms/Label";
 
