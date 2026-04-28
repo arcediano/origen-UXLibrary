@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Info, Percent } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 export interface PercentageInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {

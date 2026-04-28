@@ -6,7 +6,7 @@
 "use client";
 
 import * as React from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 import { CheckCircle2, Circle, AlertCircle } from "lucide-react";
 
 export type StepStatus = "completed" | "active" | "pending" | "error";

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { AlertCircle, AlertTriangle, CheckCircle, Info, Leaf, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 type AlertVariant = "default" | "success" | "warning" | "error" | "info" | "organic";
 

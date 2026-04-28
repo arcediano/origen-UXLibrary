@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Info, Plus, Tag, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 export interface TagsInputProps {
   value: string[];

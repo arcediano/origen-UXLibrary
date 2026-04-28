@@ -14,7 +14,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Info } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../../lib/utils";
 
 // ─── Variantes CVA ────────────────────────────────────────────────────────────
 
