@@ -11,13 +11,13 @@
     "isolatedModules": true,
     "declaration": true,
     "declarationDir": "dist",
+    "rootDir": "./src",
     "emitDeclarationOnly": false,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
