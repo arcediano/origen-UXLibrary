@@ -130,6 +130,16 @@ export type { FilterBottomSheetProps } from "./components/mobile/FilterBottomShe
 export { ScrollChipFilter } from "./components/mobile/ScrollChipFilter";
 export type { ScrollChipItem, ScrollChipFilterProps } from "./components/mobile/ScrollChipFilter";
 
+// ─── Molecules ────────────────────────────────────────────────────────────────
+export { EmptyState } from "./components/molecules/EmptyState";
+export type { EmptyStateProps, EmptyStateAction } from "./components/molecules/EmptyState";
+
+export { SearchInput } from "./components/molecules/SearchInput";
+export type { SearchInputProps } from "./components/molecules/SearchInput";
+
+export { StatCard } from "./components/molecules/StatCard";
+export type { StatCardProps, StatCardTrend } from "./components/molecules/StatCard";
+
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {
 	OrigenLeafIcon,
