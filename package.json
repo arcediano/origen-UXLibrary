@@ -43,6 +43,9 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint src --ext ts,tsx",
     "type-check": "tsc --noEmit",
+    "gate:typecheck": "npm run type-check",
+    "gate:test": "npm run test",
+    "gate:ci": "npm run gate:typecheck && npm run gate:test",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "npm run build && changeset publish"
