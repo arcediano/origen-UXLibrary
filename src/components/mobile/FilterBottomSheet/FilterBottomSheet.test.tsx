@@ -31,7 +31,7 @@ describe("FilterBottomSheet", () => {
     const onClose = vi.fn();
     render(<FilterBottomSheet open={true} onClose={onClose} title="Filtros" />);
     const backdrop = screen.getByRole("dialog").previousElementSibling as HTMLElement;
-    fireEvent.click(backdrop);
+    fireEvent.pointerDown(backdrop);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
