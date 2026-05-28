@@ -87,13 +87,13 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
       ref={ref}
       aria-label="Mobile bottom navigation"
       className={cn(
-        "w-full border-t border-border-subtle bg-surface/95 px-3 pb-[calc(env(safe-area-inset-bottom,0px)+0.75rem)] pt-2 backdrop-blur-md",
+        "w-full border-t border-border-subtle bg-surface px-3 pb-[calc(env(safe-area-inset-bottom,0px)+0.75rem)] pt-2",
         fixed && "fixed bottom-0 left-0 right-0 z-40",
         className
       )}
       {...props}
     >
-      <div className="mx-auto flex max-w-md items-stretch justify-between gap-1 rounded-[1.75rem] border border-white/70 bg-white/88 p-1.5 shadow-origen-lg">
+      <div className="mx-auto flex max-w-md items-stretch justify-between gap-1 rounded-[1.75rem] border border-border-subtle bg-surface-alt p-1.5 shadow-origen-lg">
         {items.map((item) => (
           <MobileBottomNavLink
             key={item.id}

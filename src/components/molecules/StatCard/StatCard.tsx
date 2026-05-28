@@ -40,7 +40,7 @@ export interface StatCardProps {
   /** Texto secundario debajo del valor (ej: "últimos 30 días") */
   subtitle?: string;
   /** Paleta de color del token Origen */
-  variant?: "pradera" | "hoja" | "bosque" | "arena" | "oscuro" | "neutral";
+  variant?: "pradera" | "hoja" | "bosque" | "arena" | "oscuro" | "neutral" | "mandarina";
   /** Estado de carga — muestra skeletons */
   loading?: boolean;
   /** Clases adicionales */
@@ -82,6 +82,11 @@ const variantMap: Record<
     bg: "from-gray-100/80 to-transparent",
     border: "border-gray-200",
     icon: "text-gray-400",
+  },
+  mandarina: {
+    bg: "from-origen-mandarina/10 to-transparent",
+    border: "border-origen-mandarina/20",
+    icon: "text-origen-mandarina",
   },
 };
 

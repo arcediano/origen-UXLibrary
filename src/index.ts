@@ -99,6 +99,9 @@ export type { SwitchProps } from "./components/atoms/Switch";
 export { Table } from "./components/atoms/Table";
 export type { TableProps, Column } from "./components/atoms/Table";
 
+export { MobileCardList } from "./components/atoms/MobileCardList";
+export type { MobileCardListProps } from "./components/atoms/MobileCardList";
+
 export { TagsInput } from "./components/atoms/TagsInput";
 export type { TagsInputProps } from "./components/atoms/TagsInput";
 
@@ -131,6 +134,9 @@ export { ScrollChipFilter } from "./components/mobile/ScrollChipFilter";
 export type { ScrollChipItem, ScrollChipFilterProps } from "./components/mobile/ScrollChipFilter";
 
 // ─── Molecules ────────────────────────────────────────────────────────────────
+export { AppTopBar } from "./components/molecules/AppTopBar";
+export type { AppTopBarProps } from "./components/molecules/AppTopBar";
+
 export { EmptyState } from "./components/molecules/EmptyState";
 export type { EmptyStateProps, EmptyStateAction } from "./components/molecules/EmptyState";
 
@@ -139,6 +145,12 @@ export type { SearchInputProps } from "./components/molecules/SearchInput";
 
 export { StatCard } from "./components/molecules/StatCard";
 export type { StatCardProps, StatCardTrend } from "./components/molecules/StatCard";
+
+export { StatGrid } from "./components/molecules/StatGrid";
+export type { StatGridProps, StatGridItem } from "./components/molecules/StatGrid";
+
+export { PageContainer } from "./components/molecules/PageContainer";
+export type { PageContainerProps, PageContainerVariant } from "./components/molecules/PageContainer";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {
@@ -154,3 +166,6 @@ export {
 // ─── Utils ────────────────────────────────────────────────────────────────────
 export { cn, formatFileSize }           from "./lib/utils";
 export { useIsMobile } from "./lib/hooks/useIsMobile";
+export { useSafeArea } from "./lib/hooks/useSafeArea";
+export type { SafeAreaInsets } from "./lib/hooks/useSafeArea";
+export { useReducedMotion } from "./lib/hooks/useReducedMotion";
