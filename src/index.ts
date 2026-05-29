@@ -169,3 +169,20 @@ export { useIsMobile } from "./lib/hooks/useIsMobile";
 export { useSafeArea } from "./lib/hooks/useSafeArea";
 export type { SafeAreaInsets } from "./lib/hooks/useSafeArea";
 export { useReducedMotion } from "./lib/hooks/useReducedMotion";
+
+// ─── Tokens ───────────────────────────────────────────────────────────────────
+export {
+  tokens,
+  colors,
+  rawColors,
+  shadows,
+  gradients,
+  typography,
+  radius,
+} from "./tokens";
+export type {
+  ColorToken,
+  RawColorToken,
+  ShadowToken,
+  GradientToken,
+} from "./tokens";
