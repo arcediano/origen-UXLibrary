@@ -44,7 +44,7 @@ const ActionBar = React.forwardRef<HTMLElement, ActionBarProps>(
         ref={ref}
         aria-label="Barra de acciones"
         className={cn(
-          "w-full border-t border-border bg-background/95 backdrop-blur-sm",
+          "w-full border-t border-border bg-background/95 backdrop-blur-sm shadow-[0_-4px_20px_rgba(27,67,50,0.08)]",
           "px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]",
           showOnDesktop ? "" : "lg:hidden",
           fixed && "fixed bottom-0 inset-x-0 z-50",
