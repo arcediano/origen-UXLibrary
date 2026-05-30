@@ -73,7 +73,7 @@ const ActionBar = React.forwardRef<HTMLElement, ActionBarProps>(
                 <Button
                   key={action.id}
                   type="button"
-                  variant={action.variant ?? "ghost"}
+                  variant={action.variant ?? "secondary"}
                   onClick={action.onClick}
                   disabled={action.disabled}
                   loading={action.loading}
