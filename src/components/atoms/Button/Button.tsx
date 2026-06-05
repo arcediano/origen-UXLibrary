@@ -42,9 +42,9 @@ const buttonVariants = cva(
           "disabled:border-origen-pino/30 disabled:bg-origen-pastel/90 disabled:text-origen-bosque/70"
         ),
         outline: cn(
-          "border border-border-subtle bg-surface-alt text-origen-bosque",
+          "border border-origen-pino/30 bg-surface-alt text-origen-bosque",
           "hover:border-origen-pradera/55 hover:bg-origen-pastel/70",
-          "disabled:border-border-strong disabled:bg-white disabled:text-origen-bosque/70"
+          "disabled:border-origen-pino/15 disabled:bg-white disabled:text-origen-bosque/70"
         ),
         ghost: cn(
           "bg-transparent text-origen-bosque shadow-none",

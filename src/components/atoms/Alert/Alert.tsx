@@ -14,10 +14,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const variantClasses: Record<AlertVariant, string> = {
   default: "border-origen-hoja bg-origen-crema text-origen-bosque",
-  success: "border-green-700 bg-green-50 text-green-900",
-  warning: "border-amber-700 bg-amber-50 text-amber-900",
-  error: "border-red-700 bg-red-50 text-red-900",
-  info: "border-blue-700 bg-blue-50 text-blue-900",
+  success: "border-feedback-success/50 bg-feedback-success-subtle text-feedback-success-text",
+  warning: "border-feedback-warning/50 bg-feedback-warning-subtle text-feedback-warning-text",
+  error: "border-feedback-danger/50 bg-feedback-danger-subtle text-feedback-danger-text",
+  info: "border-blue-300 bg-blue-50 text-blue-900",
   organic:
     "border-origen-pradera/30 bg-gradient-to-br from-origen-pastel to-origen-crema text-origen-oscuro shadow-md shadow-origen-pradera/10",
 };
@@ -45,13 +45,13 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role={isAssertive ? "alert" : "status"}
         aria-live={isAssertive ? "assertive" : "polite"}
         className={cn(
-          "relative flex w-full items-start gap-3 rounded-xl border p-4",
+          "relative flex w-full items-center gap-3 rounded-xl border p-4",
           "transition-all duration-200",
           variantClasses[variant],
           className
         )}
       >
-        <span className="mt-0.5 shrink-0 text-current">{variantIcons[variant]}</span>
+        <span className="shrink-0 text-current">{variantIcons[variant]}</span>
 
         <div className="flex-1 space-y-1">{children}</div>
 

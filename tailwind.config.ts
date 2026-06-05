@@ -54,6 +54,18 @@ const config: Config = {
         "border-strong": "hsl(var(--border-strong))",
         "text-subtle": "hsl(var(--text-subtle))",
         "text-disabled": "hsl(var(--text-disabled))",
+        // === FEEDBACK TOKENS (sincronizados con proyectos consumidores) ===
+        feedback: {
+          "success":        "hsl(var(--hoja))",
+          "success-subtle": "hsl(var(--pastel))",
+          "success-text":   "hsl(var(--hoja))",
+          "danger":         "#ef4444",
+          "danger-subtle":  "#fef2f2",
+          "danger-text":    "#b91c1c",
+          "warning":        "#d97706",
+          "warning-subtle": "#fffbeb",
+          "warning-text":   "#92400e",
+        },
         // Variables del sistema (shadcn/ui compatible)
         border:     "hsl(var(--border))",
         input:      "hsl(var(--input))",
