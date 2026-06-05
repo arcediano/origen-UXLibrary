@@ -15,7 +15,6 @@
  * />
  */
 
-import * as React from "react";
 import { cn } from "../../../lib/utils";
 import { StatCard } from "../StatCard/StatCard";
 import type { StatCardProps } from "../StatCard/StatCard";
