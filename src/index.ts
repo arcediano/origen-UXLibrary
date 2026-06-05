@@ -108,6 +108,12 @@ export type { TagsInputProps } from "./components/atoms/TagsInput";
 export { Textarea } from "./components/atoms/Textarea";
 export type { TextareaProps } from "./components/atoms/Textarea";
 
+export { Spinner, LoadingSpinner } from "./components/atoms/Spinner";
+export type { SpinnerProps, SpinnerSize, SpinnerVariant, LoadingSpinnerProps } from "./components/atoms/Spinner";
+
+export { PasswordStrengthIndicator } from "./components/atoms/PasswordStrengthIndicator";
+export type { PasswordStrengthIndicatorProps } from "./components/atoms/PasswordStrengthIndicator";
+
 export { Toggle } from "./components/atoms/Toggle";
 export type { ToggleProps } from "./components/atoms/Toggle";
 
@@ -133,6 +139,9 @@ export type { FilterBottomSheetProps } from "./components/mobile/FilterBottomShe
 export { ScrollChipFilter } from "./components/mobile/ScrollChipFilter";
 export type { ScrollChipItem, ScrollChipFilterProps } from "./components/mobile/ScrollChipFilter";
 
+export { MobileScrollSlider } from "./components/mobile/MobileScrollSlider";
+export type { MobileScrollSliderProps } from "./components/mobile/MobileScrollSlider";
+
 // ─── Molecules ────────────────────────────────────────────────────────────────
 export { AppTopBar } from "./components/molecules/AppTopBar";
 export type { AppTopBarProps } from "./components/molecules/AppTopBar";
@@ -151,6 +160,12 @@ export type { StatGridProps, StatGridItem } from "./components/molecules/StatGri
 
 export { PageContainer } from "./components/molecules/PageContainer";
 export type { PageContainerProps, PageContainerVariant } from "./components/molecules/PageContainer";
+
+export { PageHeader } from "./components/molecules/PageHeader";
+export type { PageHeaderProps } from "./components/molecules/PageHeader";
+
+export { AuthFooter } from "./components/molecules/AuthFooter";
+export type { AuthFooterProps, AuthFooterVariant } from "./components/molecules/AuthFooter";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {

@@ -85,6 +85,8 @@ export interface ButtonProps
   leftIcon?: React.ReactNode;
   /** Icono posicionado a la derecha del texto */
   rightIcon?: React.ReactNode;
+  /** Fuerza ancho completo en todos los breakpoints (sobreescribe el sm:w-auto de la base) */
+  fullWidth?: boolean;
 }
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -100,6 +102,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       leftIcon,
       rightIcon,
+      fullWidth = false,
       children,
       type = "button",
       ...props
@@ -109,7 +112,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     <button
       ref={ref}
       {...props}
-      className={cn(buttonVariants({ variant, size }), className)}
+      className={cn(buttonVariants({ variant, size }), fullWidth && 'w-full sm:w-full', className)}
       disabled={disabled || loading}
       aria-busy={loading}
       aria-disabled={disabled || loading}

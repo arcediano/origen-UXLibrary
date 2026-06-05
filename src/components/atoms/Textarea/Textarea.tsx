@@ -10,6 +10,8 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
   helperText?: string;
   showCharCount?: boolean;
   autoResize?: boolean;
+  /** Permite redimensionar el textarea verticalmente por el usuario */
+  resizable?: boolean;
   success?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
@@ -28,6 +30,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       showCharCount = false,
       maxLength,
       autoResize = true,
+      resizable = false,
       disabled,
       success,
       loading,
@@ -209,6 +212,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               "transition-all duration-200",
               "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
               "focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+              resizable ? "resize-y" : "resize-none",
               variantClasses[variant],
               sizeClasses[textareaSize],
               icon && "pl-9 sm:pl-10",

@@ -40,6 +40,8 @@ export interface SelectProps {
   required?: boolean;
   name?: string;
   error?: string;
+  /** Etiqueta visible encima del select */
+  label?: string;
   children: React.ReactNode;
   items?: Array<{ value: string; label: string }>;
   className?: string;
@@ -55,6 +57,7 @@ const Select = ({
   required = false,
   name,
   error,
+  label,
   children,
   items,
   className,
@@ -111,6 +114,19 @@ const Select = ({
       }}
     >
       <div className={cn("relative w-full", className)}>
+        {label && (
+          <label
+            className={cn(
+              "mb-1.5 block text-xs font-medium text-origen-bosque sm:text-sm",
+              disabled && "cursor-not-allowed opacity-50"
+            )}
+          >
+            {label}
+            {required && (
+              <span className="ml-1 text-red-500" aria-label="requerido">*</span>
+            )}
+          </label>
+        )}
         <select
           name={name}
           value={currentValue}
