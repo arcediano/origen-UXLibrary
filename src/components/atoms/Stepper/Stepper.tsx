@@ -29,8 +29,17 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   onStepChange?: (step: number) => void;
   /** Variante visual */
   variant?: "default" | "minimal" | "card";
-  /** Orientación */
-  orientation?: "horizontal" | "vertical";
+  /**
+   * Orientación.
+   * - `horizontal` / `vertical`: stepper completo con circulos, titulos y
+   *   conectores (comportamiento original).
+   * - `horizontal-dots`: variante compacta "dot trail" pensada para cabeceras
+   *   moviles (p. ej. onboarding). Renderiza solo los indicadores de paso en
+   *   linea horizontal, sin titulos ni descripciones; usa `step.title` como
+   *   `aria-label` de cada punto.
+   * @default "horizontal"
+   */
+  orientation?: "horizontal" | "vertical" | "horizontal-dots";
   /** Mostrar descripciones */
   showDescriptions?: boolean;
   /** Permitir navegación a pasos completados */
@@ -59,6 +68,50 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       orientation === "vertical"
         ? "flex flex-col gap-8"
         : "flex flex-row justify-between gap-4";
+
+    if (orientation === "horizontal-dots") {
+      return (
+        <div
+          ref={ref}
+          {...props}
+          role="list"
+          aria-label="Progreso del proceso"
+          className={cn("flex w-full items-center gap-1", className)}
+        >
+          {steps.map((step, index) => {
+            const isCompleted = step.status === "completed";
+            const isActive = step.status === "active";
+
+            return (
+              <React.Fragment key={step.id}>
+                <div
+                  role="listitem"
+                  aria-label={step.title}
+                  aria-current={isActive ? "step" : undefined}
+                  className={cn(
+                    "flex flex-shrink-0 items-center justify-center rounded-full transition-all duration-300",
+                    isCompleted && "h-5 w-5 bg-origen-hoja",
+                    isActive && "h-5 w-5 bg-origen-pradera ring-2 ring-origen-pradera/30",
+                    !isCompleted && !isActive && "h-2.5 w-2.5 bg-border"
+                  )}
+                >
+                  {isCompleted && <CheckCircle2 className="h-3 w-3 text-white" aria-hidden="true" />}
+                  {isActive && <span className="h-2 w-2 rounded-full bg-surface-alt" aria-hidden="true" />}
+                </div>
+                {index < steps.length - 1 && (
+                  <div
+                    className={cn(
+                      "h-0.5 flex-1 transition-all duration-300",
+                      index < currentStep ? "bg-origen-pradera" : "bg-border"
+                    )}
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      );
+    }
 
     const handleStepClick = (index: number) => {
       const step = steps[index];

@@ -12,6 +12,11 @@
  * // Con next/link para SPA navigation
  * import Link from 'next/link';
  * <AuthFooter variant="login" linkComponent={Link} />
+ *
+ * // Variante "info": paginas legales/informativas (no son flujos de auth),
+ * // mantiene el CTA "Nuevo productor" como promocion cruzada del marketplace
+ * // pero con un versionLabel neutro (sin "Acceso productores").
+ * <AuthFooter variant="info" linkComponent={Link} />
  */
 
 "use client";
@@ -31,7 +36,7 @@ import {
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
-export type AuthFooterVariant = "login" | "register" | "forgot";
+export type AuthFooterVariant = "login" | "register" | "forgot" | "info";
 
 export interface AuthFooterProps {
   /** Variante del footer que determina el link contextual */
@@ -66,6 +71,11 @@ const VARIANT_CONFIG: Record<AuthFooterVariant, {
     mobileLink:  { href: "/auth/login", icon: Lock,  label: "Volver al login" },
     desktopLink: { href: "/auth/login", icon: Shield, label: "Volver al login" },
     versionLabel: "Recuperar contraseña",
+  },
+  info: {
+    mobileLink:  { href: "/auth/register", icon: Store, label: "Nuevo productor" },
+    desktopLink: { href: "/auth/register", icon: Store, label: "Nuevo productor" },
+    versionLabel: "Marketplace de productores locales",
   },
 };
 

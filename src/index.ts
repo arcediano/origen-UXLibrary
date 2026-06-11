@@ -143,9 +143,6 @@ export { MobileScrollSlider } from "./components/mobile/MobileScrollSlider";
 export type { MobileScrollSliderProps } from "./components/mobile/MobileScrollSlider";
 
 // ─── Molecules ────────────────────────────────────────────────────────────────
-export { AppTopBar } from "./components/molecules/AppTopBar";
-export type { AppTopBarProps } from "./components/molecules/AppTopBar";
-
 export { EmptyState } from "./components/molecules/EmptyState";
 export type { EmptyStateProps, EmptyStateAction } from "./components/molecules/EmptyState";
 
@@ -157,6 +154,9 @@ export type { StatCardProps, StatCardTrend } from "./components/molecules/StatCa
 
 export { StatGrid } from "./components/molecules/StatGrid";
 export type { StatGridProps, StatGridItem } from "./components/molecules/StatGrid";
+
+export { StatHighlightCard } from "./components/molecules/StatHighlightCard";
+export type { StatHighlightCardProps, StatHighlightCardGradient } from "./components/molecules/StatHighlightCard";
 
 export { PageContainer } from "./components/molecules/PageContainer";
 export type { PageContainerProps, PageContainerVariant } from "./components/molecules/PageContainer";
