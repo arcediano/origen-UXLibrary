@@ -3,7 +3,7 @@
  * @description Suite de validación programática de atributos ARIA.
  *
  * Cubre las cadenas de accesibilidad de todos los componentes clave:
- * Button, Input, Badge, Tabs, MobileBottomNav, FilterBottomSheet, ScrollChipFilter.
+ * Button, Input, Badge, Tabs, FilterBottomSheet, ScrollChipFilter.
  *
  * Complementa smoke-a11y.test.tsx (existencia de roles) con aserciones profundas
  * sobre aria-invalid, aria-describedby, aria-controls, aria-labelledby y estados
@@ -13,13 +13,10 @@
 import * as React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Heart, Home, Search, UserRound } from "lucide-react";
-
 import { Button } from "@/components/atoms/Button/Button";
 import { Input } from "@/components/atoms/Input/Input";
 import { Badge, StatusBadge } from "@/components/atoms/Badge/Badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/atoms/Tabs/Tabs";
-import { MobileBottomNav } from "@/components/mobile/MobileBottomNav/MobileBottomNav";
 import { FilterBottomSheet } from "@/components/mobile/FilterBottomSheet/FilterBottomSheet";
 import { ScrollChipFilter } from "@/components/mobile/ScrollChipFilter/ScrollChipFilter";
 
@@ -161,39 +158,6 @@ describe("Tabs — ARIA", () => {
     expect(tab1).toHaveAttribute("aria-selected", "false");
     expect(tab2).toHaveAttribute("aria-selected", "true");
     expect(screen.getByRole("tabpanel")).toHaveTextContent("Contenido 2");
-  });
-});
-
-// ─── MobileBottomNav ─────────────────────────────────────────────────────────
-
-const NAV_ITEMS = [
-  { id: "inicio",    label: "Inicio",     icon: <Home      className="h-5 w-5" aria-hidden="true" /> },
-  { id: "buscar",    label: "Buscar",     icon: <Search    className="h-5 w-5" aria-hidden="true" /> },
-  { id: "favoritos", label: "Favoritos",  icon: <Heart     className="h-5 w-5" aria-hidden="true" />, badge: 3 },
-  { id: "perfil",    label: "Perfil",     icon: <UserRound className="h-5 w-5" aria-hidden="true" /> },
-];
-
-describe("MobileBottomNav — ARIA", () => {
-  it("es un landmark de navegación con aria-label", () => {
-    render(<MobileBottomNav items={NAV_ITEMS} activeId="inicio" />);
-    expect(
-      screen.getByRole("navigation", { name: /mobile bottom navigation/i })
-    ).toBeInTheDocument();
-  });
-
-  it("el ítem activo tiene aria-pressed=true", () => {
-    render(<MobileBottomNav items={NAV_ITEMS} activeId="buscar" />);
-    const buscarBtn = screen.getByRole("button", { name: /buscar/i });
-    expect(buscarBtn).toHaveAttribute("aria-pressed", "true");
-  });
-
-  it("los ítems inactivos tienen aria-pressed=false", () => {
-    render(<MobileBottomNav items={NAV_ITEMS} activeId="inicio" />);
-    // Los 3 ítems inactivos deben tener aria-pressed=false
-    const inactive = screen
-      .getAllByRole("button")
-      .filter((b) => b.getAttribute("aria-pressed") === "false");
-    expect(inactive).toHaveLength(3);
   });
 });
 

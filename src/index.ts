@@ -124,9 +124,6 @@ export { Toaster, toast, useToast, ToastProvider, ToastViewport, Toast, ToastTit
 export type { ToasterToast } from "./components/atoms/Toast";
 
 // ─── Mobile ───────────────────────────────────────────────────────────────────
-export { MobileBottomNav } from "./components/mobile/MobileBottomNav";
-export type { MobileBottomNavItem, MobileBottomNavProps } from "./components/mobile/MobileBottomNav";
-
 export { MobileTopBar } from "./components/mobile/MobileTopBar";
 export type { MobileTopBarProps } from "./components/mobile/MobileTopBar";
 
