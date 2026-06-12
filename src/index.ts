@@ -45,8 +45,23 @@ export type { AlertDialogProps, AlertDialogContentProps } from "./components/ato
 export { Avatar, AvatarImage, AvatarFallback, AvatarGroup } from "./components/atoms/Avatar";
 export type { AvatarProps, AvatarImageProps, AvatarFallbackProps, AvatarGroupProps } from "./components/atoms/Avatar";
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants } from "./components/atoms/Card";
-export type { CardProps, CardHeaderProps, CardTitleProps, CardDescriptionProps, CardContentProps, CardFooterProps } from "./components/atoms/Card";
+export { Card, CardHeader, CardIconHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants } from "./components/atoms/Card";
+export type { CardProps, CardHeaderProps, CardIconHeaderProps, CardTitleProps, CardDescriptionProps, CardContentProps, CardFooterProps } from "./components/atoms/Card";
+
+export { AccordionCard } from "./components/atoms/AccordionCard";
+export type { AccordionCardProps, AccordionCardState } from "./components/atoms/AccordionCard";
+
+export { SelectableCard } from "./components/atoms/SelectableCard";
+export type { SelectableCardProps, SelectableCardLayout, SelectableCardTone } from "./components/atoms/SelectableCard";
+
+export { FileUpload } from "./components/atoms/FileUpload";
+export type { FileUploadProps, UploadedFile } from "./components/atoms/FileUpload";
+
+export { CategoryCard } from "./components/atoms/CategoryCard";
+export type { CategoryCardProps, CategoryCardCategory } from "./components/atoms/CategoryCard";
+
+export { DocumentUploadCard } from "./components/atoms/DocumentUploadCard";
+export type { DocumentUploadCardProps, DocumentUploadStatus } from "./components/atoms/DocumentUploadCard";
 
 export { Checkbox, CheckboxWithLabel, CheckboxGroup } from "./components/atoms/Checkbox";
 export type { CheckboxProps, CheckboxWithLabelProps, CheckboxGroupProps } from "./components/atoms/Checkbox";
@@ -174,6 +189,17 @@ export {
 	OrigenVerifiedBadgeIcon,
 	OrigenEmptyStateIllustration,
 } from "./components/icons";
+
+// ─── Validations ──────────────────────────────────────────────────────────────
+export {
+	IMAGE_QUALITY_PRESETS,
+	formatImageDimensions,
+	getImageQualityHint,
+	buildImageResolutionError,
+	isImageFile,
+	getImageDimensions,
+} from "./lib/validations/image-quality";
+export type { ImageDimensions, ImageQualityRequirement } from "./lib/validations/image-quality";
 
 // ─── Utils ────────────────────────────────────────────────────────────────────
 export { cn, formatFileSize }           from "./lib/utils";

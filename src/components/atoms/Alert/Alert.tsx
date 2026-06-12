@@ -10,6 +10,8 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: AlertVariant;
   dismissible?: boolean;
   onDismiss?: () => void;
+  /** Contenido adicional a la derecha del texto (ej. Badge de estado o accion) */
+  trailing?: React.ReactNode;
 }
 
 const variantClasses: Record<AlertVariant, string> = {
@@ -32,7 +34,7 @@ const variantIcons: Record<AlertVariant, React.ReactNode> = {
 };
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant = "default", dismissible = false, onDismiss, children, ...props }, ref) => {
+  ({ className, variant = "default", dismissible = false, onDismiss, trailing, children, ...props }, ref) => {
     const [visible, setVisible] = React.useState(true);
     const isAssertive = variant === "error";
 
@@ -54,6 +56,8 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         <span className="shrink-0 text-current">{variantIcons[variant]}</span>
 
         <div className="flex-1 space-y-1">{children}</div>
+
+        {trailing && <div className="shrink-0">{trailing}</div>}
 
         {dismissible && (
           <button

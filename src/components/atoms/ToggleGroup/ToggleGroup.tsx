@@ -15,7 +15,7 @@ interface ToggleGroupContextValue {
   type: "single" | "multiple";
   orientation?: "horizontal" | "vertical";
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "outline";
+  variant?: "default" | "outline" | "segmented" | "pill";
 }
 
 const ToggleGroupContext = React.createContext<ToggleGroupContextValue | undefined>(
@@ -30,7 +30,17 @@ interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   orientation?: "horizontal" | "vertical";
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "outline";
+  /**
+   * - `default` / `outline`: grupo de chips/botones independientes.
+   * - `segmented`: fila de N columnas de igual ancho con borde compartido
+   *   (control segmentado), activo en `bg-origen-pradera text-white`. Util
+   *   para selectores de 3 opciones tipo "tipo de zona" (ver /onboarding,
+   *   Paso 4 - Capacidad).
+   * - `pill`: chips totalmente redondeados, activo en color de marca con
+   *   texto blanco, inactivo con borde de marca. Util para listas cortas
+   *   tipo "meses de disponibilidad" (ver /onboarding, Paso 2 - Productos).
+   */
+  variant?: "default" | "outline" | "segmented" | "pill";
 }
 
 const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
@@ -83,10 +93,15 @@ const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
       variant,
     };
 
-    const orientationClass =
-      orientation === "vertical"
+    const isSegmented = variant === "segmented";
+
+    const orientationClass = isSegmented
+      ? "grid w-full overflow-hidden rounded-xl border border-border-subtle"
+      : orientation === "vertical"
         ? "flex flex-col"
         : "flex flex-row flex-wrap";
+
+    const childCount = React.Children.count(props.children);
 
     return (
       <ToggleGroupContext.Provider value={contextValue}>
@@ -94,7 +109,8 @@ const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
           ref={ref}
           {...props}
           role="group"
-          className={cn("inline-flex gap-1", orientationClass, className)}
+          style={isSegmented ? { gridTemplateColumns: `repeat(${Math.max(childCount, 1)}, minmax(0, 1fr))` } : undefined}
+          className={cn(isSegmented ? "gap-0" : "inline-flex gap-1", orientationClass, className)}
         />
       </ToggleGroupContext.Provider>
     );
@@ -114,9 +130,15 @@ const toggleGroupItemVariants = cva(
       },
       variant: {
         default:
-          "bg-origin-pradera/15 text-origin-bosque hover:bg-origin-pradera/25 data-[state=on]:bg-origin-pradera data-[state=on]:text-white",
+          "bg-origen-pradera/15 text-origen-bosque hover:bg-origen-pradera/25 data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
         outline:
-          "border border-origin-pradera/30 text-origin-bosque hover:border-origin-pradera/60 data-[state=on]:border-origin-pradera data-[state=on]:bg-origin-pradera/10",
+          "border border-origen-pradera/30 text-origen-bosque hover:border-origen-pradera/60 data-[state=on]:border-origen-pradera data-[state=on]:bg-origen-pradera/10",
+        /** Fila segmentada de N columnas, sin radio individual ni gap, separadas por borde compartido */
+        segmented:
+          "w-full rounded-none border-0 border-l border-border-subtle first:border-l-0 bg-surface-alt text-text-subtle hover:bg-origen-crema/40 hover:text-origen-bosque data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
+        /** Chip totalmente redondeado: activo en color de marca, inactivo con borde de marca */
+        pill:
+          "rounded-full border border-origen-pradera/40 text-origen-bosque hover:border-origen-pradera data-[state=on]:border-origen-pradera data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
       },
     },
     defaultVariants: {
@@ -129,7 +151,7 @@ const toggleGroupItemVariants = cva(
 interface ToggleGroupItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
   size?: "sm" | "md" | "lg";
-  variant?: "default" | "outline";
+  variant?: "default" | "outline" | "segmented" | "pill";
 }
 
 const ToggleGroupItem = React.forwardRef<

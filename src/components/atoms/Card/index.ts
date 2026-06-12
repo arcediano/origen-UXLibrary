@@ -1,6 +1,7 @@
 export {
   Card,
   CardHeader,
+  CardIconHeader,
   CardTitle,
   CardDescription,
   CardContent,
@@ -10,6 +11,7 @@ export {
 export type {
   CardProps,
   CardHeaderProps,
+  CardIconHeaderProps,
   CardTitleProps,
   CardDescriptionProps,
   CardContentProps,

@@ -15,6 +15,20 @@ export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   showIcon?: boolean;
   description?: string;
   animated?: boolean;
+  /**
+   * Modo de visualizacion:
+   * - `bar` (por defecto): barra de progreso estandar con `showLabel`/`label`/`description`.
+   * - `char-count`: modo contador de caracteres con umbral (`threshold`). Antes del
+   *   umbral muestra "value / threshold minimos" en ambar con mensaje de
+   *   caracteres restantes; al alcanzarlo, cambia a indicador verde con
+   *   mensaje de confirmacion. Util para descripciones con minimo de
+   *   caracteres (ver /onboarding, Paso 1 - Historia).
+   */
+  mode?: "bar" | "char-count";
+  /** Umbral minimo de caracteres en modo `char-count` */
+  threshold?: number;
+  /** Mensaje mostrado cuando se alcanza el umbral en modo `char-count` (por defecto "¡Listo! Ya puedes continuar") */
+  completeMessage?: string;
 }
 
 const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
@@ -30,6 +44,9 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       showIcon = true,
       description,
       animated = true,
+      mode = "bar",
+      threshold = 50,
+      completeMessage = "¡Listo! Ya puedes continuar",
       ...props
     },
     ref
@@ -37,6 +54,51 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     const safeMax = max <= 0 ? 100 : max;
     const safeValue = Math.min(Math.max(value, 0), safeMax);
     const percentage = Math.min(Math.max((safeValue / safeMax) * 100, 0), 100);
+
+    if (mode === "char-count") {
+      const remaining = Math.max(threshold - safeValue, 0);
+      const isComplete = safeValue >= threshold;
+      const charPercentage = Math.min((safeValue / threshold) * 100, 100);
+
+      return (
+        <div
+          ref={ref}
+          {...props}
+          role="status"
+          aria-live="polite"
+          className={cn("w-full space-y-1", className)}
+        >
+          {!isComplete && (
+            <>
+              <div className="mb-1 flex justify-between text-xs text-text-subtle">
+                <span>{safeValue} / {threshold} mínimos</span>
+                <span>{safeValue}/{safeMax}</span>
+              </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-surface">
+                <div
+                  className="h-full rounded-full bg-origen-pradera transition-all duration-300"
+                  style={{ width: `${charPercentage}%` }}
+                />
+              </div>
+              <p className="mt-1 flex items-center gap-1 text-xs text-amber-600">
+                <Clock className="h-3 w-3" aria-hidden="true" />
+                {remaining} caracteres más para poder continuar
+              </p>
+            </>
+          )}
+
+          {isComplete && (
+            <div className="flex items-center justify-between">
+              <span className="flex items-center gap-1 text-xs text-green-600">
+                <Sprout className="h-3.5 w-3.5" aria-hidden="true" />
+                {completeMessage}
+              </span>
+              <span className="text-xs text-text-subtle">{safeValue}/{safeMax}</span>
+            </div>
+          )}
+        </div>
+      );
+    }
 
     const variantConfig: Record<
       ProgressVariant,

@@ -15,6 +15,12 @@ const cardVariants = cva(
         elevated: "bg-white shadow-origen hover:shadow-origen-lg",
         outline: "bg-transparent border-2 border-origen-pradera/35 hover:border-origen-pradera/60",
         flat: "bg-origen-pastel border-transparent shadow-none",
+        /**
+         * Section Card — patron canonico de /onboarding: tarjeta de seccion
+         * de formulario multi-paso, con sombra suave que aumenta al hover y
+         * borde que se tine de color de marca al pasar el raton.
+         */
+        section: "bg-surface-alt shadow-sm hover:shadow-md hover:border-origen-pradera/30",
       },
       interactive: {
         true: cn(
@@ -63,6 +69,17 @@ export interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "left" | "center" | "right";
 }
 
+export interface CardIconHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Icono mostrado dentro del recuadro con gradiente de marca (recomendado: lucide-react h-5 w-5) */
+  icon: React.ReactNode;
+  /** Titulo de la seccion */
+  title: string;
+  /** Subtitulo o descripcion corta opcional */
+  description?: string;
+  /** Tamano del bloque de icono y tipografia del titulo */
+  size?: "sm" | "md";
+}
+
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, interactive, padding, role, tabIndex, ...props }, ref) => (
     <div
@@ -84,6 +101,46 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
     };
 
     return <div ref={ref} className={cn("flex flex-col", spacingClasses[spacing], className)} {...props} />;
+  }
+);
+
+/**
+ * CardIconHeader — bloque de cabecera con icono en cuadro con gradiente de
+ * marca, titulo y subtitulo. Patron canonico de las "Section Cards" de
+ * /onboarding (ver manual de diseno, seccion 9).
+ *
+ * @example
+ * <Card variant="section" padding="md">
+ *   <CardIconHeader icon={<Building2 className="h-5 w-5" />} title="Identidad legal" description="Necesario para verificar tu cuenta" />
+ *   <CardContent>...</CardContent>
+ * </Card>
+ */
+const CardIconHeader = React.forwardRef<HTMLDivElement, CardIconHeaderProps>(
+  ({ className, icon, title, description, size = "md", children, ...props }, ref) => {
+    const boxSize = size === "sm" ? "h-8 w-8" : "h-9 w-9";
+    const titleSize = size === "sm" ? "text-base" : "text-lg";
+
+    return (
+      <div ref={ref} className={cn("mb-4 flex items-center gap-3", className)} {...props}>
+        <div
+          className={cn(
+            boxSize,
+            "flex shrink-0 items-center justify-center rounded-lg",
+            "bg-gradient-to-br from-origen-pradera/20 to-origen-hoja/20 text-origen-pradera"
+          )}
+          aria-hidden="true"
+        >
+          {icon}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className={cn("font-semibold leading-tight text-origen-bosque", titleSize)}>{title}</h2>
+            {children}
+          </div>
+          {description && <p className="text-xs text-text-subtle sm:text-sm">{description}</p>}
+        </div>
+      </div>
+    );
   }
 );
 
@@ -159,9 +216,10 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
 
 Card.displayName = "Card";
 CardHeader.displayName = "CardHeader";
+CardIconHeader.displayName = "CardIconHeader";
 CardTitle.displayName = "CardTitle";
 CardDescription.displayName = "CardDescription";
 CardContent.displayName = "CardContent";
 CardFooter.displayName = "CardFooter";
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants };
+export { Card, CardHeader, CardIconHeader, CardTitle, CardDescription, CardContent, CardFooter, cardVariants };
