@@ -175,9 +175,9 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
     >
       <div
         className={cn(
-          "mx-auto flex max-w-md items-stretch justify-between gap-1 border border-border-subtle bg-surface-alt p-1.5",
+          "flex items-stretch justify-between gap-1 border border-border-subtle bg-surface-alt p-1.5",
           variant === "default" && "rounded-[1.75rem] shadow-origen-lg",
-          variant === "island" && "rounded-2xl shadow-origen-lg"
+          variant === "island" && "mx-auto max-w-md rounded-2xl shadow-origen-lg"
         )}
       >
         {items.map((item) =>

@@ -152,6 +152,82 @@ export const IslandWithCentralFAB: Story = {
  * Patron "floating island + FAB central": item `central` renderizado como
  * boton circular elevado con gradiente y sombra, combinado con `variant="island"`.
  */
+/**
+ * ## Patron "ancho completo, borde a borde + FAB central"
+ *
+ * `MobileBottomNav` con `variant="default"` (sin `max-w-md`/`mx-auto` en el
+ * contenedor interior, a diferencia de `variant="island"`) y un item
+ * `central: true` (FAB elevado, igual que en `IslandWithCentralFAB` /
+ * `FloatingIslandWithCentralFab`). El resultado es una barra que ocupa el
+ * 100% del ancho disponible del viewport (con el padding del propio `nav`
+ * como unico margen lateral), con el boton central sobresaliendo por encima
+ * del borde superior.
+ *
+ * Es el equivalente visual de `FloatingIslandWithCentralFab` pero sin
+ * margenes laterales ni limite de ancho — recomendado para `BottomTabBar`
+ * (`origen-dashboard`) y `MarketplaceBottomNav` (`origen-web`).
+ *
+ * ### Cambios respecto al wrapper de `IslandWithCentralFAB`
+ *
+ * ```tsx
+ * <motion.div
+ *   key="bottom-nav"
+ *   initial={{ y: 100, opacity: 0 }}
+ *   animate={{ y: 0, opacity: 1 }}
+ *   exit={{ y: 100, opacity: 0 }}
+ *   transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+ *   className="lg:hidden fixed bottom-0 inset-x-0 z-50 flex items-end px-0"
+ *   style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 10px)' }}
+ * >
+ *   <UXMobileBottomNav
+ *     items={items}
+ *     activeId={activeId}
+ *     onValueChange={handleValueChange}
+ *     variant="default"
+ *     fixed={false}
+ *   />
+ * </motion.div>
+ * ```
+ *
+ * Puntos clave:
+ * - `variant="default"` en lugar de `variant="island"`: el contenedor
+ *   interior ya no aplica `max-w-md`/`mx-auto`, por lo que ocupa el 100% del
+ *   ancho del `nav` (que ya es `w-full` con `px-3`).
+ * - El wrapper exterior cambia `flex justify-center items-end px-4` por
+ *   `flex items-end px-0` (o se elimina `justify-center`/`px-4` por
+ *   completo): sin esto la barra seguiria centrada con margenes laterales
+ *   aunque el componente ya soporte ancho completo.
+ * - Sin `className="w-full max-w-[360px]"`: ese limite es exclusivo del
+ *   patron "isla flotante" (`variant="island"`).
+ * - El item `central` se renderiza igual que en `island`: FAB circular
+ *   elevado (`-translate-y-4`, `h-14 w-14`, `bg-gradient-origen`,
+ *   `shadow-origen`), independiente del `variant`.
+ */
+export const DefaultFullWidthWithCentralFAB: Story = {
+  render: () => {
+    const [activeId, setActiveId] = React.useState("inicio");
+
+    return (
+      <div className="min-h-[520px] bg-origen-nube pb-32">
+        <div className="mx-auto flex max-w-md flex-col gap-4 px-4 pt-6">
+          <div className="rounded-[2rem] border border-border-subtle bg-surface-alt p-5 shadow-subtle">
+            <p className="text-micro uppercase tracking-[0.18em] text-text-subtle">Demo mobile</p>
+            <h2 className="mt-2 text-h3 text-origen-bosque">Ancho completo + FAB central</h2>
+            <p className="mt-2 text-small text-text-subtle">Tab activa: {activeId}</p>
+          </div>
+        </div>
+        <MobileBottomNav
+          items={itemsWithCentral}
+          activeId={activeId}
+          onValueChange={setActiveId}
+          fixed
+          variant="default"
+        />
+      </div>
+    );
+  },
+};
+
 export const FloatingIslandWithCentralFab: Story = {
   render: () => {
     const [activeId, setActiveId] = React.useState("inicio");
