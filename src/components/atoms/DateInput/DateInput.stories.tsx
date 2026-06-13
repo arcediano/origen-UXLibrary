@@ -33,6 +33,23 @@ export const Disabled: Story = {
   args: { label: "Fecha de alta", disabled: true, value: "2026-01-01" },
 };
 
+export const FormattedOverlay: Story = {
+  name: "Formato humano (es-ES)",
+  render: () => {
+    const [value, setValue] = React.useState("2026-06-12");
+    return (
+      <div className="p-4 bg-white max-w-xs">
+        <DateInput
+          label="Fecha de entrega"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          helperText='Sin foco se muestra como "12 jun. 2026"; al enfocar aparece el input nativo dd/mm/aaaa.'
+        />
+      </div>
+    );
+  },
+};
+
 export const Range: Story = {
   render: () => {
     const [from, setFrom] = React.useState("2026-06-01");

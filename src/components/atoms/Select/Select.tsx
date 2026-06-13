@@ -161,10 +161,18 @@ const Select = ({
 export interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: React.ReactNode;
+  /**
+   * Estilo visual del trigger.
+   * - `"default"` (por defecto): control de formulario estándar, fondo blanco
+   *   y borde de marca `pradera/30`.
+   * - `"subtle"`: integrado en un "carril" neutro (`bg-muted/50`), pensado
+   *   para usarse como filtro secundario junto a `TabsList`.
+   */
+  tone?: "default" | "subtle";
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, children, ...props }, forwardedRef) => {
+  ({ className, children, tone = "default", ...props }, forwardedRef) => {
     const { open, setOpen, disabled: ctxDisabled, error, triggerRef } = useSelect();
     const disabled = props.disabled || ctxDisabled;
 
@@ -192,6 +200,11 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
           "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
           error
             ? "border-feedback-danger hover:border-red-600"
+            : tone === "subtle"
+            ? cn(
+                "border-transparent bg-muted/50 hover:bg-muted/70",
+                open && "bg-white border-origen-pradera/30 ring-2 ring-origen-pradera/15"
+              )
             : cn("border-origen-pradera/30 hover:border-origen-hoja", open && "border-origen-pradera ring-2 ring-origen-pradera/20"),
           className
         )}

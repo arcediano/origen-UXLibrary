@@ -41,6 +41,29 @@ const iconSizeClasses = {
   lg: "w-5 h-5",
 };
 
+/**
+ * Formatea una fecha ISO (`yyyy-mm-dd`) al formato "humano" en español,
+ * p. ej. "12 jun. 2026". Devuelve `null` si el valor no es una fecha válida.
+ */
+function formatHumanDate(value: string | undefined): string | null {
+  if (!value) return null;
+  // input[type=date] siempre entrega yyyy-mm-dd; se construye en UTC para
+  // evitar desfases de zona horaria al formatear.
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return null;
+  const [, year, month, day] = match;
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+  if (Number.isNaN(date.getTime())) return null;
+
+  const formatted = new Intl.DateTimeFormat("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+
+  return formatted;
+}
+
 // ─── DateInput ────────────────────────────────────────────────────────────────
 
 const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
@@ -53,12 +76,28 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
       inputSize = "md",
       disabled,
       id: idProp,
+      value,
+      defaultValue,
+      onFocus,
+      onBlur,
       ...props
     },
     ref
   ) => {
     const generatedId = React.useId();
     const id = idProp ?? generatedId;
+    const [isFocused, setIsFocused] = React.useState(false);
+    const [currentValue, setCurrentValue] = React.useState<string | undefined>(
+      (value as string | undefined) ?? (defaultValue as string | undefined)
+    );
+
+    React.useEffect(() => {
+      if (value !== undefined) {
+        setCurrentValue(value as string);
+      }
+    }, [value]);
+
+    const humanDate = !isFocused ? formatHumanDate(currentValue) : null;
 
     return (
       <div className="flex flex-col gap-1.5 w-full">
@@ -94,7 +133,22 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
             ref={ref}
             id={id}
             type="date"
+            lang="es"
             disabled={disabled}
+            value={value}
+            defaultValue={defaultValue}
+            onFocus={(event) => {
+              setIsFocused(true);
+              onFocus?.(event);
+            }}
+            onBlur={(event) => {
+              setIsFocused(false);
+              onBlur?.(event);
+            }}
+            onChange={(event) => {
+              setCurrentValue(event.target.value);
+              props.onChange?.(event);
+            }}
             className={cn(
               // Base
               "w-full pl-9 pr-3 font-medium rounded-xl border transition-colors",
@@ -113,6 +167,9 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               error && "border-feedback-danger focus:border-feedback-danger focus:ring-2 focus:ring-feedback-danger/20 focus:outline-none",
               // Estado disabled
               disabled && "opacity-40 cursor-not-allowed bg-surface border-border-subtle",
+              // Oculta el render nativo del valor cuando se muestra el overlay
+              // con la fecha en formato "humano" (es-ES)
+              humanDate && "text-transparent",
               // Chrome/Safari: icono del calendario nativo alineado
               "[&::-webkit-calendar-picker-indicator]:opacity-0",
               "[&::-webkit-calendar-picker-indicator]:absolute",
@@ -126,6 +183,20 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
             )}
             {...props}
           />
+
+          {humanDate && (
+            <span
+              aria-hidden="true"
+              className={cn(
+                "pointer-events-none absolute left-9 right-3 truncate font-medium",
+                "text-origen-bosque",
+                disabled && "text-text-disabled",
+                error && "text-feedback-danger"
+              )}
+            >
+              {humanDate}
+            </span>
+          )}
         </div>
 
         {(error || helperText) && (

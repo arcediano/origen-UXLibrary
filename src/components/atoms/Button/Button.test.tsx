@@ -36,9 +36,17 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveAttribute("aria-busy", "true");
   });
 
-  it("usa clases de contraste reforzado para destructive", () => {
-    expect(buttonVariants({ variant: "destructive" })).toContain("bg-red-700");
-    expect(buttonVariants({ variant: "destructive" })).toContain("border-red-800");
+  it("usa los tokens de marca feedback-danger para destructive", () => {
+    expect(buttonVariants({ variant: "destructive" })).toContain("bg-feedback-danger");
+    expect(buttonVariants({ variant: "destructive" })).toContain("border-feedback-danger-text/30");
+    expect(buttonVariants({ variant: "destructive" })).toContain("hover:bg-feedback-danger-text");
+  });
+
+  it("refuerza el feedback visual de ghost en hover y focus-visible", () => {
+    render(<Button variant="ghost">Ghost</Button>);
+    const button = screen.getByRole("button", { name: /ghost/i });
+    expect(button.className).toContain("hover:text-origen-pino");
+    expect(button.className).toContain("focus-visible:bg-origen-pastel/40");
   });
 
   it("usa un focus ring visible para estados claros", () => {

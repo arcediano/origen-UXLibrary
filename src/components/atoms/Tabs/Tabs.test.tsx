@@ -118,10 +118,10 @@ describe("Tabs", () => {
     );
 
     expect(screen.getByRole("tab", { name: "Dos" }).className).toContain("focus-visible:ring-origen-pino");
-    expect(screen.getByRole("tab", { name: "Dos" }).className).toContain("text-origen-pino");
+    expect(screen.getByRole("tab", { name: "Dos" }).className).toContain("text-origen-pino/80");
   });
 
-  it("mantiene texto blanco legible en tab activo con gradiente", () => {
+  it("marca el tab activo como pastilla blanca sutil sin gradiente de marca", () => {
     render(
       <Tabs defaultValue="uno">
         <TabsList>
@@ -133,7 +133,11 @@ describe("Tabs", () => {
       </Tabs>
     );
 
-    expect(screen.getByRole("tab", { name: "Uno" }).className).toContain("text-white");
+    const activeTab = screen.getByRole("tab", { name: "Uno" });
+    expect(activeTab.className).toContain("bg-white");
+    expect(activeTab.className).toContain("shadow-sm");
+    expect(activeTab.className).toContain("text-origen-bosque");
+    expect(activeTab.className).not.toContain("bg-gradient-origen");
   });
 
   it("mantiene estado disabled con contraste suficiente", () => {

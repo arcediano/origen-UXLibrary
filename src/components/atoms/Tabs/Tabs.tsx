@@ -112,9 +112,9 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
         role="tablist"
         aria-orientation={orientation}
         className={cn(
-          "inline-flex rounded-2xl border border-border-subtle bg-surface-alt/90 p-1 shadow-subtle",
-          orientation === "horizontal" && "flex-row gap-1",
-          orientation === "vertical" && "flex-col gap-1",
+          "inline-flex rounded-xl bg-muted/50 p-1 gap-1",
+          orientation === "horizontal" && "flex-row",
+          orientation === "vertical" && "flex-col",
           fullWidth && "flex w-full",
           className
         )}
@@ -166,8 +166,8 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
           "disabled:cursor-not-allowed disabled:text-origen-bosque/65 disabled:hover:bg-transparent disabled:hover:text-origen-bosque/65",
           "whitespace-nowrap",
           isActive
-            ? "bg-gradient-origen text-white shadow-origen"
-            : "text-origen-pino hover:bg-origen-pastel/80 hover:text-origen-bosque",
+            ? "bg-white text-origen-bosque shadow-sm"
+            : "text-origen-pino/80 hover:bg-white/60 hover:text-origen-bosque",
           className
         )}
         onClick={(event) => {

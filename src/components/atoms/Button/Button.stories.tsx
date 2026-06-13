@@ -45,6 +45,24 @@ export const Ghost: Story = {
   args: { children: "Omitir", variant: "ghost", size: "md" },
 };
 
+export const GhostIconOnly: Story = {
+  name: "Ghost (icon-only)",
+  args: {
+    variant: "ghost",
+    size: "icon-sm",
+    "aria-label": "Cerrar",
+    children: <Plus className="h-4 w-4 rotate-45" aria-hidden />,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Uso real de `ghost` en `AdminSidebar` (botón icon-only para cerrar el menú móvil). El hover combina fondo `origen-pastel/60` y texto `origen-pino`.",
+      },
+    },
+  },
+};
+
 export const Destructive: Story = {
   args: { children: "Eliminar", variant: "destructive", size: "md" },
 };

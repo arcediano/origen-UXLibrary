@@ -48,13 +48,14 @@ const buttonVariants = cva(
         ),
         ghost: cn(
           "bg-transparent text-origen-bosque shadow-none",
-          "hover:bg-origen-pastel/60",
+          "hover:bg-origen-pastel/60 hover:text-origen-pino",
+          "focus-visible:bg-origen-pastel/40",
           "disabled:text-origen-bosque/70"
         ),
         destructive: cn(
-          "border border-red-800 bg-red-700 text-white",
-          "hover:bg-red-800",
-          "disabled:border-red-900/40 disabled:bg-red-800/80 disabled:text-white/85"
+          "border border-feedback-danger-text/30 bg-feedback-danger text-white",
+          "hover:bg-feedback-danger-text",
+          "disabled:border-feedback-danger-text/20 disabled:bg-feedback-danger/70 disabled:text-white/85"
         ),
       },
       size: {
