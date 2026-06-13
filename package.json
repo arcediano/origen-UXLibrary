@@ -41,6 +41,8 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "lint": "eslint src --ext ts,tsx",
     "type-check": "tsc --noEmit",
     "changeset": "changeset",
