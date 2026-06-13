@@ -37,9 +37,10 @@ describe("Button", () => {
   });
 
   it("usa los tokens de marca feedback-danger para destructive", () => {
-    expect(buttonVariants({ variant: "destructive" })).toContain("bg-feedback-danger");
-    expect(buttonVariants({ variant: "destructive" })).toContain("border-feedback-danger-text/30");
-    expect(buttonVariants({ variant: "destructive" })).toContain("hover:bg-feedback-danger-text");
+    expect(buttonVariants({ variant: "destructive" })).toContain("bg-feedback-danger-subtle");
+    expect(buttonVariants({ variant: "destructive" })).toContain("text-feedback-danger-text");
+    expect(buttonVariants({ variant: "destructive" })).toContain("border-feedback-danger-border");
+    expect(buttonVariants({ variant: "destructive" })).toContain("hover:bg-feedback-danger/15");
   });
 
   it("refuerza el feedback visual de ghost en hover y focus-visible", () => {

@@ -154,6 +154,11 @@ export type { ScrollChipItem, ScrollChipFilterProps } from "./components/mobile/
 export { MobileScrollSlider } from "./components/mobile/MobileScrollSlider";
 export type { MobileScrollSliderProps } from "./components/mobile/MobileScrollSlider";
 
+// Alias de descubribilidad: MobileScrollSlider cubre el caso de uso de "carrusel"
+// móvil (testimonios, galerías de producto, onboarding). No duplica lógica.
+export { MobileScrollSlider as Carousel } from "./components/mobile/MobileScrollSlider";
+export type { MobileScrollSliderProps as CarouselProps } from "./components/mobile/MobileScrollSlider";
+
 // ─── Molecules ────────────────────────────────────────────────────────────────
 export { EmptyState } from "./components/molecules/EmptyState";
 export type { EmptyStateProps, EmptyStateAction } from "./components/molecules/EmptyState";
@@ -178,6 +183,9 @@ export type { PageHeaderProps } from "./components/molecules/PageHeader";
 
 export { AuthFooter } from "./components/molecules/AuthFooter";
 export type { AuthFooterProps, AuthFooterVariant } from "./components/molecules/AuthFooter";
+
+export { ReviewSummary } from "./components/molecules/ReviewSummary";
+export type { ReviewSummaryProps, ReviewSummaryBreakdownItem } from "./components/molecules/ReviewSummary";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {

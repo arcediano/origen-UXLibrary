@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { ShoppingBag } from "lucide-react";
 import { Badge } from "../Badge";
 import { Table, type Column } from "./Table";
 
@@ -59,6 +60,23 @@ export const Empty: Story = {
   render: () => (
     <div className="p-4 bg-white">
       <Table data={[]} columns={columns} keyExtractor={(item) => item.id} emptyMessage="No hay productos para mostrar" />
+    </div>
+  ),
+};
+
+export const EmptyConDescripcionYAccion: Story = {
+  name: "Empty (icono + descripción + acción)",
+  render: () => (
+    <div className="p-4 bg-white">
+      <Table
+        data={[]}
+        columns={columns}
+        keyExtractor={(item) => item.id}
+        emptyMessage="No hay pedidos recientes"
+        emptyDescription="Los nuevos pedidos aparecerán aquí"
+        emptyIcon={<ShoppingBag className="h-8 w-8 text-origen-pino" />}
+        emptyAction={{ label: "Ver catálogo", href: "#" }}
+      />
     </div>
   ),
 };

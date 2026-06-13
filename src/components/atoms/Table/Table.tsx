@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDown, ChevronRight, ChevronsUpDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronRight, ChevronsUpDown, ChevronUp, PackageOpen } from "lucide-react";
 import { cn } from "../../../lib/utils";
+import { EmptyState, type EmptyStateAction } from "../../molecules/EmptyState";
 
 export interface Column<T> {
   key: string;
@@ -32,6 +33,12 @@ export interface TableProps<T> {
   expandable?: {
     renderExpand: (item: T) => React.ReactNode;
   };
+  /** Icono para el empty state (ReactNode). Por defecto `<PackageOpen className="h-8 w-8 text-origen-pino" />` */
+  emptyIcon?: React.ReactNode;
+  /** Descripción adicional bajo `emptyMessage` en el empty state */
+  emptyDescription?: string;
+  /** Acción opcional (botón/enlace) en el empty state */
+  emptyAction?: EmptyStateAction;
 }
 
 export function Table<T>({
@@ -48,6 +55,9 @@ export function Table<T>({
   initialSortDirection = "asc",
   rowClassName,
   expandable,
+  emptyIcon,
+  emptyDescription,
+  emptyAction,
 }: TableProps<T>) {
   const [sortColumn, setSortColumn] = React.useState<string | undefined>(initialSortColumn);
   const [sortDirection, setSortDirection] = React.useState<"asc" | "desc">(initialSortDirection);
@@ -159,15 +169,14 @@ export function Table<T>({
               Array.from({ length: loadingRows }).map((_, index) => <LoadingRow key={index} />)
             ) : sortedData.length === 0 ? (
               <tr>
-                <td colSpan={columns.length + (expandable ? 1 : 0)} className="px-4 py-12 text-center text-muted-foreground">
-                  <div className="flex flex-col items-center justify-center">
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-origen-crema">
-                      <span className="text-lg text-origen-pradera" aria-hidden="true">
-                        📦
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-foreground">{emptyMessage}</p>
-                  </div>
+                <td colSpan={columns.length + (expandable ? 1 : 0)} className="p-0">
+                  <EmptyState
+                    icon={emptyIcon ?? <PackageOpen className="h-8 w-8 text-origen-pino" />}
+                    title={emptyMessage}
+                    description={emptyDescription}
+                    action={emptyAction}
+                    size="sm"
+                  />
                 </td>
               </tr>
             ) : (

@@ -65,6 +65,14 @@ export const GhostIconOnly: Story = {
 
 export const Destructive: Story = {
   args: { children: "Eliminar", variant: "destructive", size: "md" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Variante `destructive` rediseñada: estructura equivalente a `secondary` pero en tonos rojos (fondo `feedback-danger-subtle`, texto y borde `feedback-danger-text`/`feedback-danger-border`, hover sutil `feedback-danger/15`). Sin fondo sólido.",
+      },
+    },
+  },
 };
 
 export const Loading: Story = {

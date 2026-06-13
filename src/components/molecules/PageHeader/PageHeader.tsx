@@ -21,7 +21,7 @@
 
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, HelpCircle } from "lucide-react";
 import { cn } from "../../../lib/utils";
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -45,6 +45,18 @@ export interface PageHeaderProps {
   className?: string;
   /** Clase CSS adicional para el contenedor interior */
   containerClassName?: string;
+  /** Icono del badge superior (componente lucide-react) */
+  badgeIcon?: React.ComponentType<{ className?: string }>;
+  /** Texto del badge superior, junto al icono */
+  badgeText?: string;
+  /**
+   * Texto corto del tooltip de ayuda (junto al título).
+   * Si se proporciona junto con `tooltipDetailed`, se muestra un icono de
+   * información que revela `tooltipDetailed` en hover/focus.
+   */
+  tooltip?: string;
+  /** Texto detallado del tooltip (contenido del tooltip nativo) */
+  tooltipDetailed?: string;
 }
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -57,7 +69,12 @@ export function PageHeader({
   onBack,
   className,
   containerClassName,
+  badgeIcon: BadgeIcon,
+  badgeText,
+  tooltip,
+  tooltipDetailed,
 }: PageHeaderProps) {
+  const tooltipContent = tooltipDetailed ?? tooltip;
   return (
     <div className={cn("relative", className)}>
       <div
@@ -80,9 +97,22 @@ export function PageHeader({
             )}
 
             <div className="min-w-0 flex-1">
-              <h1 className="text-[22px] font-semibold leading-tight text-origen-bosque sm:text-[26px] lg:text-[32px]">
-                {title}
-              </h1>
+              {(BadgeIcon || badgeText) && (
+                <span className="mb-1.5 inline-flex items-center gap-1.5 rounded-full bg-origen-pastel/60 px-3 py-1 text-xs font-semibold text-origen-bosque">
+                  {BadgeIcon && <BadgeIcon className="h-3.5 w-3.5 text-origen-pradera" />}
+                  {badgeText}
+                </span>
+              )}
+              <div className="flex items-center gap-2">
+                <h1 className="text-[22px] font-semibold leading-tight text-origen-bosque sm:text-[26px] lg:text-[32px]">
+                  {title}
+                </h1>
+                {tooltipContent && (
+                  <span title={tooltipContent} aria-label={tooltipContent} className="inline-flex shrink-0">
+                    <HelpCircle className="h-4 w-4 text-text-subtle" />
+                  </span>
+                )}
+              </div>
               {description && (
                 <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {description}

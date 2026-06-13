@@ -53,9 +53,10 @@ const buttonVariants = cva(
           "disabled:text-origen-bosque/70"
         ),
         destructive: cn(
-          "border border-feedback-danger-text/30 bg-feedback-danger text-white",
-          "hover:bg-feedback-danger-text",
-          "disabled:border-feedback-danger-text/20 disabled:bg-feedback-danger/70 disabled:text-white/85"
+          "border border-feedback-danger-border",
+          "bg-feedback-danger-subtle text-feedback-danger-text",
+          "hover:bg-feedback-danger/15 hover:border-feedback-danger-text/40",
+          "disabled:border-feedback-danger-border/60 disabled:bg-feedback-danger-subtle/70 disabled:text-feedback-danger-text/60"
         ),
       },
       size: {
