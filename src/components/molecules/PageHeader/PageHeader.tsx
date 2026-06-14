@@ -33,7 +33,7 @@ export interface PageHeaderProps {
   description?: string;
   /** Nodo(s) React para acciones en el lado derecho (botones, etc.) */
   actions?: React.ReactNode;
-  /** Muestra el botón de volver (solo en desktop ≥ lg) */
+  /** Muestra el botón de volver (visible en todos los tamaños de pantalla) */
   showBackButton?: boolean;
   /**
    * Callback al pulsar el botón de volver.
@@ -88,7 +88,7 @@ export function PageHeader({
             {showBackButton && (
               <button
                 onClick={onBack}
-                className="mt-0.5 hidden h-10 w-10 items-center justify-center rounded-xl border border-border bg-surface-alt text-text-subtle transition-colors hover:border-origen-pradera hover:bg-origen-pradera/5 hover:text-origen-pradera lg:inline-flex"
+                className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-alt text-text-subtle transition-colors hover:border-origen-pradera hover:bg-origen-pradera/5 hover:text-origen-pradera"
                 aria-label="Volver"
                 type="button"
               >
