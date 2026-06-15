@@ -45,6 +45,11 @@ export interface StatCardProps {
   loading?: boolean;
   /** Clases adicionales */
   className?: string;
+  /**
+   * Clases adicionales para el valor principal. Útil para reducir el
+   * tamaño de fuente cuando `value` es un texto largo en vez de un KPI numérico.
+   */
+  valueClassName?: string;
 }
 
 // ─── Variantes de color ───────────────────────────────────────────────────────
@@ -121,6 +126,7 @@ export function StatCard({
   variant = "neutral",
   loading = false,
   className,
+  valueClassName,
 }: StatCardProps) {
   if (loading) return <StatCardSkeleton className={className} />;
 
@@ -155,7 +161,12 @@ export function StatCard({
       </div>
 
       {/* Valor */}
-      <p className="text-2xl font-bold text-origen-bosque tabular-nums leading-none mb-1">
+      <p
+        className={cn(
+          "text-2xl font-bold text-origen-bosque tabular-nums leading-none mb-1",
+          valueClassName,
+        )}
+      >
         {value}
       </p>
 
