@@ -59,13 +59,17 @@ export interface FilterToolbarProps {
    */
   activeFilterCount?: number;
   /**
-   * Callback al pulsar el botón "Filtros" (abre el `FilterSheet`). Si se
-   * omite, el botón no se renderiza — útil para pantallas sin filtros
-   * adicionales en móvil.
+   * Callback al pulsar el botón "Filtros" (abre `FilterPanel`). Si se omite,
+   * el botón no se renderiza — útil para pantallas sin panel de filtros.
    */
   onOpenFilters?: () => void;
   /** Texto del botón de filtros. Por defecto "Filtros" */
   filtersLabel?: string;
+  /**
+   * Ref al botón de filtros — necesario para anclar el popover de escritorio
+   * de `FilterPanel`. Pasar el mismo ref que se pasa a `FilterPanel.triggerRef`.
+   */
+  filtersButtonRef?: React.Ref<HTMLButtonElement>;
   /**
    * Slot de acciones adicionales a la derecha de la toolbar (p. ej. toggle
    * de vista grid/lista). Se muestra en todos los breakpoints salvo que el
@@ -85,6 +89,7 @@ export function FilterToolbar({
   activeFilterCount = 0,
   onOpenFilters,
   filtersLabel = "Filtros",
+  filtersButtonRef,
   actions,
   className,
 }: FilterToolbarProps) {
@@ -103,15 +108,18 @@ export function FilterToolbar({
 
       {onOpenFilters && (
         <button
+          ref={filtersButtonRef}
           type="button"
           onClick={onOpenFilters}
+          aria-expanded={false}
+          aria-haspopup="dialog"
           className={cn(
-            "lg:hidden flex items-center gap-1.5 h-10 px-3.5 rounded-xl border text-sm font-medium transition-colors flex-shrink-0",
+            "flex items-center gap-1.5 h-10 px-3.5 rounded-xl border text-sm font-medium transition-colors flex-shrink-0",
             activeFilterCount > 0
               ? "bg-origen-bosque border-origen-bosque text-white"
               : "bg-surface-alt border-border text-origen-bosque",
           )}
-          aria-label="Abrir filtros"
+          aria-label={activeFilterCount > 0 ? `Filtros (${activeFilterCount} activos)` : "Abrir filtros"}
         >
           <SlidersHorizontal className="w-4 h-4" />
           <span>{filtersLabel}</span>

@@ -191,7 +191,11 @@ export { ActiveFilterChips } from "./components/molecules/ActiveFilterChips";
 export type { ActiveFilterChipsProps, ActiveFilterChip } from "./components/molecules/ActiveFilterChips";
 
 export { FilterSheet } from "./components/molecules/FilterSheet";
-export type { FilterSheetProps, FilterSection, ChipOption, ToggleOption } from "./components/molecules/FilterSheet";
+export type { FilterSheetProps } from "./components/molecules/FilterSheet";
+
+export { FilterPanel } from "./components/molecules/FilterPanel";
+export type { FilterPanelProps } from "./components/molecules/FilterPanel";
+export type { FilterSection, ChipOption, ToggleOption } from "./components/molecules/FilterPanel/FilterPanel.sections";
 
 export { FilterToolbar } from "./components/molecules/FilterToolbar";
 export type { FilterToolbarProps } from "./components/molecules/FilterToolbar";
