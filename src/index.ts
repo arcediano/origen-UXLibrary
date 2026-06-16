@@ -157,6 +157,9 @@ export type { MobileScrollSliderProps } from "./components/mobile/MobileScrollSl
 export { SwipeableRow } from "./components/mobile/SwipeableRow";
 export type { SwipeableRowProps, SwipeAction } from "./components/mobile/SwipeableRow";
 
+export { MobilePullRefresh } from "./components/mobile/MobilePullRefresh";
+export type { MobilePullRefreshProps } from "./components/mobile/MobilePullRefresh";
+
 // Alias de descubribilidad: MobileScrollSlider cubre el caso de uso de "carrusel"
 // móvil (testimonios, galerías de producto, onboarding). No duplica lógica.
 export { MobileScrollSlider as Carousel } from "./components/mobile/MobileScrollSlider";
