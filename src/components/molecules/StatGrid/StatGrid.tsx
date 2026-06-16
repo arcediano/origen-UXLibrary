@@ -65,7 +65,7 @@ export function StatGrid({
         </p>
       )}
       <div
-        className={cn("grid gap-3 sm:gap-4", colsMap[columns])}
+        className={cn("grid gap-3 sm:gap-4 lg:gap-6", colsMap[columns])}
         aria-busy={loading || undefined}
       >
         {items.map((item, i) => (
