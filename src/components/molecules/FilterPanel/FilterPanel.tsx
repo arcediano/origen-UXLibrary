@@ -47,6 +47,7 @@ import { X, SlidersHorizontal } from "lucide-react";
 import { createPortal } from "react-dom";
 import { FilterBottomSheet as FilterPanelMobile } from "../../mobile/FilterBottomSheet";
 import { cn } from "../../../lib/utils";
+import { useIsMobile } from "../../../lib/hooks/useIsMobile";
 import {
   type FilterSection,
   type Draft,
@@ -286,6 +287,15 @@ function FilterPanelDesktop({
 
 // ─── FilterPanelMobileWrapper — Bottom sheet (<1024px) ────────────────────────
 
+/**
+ * IMPORTANTE: `FilterBottomSheet` usa `createPortal` para inyectar el overlay y
+ * el panel directamente en `document.body`. Por ello, cualquier clase CSS del
+ * componente padre (como `lg:hidden`) no tiene efecto sobre los elementos del
+ * portal — éstos escapan del árbol DOM local.
+ *
+ * La exclusión del bottom sheet en desktop se gestiona en el componente público
+ * `FilterPanel` mediante `useIsMobile`, no aquí con CSS.
+ */
 function FilterPanelMobileWrapper({
   isOpen,
   onClose,
@@ -343,20 +353,18 @@ function FilterPanelMobileWrapper({
   );
 
   return (
-    <div className="lg:hidden">
-      <FilterPanelMobile open={isOpen} onClose={onClose} title={title} footer={footer}>
-        <SectionList
-          sections={sections}
-          draft={draft}
-          onSetChips={setChips}
-          onSetDateFrom={setDateFrom}
-          onSetDateTo={setDateTo}
-          onSetNumMin={setNumMin}
-          onSetNumMax={setNumMax}
-          onSetToggle={setToggle}
-        />
-      </FilterPanelMobile>
-    </div>
+    <FilterPanelMobile open={isOpen} onClose={onClose} title={title} footer={footer}>
+      <SectionList
+        sections={sections}
+        draft={draft}
+        onSetChips={setChips}
+        onSetDateFrom={setDateFrom}
+        onSetDateTo={setDateTo}
+        onSetNumMin={setNumMin}
+        onSetNumMax={setNumMax}
+        onSetToggle={setToggle}
+      />
+    </FilterPanelMobile>
   );
 }
 
@@ -366,13 +374,25 @@ function FilterPanelMobileWrapper({
  * Panel de filtros unificado: popover en escritorio (≥1024px) y bottom sheet
  * en móvil/tablet (<1024px). Comparte secciones tipadas y draft state.
  *
- * La distinción de breakpoint se resuelve por CSS (`hidden lg:flex` / `lg:hidden`),
- * no por JS, para evitar flash de contenido incorrecto en SSR (Next.js).
+ * La distinción de breakpoint se resuelve con `useIsMobile(1024)` (JS), no con
+ * CSS (`hidden` / `lg:flex`). Esto es necesario porque ambas implementaciones
+ * usan `createPortal` para inyectar sus elementos directamente en `document.body`,
+ * escapando del árbol DOM local. Las clases CSS del componente padre no tienen
+ * efecto sobre los elementos del portal, por lo que una separación puramente CSS
+ * provocaría que ambos paneles sean visibles a la vez en desktop.
+ *
+ * Nota SSR: `useIsMobile` devuelve `false` en el servidor (SSR) — lo que hace
+ * que en la hidratación inicial se renderice `FilterPanelDesktop`. El cambio al
+ * bottom sheet ocurre después de que el cliente conoce el tamaño de la ventana,
+ * evitando un mismatch de hidratación. Si el panel está cerrado (`isOpen=false`)
+ * en ese momento, no hay flash visible.
  */
 export function FilterPanel(props: FilterPanelProps) {
-  return (
-    <>
-      {/* Móvil/tablet: bottom sheet */}
+  // 1024px = breakpoint `lg` de Tailwind
+  const isMobile = useIsMobile(1024);
+
+  if (isMobile) {
+    return (
       <FilterPanelMobileWrapper
         isOpen={props.isOpen}
         onClose={props.onClose}
@@ -383,11 +403,10 @@ export function FilterPanel(props: FilterPanelProps) {
         title={props.title}
         className={props.className}
       />
+    );
+  }
 
-      {/* Desktop: popover anclado al triggerRef */}
-      <FilterPanelDesktop {...props} />
-    </>
-  );
+  return <FilterPanelDesktop {...props} />;
 }
 
 FilterPanel.displayName = "FilterPanel";
