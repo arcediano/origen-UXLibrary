@@ -62,7 +62,7 @@ const config: Config = {
           "danger":         "#ef4444",
           "danger-subtle":  "#fef2f2",
           "danger-text":    "#b91c1c",
-          "danger-border":  "rgba(239,68,68,0.3)",
+          "danger-border":  "rgba(239,68,68,0.55)",
           "warning":        "#d97706",
           "warning-subtle": "#fffbeb",
           "warning-text":   "#92400e",
