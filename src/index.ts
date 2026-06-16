@@ -187,6 +187,15 @@ export type { AuthFooterProps, AuthFooterVariant } from "./components/molecules/
 export { ReviewSummary } from "./components/molecules/ReviewSummary";
 export type { ReviewSummaryProps, ReviewSummaryBreakdownItem } from "./components/molecules/ReviewSummary";
 
+export { ActiveFilterChips } from "./components/molecules/ActiveFilterChips";
+export type { ActiveFilterChipsProps, ActiveFilterChip } from "./components/molecules/ActiveFilterChips";
+
+export { FilterSheet } from "./components/molecules/FilterSheet";
+export type { FilterSheetProps, FilterSection, ChipOption, ToggleOption } from "./components/molecules/FilterSheet";
+
+export { FilterToolbar } from "./components/molecules/FilterToolbar";
+export type { FilterToolbarProps } from "./components/molecules/FilterToolbar";
+
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {
 	OrigenLeafIcon,
