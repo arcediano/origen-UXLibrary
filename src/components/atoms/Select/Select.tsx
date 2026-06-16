@@ -281,7 +281,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
         position: "fixed",
         top: rect.bottom + 4,
         left: rect.left,
-        width: rect.width,
+        minWidth: rect.width,
         zIndex: 9999,
       });
     }, [isMobile, triggerRef]);
