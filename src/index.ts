@@ -154,6 +154,9 @@ export type { ScrollChipItem, ScrollChipFilterProps } from "./components/mobile/
 export { MobileScrollSlider } from "./components/mobile/MobileScrollSlider";
 export type { MobileScrollSliderProps } from "./components/mobile/MobileScrollSlider";
 
+export { SwipeableRow } from "./components/mobile/SwipeableRow";
+export type { SwipeableRowProps, SwipeAction } from "./components/mobile/SwipeableRow";
+
 // Alias de descubribilidad: MobileScrollSlider cubre el caso de uso de "carrusel"
 // móvil (testimonios, galerías de producto, onboarding). No duplica lógica.
 export { MobileScrollSlider as Carousel } from "./components/mobile/MobileScrollSlider";

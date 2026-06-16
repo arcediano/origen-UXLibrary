@@ -1,6 +1,6 @@
 {
   "name": "@arcediano/ux-library",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Librería de componentes corporativos reutilizables — Origen Design System",
   "author": "Origen Design Team",
   "license": "UNLICENSED",
@@ -66,6 +66,7 @@
     "@radix-ui/react-toast": "^1.2.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.10.0",
     "lucide-react": "^0.468.0",
     "tailwind-merge": "^2.6.1",
     "tailwindcss-animate": "^1.0.7"
