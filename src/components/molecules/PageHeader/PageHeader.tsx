@@ -88,7 +88,7 @@ export function PageHeader({
             {showBackButton && (
               <button
                 onClick={onBack}
-                className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-alt text-text-subtle transition-colors hover:border-origen-pradera hover:bg-origen-pradera/5 hover:text-origen-pradera"
+                className="mt-0.5 hidden lg:inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-alt text-text-subtle transition-colors hover:border-origen-pradera hover:bg-origen-pradera/5 hover:text-origen-pradera"
                 aria-label="Volver"
                 type="button"
               >
