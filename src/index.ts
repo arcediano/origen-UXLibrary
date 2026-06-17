@@ -117,6 +117,9 @@ export type { TableProps, Column } from "./components/atoms/Table";
 export { MobileCardList } from "./components/atoms/MobileCardList";
 export type { MobileCardListProps } from "./components/atoms/MobileCardList";
 
+export { NotificationCard, NotificationCardSkeleton } from "./components/atoms/NotificationCard";
+export type { NotificationCardProps, NotificationCardSkeletonProps, NotificationCardCategory, NotificationCardPriority } from "./components/atoms/NotificationCard";
+
 export { TagsInput } from "./components/atoms/TagsInput";
 export type { TagsInputProps } from "./components/atoms/TagsInput";
 
