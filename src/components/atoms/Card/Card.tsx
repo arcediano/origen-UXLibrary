@@ -21,6 +21,15 @@ const cardVariants = cva(
          * borde que se tine de color de marca al pasar el raton.
          */
         section: "bg-surface-alt shadow-sm hover:shadow-md hover:border-origen-pradera/30",
+        /**
+         * Media Card — para cards con imagen (ProductCard, ProducerCard).
+         * overflow-hidden para contener la imagen, elevación al hover.
+         */
+        media: cn(
+          "bg-white shadow-subtle overflow-hidden",
+          "hover:-translate-y-2 hover:shadow-origen-lg",
+          "transition-all duration-300 ease-out"
+        ),
       },
       interactive: {
         true: cn(

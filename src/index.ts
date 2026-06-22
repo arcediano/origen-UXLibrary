@@ -126,6 +126,8 @@ export type { TagsInputProps } from "./components/atoms/TagsInput";
 export { Textarea } from "./components/atoms/Textarea";
 export type { TextareaProps } from "./components/atoms/Textarea";
 
+export { SectionDivider } from "./components/atoms/SectionDivider";
+
 export { Spinner, LoadingSpinner } from "./components/atoms/Spinner";
 export type { SpinnerProps, SpinnerSize, SpinnerVariant, LoadingSpinnerProps } from "./components/atoms/Spinner";
 

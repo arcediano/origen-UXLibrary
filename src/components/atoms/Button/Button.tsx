@@ -58,6 +58,13 @@ const buttonVariants = cva(
           "hover:bg-feedback-danger/15 hover:border-feedback-danger-text/40",
           "disabled:border-feedback-danger-border/60 disabled:bg-feedback-danger-subtle/70 disabled:text-feedback-danger-text/60"
         ),
+        hero: cn(
+          "bg-white text-origen-bosque border border-white/20",
+          "hover:bg-white/92 hover:scale-[1.03]",
+          "shadow-lg shadow-black/15",
+          "active:scale-[0.98] transition-all duration-200",
+          "disabled:bg-white/60 disabled:text-origen-bosque/50 disabled:border-white/10"
+        ),
       },
       size: {
         sm:      "h-10 px-4 gap-2 rounded-lg text-small",
