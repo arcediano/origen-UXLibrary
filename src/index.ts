@@ -137,6 +137,9 @@ export type { PasswordStrengthIndicatorProps } from "./components/atoms/Password
 export { Toggle } from "./components/atoms/Toggle";
 export type { ToggleProps } from "./components/atoms/Toggle";
 
+export { Breadcrumb } from "./components/atoms/Breadcrumb";
+export type { BreadcrumbProps, BreadcrumbItem } from "./components/atoms/Breadcrumb";
+
 export { ToggleGroup, ToggleGroupItem } from "./components/atoms/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/atoms/ToggleGroup";
 
@@ -216,6 +219,12 @@ export type { PageLoaderProps } from "./components/molecules/PageLoader";
 
 export { PageError } from "./components/molecules/PageError";
 export type { PageErrorProps } from "./components/molecules/PageError";
+
+export { ReviewCard } from "./components/molecules/ReviewCard";
+export type { ReviewCardProps, ReviewCardReview } from "./components/molecules/ReviewCard";
+
+export { ProducerCard } from "./components/molecules/ProducerCard";
+export type { ProducerCardProps, ProducerCardProducer } from "./components/molecules/ProducerCard";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {
