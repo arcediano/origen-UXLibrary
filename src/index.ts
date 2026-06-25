@@ -140,6 +140,9 @@ export type { ToggleProps } from "./components/atoms/Toggle";
 export { Breadcrumb } from "./components/atoms/Breadcrumb";
 export type { BreadcrumbProps, BreadcrumbItem } from "./components/atoms/Breadcrumb";
 
+export { QuantitySelector } from "./components/atoms/QuantitySelector";
+export type { QuantitySelectorProps } from "./components/atoms/QuantitySelector";
+
 export { ToggleGroup, ToggleGroupItem } from "./components/atoms/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/atoms/ToggleGroup";
 
@@ -167,6 +170,9 @@ export type { SwipeableRowProps, SwipeAction } from "./components/mobile/Swipeab
 
 export { MobilePullRefresh } from "./components/mobile/MobilePullRefresh";
 export type { MobilePullRefreshProps } from "./components/mobile/MobilePullRefresh";
+
+export { ProductMobileHeader } from "./components/mobile/ProductMobileHeader";
+export type { ProductMobileHeaderProps } from "./components/mobile/ProductMobileHeader";
 
 // Alias de descubribilidad: MobileScrollSlider cubre el caso de uso de "carrusel"
 // móvil (testimonios, galerías de producto, onboarding). No duplica lógica.
