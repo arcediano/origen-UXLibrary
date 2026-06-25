@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.9.0
+
+### Minor Changes
+
+- feat(NutritionDonut): add SVG donut chart component for nutritional macros display
+
 ## 0.8.0
 
 ### Minor Changes

@@ -143,6 +143,9 @@ export type { BreadcrumbProps, BreadcrumbItem } from "./components/atoms/Breadcr
 export { QuantitySelector } from "./components/atoms/QuantitySelector";
 export type { QuantitySelectorProps } from "./components/atoms/QuantitySelector";
 
+export { NutritionDonut } from "./components/atoms/NutritionDonut/NutritionDonut";
+export type { NutritionDonutProps } from "./components/atoms/NutritionDonut/NutritionDonut";
+
 export { ToggleGroup, ToggleGroupItem } from "./components/atoms/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/atoms/ToggleGroup";
 
