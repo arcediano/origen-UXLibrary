@@ -149,6 +149,9 @@ export type { NutritionDonutProps } from "./components/atoms/NutritionDonut/Nutr
 export { ToggleGroup, ToggleGroupItem } from "./components/atoms/ToggleGroup";
 export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/atoms/ToggleGroup";
 
+export { RichTextEditor } from "./components/atoms/RichTextEditor";
+export type { RichTextEditorProps } from "./components/atoms/RichTextEditor";
+
 export { Toaster, toast, useToast, ToastProvider, ToastViewport, Toast, ToastTitle, ToastDescription, ToastClose, ToastAction } from "./components/atoms/Toast";
 export type { ToasterToast } from "./components/atoms/Toast";
 
