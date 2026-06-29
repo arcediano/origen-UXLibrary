@@ -238,6 +238,9 @@ export type { ReviewCardProps, ReviewCardReview } from "./components/molecules/R
 export { ProducerCard } from "./components/molecules/ProducerCard";
 export type { ProducerCardProps, ProducerCardProducer } from "./components/molecules/ProducerCard";
 
+export { ProducerInfoSidebar } from "./components/molecules/ProducerInfoSidebar";
+export type { ProducerInfoSidebarProps } from "./components/molecules/ProducerInfoSidebar";
+
 // ─── Icons ────────────────────────────────────────────────────────────────────
 export {
 	OrigenLeafIcon,

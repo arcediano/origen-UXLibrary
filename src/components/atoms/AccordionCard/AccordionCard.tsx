@@ -23,7 +23,7 @@ export interface AccordionCardProps extends Omit<React.HTMLAttributes<HTMLDivEle
   description?: string;
   /** Badge o pill opcional junto al titulo (ej. "Recomendado", "Requiere verificacion") */
   badge?: React.ReactNode;
-  /** Si el contenido aparece expandido por defecto */
+  /** Si el contenido aparece expandido por defecto (modo no controlado) */
   defaultExpanded?: boolean;
   /**
    * Estado que condiciona el color del borde de la card:
@@ -32,6 +32,10 @@ export interface AccordionCardProps extends Omit<React.HTMLAttributes<HTMLDivEle
    * - `incomplete`: borde neutro/ambar (item incompleto)
    */
   state?: AccordionCardState;
+  /** Estado controlado: si se pasa, el componente pasa a modo controlado */
+  expanded?: boolean;
+  /** Callback cuando el usuario clickea el header (solo en modo controlado) */
+  onToggle?: () => void;
   children: React.ReactNode;
 }
 
@@ -51,12 +55,28 @@ const AccordionCard = React.forwardRef<HTMLDivElement, AccordionCardProps>(
       badge,
       defaultExpanded = false,
       state = "default",
+      expanded: controlledExpanded,
+      onToggle,
       children,
       ...props
     },
     ref
   ) => {
-    const [expanded, setExpanded] = React.useState(defaultExpanded);
+    const [internalExpanded, setInternalExpanded] = React.useState(defaultExpanded);
+
+    // Si expanded está definido (modo controlado), usarlo; si no, usar estado interno
+    const isExpanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded;
+
+    const handleToggle = () => {
+      if (controlledExpanded !== undefined) {
+        // Modo controlado: llamar al callback
+        onToggle?.();
+      } else {
+        // Modo no controlado: actualizar estado interno
+        setInternalExpanded((value) => !value);
+      }
+    };
+
     const contentId = React.useId();
 
     return (
@@ -69,8 +89,8 @@ const AccordionCard = React.forwardRef<HTMLDivElement, AccordionCardProps>(
       >
         <button
           type="button"
-          onClick={() => setExpanded((value) => !value)}
-          aria-expanded={expanded}
+          onClick={handleToggle}
+          aria-expanded={isExpanded}
           aria-controls={contentId}
           className="flex w-full items-center justify-between p-4 text-left sm:p-5"
         >
@@ -80,13 +100,13 @@ const AccordionCard = React.forwardRef<HTMLDivElement, AccordionCardProps>(
           <ChevronDown
             className={cn(
               "ml-3 h-4 w-4 shrink-0 text-text-subtle transition-transform duration-200",
-              expanded && "rotate-180"
+              isExpanded && "rotate-180"
             )}
             aria-hidden="true"
           />
         </button>
 
-        {expanded && (
+        {isExpanded && (
           <div id={contentId} className="border-t border-border-subtle px-4 pb-4 pt-4 sm:px-5 sm:pb-5">
             {children}
           </div>
