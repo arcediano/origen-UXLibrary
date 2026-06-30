@@ -45,6 +45,7 @@
 
 "use client";
 
+import type { ReactNode } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import {
@@ -69,6 +70,13 @@ export interface FilterSidebarProps {
   resultLabel?: string;
   /** Título de la cabecera. Por defecto "Filtros". */
   title?: string;
+  /**
+   * Contenido adicional renderizado entre la cabecera y las `sections`
+   * tipadas — por ejemplo, un `Select searchable` para filtros de
+   * cardinalidad alta (categoría, productor) que no encajan en los 4 tipos
+   * de `FilterSection`. Opcional.
+   */
+  children?: ReactNode;
   className?: string;
 }
 
@@ -94,6 +102,7 @@ export function FilterSidebar({
   resultCount,
   resultLabel = "resultados",
   title = "Filtros",
+  children,
   className,
 }: FilterSidebarProps) {
   // Draft "espejo" del estado controlado externo — únicamente para reutilizar
@@ -124,6 +133,15 @@ export function FilterSidebar({
           </span>
         )}
       </div>
+
+      {/* Contenido adicional (p. ej. Select searchable de categoría/productor) —
+          va antes de las secciones tipadas porque suele tratarse de los filtros
+          de mayor frecuencia de uso. */}
+      {children && (
+        <div className="flex flex-col gap-3 px-4 pt-4">
+          {children}
+        </div>
+      )}
 
       {/* Secciones — aplicación inmediata, sin scroll interno forzado */}
       <div className="px-4 py-4">

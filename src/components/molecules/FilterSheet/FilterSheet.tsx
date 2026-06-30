@@ -55,6 +55,12 @@ export interface FilterSheetProps {
   resultCount?: number;
   resultLabel?: string;
   title?: string;
+  /**
+   * Contenido adicional renderizado antes de las `sections` tipadas —
+   * mismo propósito que en `FilterSidebar` (p. ej. `Select searchable` de
+   * categoría/productor). Opcional.
+   */
+  children?: React.ReactNode;
 }
 
 // ─── Draft state helpers ──────────────────────────────────────────────────────
@@ -113,6 +119,7 @@ export function FilterSheet({
   resultCount,
   resultLabel = "resultados",
   title = "Filtros",
+  children,
 }: FilterSheetProps) {
   const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
     useFilterDraft(isOpen, sections);
@@ -165,6 +172,7 @@ export function FilterSheet({
 
   return (
     <FilterPanel open={isOpen} onClose={onClose} title={title} footer={footer}>
+      {children && <div className="flex flex-col gap-3 mb-4">{children}</div>}
       <SectionList
         sections={sections}
         draft={draft}
