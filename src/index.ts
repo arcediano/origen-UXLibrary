@@ -223,6 +223,9 @@ export { FilterPanel } from "./components/molecules/FilterPanel";
 export type { FilterPanelProps } from "./components/molecules/FilterPanel";
 export type { FilterSection, ChipOption, ToggleOption } from "./components/molecules/FilterPanel/FilterPanel.sections";
 
+export { FilterSidebar } from "./components/molecules/FilterSidebar";
+export type { FilterSidebarProps } from "./components/molecules/FilterSidebar";
+
 export { FilterToolbar } from "./components/molecules/FilterToolbar";
 export type { FilterToolbarProps } from "./components/molecules/FilterToolbar";
 
