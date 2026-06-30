@@ -18,14 +18,19 @@
  *   pantalla completa). El consumidor debe mostrar un botón "Filtros" (p.ej.
  *   `FilterToolbar`) que abra este mismo contenido dentro de `FilterSheet`
  *   (bottom sheet ya existente del sistema) — ver `asSheetContent`.
- * - **Cada sección va envuelta en un `AccordionCard`** (v0.15.0): todas
- *   colapsadas por defecto salvo que se indique lo contrario vía
- *   `defaultExpandedSections`, para que el sidebar quepa sin scroll vertical
- *   propio incluso con muchas secciones activas a la vez.
  * - **Sin scroll interno**: el sidebar nunca fuerza `overflow-y-auto` ni
  *   `max-h` por sí mismo — es responsabilidad del consumidor decidir si la
  *   columna es `sticky`/con scroll de página normal. Las secciones de tipo
  *   `chips` tampoco fuerzan scroll horizontal (wrap vertical siempre).
+ * - **Sin acordeones (v0.16.0)**: cada sección tipada (Precio, Etiquetas,
+ *   Disponibilidad, etc.) se renderiza siempre visible, sin posibilidad de
+ *   colapsar/expandir — mismo criterio que `RatingFilterSection`, que nunca
+ *   tuvo comportamiento de acordeón. Un sidebar de filtros públicos es la
+ *   interacción principal del catálogo: ocultar secciones tras un clic
+ *   adicional añade carga cognitiva y un paso extra para ver controles que
+ *   el usuario probablemente necesita usar. Revierte el patrón de
+ *   `AccordionCard` introducido en v0.15.0 (ver manual de diseño, sección
+ *   4.16.2, ahora marcada como histórico/revertida).
  *
  * Comparte el motor de secciones tipadas (`chips`, `daterange`, `numberrange`,
  * `toggles`) con `FilterPanel`/`FilterSheet` a través de `FilterPanel.sections`,
@@ -59,9 +64,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { SlidersHorizontal, Tag, Banknote, ToggleLeft, CalendarRange } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import { cn } from "../../../lib/utils";
-import { AccordionCard } from "../../atoms/AccordionCard";
 import {
   type FilterSection,
   isSectionActive,
@@ -81,7 +85,7 @@ export type { RatingFilterSectionProps, RatingFilterOption } from "./RatingFilte
 // ─── Props ────────────────────────────────────────────────────────────────────
 
 export interface FilterSidebarProps {
-  /** Secciones de filtro a renderizar (mismo motor que `FilterPanel`). Cada una se envuelve en un `AccordionCard` independiente. */
+  /** Secciones de filtro a renderizar (mismo motor que `FilterPanel`). Siempre visibles, sin acordeón. */
   sections: FilterSection[];
   /** Limpia todos los filtros activos. Aplicación inmediata (sin draft). */
   onClearAll: () => void;
@@ -98,12 +102,6 @@ export interface FilterSidebarProps {
    * de `FilterSection`, o `RatingFilterSection` (estrellas). Opcional.
    */
   children?: ReactNode;
-  /**
-   * IDs de `sections` que deben aparecer expandidos por defecto. Por
-   * defecto todas las secciones empiezan colapsadas, para que el sidebar
-   * no fuerce scroll vertical con muchas secciones activas a la vez.
-   */
-  defaultExpandedSections?: string[];
   className?: string;
 }
 
@@ -115,14 +113,6 @@ export interface FilterSidebarProps {
 function hasAnyActiveFilter(sections: FilterSection[]): boolean {
   return sections.some(isSectionActive);
 }
-
-/** Icono por defecto de cada tipo de sección, usado en la cabecera del `AccordionCard`. */
-const SECTION_ICONS: Record<FilterSection["type"], React.ElementType> = {
-  chips: Tag,
-  daterange: CalendarRange,
-  numberrange: Banknote,
-  toggles: ToggleLeft,
-};
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
@@ -138,7 +128,6 @@ export function FilterSidebar({
   resultLabel = "resultados",
   title = "Filtros",
   children,
-  defaultExpandedSections = [],
   className,
 }: FilterSidebarProps) {
   const hasActive = hasAnyActiveFilter(sections);
@@ -173,59 +162,46 @@ export function FilterSidebar({
         </div>
       )}
 
-      {/* Secciones — cada una envuelta en un AccordionCard independiente,
-          colapsadas por defecto salvo defaultExpandedSections. Sin scroll
-          interno forzado: la pila completa de acordeones colapsados es
-          compacta incluso con varias secciones. */}
-      <div className="flex flex-col gap-3 px-4 py-4">
-        {sections.map((section) => {
-          const Icon = SECTION_ICONS[section.type];
-          const active = isSectionActive(section);
-
-          return (
-            <AccordionCard
-              key={section.id}
-              icon={<Icon className="h-4 w-4" aria-hidden="true" />}
-              title={section.title}
-              defaultExpanded={defaultExpandedSections.includes(section.id)}
-              badge={
-                active ? (
-                  <span className="inline-flex h-2 w-2 rounded-full bg-origen-pradera" aria-label="Filtro activo" />
-                ) : undefined
-              }
-              className="rounded-xl"
-            >
-              {section.type === "chips" && (
-                <ChipsSection section={section} value={section.value} onChange={section.onChange} />
-              )}
-              {section.type === "daterange" && (
-                <DateRangeSection
-                  section={section}
-                  from={section.valueFrom}
-                  to={section.valueTo}
-                  onFrom={section.onChangeFrom}
-                  onTo={section.onChangeTo}
-                />
-              )}
-              {section.type === "numberrange" && (
-                <NumberRangeSection
-                  section={section}
-                  min={section.valueMin}
-                  max={section.valueMax}
-                  onMin={section.onChangeMin}
-                  onMax={section.onChangeMax}
-                />
-              )}
-              {section.type === "toggles" && (
-                <TogglesSection
-                  section={section}
-                  values={Object.fromEntries(section.options.map((o) => [o.id, o.value]))}
-                  onToggle={(optId, v) => section.options.find((o) => o.id === optId)?.onChange(v)}
-                />
-              )}
-            </AccordionCard>
-          );
-        })}
+      {/* Secciones — siempre visibles, sin acordeón (v0.16.0): Precio,
+          Etiquetas y Disponibilidad no deben requerir un clic adicional
+          para mostrarse, igual que RatingFilterSection. Cada sección ya
+          pinta su propio título (ver `*Section` en FilterPanel.sections),
+          por lo que basta un contenedor plano con separador inferior entre
+          secciones. Sin scroll interno forzado: con todas las secciones
+          expandidas el sidebar simplemente es más alto. */}
+      <div className="flex flex-col divide-y divide-border-subtle px-4">
+        {sections.map((section) => (
+          <div key={section.id} className="py-4 first:pt-4 last:pb-4">
+            {section.type === "chips" && (
+              <ChipsSection section={section} value={section.value} onChange={section.onChange} />
+            )}
+            {section.type === "daterange" && (
+              <DateRangeSection
+                section={section}
+                from={section.valueFrom}
+                to={section.valueTo}
+                onFrom={section.onChangeFrom}
+                onTo={section.onChangeTo}
+              />
+            )}
+            {section.type === "numberrange" && (
+              <NumberRangeSection
+                section={section}
+                min={section.valueMin}
+                max={section.valueMax}
+                onMin={section.onChangeMin}
+                onMax={section.onChangeMax}
+              />
+            )}
+            {section.type === "toggles" && (
+              <TogglesSection
+                section={section}
+                values={Object.fromEntries(section.options.map((o) => [o.id, o.value]))}
+                onToggle={(optId, v) => section.options.find((o) => o.id === optId)?.onChange(v)}
+              />
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Footer — único punto de limpieza, deshabilitado si no hay filtros activos */}

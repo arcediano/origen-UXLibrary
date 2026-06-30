@@ -1,8 +1,8 @@
 /**
  * @file FilterSidebar.test.tsx
  * @description Tests unitarios de FilterSidebar — aplicación inmediata
- * (sin draft), secciones envueltas en AccordionCard (colapsadas por
- * defecto), estado de "Limpiar filtros" y onClearAll.
+ * (sin draft), secciones siempre visibles (sin acordeón), estado de
+ * "Limpiar filtros" y onClearAll.
  */
 
 import { render, screen, fireEvent } from "@testing-library/react";
@@ -40,44 +40,24 @@ describe("FilterSidebar", () => {
     expect(screen.getByText("42 productos")).toBeInTheDocument();
   });
 
-  it("renderiza cada sección como un acordeón colapsado por defecto (título visible, opciones ocultas)", () => {
+  it("renderiza cada sección siempre visible, sin acordeón (título y opciones visibles de inicio)", () => {
     render(<FilterSidebar sections={makeChipsSections("", vi.fn())} onClearAll={vi.fn()} />);
     expect(screen.getByText("Categoría")).toBeInTheDocument();
-    expect(screen.queryByText("Frutas")).not.toBeInTheDocument();
-    expect(screen.queryByText("Lácteos")).not.toBeInTheDocument();
-  });
-
-  it("expande una sección al hacer clic en su cabecera y muestra sus opciones sin scroll horizontal", () => {
-    render(<FilterSidebar sections={makeChipsSections("", vi.fn())} onClearAll={vi.fn()} />);
-
-    fireEvent.click(screen.getByText("Categoría"));
-
     expect(screen.getByText("Frutas")).toBeInTheDocument();
     expect(screen.getByText("Lácteos")).toBeInTheDocument();
   });
 
-  it("aplica el cambio de inmediato (sin draft ni botón Aplicar)", () => {
+  it("aplica el cambio de inmediato (sin draft ni botón Aplicar), sin interacción previa de expandir", () => {
     const onChange = vi.fn();
     render(<FilterSidebar sections={makeChipsSections("", onChange)} onClearAll={vi.fn()} />);
 
-    fireEvent.click(screen.getByText("Categoría")); // expandir
     fireEvent.click(screen.getByText("Frutas"));
 
     // Aplicación inmediata: onChange se invoca directamente al hacer clic,
-    // sin necesidad de un botón "Aplicar" (a diferencia de FilterPanel).
+    // sin necesidad de un botón "Aplicar" (a diferencia de FilterPanel) ni
+    // de expandir un acordeón primero (las secciones siempre están visibles).
     expect(onChange).toHaveBeenCalledWith("frutas");
     expect(screen.queryByText("Aplicar")).not.toBeInTheDocument();
-  });
-
-  it("una sección con filtro activo puede iniciar expandida vía defaultExpandedSections", () => {
-    render(
-      <FilterSidebar
-        sections={makeChipsSections("frutas", vi.fn())}
-        onClearAll={vi.fn()}
-        defaultExpandedSections={["category"]}
-      />,
-    );
-    expect(screen.getByText("Frutas")).toBeInTheDocument();
   });
 
   it('el botón "Limpiar filtros" está deshabilitado sin filtros activos', () => {
@@ -96,7 +76,7 @@ describe("FilterSidebar", () => {
     expect(onClearAll).toHaveBeenCalledTimes(1);
   });
 
-  it("renderiza correctamente con secciones numberrange y toggles, ambas expandibles", () => {
+  it("renderiza correctamente con secciones numberrange y toggles, ambas siempre visibles", () => {
     const sections: FilterSection[] = [
       {
         type: "numberrange",
@@ -118,8 +98,6 @@ describe("FilterSidebar", () => {
     render(<FilterSidebar sections={sections} onClearAll={vi.fn()} />);
     expect(screen.getByText("Precio")).toBeInTheDocument();
     expect(screen.getByText("Disponibilidad")).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("Disponibilidad"));
     expect(screen.getByText("Solo en stock")).toBeInTheDocument();
   });
 
@@ -130,7 +108,11 @@ describe("FilterSidebar", () => {
       </FilterSidebar>,
     );
     expect(screen.getByText("Valoración")).toBeInTheDocument();
-    expect(screen.getByText("Todas")).toBeInTheDocument();
+    // "Todas" aparece dos veces (RatingFilterSection y la sección chips de
+    // Categoría, ambas siempre visibles sin acordeón) — se valida que al
+    // menos una instancia esté presente sin ambigüedad de selector único.
+    expect(screen.getAllByText("Todas").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Categoría")).toBeInTheDocument();
   });
 });
 

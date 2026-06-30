@@ -11,7 +11,7 @@ const meta: Meta<typeof FilterSidebar> = {
     docs: {
       description: {
         component:
-          "Columna de filtros siempre visible para catálogos públicos a 2 columnas (`origen-web`). A diferencia de `FilterPanel`, aplica cada cambio de inmediato (sin draft ni botón \"Aplicar\"). Cada sección se envuelve en un `AccordionCard` colapsado por defecto, sin scroll vertical/horizontal propio. Renderizar solo en `lg:block` — en móvil/tablet usar las mismas `sections` dentro de `FilterSheet`.",
+          "Columna de filtros siempre visible para catálogos públicos a 2 columnas (`origen-web`). A diferencia de `FilterPanel`, aplica cada cambio de inmediato (sin draft ni botón \"Aplicar\"). Todas las secciones (Precio, Etiquetas, Disponibilidad, etc.) se renderizan siempre visibles, sin acordeón ni posibilidad de colapsar, sin scroll vertical/horizontal propio. Renderizar solo en `lg:block` — en móvil/tablet usar las mismas `sections` dentro de `FilterSheet`.",
       },
     },
   },
@@ -22,10 +22,10 @@ type Story = StoryObj<typeof FilterSidebar>;
 
 /**
  * Catálogo de productos: valoración (RatingFilterSection, estrellas
- * amarillas, fuera del array `sections`, siempre visible sin acordeón),
- * categoría (chips), precio (numberrange) y disponibilidad (toggles), estas
- * últimas dentro de acordeones colapsados por defecto. Layout de
- * referencia: sidebar `w-[280px]` + contenido a la derecha.
+ * amarillas, fuera del array `sections`), categoría (chips), precio
+ * (numberrange) y disponibilidad (toggles) — todas siempre visibles, sin
+ * acordeón. Layout de referencia: sidebar `w-[280px]` + contenido a la
+ * derecha.
  */
 export const CatalogFilters: Story = {
   render: () => {
