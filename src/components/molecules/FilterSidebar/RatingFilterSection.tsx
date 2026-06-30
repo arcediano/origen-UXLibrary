@@ -1,20 +1,26 @@
 /**
  * @file RatingFilterSection.tsx
- * @description Sección de filtro de valoración mínima con estrellas grandes
- * y amarillas como elemento visual principal (no chips de texto con el
+ * @description Sección de filtro de valoración mínima con estrellas
+ * amarillas como elemento visual principal (no chips de texto con el
  * símbolo "★" incrustado). Pensada para `FilterSidebar` (catálogo público de
- * `origen-web`), donde la valoración debe destacar visualmente sobre el
- * resto de filtros.
+ * `origen-web`), donde la valoración debe destacar moderadamente sobre el
+ * resto de filtros, sin dominar el sidebar.
  *
  * No forma parte del motor de secciones tipadas (`FilterSection` en
- * `FilterPanel.sections.tsx`) deliberadamente: el patrón visual (estrellas
- * grandes, no chips de texto) es específico de este caso de uso y no
- * generaliza a otros filtros de cardinalidad baja (estado, disponibilidad),
- * que sí siguen usando `chips`. Ver manual de diseño, sección 4.16.1.
+ * `FilterPanel.sections.tsx`) deliberadamente: el patrón visual (estrellas,
+ * no chips de texto) es específico de este caso de uso y no generaliza a
+ * otros filtros de cardinalidad baja (estado, disponibilidad), que sí siguen
+ * usando `chips`. Ver manual de diseño, sección 4.16.1.
  *
  * Sin scroll horizontal: las opciones se disponen en columna (`flex-col`),
  * igual que `TogglesSection`, evitando cualquier overflow lateral dentro del
  * sidebar de 280px.
+ *
+ * Sin paneles colapsables: a diferencia de las secciones del motor tipado
+ * (Precio, Etiquetas, Disponibilidad), que sí se envuelven en
+ * `AccordionCard`, esta sección se renderiza siempre expandida — se expone
+ * como `children` de `FilterSidebar`/`FilterSheet`, fuera del bucle que
+ * aplica acordeones (ver `FilterSidebar.tsx`). Ver manual, sección 4.16.3.
  */
 
 "use client";
@@ -48,23 +54,21 @@ const DEFAULT_OPTIONS: RatingFilterOption[] = [
 
 /**
  * Fila de N estrellas, las primeras `count` rellenas en amarillo/dorado de
- * marca (`origen-mandarina`) y el resto en contorno neutro. Estrellas
- * grandes (`w-6 h-6`) para que la valoración sea el elemento más prominente
- * del sidebar, según requisito de usuario.
+ * marca (`origen-mandarina`) y el resto en contorno neutro. Tamaño `w-5 h-5`
+ * (20px): discreto frente al `w-6 h-6` (24px) inicial, que resultó excesivo
+ * en uso real, pero por encima de los iconos `w-4 h-4` del resto del
+ * sidebar (`AccordionCard`, `TogglesSection`) para que la valoración siga
+ * siendo el filtro más reconocible a simple vista.
  */
-function StarRow({ count, active }: { count: number; active: boolean }) {
+function StarRow({ count }: { count: number }) {
   return (
     <div className="flex items-center gap-0.5" aria-hidden="true">
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
           className={cn(
-            "w-6 h-6 transition-colors",
-            i < count
-              ? "fill-origen-mandarina text-origen-mandarina"
-              : active
-                ? "fill-white/40 text-white/70"
-                : "fill-transparent text-border",
+            "w-5 h-5 transition-colors",
+            i < count ? "fill-origen-mandarina text-origen-mandarina" : "fill-transparent text-border",
           )}
           strokeWidth={1.5}
         />
@@ -90,13 +94,13 @@ export function RatingFilterSection({
           onClick={() => onChange(0)}
           aria-pressed={value === 0}
           className={cn(
-            "flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium transition-colors min-h-[44px]",
+            "flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium border transition-colors min-h-[44px]",
             value === 0
-              ? "bg-origen-bosque text-white"
-              : "bg-surface border border-border-subtle text-origen-bosque hover:border-origen-pradera/40",
+              ? "bg-origen-bosque/10 border-origen-bosque text-origen-bosque"
+              : "bg-surface border-border-subtle text-origen-bosque hover:border-origen-pradera/40",
           )}
         >
-          <StarRow count={0} active={value === 0} />
+          <StarRow count={0} />
           <span>Todas</span>
         </button>
 
@@ -110,13 +114,13 @@ export function RatingFilterSection({
               aria-pressed={active}
               aria-label={`${opt.threshold} estrellas ${opt.label}`}
               className={cn(
-                "flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium transition-colors min-h-[44px]",
+                "flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-medium border transition-colors min-h-[44px]",
                 active
-                  ? "bg-origen-bosque text-white"
-                  : "bg-surface border border-border-subtle text-origen-bosque hover:border-origen-pradera/40",
+                  ? "bg-origen-bosque/10 border-origen-bosque text-origen-bosque"
+                  : "bg-surface border-border-subtle text-origen-bosque hover:border-origen-pradera/40",
               )}
             >
-              <StarRow count={opt.threshold} active={active} />
+              <StarRow count={opt.threshold} />
               <span>{opt.label}</span>
             </button>
           );

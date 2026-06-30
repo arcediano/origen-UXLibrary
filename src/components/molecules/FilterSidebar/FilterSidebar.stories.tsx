@@ -21,11 +21,11 @@ export default meta;
 type Story = StoryObj<typeof FilterSidebar>;
 
 /**
- * Catálogo de productos: valoración (RatingFilterSection, estrellas grandes
- * y amarillas, fuera del array `sections`), categoría (chips), precio
- * (numberrange) y disponibilidad (toggles), todas dentro de acordeones
- * colapsados por defecto. Layout de referencia: sidebar `w-[280px]` +
- * contenido a la derecha.
+ * Catálogo de productos: valoración (RatingFilterSection, estrellas
+ * amarillas, fuera del array `sections`, siempre visible sin acordeón),
+ * categoría (chips), precio (numberrange) y disponibilidad (toggles), estas
+ * últimas dentro de acordeones colapsados por defecto. Layout de
+ * referencia: sidebar `w-[280px]` + contenido a la derecha.
  */
 export const CatalogFilters: Story = {
   render: () => {
@@ -126,9 +126,11 @@ export const Empty: Story = {
 };
 
 /**
- * Sección de valoración aislada — estrellas grandes (`w-6 h-6`) y amarillas
- * (`origen-mandarina`), sin scroll horizontal: las 3 opciones se disponen en
- * columna y envuelven sin overflow incluso en el ancho estrecho del sidebar.
+ * Sección de valoración aislada — estrellas discretas (`w-5 h-5`) y
+ * amarillas (`origen-mandarina`), estado activo en fondo suave
+ * (`bg-origen-bosque/10`), sin scroll horizontal: las 3 opciones se
+ * disponen en columna y envuelven sin overflow incluso en el ancho
+ * estrecho del sidebar.
  */
 export const RatingSection: Story = {
   render: () => {
