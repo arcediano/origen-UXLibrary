@@ -12,12 +12,17 @@
  * pantalla — son específicos del dominio y no se promueven.
  *
  * Responsive:
- * - Móvil (~375px) / Tablet (~768px, `<lg`): `SearchInput` ocupa el espacio
- *   disponible (`flex-1`); el botón "Filtros" mantiene ancho fijo a la
- *   derecha con badge de contador si `activeFilterCount > 0`.
- * - Desktop (≥1024px, `lg`): el botón "Filtros" se oculta (los filtros están
- *   siempre visibles inline bajo la toolbar). El slot `actions` se muestra
- *   siempre que se pase.
+ * - Móvil (`<sm`, ~375px): `SearchInput` ocupa una fila completa propia
+ *   (`basis-full`); el botón "Filtros" y el slot `actions` bajan a una
+ *   segunda fila (el contenedor usa `flex-wrap`).
+ * - Tablet/Desktop (`≥sm`, ~640px en adelante): una sola fila — `SearchInput`
+ *   ocupa el espacio disponible (`flex-1`), seguido del botón "Filtros" (con
+ *   badge de contador si `activeFilterCount > 0`) y el slot `actions`.
+ * - El botón "Filtros" nativo se muestra en todos los breakpoints mientras
+ *   se pase `onOpenFilters` — no se oculta automáticamente en desktop. Si la
+ *   pantalla consumidora ya tiene una barra de filtros inline siempre
+ *   visible en desktop, envolver todo el componente en `lg:hidden` desde el
+ *   consumidor (patrón usado en origen-dashboard).
  *
  * @example
  * ```tsx
@@ -94,7 +99,7 @@ export function FilterToolbar({
   className,
 }: FilterToolbarProps) {
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div className={cn("flex flex-wrap items-center gap-2", className)}>
       <SearchInput
         value={searchValue}
         onChange={onSearchChange}
@@ -102,7 +107,7 @@ export function FilterToolbar({
         debounceMs={searchDebounceMs}
         placeholder={searchPlaceholder}
         aria-label={searchAriaLabel ?? searchPlaceholder}
-        className="flex-1"
+        className="basis-full sm:flex-1 sm:basis-auto"
         size="md"
       />
 

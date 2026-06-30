@@ -95,7 +95,7 @@ export const ScrollChipFilter = React.forwardRef<HTMLDivElement, ScrollChipFilte
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-1",
                 active
                   ? "bg-gradient-origen text-white shadow-subtle"
-                  : "bg-origen-pastel/60 text-origen-bosque hover:bg-origen-pastel border border-border-subtle",
+                  : "bg-surface-alt text-origen-bosque hover:bg-origen-pastel/60 border border-border-subtle",
                 item.disabled && "pointer-events-none opacity-45"
               )}
             >
