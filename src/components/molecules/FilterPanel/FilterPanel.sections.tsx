@@ -141,7 +141,7 @@ export function ChipsSection({
   return (
     <div>
       <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wide mb-3">{section.title}</p>
-      <div className="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5 scrollbar-hide">
+      <div className="flex flex-wrap gap-2">
         {section.options.map((opt) => {
           const active = value === opt.value;
           const Icon = opt.icon;
@@ -151,7 +151,7 @@ export function ChipsSection({
               type="button"
               onClick={() => onChange(opt.value)}
               className={cn(
-                "flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium border min-h-[44px] transition-colors",
+                "inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium border min-h-[44px] transition-colors",
                 active
                   ? "bg-origen-bosque border-origen-bosque text-white"
                   : "bg-surface border-border-subtle text-origen-bosque",

@@ -1,2 +1,9 @@
-export { FilterSidebar } from "./FilterSidebar";
-export type { FilterSidebarProps, FilterSection, ChipOption, ToggleOption } from "./FilterSidebar";
+export { FilterSidebar, RatingFilterSection } from "./FilterSidebar";
+export type {
+  FilterSidebarProps,
+  FilterSection,
+  ChipOption,
+  ToggleOption,
+  RatingFilterSectionProps,
+  RatingFilterOption,
+} from "./FilterSidebar";

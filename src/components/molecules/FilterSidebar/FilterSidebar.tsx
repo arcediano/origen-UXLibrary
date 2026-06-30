@@ -18,26 +18,39 @@
  *   pantalla completa). El consumidor debe mostrar un botón "Filtros" (p.ej.
  *   `FilterToolbar`) que abra este mismo contenido dentro de `FilterSheet`
  *   (bottom sheet ya existente del sistema) — ver `asSheetContent`.
+ * - **Cada sección va envuelta en un `AccordionCard`** (v0.15.0): todas
+ *   colapsadas por defecto salvo que se indique lo contrario vía
+ *   `defaultExpandedSections`, para que el sidebar quepa sin scroll vertical
+ *   propio incluso con muchas secciones activas a la vez.
+ * - **Sin scroll interno**: el sidebar nunca fuerza `overflow-y-auto` ni
+ *   `max-h` por sí mismo — es responsabilidad del consumidor decidir si la
+ *   columna es `sticky`/con scroll de página normal. Las secciones de tipo
+ *   `chips` tampoco fuerzan scroll horizontal (wrap vertical siempre).
  *
  * Comparte el motor de secciones tipadas (`chips`, `daterange`, `numberrange`,
  * `toggles`) con `FilterPanel`/`FilterSheet` a través de `FilterPanel.sections`,
  * por lo que cualquier mejora a esas secciones beneficia a los tres
- * componentes por igual.
+ * componentes por igual. La sección de valoración (estrellas grandes y
+ * amarillas) **no** usa este motor — ver `RatingFilterSection`, pensada
+ * específicamente para este caso visual y expuesta como bloque `children`,
+ * igual que los `Select searchable` de cardinalidad alta.
  *
  * @example
  * ```tsx
  * <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8 lg:items-start">
  *   <FilterSidebar
- *     className="hidden lg:block lg:sticky lg:top-24"
+ *     className="hidden lg:flex lg:sticky lg:top-24"
  *     title="Filtros"
  *     sections={[
- *       { type: 'chips', id: 'category', title: 'Categoría', options, value, onChange },
- *       { type: 'chips', id: 'rating', title: 'Valoración', options: ratingOptions, value, onChange },
+ *       { type: 'numberrange', id: 'price', title: 'Precio', valueMin, valueMax, onChangeMin, onChangeMax, prefix: '€' },
+ *       { type: 'toggles', id: 'availability', title: 'Disponibilidad', options },
  *     ]}
  *     onClearAll={onClearFilters}
  *     resultCount={total}
  *     resultLabel="productos"
- *   />
+ *   >
+ *     <RatingFilterSection value={minRating} onChange={setMinRating} />
+ *   </FilterSidebar>
  *   <main>{children}</main>
  * </div>
  * ```
@@ -46,21 +59,29 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, Tag, Banknote, ToggleLeft, CalendarRange } from "lucide-react";
 import { cn } from "../../../lib/utils";
+import { AccordionCard } from "../../atoms/AccordionCard";
 import {
   type FilterSection,
   isSectionActive,
 } from "./FilterSidebar.sections";
-import { SectionList as SharedSectionList, type Draft, buildDraft } from "../FilterPanel/FilterPanel.sections";
+import {
+  ChipsSection,
+  DateRangeSection,
+  NumberRangeSection,
+  TogglesSection,
+} from "../FilterPanel/FilterPanel.sections";
 
 // Re-export shared types so consumers only need to import from FilterSidebar
 export type { FilterSection, ChipOption, ToggleOption } from "../FilterPanel/FilterPanel.sections";
+export { RatingFilterSection } from "./RatingFilterSection";
+export type { RatingFilterSectionProps, RatingFilterOption } from "./RatingFilterSection";
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
 export interface FilterSidebarProps {
-  /** Secciones de filtro a renderizar (mismo motor que `FilterPanel`). */
+  /** Secciones de filtro a renderizar (mismo motor que `FilterPanel`). Cada una se envuelve en un `AccordionCard` independiente. */
   sections: FilterSection[];
   /** Limpia todos los filtros activos. Aplicación inmediata (sin draft). */
   onClearAll: () => void;
@@ -74,9 +95,15 @@ export interface FilterSidebarProps {
    * Contenido adicional renderizado entre la cabecera y las `sections`
    * tipadas — por ejemplo, un `Select searchable` para filtros de
    * cardinalidad alta (categoría, productor) que no encajan en los 4 tipos
-   * de `FilterSection`. Opcional.
+   * de `FilterSection`, o `RatingFilterSection` (estrellas). Opcional.
    */
   children?: ReactNode;
+  /**
+   * IDs de `sections` que deben aparecer expandidos por defecto. Por
+   * defecto todas las secciones empiezan colapsadas, para que el sidebar
+   * no fuerce scroll vertical con muchas secciones activas a la vez.
+   */
+  defaultExpandedSections?: string[];
   className?: string;
 }
 
@@ -88,6 +115,14 @@ export interface FilterSidebarProps {
 function hasAnyActiveFilter(sections: FilterSection[]): boolean {
   return sections.some(isSectionActive);
 }
+
+/** Icono por defecto de cada tipo de sección, usado en la cabecera del `AccordionCard`. */
+const SECTION_ICONS: Record<FilterSection["type"], React.ElementType> = {
+  chips: Tag,
+  daterange: CalendarRange,
+  numberrange: Banknote,
+  toggles: ToggleLeft,
+};
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
@@ -103,14 +138,9 @@ export function FilterSidebar({
   resultLabel = "resultados",
   title = "Filtros",
   children,
+  defaultExpandedSections = [],
   className,
 }: FilterSidebarProps) {
-  // Draft "espejo" del estado controlado externo — únicamente para reutilizar
-  // `SectionList`, que espera la forma `Draft`. No hay estado propio: cada
-  // sección sigue gestionando su propio valor controlado vía `value`/`onChange`,
-  // por lo que los cambios se aplican de inmediato (no hay paso "Aplicar").
-  const draft: Draft = buildDraft(sections);
-
   const hasActive = hasAnyActiveFilter(sections);
 
   return (
@@ -134,47 +164,68 @@ export function FilterSidebar({
         )}
       </div>
 
-      {/* Contenido adicional (p. ej. Select searchable de categoría/productor) —
-          va antes de las secciones tipadas porque suele tratarse de los filtros
-          de mayor frecuencia de uso. */}
+      {/* Contenido adicional (p. ej. Select searchable de categoría/productor,
+          RatingFilterSection) — va antes de las secciones tipadas porque
+          suele tratarse de los filtros de mayor frecuencia de uso. */}
       {children && (
-        <div className="flex flex-col gap-3 px-4 pt-4">
+        <div className="flex flex-col gap-4 px-4 pt-4">
           {children}
         </div>
       )}
 
-      {/* Secciones — aplicación inmediata, sin scroll interno forzado */}
-      <div className="px-4 py-4">
-        <SharedSectionList
-          sections={sections}
-          draft={draft}
-          onSetChips={(id, v) => {
-            const section = sections.find((s) => s.id === id);
-            if (section?.type === "chips") section.onChange(v);
-          }}
-          onSetDateFrom={(id, v) => {
-            const section = sections.find((s) => s.id === id);
-            if (section?.type === "daterange") section.onChangeFrom(v);
-          }}
-          onSetDateTo={(id, v) => {
-            const section = sections.find((s) => s.id === id);
-            if (section?.type === "daterange") section.onChangeTo(v);
-          }}
-          onSetNumMin={(id, v) => {
-            const section = sections.find((s) => s.id === id);
-            if (section?.type === "numberrange") section.onChangeMin(v);
-          }}
-          onSetNumMax={(id, v) => {
-            const section = sections.find((s) => s.id === id);
-            if (section?.type === "numberrange") section.onChangeMax(v);
-          }}
-          onSetToggle={(sectionId, optId, v) => {
-            const section = sections.find((s) => s.id === sectionId);
-            if (section?.type !== "toggles") return;
-            const opt = section.options.find((o) => o.id === optId);
-            opt?.onChange(v);
-          }}
-        />
+      {/* Secciones — cada una envuelta en un AccordionCard independiente,
+          colapsadas por defecto salvo defaultExpandedSections. Sin scroll
+          interno forzado: la pila completa de acordeones colapsados es
+          compacta incluso con varias secciones. */}
+      <div className="flex flex-col gap-3 px-4 py-4">
+        {sections.map((section) => {
+          const Icon = SECTION_ICONS[section.type];
+          const active = isSectionActive(section);
+
+          return (
+            <AccordionCard
+              key={section.id}
+              icon={<Icon className="h-4 w-4" aria-hidden="true" />}
+              title={section.title}
+              defaultExpanded={defaultExpandedSections.includes(section.id)}
+              badge={
+                active ? (
+                  <span className="inline-flex h-2 w-2 rounded-full bg-origen-pradera" aria-label="Filtro activo" />
+                ) : undefined
+              }
+              className="rounded-xl"
+            >
+              {section.type === "chips" && (
+                <ChipsSection section={section} value={section.value} onChange={section.onChange} />
+              )}
+              {section.type === "daterange" && (
+                <DateRangeSection
+                  section={section}
+                  from={section.valueFrom}
+                  to={section.valueTo}
+                  onFrom={section.onChangeFrom}
+                  onTo={section.onChangeTo}
+                />
+              )}
+              {section.type === "numberrange" && (
+                <NumberRangeSection
+                  section={section}
+                  min={section.valueMin}
+                  max={section.valueMax}
+                  onMin={section.onChangeMin}
+                  onMax={section.onChangeMax}
+                />
+              )}
+              {section.type === "toggles" && (
+                <TogglesSection
+                  section={section}
+                  values={Object.fromEntries(section.options.map((o) => [o.id, o.value]))}
+                  onToggle={(optId, v) => section.options.find((o) => o.id === optId)?.onChange(v)}
+                />
+              )}
+            </AccordionCard>
+          );
+        })}
       </div>
 
       {/* Footer — único punto de limpieza, deshabilitado si no hay filtros activos */}
