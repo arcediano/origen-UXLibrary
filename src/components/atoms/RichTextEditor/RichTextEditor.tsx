@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * RichTextEditor — Editor de texto enriquecido basado en Tiptap v3.
  *

@@ -6,6 +6,7 @@
  * @example
  * <Button variant="primary" size="md" loading>Guardar</Button>
  * <Button variant="outline" leftIcon={<PlusIcon />}>Añadir</Button>
+ * <Button asChild variant="outline"><a href="/path">Link</a></Button>
  */
 
 "use client";
@@ -13,6 +14,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "../../../lib/utils";
 
 // ─── Variantes CVA ────────────────────────────────────────────────────────────
@@ -96,6 +98,12 @@ export interface ButtonProps
   rightIcon?: React.ReactNode;
   /** Fuerza ancho completo en todos los breakpoints (sobreescribe el sm:w-auto de la base) */
   fullWidth?: boolean;
+  /**
+   * Renderiza los estilos del Button en el elemento hijo (Slot pattern).
+   * Cuando es true, ignora loading, leftIcon y rightIcon — el hijo controla su contenido.
+   * Útil para envolver un <Link> de Next.js: <Button asChild><Link href="...">Texto</Link></Button>
+   */
+  asChild?: boolean;
 }
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -112,35 +120,42 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       fullWidth = false,
+      asChild = false,
       children,
       type = "button",
       ...props
     },
     ref
-  ) => (
-    <button
-      ref={ref}
-      {...props}
-      className={cn(buttonVariants({ variant, size }), fullWidth && 'w-full sm:w-full', className)}
-      disabled={disabled || loading}
-      aria-busy={loading}
-      aria-disabled={disabled || loading}
-      type={type}
-    >
-      {loading ? (
-        <>
-          <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-          <span>{loadingText}</span>
-        </>
-      ) : (
-        <>
-          {leftIcon  && <span className="shrink-0" aria-hidden>{leftIcon}</span>}
-          <span>{children}</span>
-          {rightIcon && <span className="shrink-0" aria-hidden>{rightIcon}</span>}
-        </>
-      )}
-    </button>
-  )
+  ) => {
+    const Comp = asChild ? Slot : "button";
+
+    return (
+      <Comp
+        ref={ref}
+        {...props}
+        className={cn(buttonVariants({ variant, size }), fullWidth && 'w-full sm:w-full', className)}
+        disabled={!asChild ? (disabled || loading) : undefined}
+        aria-busy={!asChild ? loading : undefined}
+        aria-disabled={!asChild ? (disabled || loading) : undefined}
+        type={!asChild ? type : undefined}
+      >
+        {asChild ? (
+          children
+        ) : loading ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+            <span>{loadingText}</span>
+          </>
+        ) : (
+          <>
+            {leftIcon  && <span className="shrink-0" aria-hidden>{leftIcon}</span>}
+            <span>{children}</span>
+            {rightIcon && <span className="shrink-0" aria-hidden>{rightIcon}</span>}
+          </>
+        )}
+      </Comp>
+    );
+  }
 );
 
 Button.displayName = "Button";

@@ -1,5 +1,21 @@
 # @arcediano/ux-library
 
+## 0.17.1
+
+### Patch Changes
+
+- Corrige `ScrollChipFilter`: el `<div>` envolvente usado cuando se pasa `renderItem` no tenía `shrink-0`, lo que hacía que los chips se comprimieran (con el texto envuelto en varias líneas) en vez de mantener su ancho natural dentro de la fila con scroll horizontal.
+
+## 0.17.0
+
+### Minor Changes
+
+- Extiende componentes para el rediseño de Mi Cuenta (origen-web):
+
+  - `Badge`/`StatusBadge`: añade estados de pedido `confirmed`, `returned`, `refunded` y estados de reseña `review_pending`, `review_approved`, `review_rejected`, `review_flagged`.
+  - `ScrollChipFilter`: añade prop `size` (variantes de tamaño con mínimo táctil de 44px) y prop `badge` (contador superpuesto), y prop `renderItem` para permitir que el consumidor controle el elemento raíz de cada chip (p. ej. envolver `Link` de Next.js con prefetch en vez de un `button`).
+  - `Button`: añade prop `asChild` (usando `@radix-ui/react-slot`) para poder envolver un `Link` u otro elemento manteniendo los estilos del botón.
+
 ## 0.9.0
 
 ### Minor Changes

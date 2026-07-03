@@ -93,6 +93,8 @@ export function Badge({
 export type StatusType =
   | "active" | "inactive" | "out_of_stock" | "draft" | "pending_approval"
   | "pending" | "processing" | "shipped" | "delivered" | "cancelled"
+  | "confirmed" | "returned" | "refunded"
+  | "review_pending" | "review_approved" | "review_rejected" | "review_flagged"
   | "verified" | "pending_verification" | "approved" | "suspended";
 
 export interface StatusBadgeProps {
@@ -114,6 +116,14 @@ const STATUS_MAP: Record<StatusType, { variant: BadgeVariant; label: string; ico
   shipped:             { variant: "info",    label: "Enviado",                 icon: <Package     className="w-3 h-3" /> },
   delivered:           { variant: "success", label: "Entregado",               icon: <CheckCircle className="w-3 h-3" /> },
   cancelled:           { variant: "danger",  label: "Cancelado",               icon: <XCircle     className="w-3 h-3" /> },
+  confirmed:           { variant: "info",    label: "Confirmado",              icon: <CheckCircle className="w-3 h-3" /> },
+  returned:            { variant: "warning", label: "Devuelto",                icon: <AlertCircle className="w-3 h-3" /> },
+  refunded:            { variant: "neutral", label: "Reembolsado",             icon: <FileText    className="w-3 h-3" /> },
+  // Reseña
+  review_pending:      { variant: "warning", label: "Pendiente de aprobación", icon: <Clock       className="w-3 h-3" /> },
+  review_approved:     { variant: "success", label: "Publicada",               icon: <CheckCircle className="w-3 h-3" /> },
+  review_rejected:     { variant: "danger",  label: "Rechazada",               icon: <XCircle     className="w-3 h-3" /> },
+  review_flagged:      { variant: "warning", label: "Reportada",               icon: <AlertCircle className="w-3 h-3" /> },
   // Verificación
   verified:            { variant: "success", label: "Verificado",              icon: <CheckCircle className="w-3 h-3" /> },
   pending_verification:{ variant: "neutral", label: "Pendiente verificación",  icon: <Clock       className="w-3 h-3" /> },
