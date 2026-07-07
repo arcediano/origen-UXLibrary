@@ -1,5 +1,17 @@
 # @arcediano/ux-library
 
+## 0.18.0
+
+### Minor Changes
+
+- feat(AuthFooter): Add "comprador-login" variant and parametrize navColumn per variant
+
+  - Extend AuthFooterVariant with "comprador-login" for marketplace buyer login footer
+  - Add navColumn field to VARIANT_CONFIG to allow per-variant navigation section titles and links
+  - Migrate existing NAV_LINKS content to navColumn of login/register/forgot/info variants (no visual changes)
+  - New "comprador-login" variant with "Comprar" column linking to /como-funciona, /contacto, /faq
+  - CTA "Vende en Origen" links to https://origen-dashboard.vercel.app with versionLabel "Acceso comprador"
+
 ## 0.17.1
 
 ### Patch Changes

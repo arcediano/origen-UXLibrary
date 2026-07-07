@@ -36,7 +36,12 @@ import {
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
-export type AuthFooterVariant = "login" | "register" | "forgot" | "info";
+export type AuthFooterVariant = "login" | "register" | "forgot" | "info" | "comprador-login";
+
+export interface AuthFooterNavColumn {
+  title: string;
+  links: { href: string; label: string }[];
+}
 
 export interface AuthFooterProps {
   /** Variante del footer que determina el link contextual */
@@ -56,26 +61,72 @@ const VARIANT_CONFIG: Record<AuthFooterVariant, {
   mobileLink: { href: string; icon: React.ElementType; label: string };
   desktopLink: { href: string; icon: React.ElementType; label: string };
   versionLabel: string;
+  navColumn: AuthFooterNavColumn;
 }> = {
   login: {
     mobileLink:  { href: "/auth/register", icon: Store, label: "Nuevo productor" },
     desktopLink: { href: "/auth/register", icon: Store, label: "Nuevo productor" },
     versionLabel: "Acceso productores",
+    navColumn: {
+      title: "Productores",
+      links: [
+        { href: "/como-funciona",  label: "Cómo funciona" },
+        { href: "/contacto",       label: "Soporte especializado" },
+        { href: "/casos-exito",    label: "Casos de éxito" },
+      ],
+    },
   },
   register: {
     mobileLink:  { href: "/auth/login", icon: Lock,  label: "Acceso productores" },
     desktopLink: { href: "/auth/login", icon: Shield, label: "Acceso productores" },
     versionLabel: "Registro de productores",
+    navColumn: {
+      title: "Productores",
+      links: [
+        { href: "/como-funciona",  label: "Cómo funciona" },
+        { href: "/contacto",       label: "Soporte especializado" },
+        { href: "/casos-exito",    label: "Casos de éxito" },
+      ],
+    },
   },
   forgot: {
     mobileLink:  { href: "/auth/login", icon: Lock,  label: "Volver al login" },
     desktopLink: { href: "/auth/login", icon: Shield, label: "Volver al login" },
     versionLabel: "Recuperar contraseña",
+    navColumn: {
+      title: "Productores",
+      links: [
+        { href: "/como-funciona",  label: "Cómo funciona" },
+        { href: "/contacto",       label: "Soporte especializado" },
+        { href: "/casos-exito",    label: "Casos de éxito" },
+      ],
+    },
   },
   info: {
     mobileLink:  { href: "/auth/register", icon: Store, label: "Nuevo productor" },
     desktopLink: { href: "/auth/register", icon: Store, label: "Nuevo productor" },
     versionLabel: "Marketplace de productores locales",
+    navColumn: {
+      title: "Productores",
+      links: [
+        { href: "/como-funciona",  label: "Cómo funciona" },
+        { href: "/contacto",       label: "Soporte especializado" },
+        { href: "/casos-exito",    label: "Casos de éxito" },
+      ],
+    },
+  },
+  "comprador-login": {
+    mobileLink:  { href: "https://origen-dashboard.vercel.app", icon: Store, label: "Vende en Origen" },
+    desktopLink: { href: "https://origen-dashboard.vercel.app", icon: Store, label: "Vende en Origen" },
+    versionLabel: "Acceso comprador",
+    navColumn: {
+      title: "Comprar",
+      links: [
+        { href: "/como-funciona", label: "Cómo funciona" },
+        { href: "/contacto",      label: "Contacto" },
+        { href: "/faq",           label: "Preguntas frecuentes" },
+      ],
+    },
   },
 };
 
@@ -84,12 +135,6 @@ const LEGAL_LINKS = [
   { href: "/cookies",      label: "Cookies" },
   { href: "/aviso-legal",  label: "Aviso Legal" },
   { href: "/contacto",     label: "Contacto" },
-];
-
-const NAV_LINKS = [
-  { href: "/como-funciona",  label: "Cómo funciona" },
-  { href: "/contacto",       label: "Soporte especializado" },
-  { href: "/casos-exito",    label: "Casos de éxito" },
 ];
 
 const CONTACT_INFO = [
@@ -216,13 +261,13 @@ export function AuthFooter({
               </div>
             </div>
 
-            {/* Columna productores */}
+            {/* Columna de navegación */}
             <div className="lg:col-span-2">
               <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4">
-                Productores
+                {config.navColumn.title}
               </h3>
               <ul className="space-y-3">
-                {NAV_LINKS.map(({ href, label }) => (
+                {config.navColumn.links.map(({ href, label }) => (
                   <li key={href}>
                     <LinkComponent
                       href={href}
