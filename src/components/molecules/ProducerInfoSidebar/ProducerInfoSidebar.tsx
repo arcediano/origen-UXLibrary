@@ -173,16 +173,13 @@ export function ProducerInfoSidebar({
               </span>
             )}
             {isVerified && (
-              <span
-                aria-label="Productor verificado por Origen"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-origen-bosque"
+              <Badge
+                variant="success"
+                size="sm"
+                icon={<CheckCircle className="h-3 w-3" />}
               >
-                <CheckCircle
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-origen-hoja"
-                />
-                <span className="text-origen-hoja">Verificado</span>
-              </span>
+                Verificado
+              </Badge>
             )}
           </div>
         )}
