@@ -102,6 +102,14 @@ export interface FilterSidebarProps {
    * de `FilterSection`, o `RatingFilterSection` (estrellas). Opcional.
    */
   children?: ReactNode;
+  /**
+   * Indica si hay algún filtro activo fuera de `sections` (p. ej. un `Select
+   * searchable` de alta cardinalidad pasado como `children`). El botón
+   * "Limpiar filtros" solo puede detectar el estado de `sections` por sí
+   * mismo — si el consumidor filtra únicamente vía `children`, debe reportar
+   * aquí si hay algo que limpiar, o el botón nunca se activará.
+   */
+  hasExternalActiveFilters?: boolean;
   className?: string;
 }
 
@@ -128,9 +136,10 @@ export function FilterSidebar({
   resultLabel = "resultados",
   title = "Filtros",
   children,
+  hasExternalActiveFilters = false,
   className,
 }: FilterSidebarProps) {
-  const hasActive = hasAnyActiveFilter(sections);
+  const hasActive = hasAnyActiveFilter(sections) || hasExternalActiveFilters;
 
   return (
     <aside
@@ -157,7 +166,15 @@ export function FilterSidebar({
           RatingFilterSection) — va antes de las secciones tipadas porque
           suele tratarse de los filtros de mayor frecuencia de uso. */}
       {children && (
-        <div className="flex flex-col gap-4 px-4 pt-4">
+        <div
+          className={cn(
+            "flex flex-col gap-4 px-4 pt-4",
+            // Sin secciones tipadas después, este bloque es el último antes
+            // del footer — necesita su propio pb-4 para no pegarse contra el
+            // borde superior del botón "Limpiar filtros".
+            sections.length === 0 && "pb-4",
+          )}
+        >
           {children}
         </div>
       )}

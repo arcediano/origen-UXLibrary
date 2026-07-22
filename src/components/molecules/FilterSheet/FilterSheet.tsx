@@ -61,6 +61,14 @@ export interface FilterSheetProps {
    * categoría/productor). Opcional.
    */
   children?: React.ReactNode;
+  /**
+   * Indica si hay algún filtro activo fuera de `sections` (p. ej. un `Select
+   * searchable` de alta cardinalidad pasado como `children`). Mismo
+   * propósito que en `FilterSidebar` — sin esto, el botón de limpiar no
+   * puede saber que hay algo que limpiar si el filtro activo vive solo en
+   * `children`.
+   */
+  hasExternalActiveFilters?: boolean;
 }
 
 // ─── Draft state helpers ──────────────────────────────────────────────────────
@@ -120,6 +128,7 @@ export function FilterSheet({
   resultLabel = "resultados",
   title = "Filtros",
   children,
+  hasExternalActiveFilters = false,
 }: FilterSheetProps) {
   const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
     useFilterDraft(isOpen, sections);
@@ -134,7 +143,7 @@ export function FilterSheet({
     };
   }, [isOpen]);
 
-  const hasActive = isDraftActive(draft);
+  const hasActive = isDraftActive(draft) || hasExternalActiveFilters;
 
   const handleApply = () => {
     applyDraft(sections, draft);

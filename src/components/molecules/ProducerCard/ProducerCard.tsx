@@ -68,8 +68,11 @@ export function ProducerCard({
       aria-label={`Ver perfil de ${businessName}`}
     >
       <Card variant="media" padding="none" className="h-full flex flex-col">
-        {/* Imagen banner — 16:9 con logo superpuesto */}
-        <div className="relative aspect-video overflow-hidden bg-origen-pastel">
+        {/* Imagen banner — 16:9 con logo superpuesto. Sin overflow-hidden propio:
+            el Avatar superpuesto sobresale por debajo (-bottom-5) y debe seguir
+            siendo visible; el recorte a esquinas redondeadas ya lo aporta el
+            overflow-hidden del Card variant="media" en el nivel exterior. */}
+        <div className="relative aspect-video bg-origen-pastel">
           {producer.visual?.bannerUrl ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
