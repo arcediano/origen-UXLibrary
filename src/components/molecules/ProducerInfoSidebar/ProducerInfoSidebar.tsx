@@ -252,7 +252,7 @@ export function ProducerInfoSidebar({
           {/* Boton para expandir/colapsar la seccion editorial */}
           {onToggleProfile && (
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               onClick={onToggleProfile}
               aria-expanded={profileExpanded}
