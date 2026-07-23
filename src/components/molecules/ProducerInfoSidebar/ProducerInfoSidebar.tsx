@@ -23,7 +23,7 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDown, MapPin, Calendar, CheckCircle } from "lucide-react";
+import { ArrowRight, ChevronDown, MapPin, Calendar, CheckCircle } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import { Badge } from "../../atoms/Badge";
 import { Button } from "../../atoms/Button";
@@ -63,16 +63,28 @@ export interface ProducerInfoSidebarProps {
   favoriteButton?: React.ReactNode;
   /**
    * Estado externo del acordeon editorial (modo controlado).
-   * Si no se pasa, el boton no muestra estado expandido.
+   * Solo aplica cuando `profileLinkMode` es `false` (default). Si no se
+   * pasa, el boton no muestra estado expandido.
    */
   profileExpanded?: boolean;
-  /** Callback invocado al pulsar el boton "Conocer perfil" */
+  /** Callback invocado al pulsar el boton "Conocer perfil" / "Conocer nuestra historia" */
   onToggleProfile?: () => void;
   /**
-   * id del AccordionCard editorial al que apunta el boton.
-   * Se usa como aria-controls para la accesibilidad.
+   * id de la seccion editorial a la que apunta el boton.
+   * Se usa como aria-controls (modo acordeon) o como ancla de scroll
+   * (modo `profileLinkMode`).
    */
   profileSectionId?: string;
+  /**
+   * Cuando es `true`, el boton se comporta como un enlace de navegacion a
+   * una seccion editorial **siempre visible** en la pagina (icono flecha,
+   * label "Conocer nuestra historia", sin `aria-expanded`) en vez de un
+   * disclosure de acordeon (icono chevron rotativo, `aria-expanded`,
+   * label "Conocer perfil"/"Ocultar perfil"). Usar `true` cuando el
+   * contenido editorial ya no vive detras de un accordion colapsado.
+   * @default false
+   */
+  profileLinkMode?: boolean;
   /** Clases CSS adicionales para el contenedor raiz */
   className?: string;
 }
@@ -99,6 +111,7 @@ export function ProducerInfoSidebar({
   profileExpanded = false,
   onToggleProfile,
   profileSectionId,
+  profileLinkMode = false,
   className,
 }: ProducerInfoSidebarProps) {
   // ── Datos derivados ──────────────────────────────────────────────────────
@@ -249,8 +262,21 @@ export function ProducerInfoSidebar({
           {/* Slot de favorito inyectado por el proyecto consumidor */}
           {favoriteButton}
 
-          {/* Boton para expandir/colapsar la seccion editorial */}
-          {onToggleProfile && (
+          {/* Boton de acceso a la seccion editorial: enlace de navegacion
+              (profileLinkMode) o disclosure de acordeon (legacy) */}
+          {onToggleProfile && profileLinkMode && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onToggleProfile}
+              aria-controls={profileSectionId}
+              className="flex-1 justify-between"
+              rightIcon={<ArrowRight aria-hidden="true" className="h-4 w-4" />}
+            >
+              Conocer nuestra historia
+            </Button>
+          )}
+          {onToggleProfile && !profileLinkMode && (
             <Button
               variant="outline"
               size="sm"
