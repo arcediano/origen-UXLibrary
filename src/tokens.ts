@@ -85,6 +85,9 @@ export const colors = {
   feedbackDangerSubtle:  'hsl(0 86% 97%)',
   feedbackDangerText:    'hsl(0 72% 42%)',
   feedbackDangerBorder:  'hsl(0 84% 60% / 0.3)',
+  feedbackInfo:          'hsl(217 91% 60%)',
+  feedbackInfoSubtle:    'hsl(214 100% 97%)',
+  feedbackInfoText:      'hsl(224 64% 33%)',
 } as const;
 
 // ─── Sombras ─────────────────────────────────────────────────────────────────

@@ -19,7 +19,7 @@ const variantClasses: Record<AlertVariant, string> = {
   success: "border-feedback-success/50 bg-feedback-success-subtle text-feedback-success-text",
   warning: "border-feedback-warning/50 bg-feedback-warning-subtle text-feedback-warning-text",
   error: "border-feedback-danger/50 bg-feedback-danger-subtle text-feedback-danger-text",
-  info: "border-blue-300 bg-blue-50 text-blue-900",
+  info: "border-feedback-info/40 bg-feedback-info-subtle text-feedback-info-text",
   organic:
     "border-origen-pradera/30 bg-gradient-to-br from-origen-pastel to-origen-crema text-origen-oscuro shadow-md shadow-origen-pradera/10",
 };

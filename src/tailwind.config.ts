@@ -66,6 +66,9 @@ const config: Config = {
           "warning":        "#d97706",
           "warning-subtle": "#fffbeb",
           "warning-text":   "#92400e",
+          "info":           "#3b82f6",
+          "info-subtle":    "#eff6ff",
+          "info-text":      "#1e40af",
         },
         // Variables del sistema (shadcn/ui compatible)
         border:     "hsl(var(--border))",

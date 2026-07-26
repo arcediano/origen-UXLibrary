@@ -52,8 +52,8 @@ describe("Alert", () => {
       </Alert>
     );
 
-    expect(screen.getByRole("status").className).toContain("text-blue-900");
-    expect(screen.getByRole("status").className).toContain("border-blue-700");
+    expect(screen.getByRole("status").className).toContain("text-feedback-info-text");
+    expect(screen.getByRole("status").className).toContain("border-feedback-info");
   });
 
   it("usa contraste reforzado en variante success", () => {
