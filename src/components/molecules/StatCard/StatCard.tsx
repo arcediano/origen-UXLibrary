@@ -189,7 +189,7 @@ export function StatCard({
                       ? "bg-gray-50 text-gray-500 border-gray-200"
                       : trendPositive
                         ? "bg-origen-pastel text-origen-bosque border-origen-pradera/30"
-                        : "bg-feedback-danger-subtle text-red-700 border-red-200",
+                        : "bg-feedback-danger-subtle text-feedback-danger-text border-feedback-danger/30",
                   )}
                   aria-label={`Tendencia: ${trend.value > 0 ? "+" : ""}${trend.value.toFixed(1)}%`}
                 >

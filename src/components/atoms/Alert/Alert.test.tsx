@@ -64,8 +64,8 @@ describe("Alert", () => {
       </Alert>
     );
 
-    expect(screen.getByRole("status").className).toContain("text-green-900");
-    expect(screen.getByRole("status").className).toContain("border-green-700");
+    expect(screen.getByRole("status").className).toContain("text-feedback-success-text");
+    expect(screen.getByRole("status").className).toContain("border-feedback-success");
   });
 
   it("usa borde visible en variante default", () => {
