@@ -2,6 +2,12 @@
  * @file PageError.tsx
  * @description Componente simple para mostrar errores en páginas
  * Sistema de estado — muestra un alert de error con opción de reintento.
+ *
+ * IMPORTANTE: sin fondo propio y misma altura mínima en todos los
+ * breakpoints (`min-h-[calc(100dvh-144px)]`). Ver nota equivalente en
+ * `PageLoader.tsx` — este componente se renderiza a menudo dentro de un
+ * `<main>` ya padeado/desplazado por un sidebar fijo, y un fondo/alto de
+ * viewport propio genera una costura visible con el layout padre.
  */
 
 'use client';
@@ -34,8 +40,7 @@ export function PageError({
   return (
     <div className={cn(
       'flex items-center justify-center p-4',
-      'min-h-[calc(100dvh-144px)] lg:min-h-screen',
-      'lg:bg-gradient-to-b lg:from-white lg:to-[hsl(var(--crema))]',
+      'min-h-[calc(100dvh-144px)]',
       className
     )}>
       <div className="max-w-md w-full">
