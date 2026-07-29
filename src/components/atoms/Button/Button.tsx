@@ -3,6 +3,13 @@
  * @description Componente Button del Origen Design System.
  * Variantes: primary | secondary | outline | ghost | destructive
  *
+ * Patrón recomendado para icono + texto: usar las props `leftIcon`/`rightIcon`
+ * explícitas (no pasar el icono como `children` directo). El componente
+ * detecta y corrige automáticamente el caso de icono-como-children (ver
+ * comentario junto al render de `children` más abajo) para no romper el
+ * alineamiento en código ya existente, pero esa detección no es API pública
+ * ni el patrón preferido — úsese `leftIcon`/`rightIcon` en código nuevo.
+ *
  * @example
  * <Button variant="primary" size="md" loading>Guardar</Button>
  * <Button variant="outline" leftIcon={<PlusIcon />}>Añadir</Button>
@@ -106,6 +113,68 @@ export interface ButtonProps
   asChild?: boolean;
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+/**
+ * Separa los `children` de un Button en nodos "icono" (elementos React, p. ej.
+ * un SVG de lucide-react) y nodos de "texto" (strings/numbers/fragmentos),
+ * envolviendo cada icono detectado en su propio `<span className="shrink-0"
+ * aria-hidden>` — igual que ya reciben `leftIcon`/`rightIcon` — para que quede
+ * como hermano flex del texto en vez de compartir un único `<span>` con él.
+ *
+ * Esto corrige el desalineamiento vertical que se produce cuando un consumidor
+ * pasa un icono como children directo (`<Button><Plus />Texto</Button>`) en
+ * lugar de usar `leftIcon`/`rightIcon`: sin esta separación, icono y texto
+ * quedaban dentro del mismo `<span>` (un único hijo flex, no gobernado por el
+ * `items-center` del contenedor raíz), y el SVG con `vertical-align: baseline`
+ * por defecto se desalineaba respecto al texto.
+ *
+ * No es una API pública: el patrón recomendado sigue siendo `leftIcon`/`rightIcon`.
+ *
+ * Solo actúa cuando hay más de un nodo de nivel superior (el caso icono+texto
+ * como hermanos, p. ej. `<Plus/>Texto`). Con un único hijo se devuelve tal cual
+ * dentro de un `<span>` simple, sin marcarlo `aria-hidden`: un hijo solitario
+ * suele ser un botón icon-only (no sufre el desalineamiento, no hay texto
+ * adyacente) o un elemento compuesto que ya gestiona su propio layout e
+ * incluye texto accesible (p. ej. `<span className="inline-flex ...">` con
+ * icono + texto dentro) — marcarlo `aria-hidden` ocultaría ese texto a
+ * lectores de pantalla, una regresión de accesibilidad peor que el bug visual
+ * que se corrige aquí.
+ */
+function renderChildrenWithIconSpans(children: React.ReactNode): React.ReactNode {
+  const childArray = React.Children.toArray(children);
+
+  if (childArray.length <= 1) {
+    return <span>{children}</span>;
+  }
+
+  const nodes: React.ReactNode[] = [];
+  let currentTextGroup: React.ReactNode[] = [];
+  let textGroupKey = 0;
+
+  childArray.forEach((child, index) => {
+    if (React.isValidElement(child)) {
+      if (currentTextGroup.length > 0) {
+        nodes.push(<span key={`text-${textGroupKey++}`}>{currentTextGroup}</span>);
+        currentTextGroup = [];
+      }
+      nodes.push(
+        <span key={child.key ?? `icon-${index}`} className="shrink-0" aria-hidden>
+          {child}
+        </span>
+      );
+    } else {
+      currentTextGroup.push(child);
+    }
+  });
+
+  if (currentTextGroup.length > 0) {
+    nodes.push(<span key={`text-${textGroupKey++}`}>{currentTextGroup}</span>);
+  }
+
+  return nodes;
+}
+
 // ─── Componente ───────────────────────────────────────────────────────────────
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -149,7 +218,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <>
             {leftIcon  && <span className="shrink-0" aria-hidden>{leftIcon}</span>}
-            <span>{children}</span>
+            {renderChildrenWithIconSpans(children)}
             {rightIcon && <span className="shrink-0" aria-hidden>{rightIcon}</span>}
           </>
         )}
