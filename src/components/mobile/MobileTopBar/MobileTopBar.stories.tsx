@@ -58,11 +58,11 @@ export const BrandCenter: Story = {
         sticky
         center={
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-origen-bosque to-origen-pino text-white shadow-origen">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-origen-bosque via-origen-pino to-origen-hoja text-white shadow-origen">
               <Leaf className="h-4 w-4" aria-hidden="true" />
             </span>
             <div className="min-w-0">
-              <p className="truncate font-serif text-body font-semibold text-origen-bosque">origen.</p>
+              <p className="truncate font-serif text-body font-semibold text-origen-bosque">Origen.</p>
               <p className="truncate text-micro text-text-subtle">Panel del productor</p>
             </div>
           </div>
