@@ -23,7 +23,7 @@ export const rawColors = {
   pino:         '156 40% 33%',
   hoja:         '155 38% 41%',
   pradera:      '156 49% 63%',
-  menta:        '31 70% 62%',
+  menta:        '152 45% 86%',
   crema:        '42 52% 97%',
   mandarina:    '34 92% 60%',
   oscuro:       '158 40% 11%',
@@ -34,7 +34,9 @@ export const rawColors = {
   nube:         '150 35% 98%',
   tierra:       '156 40% 33%',
   arena:        '31 70% 62%',
-  textoSuave:   '155 16% 46%',
+  hojaTinta:    '155 42% 31%',
+  dataAnterior: '156 12% 78%',
+  textoSuave:   '158 15% 32%',
   // Hover states
   hoverBosque:  '156 48% 19%',
   hoverPradera: '156 46% 56%',
@@ -59,6 +61,8 @@ export const colors = {
   nube:         'hsl(var(--nube))',
   tierra:       'hsl(var(--tierra))',
   arena:        'hsl(var(--arena))',
+  hojaTinta:    'hsl(var(--hoja-tinta))',
+  dataAnterior: 'hsl(var(--data-anterior))',
   // Hover
   hoverBosque:  'hsl(var(--hover-bosque))',
   hoverPradera: 'hsl(var(--hover-pradera))',

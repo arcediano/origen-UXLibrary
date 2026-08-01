@@ -37,6 +37,8 @@ const config: Config = {
           nube: "hsl(var(--nube))",
           tierra: "hsl(var(--tierra))",
           arena: "hsl(var(--arena))",
+          "hoja-tinta": "hsl(var(--hoja-tinta))",
+          "data-anterior": "hsl(var(--data-anterior))",
           "texto-suave": "hsl(var(--texto-suave))",
         },
         hover: {

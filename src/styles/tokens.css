@@ -32,7 +32,7 @@
      --pino:    156 40% 33%;   /* Navegacion y bloques fuertes */
      --hoja:    155 38% 41%;   /* Exito, links, estados positivos */
      --pradera: 156 49% 63%;   /* Interacciones secundarias */
-     --menta:   31  70% 62%;   /* Acento comercial premium */
+     --menta:   152 45% 86%;   /* Acento pastel de fondo (no como texto/relleno solido) */
      --crema:   42  52% 97%;   /* Fondo base mas calido y luminoso */
      --mandarina: 34 92% 60%;  /* Oferta / accion destacada */
 
@@ -41,8 +41,10 @@
      --cereza:  352 72% 58%;   /* Urgencia y favoritos */
      --nube:    150 35% 98%;   /* Superficies ultra claras */
      --tierra:  156 40% 33%;   /* Alias de pino */
-     --arena:    31 70% 62%;   /* Alias de menta */
-     --texto-suave: 155 16% 46%;
+     --arena:    31 70% 62%;   /* Acento comercial premium */
+     --hoja-tinta: 155 42% 31%; /* Texto de estado activo, links, tendencias */
+     --data-anterior: 156 12% 78%; /* Series comparativas en graficos */
+     --texto-suave: 158 15% 32%;
 
      /* --- Apoyo --- */
      --oscuro:  158 40% 11%;   /* Texto principal */
