@@ -152,23 +152,16 @@ const TRUST_BADGES = [
 
 // ─── Logo ─────────────────────────────────────────────────────────────────────
 
+// Tile con degradado bosque→pino→hoja + hoja Lucide, servido desde
+// /origen-icon.svg (raíz de public/ de la app consumidora — ver guía de
+// diseño, sección 6 "Logo e identidad"). No se recolorea ni se reconstruye
+// a mano: es el asset oficial del lockup.
 function OrigenLogo({ size = "sm" }: { size?: "sm" | "md" }) {
-  const dims =
-    size === "sm"
-      ? { wrapper: "w-8 h-8", svg: "w-5 h-5" }
-      : { wrapper: "w-10 h-10", svg: "w-6 h-6" };
+  const px = size === "sm" ? 32 : 40;
+  const dims = size === "sm" ? "h-8 w-8" : "h-10 w-10";
 
   return (
-    <div className={`${dims.wrapper} rounded-lg bg-origen-pino flex items-center justify-center`}>
-      <svg className={`${dims.svg} text-white`} viewBox="0 0 200 200" aria-hidden="true">
-        <circle cx="100" cy="100" r="85" fill="none" stroke="currentColor" strokeWidth="3" />
-        <path d="M100 140 L100 80" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-        <path d="M100 90 Q85 75, 75 65" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-        <path d="M100 90 Q115 75, 125 65" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="100" cy="140" r="8" fill="currentColor" />
-        <circle cx="100" cy="140" r="5" fill="#74C69D" />
-      </svg>
-    </div>
+    <img src="/origen-icon.svg" alt="" width={px} height={px} className={dims} />
   );
 }
 
@@ -193,7 +186,7 @@ export function AuthFooter({
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <OrigenLogo size="sm" />
-              <span className="text-base font-bold text-white">ORIGEN</span>
+              <span className="text-base font-semibold text-white">Origen.</span>
             </div>
             <LinkComponent
               href={config.mobileLink.href}
@@ -238,7 +231,7 @@ export function AuthFooter({
               <div className="flex items-center gap-3">
                 <OrigenLogo size="md" />
                 <div>
-                  <div className="text-xl font-bold text-white">ORIGEN</div>
+                  <div className="text-xl font-semibold text-white">Origen.</div>
                   <div className="text-xs text-origen-pradera italic">
                     Conoce de dónde viene lo que comes
                   </div>
