@@ -276,6 +276,14 @@ export { useIsMobile } from "./lib/hooks/useIsMobile";
 export { useSafeArea } from "./lib/hooks/useSafeArea";
 export type { SafeAreaInsets } from "./lib/hooks/useSafeArea";
 export { useReducedMotion } from "./lib/hooks/useReducedMotion";
+export {
+  appShellPaddingClass,
+  appShellBottomOffsetClass,
+  appShellSafeAreaOffset,
+  NAV_HEIGHT_MOBILE_WEB,
+  NAV_HEIGHT_MOBILE_DASHBOARD,
+  NAV_HEIGHT_MOBILE_ADMIN,
+} from "./lib/app-shell-padding";
 
 // ─── Tokens ───────────────────────────────────────────────────────────────────
 export {
