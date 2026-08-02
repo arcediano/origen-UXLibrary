@@ -56,6 +56,12 @@ const config: Config = {
         "border-strong": "hsl(var(--border-strong))",
         "text-subtle": "hsl(var(--text-subtle))",
         "text-disabled": "hsl(var(--text-disabled))",
+        // Alias de nivel superior: las 3 apps consumidoras usan las clases
+        // `text-hoja-tinta`/`bg-hoja-tinta`/`stroke-data-anterior` (sin el
+        // prefijo `origen-`), igual que `text-subtle`. Se mantienen también
+        // anidados en `origen.*` arriba por compatibilidad.
+        "hoja-tinta": "hsl(var(--hoja-tinta))",
+        "data-anterior": "hsl(var(--data-anterior))",
         // === FEEDBACK TOKENS (sincronizados con proyectos consumidores) ===
         feedback: {
           "success":        "hsl(var(--hoja))",
