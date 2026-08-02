@@ -51,15 +51,20 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
     const resolvedSize = toggleSize ?? size ?? "md";
 
     const variantClasses: Record<ToggleVariant, { off: string; on: string; iconOn: string; iconOff: string }> = {
+      // Nota: los 4 estados "on" usan bg-origen-bosque (nunca pradera como fondo
+      // sólido) — pradera (hsl 156 49% 63%) no alcanza WCAG AA con texto blanco
+      // (~1.87:1) ni con texto oscuro (~2.82:1), ver auditoría v6. Pradera se
+      // mantiene solo en bordes/iconos del estado "off", donde su rol es de
+      // acento, no de superficie con texto encima.
       leaf: {
         off: "border-origen-pradera/30 bg-origen-crema text-origen-bosque hover:bg-origen-pastel/50",
-        on: "border-origen-pradera bg-origen-pradera text-white",
+        on: "border-origen-bosque bg-origen-bosque text-white",
         iconOn: "text-white",
         iconOff: "text-origen-pradera",
       },
       seed: {
         off: "border-origen-pradera/30 bg-origen-crema text-origen-bosque hover:bg-origen-crema/80",
-        on: "border-origen-pradera bg-origen-pradera text-white",
+        on: "border-origen-bosque bg-origen-bosque text-white",
         iconOn: "text-white",
         iconOff: "text-origen-pradera",
       },
@@ -71,7 +76,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
       },
       accent: {
         off: "border-origen-pradera/30 bg-white text-origen-bosque hover:bg-origen-pradera/10",
-        on: "border-origen-pradera bg-origen-pradera text-white",
+        on: "border-origen-bosque bg-origen-bosque text-white",
         iconOn: "text-white",
         iconOff: "text-origen-pradera",
       },

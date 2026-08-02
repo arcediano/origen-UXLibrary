@@ -33,7 +33,7 @@ interface ToggleGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * - `default` / `outline`: grupo de chips/botones independientes.
    * - `segmented`: fila de N columnas de igual ancho con borde compartido
-   *   (control segmentado), activo en `bg-origen-pradera text-white`. Util
+   *   (control segmentado), activo en `bg-origen-bosque text-white`. Util
    *   para selectores de 3 opciones tipo "tipo de zona" (ver /onboarding,
    *   Paso 4 - Capacidad).
    * - `pill`: chips totalmente redondeados, activo en color de marca con
@@ -128,17 +128,20 @@ const toggleGroupItemVariants = cva(
         md: "px-3 py-2 text-sm",
         lg: "px-4 py-3 text-base",
       },
+      // data-[state=on] usa bg-origen-bosque (nunca pradera como fondo sólido
+      // — falla WCAG AA con texto blanco u oscuro, ver auditoría v6). pradera
+      // se mantiene en bordes y fills de baja opacidad (/10-/25).
       variant: {
         default:
-          "bg-origen-pradera/15 text-origen-bosque hover:bg-origen-pradera/25 data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
+          "bg-origen-pradera/15 text-origen-bosque hover:bg-origen-pradera/25 data-[state=on]:bg-origen-bosque data-[state=on]:text-white",
         outline:
           "border border-origen-pradera/30 text-origen-bosque hover:border-origen-pradera/60 data-[state=on]:border-origen-pradera data-[state=on]:bg-origen-pradera/10",
         /** Fila segmentada de N columnas, sin radio individual ni gap, separadas por borde compartido */
         segmented:
-          "w-full rounded-none border-0 border-l border-border-subtle first:border-l-0 bg-surface-alt text-text-subtle hover:bg-origen-crema/40 hover:text-origen-bosque data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
+          "w-full rounded-none border-0 border-l border-border-subtle first:border-l-0 bg-surface-alt text-text-subtle hover:bg-origen-crema/40 hover:text-origen-bosque data-[state=on]:bg-origen-bosque data-[state=on]:text-white",
         /** Chip totalmente redondeado: activo en color de marca, inactivo con borde de marca */
         pill:
-          "rounded-full border border-origen-pradera/40 text-origen-bosque hover:border-origen-pradera data-[state=on]:border-origen-pradera data-[state=on]:bg-origen-pradera data-[state=on]:text-white",
+          "rounded-full border border-origen-pradera/40 text-origen-bosque hover:border-origen-pradera data-[state=on]:border-origen-bosque data-[state=on]:bg-origen-bosque data-[state=on]:text-white",
       },
     },
     defaultVariants: {

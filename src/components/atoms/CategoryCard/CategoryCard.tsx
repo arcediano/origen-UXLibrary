@@ -79,7 +79,7 @@ export const CategoryCard = React.forwardRef<HTMLButtonElement, CategoryCardProp
             className={cn(
               "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all",
               isSelected
-                ? "bg-gradient-to-br from-origen-pradera to-origen-hoja text-white shadow-md"
+                ? "bg-origen-bosque text-white shadow-md"
                 : "bg-gradient-to-br from-origen-crema to-origen-pastel text-origen-bosque group-hover:scale-110"
             )}
             aria-hidden="true"

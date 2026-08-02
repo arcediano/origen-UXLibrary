@@ -204,7 +204,9 @@ export function Table<T>({
                             className={cn(
                               "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md transition-all",
                               isExpanded
-                                ? "bg-origen-pradera text-white"
+                                // bg-origen-bosque, no pradera: pradera sólido con texto
+                                // blanco falla WCAG AA (~1.87:1), ver auditoría v6.
+                                ? "bg-origen-bosque text-white"
                                 : "text-muted-foreground hover:bg-origen-pradera/10 hover:text-origen-pradera"
                             )}
                             aria-label={isExpanded ? "Contraer" : "Expandir"}

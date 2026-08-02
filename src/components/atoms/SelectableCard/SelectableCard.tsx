@@ -48,13 +48,13 @@ const toneSelectedBorder: Record<SelectableCardTone, string> = {
 };
 
 const toneIconSelected: Record<SelectableCardTone, string> = {
-  brand: "bg-gradient-to-br from-origen-pradera to-origen-hoja text-white shadow-md",
+  brand: "bg-origen-bosque text-white shadow-md",
   danger: "bg-feedback-danger text-white shadow-md",
   warning: "bg-feedback-warning text-white shadow-md",
 };
 
 const toneCheck: Record<SelectableCardTone, string> = {
-  brand: "bg-origen-pradera",
+  brand: "bg-origen-bosque",
   danger: "bg-feedback-danger",
   warning: "bg-feedback-warning",
 };

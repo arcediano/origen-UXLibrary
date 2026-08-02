@@ -54,9 +54,12 @@ export interface StatHighlightCardProps {
 
 // ─── Mapa de gradientes (badge de icono) ──────────────────────────────────────
 
+// Este componente lleva texto real (valor + label) directamente sobre el
+// gradiente, en blanco — pradera→hoja fallaba WCAG AA en el extremo pradera
+// (~1.87:1). Sustituido por pino→bosque (ambos ≥5.4:1 con blanco). Ver auditoría v6.
 const gradientMap: Record<StatHighlightCardGradient, string> = {
   hoja: "from-origen-hoja/95 to-origen-hoja/80",
-  pradera: "from-origen-pradera to-origen-hoja",
+  pradera: "from-origen-pino to-origen-bosque",
   bosque: "from-origen-bosque to-origen-pino",
   mandarina: "from-origen-mandarina to-origen-mandarina/80",
 };

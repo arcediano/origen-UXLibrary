@@ -68,7 +68,9 @@ const variantMap: Record<
   NonNullable<StatCardProps["variant"]>,
   { iconGrad: string; hoverBorder: string }
 > = {
-  pradera:   { iconGrad: "from-origen-pradera to-origen-hoja",              hoverBorder: "group-hover:border-origen-pradera/50" },
+  // pradera→hoja falla contraste de icono (pradera ~1.87:1 con blanco, bajo
+  // el umbral 3:1 de UI) — sustituido por pino→hoja (ambos ≥3.86:1). Ver auditoría v6.
+  pradera:   { iconGrad: "from-origen-pino to-origen-hoja",                 hoverBorder: "group-hover:border-origen-pradera/50" },
   hoja:      { iconGrad: "from-origen-hoja to-origen-pino",                 hoverBorder: "group-hover:border-origen-hoja/60" },
   bosque:    { iconGrad: "from-origen-pino to-origen-bosque",               hoverBorder: "group-hover:border-origen-bosque/50" },
   mandarina: { iconGrad: "from-origen-mandarina to-origen-mandarina/70",    hoverBorder: "group-hover:border-origen-mandarina/50" },

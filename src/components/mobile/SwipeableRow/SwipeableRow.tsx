@@ -46,7 +46,10 @@ const COLOR_MAP: Record<SwipeAction['color'], { bg: string; text: string }> = {
   bosque:    { bg: 'bg-origen-bosque',    text: 'text-white' },
   pino:      { bg: 'bg-origen-pino',      text: 'text-white' },
   hoja:      { bg: 'bg-origen-hoja',      text: 'text-white' },
-  pradera:   { bg: 'bg-origen-pradera',   text: 'text-origen-bosque' },
+  // pradera mapea a pino, no a bg-origen-pradera: el label es 10px bold (no
+  // "texto grande" WCAG), y pradera sólido no alcanza 4.5:1 con ningún texto
+  // de marca (bosque encima da 4.43:1) — pino sí, con 5.42:1. Ver auditoría v6.
+  pradera:   { bg: 'bg-origen-pino',      text: 'text-white' },
   mandarina: { bg: 'bg-origen-mandarina', text: 'text-white' },
   red:       { bg: 'bg-feedback-danger',  text: 'text-white' },
   gray:      { bg: 'bg-surface-alt',      text: 'text-text-secondary' },

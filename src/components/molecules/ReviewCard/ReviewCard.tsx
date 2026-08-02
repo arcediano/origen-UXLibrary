@@ -15,7 +15,7 @@ export interface ReviewCardReview {
   title?: string | null;
   content: string;
   authorName: string;
-  /** Clase Tailwind para el color del avatar, p.ej. `"bg-origen-pradera text-white"`. */
+  /** Clase Tailwind para el color del avatar, p.ej. `"bg-origen-bosque text-white"`. */
   authorAvatarColor?: string;
   verifiedPurchase?: boolean;
   createdAt: string;
@@ -63,7 +63,9 @@ export function ReviewCard({
       {/* Header: avatar + nombre + verificado */}
       <div className="flex items-center gap-3">
         <Avatar size="sm">
-          <AvatarFallback className={review.authorAvatarColor ?? "bg-origen-pradera text-white"}>
+          {/* bg-origen-bosque, no pradera: pradera sólido con texto blanco
+              falla WCAG AA (~1.87:1), ver auditoría v6. */}
+          <AvatarFallback className={review.authorAvatarColor ?? "bg-origen-bosque text-white"}>
             {review.authorName.slice(0, 2).toUpperCase()}
           </AvatarFallback>
         </Avatar>
