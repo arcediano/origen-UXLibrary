@@ -191,7 +191,7 @@ export function Table<T>({
                         "transition-all duration-200",
                         index % 2 === 0 ? "bg-white" : "bg-origen-crema/5",
                         onRowClick && "cursor-pointer hover:bg-origen-crema/20",
-                        isExpanded && "border-l-4 border-origen-pradera bg-origen-crema/20",
+                        isExpanded && "border-l-4 border-origen-bosque bg-origen-nube",
                         getRowClassName(item)
                       )}
                       onClick={() => onRowClick?.(item)}
@@ -231,7 +231,7 @@ export function Table<T>({
                     </tr>
 
                     {expandable && isExpanded && (
-                      <tr className="border-y-2 border-origen-pradera/20 bg-gradient-to-br from-origen-crema/20 to-white">
+                      <tr className="border-y-2 border-origen-bosque/20 bg-origen-nube">
                         <td colSpan={columns.length + 1} className="p-3 sm:p-6">
                           <div className="text-sm sm:text-base">{expandable.renderExpand(item)}</div>
                         </td>

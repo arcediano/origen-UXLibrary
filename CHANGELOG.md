@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.23.1
+
+### Patch Changes
+
+- fix(Table): reemplaza opacidad origen-crema/20 por fondo solido origen-nube en fila expandida -- WCAG AA
+
 ## 0.18.0
 
 ### Minor Changes
