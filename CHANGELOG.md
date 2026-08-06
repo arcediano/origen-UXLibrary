@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.23.2
+
+### Patch Changes
+
+- Fix Checkbox contrast: use pino (5.4:1) instead of pradera (1.9:1) for checked/indeterminate states in seed and accent variants (R23/R24 compliance)
+
 ## 0.23.1
 
 ### Patch Changes

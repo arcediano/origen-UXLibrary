@@ -58,8 +58,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       seed: cn(
         "border-origen-pradera/50 bg-white",
         "hover:border-origen-hoja hover:bg-origen-crema/30",
-        "data-[state=checked]:bg-origen-pradera data-[state=checked]:border-origen-pradera",
-        "data-[state=indeterminate]:bg-origen-pradera data-[state=indeterminate]:border-origen-pradera",
+        // pradera es un verde claro pensado para bordes/fills de baja opacidad
+        // (R23): el estado marcado es una superficie sólida con icono blanco
+        // encima, así que usa pino (5.4:1) en vez de pradera (1.9:1).
+        "data-[state=checked]:bg-origen-pino data-[state=checked]:border-origen-pino",
+        "data-[state=indeterminate]:bg-origen-pino data-[state=indeterminate]:border-origen-pino",
         hasError && "border-feedback-danger hover:border-red-600"
       ),
       leaf: cn(
@@ -79,8 +82,10 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       accent: cn(
         "border-origen-pradera/30 bg-white",
         "hover:border-origen-pradera hover:bg-origen-pradera/5",
-        "data-[state=checked]:bg-origen-pradera data-[state=checked]:border-origen-pradera",
-        "data-[state=indeterminate]:bg-origen-pradera data-[state=indeterminate]:border-origen-pradera",
+        // Mismo criterio que "seed": el marcado es una superficie sólida con
+        // icono blanco, pradera no pasa 3:1 (R23) — usa pino.
+        "data-[state=checked]:bg-origen-pino data-[state=checked]:border-origen-pino",
+        "data-[state=indeterminate]:bg-origen-pino data-[state=indeterminate]:border-origen-pino",
         hasError && "border-feedback-danger hover:border-red-600"
       ),
     };
