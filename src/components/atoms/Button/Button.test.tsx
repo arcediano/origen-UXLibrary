@@ -72,7 +72,7 @@ describe("Button", () => {
   });
 
   it("fuerza texto legible en primary con gradiente oscuro", () => {
-    expect(buttonVariants({ variant: "primary" })).toContain("!text-white");
+    expect(buttonVariants({ variant: "primary" })).toContain("text-white");
   });
 
   it("no permite sobrescribir aria reservadas del estado loading", () => {
@@ -85,5 +85,53 @@ describe("Button", () => {
     const button = screen.getByRole("button", { name: /cargando/i });
     expect(button).toHaveAttribute("aria-busy", "true");
     expect(button).toHaveAttribute("aria-disabled", "true");
+  });
+
+  describe("conservación de clases de color en cn() — regresión para bug de tailwind-merge", () => {
+    /**
+     * Test de regresión: verifica que cn() (usado internamente en Button.render)
+     * no descarta clases de color de texto al combinarlas con fontSize personalizados.
+     *
+     * Reproductor original del bug: buttonVariants() genera clases correctamente,
+     * pero el render() final llama a cn() que descartaba la clase de color.
+     * Este test ejercita ese path real.
+     *
+     * Ver: .claude/requirements/bug-fusion-clases-tailwind-merge-button.md
+     */
+    it.each([
+      ["primary", "text-white"],
+      ["secondary", "text-origen-bosque"],
+      ["outline", "text-origen-bosque"],
+      ["ghost", "text-origen-bosque"],
+      ["destructive", "text-feedback-danger-text"],
+      ["hero", "text-origen-bosque"],
+    ])("variant=%s conserva clase de color de texto en size=sm", (variant, colorClass) => {
+      render(<Button variant={variant as any} size="sm">Texto</Button>);
+      expect(screen.getByRole("button").className).toContain(colorClass);
+    });
+
+    it.each([
+      ["primary", "text-white"],
+      ["secondary", "text-origen-bosque"],
+      ["outline", "text-origen-bosque"],
+      ["ghost", "text-origen-bosque"],
+      ["destructive", "text-feedback-danger-text"],
+      ["hero", "text-origen-bosque"],
+    ])("variant=%s conserva clase de color de texto en size=md", (variant, colorClass) => {
+      render(<Button variant={variant as any} size="md">Texto</Button>);
+      expect(screen.getByRole("button").className).toContain(colorClass);
+    });
+
+    it.each([
+      ["primary", "text-white"],
+      ["secondary", "text-origen-bosque"],
+      ["outline", "text-origen-bosque"],
+      ["ghost", "text-origen-bosque"],
+      ["destructive", "text-feedback-danger-text"],
+      ["hero", "text-origen-bosque"],
+    ])("variant=%s conserva clase de color de texto en size=lg", (variant, colorClass) => {
+      render(<Button variant={variant as any} size="lg">Texto</Button>);
+      expect(screen.getByRole("button").className).toContain(colorClass);
+    });
   });
 });

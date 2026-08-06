@@ -1,5 +1,16 @@
 # @arcediano/ux-library
 
+## 0.23.3
+
+### Patch Changes
+
+- fix: cn() ya no descarta clases de color de texto/fondo al combinarse con fontSize/backgroundImage personalizados
+
+  - Implementa extendTailwindMerge en utils.ts para registrar explícitamente las claves personalizadas de fontSize (h1, h2, h3, body, small, micro) y backgroundImage (gradient-origen, gradient-menta, gradient-crema) en sus grupos correctos
+  - Resuelve bug donde tailwind-merge clasificaba text-{size} custom como si compitieran con text-{color}, descartando la clase de color indebidamente
+  - Patrones afectados: todos los 6 variantes de Button (primary, secondary, outline, ghost, destructive, hero) en combinación con cualquier size
+  - Añade tests de regresión que renderizen el componente real (no solo buttonVariants aislado) para evitar que este bug resurja
+
 ## 0.23.2
 
 ### Patch Changes
