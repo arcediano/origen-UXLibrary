@@ -56,13 +56,16 @@ const EVENT_TYPE_MAP: Record<string, IconConfig> = {
   WELCOME:               { icon: UserCheck,   color: "text-origen-bosque",  bg: "bg-origen-bosque/10",  borderColor: "var(--origen-bosque)" },
 
   // Grupo ONBOARDING
-  PRODUCER_REQUEST_RECEIVED: { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  PRODUCER_REQUEST_APPROVED: { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  PRODUCER_REQUEST_REJECTED: { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  ONBOARDING_COMPLETED:      { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  PROFILE_UNDER_REVIEW:      { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  PROFILE_ACTIVATED:         { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
-  ONBOARDING_REMINDER:       { icon: Briefcase, color: "text-origen-pradera", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  // R25: icono informativo en círculo bg-origen-pradera/10 — pradera a opacidad
+  // plena falla contraste (~1.9:1); se usa hoja-tinta (5.9:1) como en el resto
+  // de grupos. El borderColor (barra de "no leído") no es texto, se mantiene.
+  PRODUCER_REQUEST_RECEIVED: { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  PRODUCER_REQUEST_APPROVED: { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  PRODUCER_REQUEST_REJECTED: { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  ONBOARDING_COMPLETED:      { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  PROFILE_UNDER_REVIEW:      { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  PROFILE_ACTIVATED:         { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
+  ONBOARDING_REMINDER:       { icon: Briefcase, color: "text-hoja-tinta", bg: "bg-origen-pradera/10", borderColor: "var(--origen-pradera)" },
 
   // Grupo DOCUMENTS
   DOCUMENT_APPROVED:         { icon: FileCheck, color: "text-origen-pino",   bg: "bg-origen-pino/10",   borderColor: "var(--origen-pino)" },
