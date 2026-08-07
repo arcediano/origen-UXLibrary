@@ -1,5 +1,20 @@
 # @arcediano/ux-library
 
+## 0.23.5
+
+### Patch Changes
+
+- fix(app-shell-padding): mapeo estático de clases pb-[...]/bottom-[...] para que Tailwind JIT las detecte
+
+  appShellPaddingClass() y appShellBottomOffsetClass() ahora usan un mapeo estático interno que contiene las 10 combinaciones reales de clases Tailwind. El escáner JIT de Tailwind puede detectar estas cadenas literales en el bundle compilado (dist/), lo que permite que el CSS se genere correctamente.
+
+  Antes: las clases se construían con interpolación de template string, que el escáner JIT nunca detecta.
+  Después: las clases se buscan en un mapa y se devuelven como cadenas literales completas.
+
+  El cambio es completamente transparente para los consumidores - la firma de las funciones no cambió, y un console.warn en desarrollo avisa si se usa una combinación no mapeada.
+
+  Fixes .claude/requirements/bug-tailwind-jit-clases-dinamicas.md
+
 ## 0.23.3
 
 ### Patch Changes
