@@ -1,5 +1,17 @@
 # @arcediano/ux-library
 
+## 0.23.6
+
+### Patch Changes
+
+- fix(Alert): evitar que el contenido desborde horizontalmente en móvil
+
+  El div interno de `Alert` (`flex-1 space-y-1`) no tenía `min-w-0`, así que
+  un texto largo sin espacios dentro de `AlertDescription`/`AlertTitle`
+  (p. ej. una API key en un mensaje de error) no podía encogerse ni partirse
+  dentro del layout flex y desbordaba el contenedor por la derecha en
+  pantallas estrechas. Se añade `min-w-0` y `break-words` al contenedor.
+
 ## 0.23.5
 
 ### Patch Changes

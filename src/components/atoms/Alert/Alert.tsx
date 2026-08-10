@@ -55,7 +55,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       >
         <span className="shrink-0 text-current">{variantIcons[variant]}</span>
 
-        <div className="flex-1 space-y-1">{children}</div>
+        <div className="flex-1 min-w-0 space-y-1 break-words">{children}</div>
 
         {trailing && <div className="shrink-0">{trailing}</div>}
 
