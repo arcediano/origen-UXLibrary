@@ -135,7 +135,15 @@ const CardIconHeader = React.forwardRef<HTMLDivElement, CardIconHeaderProps>(
           className={cn(
             boxSize,
             "flex shrink-0 items-center justify-center rounded-lg",
-            "bg-gradient-to-br from-origen-pradera/20 to-origen-hoja/20 text-origen-pradera"
+            /**
+             * H6 (auditoria-diseno-2026-08-22.md, origen-dashboard):
+             * `text-origen-pradera` (~1.9:1 sobre este fondo claro) viola
+             * R25 del manual — el changelog v6.5 ya documentaba esta
+             * corrección pero nunca se aplicó al componente real. Usar
+             * `text-hoja-tinta` (≥5.9:1, token correcto para iconos/texto
+             * informativo sobre fondo claro).
+             */
+            "bg-gradient-to-br from-origen-pradera/20 to-origen-hoja/20 text-hoja-tinta"
           )}
           aria-hidden="true"
         >
