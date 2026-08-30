@@ -73,8 +73,9 @@ export const colors = {
   surfaceAlt:     'hsl(var(--surface-alt))',
   surfaceRaised:  'hsl(var(--surface-raised))',
   // Bordes semánticos
-  borderSubtle:   'hsl(var(--border-subtle))',
-  borderStrong:   'hsl(var(--border-strong))',
+  borderSubtle:    'hsl(var(--border-subtle))',
+  borderStrong:    'hsl(var(--border-strong))',
+  borderContainer: 'hsl(var(--border-container))',
   // Texto semántico
   textSubtle:     'hsl(var(--text-subtle))',
   textDisabled:   'hsl(var(--text-disabled))',
