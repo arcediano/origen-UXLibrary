@@ -140,7 +140,7 @@ export function Table<T>({
     <div className={cn("overflow-hidden rounded-xl border border-border-subtle bg-surface-alt shadow-lg", className)}>
       <div className="overflow-x-auto">
         <table className="min-w-[640px] w-full md:min-w-full">
-          <thead className="border-b-2 border-origen-pradera/30 bg-origen-crema">
+          <thead className="border-b-2 border-origen-pradera/30 bg-surface-alt">
             <tr>
               {expandable && <th className="w-10 px-2 py-3 sm:py-4" />}
               {columns.map((column) => (
