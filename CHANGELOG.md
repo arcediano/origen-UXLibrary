@@ -1,5 +1,41 @@
 # @arcediano/ux-library
 
+## 0.23.7
+
+### Patch Changes
+
+- 63144c6: Fix: `CardIconHeader` pintaba el icono en `text-origen-pradera` (~1.9:1 sobre
+  el fondo claro del propio tile), violando R25 del manual de diseño. El
+  changelog v6.5 (2026-08-06) ya documentaba esta corrección como aplicada,
+  pero nunca llegó al componente real. Se corrige a `text-hoja-tinta`
+  (≥5.9:1), el token correcto para iconos/texto informativo sobre fondo
+  claro. Afecta a todos los consumidores de `CardIconHeader`/`AccordionCard`
+  (onboarding, `dashboard/account`, campañas, pagos, seguridad).
+
+  Detectado en `disenador-ux` (auditoría de diseño de
+  `bugs-detalle-pedido-productor`, 2026-08-22), bloqueante para migrar
+  `SectionAccordion` de `origen-dashboard` a `AccordionCard`.
+
+- f1d2b8a: Fix: `Table` pintaba su `<thead>` con `bg-origen-crema`, que en apps
+  consumidoras que definen `--surface`/`--background` como `var(--crema)`
+  (caso de `origen-dashboard`) resuelve al mismo valor HSL exacto que el
+  fondo de página — la cabecera desaparecía visualmente contra el fondo.
+  Se cambia a `bg-surface-alt` (blanco, mismo fondo que el resto de la
+  tabla), apoyándose en el borde inferior verde de 2px ya existente
+  (`border-b-2 border-origen-pradera/30`) para mantener la separación
+  visual cabecera/cuerpo sin depender de que cada app defina sus tokens
+  de superficie con valores distintos entre sí.
+
+  Detectado en `origen-dashboard` (reporte del humano, 2026-08-30) —
+  afecta también a `origen-admin`, que usa `Table` extensamente.
+
+  `MobileCardList` tiene un problema relacionado (contraste insuficiente
+  en móvil, no un color idéntico) que queda pendiente: las opciones
+  probadas visualmente (`border-border-strong`, sombra más pronunciada)
+  no dieron un resultado limpio sin introducir un token nuevo o reutilizar
+  uno con semántica de "activo/énfasis" fuera de su propósito — ver
+  `claude-agile/proyectos/origen-UXLibrary/tareas-pendientes.md`.
+
 ## 0.23.6
 
 ### Patch Changes
