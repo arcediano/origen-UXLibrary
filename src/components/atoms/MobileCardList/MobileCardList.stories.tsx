@@ -56,3 +56,22 @@ export const Empty: Story = {
     </div>
   ),
 };
+
+/**
+ * Contraste del borde del contenedor sobre --background/--crema (no blanco) —
+ * el escenario real reportado en apps consumidoras como origen-dashboard,
+ * donde --surface-alt (blanco) y --background/--crema tienen poca diferencia
+ * de luminosidad entre sí. Usa --border-container en vez de --border-subtle
+ * específicamente para que el contenedor se distinga del fondo aquí.
+ */
+export const OnPageBackground: Story = {
+  render: () => (
+    <div className="p-4 bg-background max-w-sm">
+      <MobileCardList>
+        <Row label="Pedido #1023" />
+        <Row label="Pedido #1024" />
+        <Row label="Pedido #1025" />
+      </MobileCardList>
+    </div>
+  ),
+};

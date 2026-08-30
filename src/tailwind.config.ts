@@ -54,6 +54,7 @@ const config: Config = {
         },
         "border-subtle": "hsl(var(--border-subtle))",
         "border-strong": "hsl(var(--border-strong))",
+        "border-container": "hsl(var(--border-container))",
         "text-subtle": "hsl(var(--text-subtle))",
         "text-disabled": "hsl(var(--text-disabled))",
         // Alias de nivel superior: las 3 apps consumidoras usan las clases

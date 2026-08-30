@@ -38,7 +38,7 @@ export function MobileCardList({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-border-subtle bg-surface-alt overflow-hidden shadow-subtle",
+        "rounded-2xl border border-border-container bg-surface-alt overflow-hidden shadow-subtle",
         className,
       )}
       aria-busy={isLoading || undefined}

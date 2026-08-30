@@ -70,6 +70,13 @@
     --surface-raised: 0 0% 100%;
     --border-subtle: 156 26% 86%;
     --border-strong: var(--hoja);
+    /* Borde de contenedor con contraste garantizado sobre --background/--crema
+       (~3:1 WCAG no-texto) — para contenedores como MobileCardList donde
+       --border-subtle resulta casi invisible en apps consumidoras cuyo fondo
+       tiene poca diferencia de luminosidad con --surface-alt. Distinto de
+       --border-strong (alias de --hoja) para no heredar su semántica de
+       "activo/énfasis". */
+    --border-container: 155 20% 48%;
     --text-subtle: var(--texto-suave);
     --text-disabled: 156 12% 62%;
 
