@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MobileCardList } from "./MobileCardList";
+import { SwipeableRow } from "../../mobile/SwipeableRow/SwipeableRow";
+import { Eye } from "lucide-react";
 
 const meta: Meta<typeof MobileCardList> = {
   title: "Atoms/MobileCardList",
@@ -71,6 +73,36 @@ export const OnPageBackground: Story = {
         <Row label="Pedido #1023" />
         <Row label="Pedido #1024" />
         <Row label="Pedido #1025" />
+      </MobileCardList>
+    </div>
+  ),
+};
+
+/**
+ * Escenario real reportado por usuarios: filas envueltas en SwipeableRow
+ * (como OrderCard/ProductMobileList en origen-dashboard/origen-admin)
+ * dentro de MobileCardList, sobre el fondo de página --background/--crema.
+ * Reproduce el bug donde la fila se pintaba con bg-surface (= --crema,
+ * el mismo color que el fondo de página) en vez de bg-surface-alt (blanco,
+ * el color del contenedor MobileCardList) — la fila quedaba literalmente
+ * del mismo color que la pantalla, no solo con poco contraste de borde.
+ */
+export const SwipeableRowOnPageBackground: Story = {
+  render: () => (
+    <div className="p-4 bg-background max-w-sm">
+      <MobileCardList>
+        {["Pedido #1023", "Pedido #1024", "Pedido #1025"].map((label) => (
+          <SwipeableRow
+            key={label}
+            actions={[{ label: "Ver", icon: Eye, color: "bosque", onPress: () => {} }]}
+            className="border-b border-border-subtle last:border-0"
+          >
+            <div className="flex items-center justify-between p-4">
+              <span className="text-sm font-medium text-origen-bosque">{label}</span>
+              <span className="text-xs text-text-subtle">Detalle</span>
+            </div>
+          </SwipeableRow>
+        ))}
       </MobileCardList>
     </div>
   ),

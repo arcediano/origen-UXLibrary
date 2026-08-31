@@ -185,7 +185,7 @@ export function SwipeableRow({
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
-        className="relative bg-surface touch-pan-y cursor-grab active:cursor-grabbing select-none"
+        className="relative bg-surface-alt touch-pan-y cursor-grab active:cursor-grabbing select-none"
       >
         {children}
       </motion.div>
