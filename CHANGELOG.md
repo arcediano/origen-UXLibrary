@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.23.8
+
+### Patch Changes
+
+- af2bf1d: MobileCardList: nuevo token `--border-container` con contraste garantizado sobre `--background`/`--crema` (antes usaba `border-subtle`, casi invisible en apps consumidoras donde ambos tokens tienen poca diferencia de luminosidad).
+
 ## 0.23.7
 
 ### Patch Changes
