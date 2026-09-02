@@ -56,10 +56,10 @@ const buttonVariants = cva(
           "disabled:border-origen-pino/15 disabled:bg-white disabled:text-origen-bosque/70"
         ),
         ghost: cn(
-          "bg-transparent text-origen-bosque shadow-none",
-          "hover:bg-origen-pastel/60 hover:text-origen-pino",
+          "border border-origen-pino/15 bg-transparent text-origen-bosque shadow-none",
+          "hover:border-origen-pradera/40 hover:bg-origen-pastel/60 hover:text-origen-pino",
           "focus-visible:bg-origen-pastel/40",
-          "disabled:text-origen-bosque/70"
+          "disabled:border-origen-pino/10 disabled:text-origen-bosque/70"
         ),
         destructive: cn(
           "border border-feedback-danger-border",
