@@ -75,6 +75,19 @@ export interface FilterPanelProps {
    * escritorio. Pasar el mismo ref que se pasa a `FilterToolbar.filtersButtonRef`.
    */
   triggerRef: React.RefObject<HTMLButtonElement | null>;
+  /**
+   * Presentación en escritorio (`≥lg`, sin efecto en móvil/tablet, que
+   * siempre usa el bottom sheet):
+   * - `"popover"` (por defecto): panel pequeño (`w-80`) anclado bajo el
+   *   botón que lo abre — comportamiento histórico, sin cambios.
+   * - `"drawer"`: panel deslizante de altura completa desde el borde derecho
+   *   de la pantalla, con scrim de fondo — para listados de gestión donde el
+   *   consumidor sustituye una barra de filtros siempre visible por un botón
+   *   "Filtros" bajo demanda también en escritorio (decisión de diseño
+   *   validada en vivo por el humano, 2026-09-03, tras revertir el intento
+   *   de sidebar fijo de 280px — ver `origen-dashboard/tareas-completadas.md`).
+   */
+  variant?: "popover" | "drawer";
   className?: string;
 }
 
@@ -136,6 +149,7 @@ function FilterPanelDesktop({
   resultLabel = "resultados",
   title = "Filtros",
   triggerRef,
+  variant = "popover",
 }: FilterPanelProps) {
   const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
     useFilterDraft(isOpen, sections);
@@ -144,6 +158,7 @@ function FilterPanelDesktop({
   const [entered, setEntered] = React.useState(false);
   const [style, setStyle] = React.useState<React.CSSProperties>({});
   const contentRef = React.useRef<HTMLDivElement | null>(null);
+  const isDrawer = variant === "drawer";
 
   React.useEffect(() => { setMounted(true); return () => setMounted(false); }, []);
 
@@ -153,8 +168,10 @@ function FilterPanelDesktop({
     return () => cancelAnimationFrame(raf);
   }, [isOpen]);
 
+  // El drawer se fija al borde de la pantalla con clases Tailwind (sin
+  // anclaje al trigger), así que no necesita el cálculo de posición.
   const updatePosition = React.useCallback(() => {
-    if (!triggerRef.current) return;
+    if (isDrawer || !triggerRef.current) return;
     const rect = triggerRef.current.getBoundingClientRect();
     setStyle({
       position: "fixed",
@@ -162,10 +179,10 @@ function FilterPanelDesktop({
       top: rect.bottom + 8,
       left: rect.left,
     });
-  }, [triggerRef]);
+  }, [isDrawer, triggerRef]);
 
   React.useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isDrawer) return;
     updatePosition();
     window.addEventListener("scroll", updatePosition, true);
     window.addEventListener("resize", updatePosition);
@@ -173,7 +190,7 @@ function FilterPanelDesktop({
       window.removeEventListener("scroll", updatePosition, true);
       window.removeEventListener("resize", updatePosition);
     };
-  }, [isOpen, updatePosition]);
+  }, [isOpen, isDrawer, updatePosition]);
 
   React.useEffect(() => {
     if (!isOpen) return;
@@ -213,18 +230,27 @@ function FilterPanelDesktop({
 
   if (!mounted || !isOpen) return null;
 
-  return createPortal(
+  const panel = (
     <div
       ref={contentRef}
       role="dialog"
-      aria-modal="false"
+      aria-modal={isDrawer ? "true" : "false"}
       aria-label={title}
-      style={style}
+      style={isDrawer ? undefined : style}
       className={cn(
-        "hidden lg:flex flex-col w-80 max-h-[70vh]",
-        "rounded-2xl border border-border bg-surface-alt shadow-2xl",
-        "transition-all duration-200",
-        entered ? "opacity-100 scale-100" : "opacity-0 scale-95",
+        "hidden lg:flex flex-col",
+        isDrawer
+          ? cn(
+              "fixed top-0 right-0 bottom-0 z-[9999] w-[360px] max-w-[90vw]",
+              "rounded-l-2xl border-l border-border bg-surface-alt shadow-2xl",
+              "transition-transform duration-200",
+              entered ? "translate-x-0" : "translate-x-full",
+            )
+          : cn(
+              "w-80 max-h-[70vh] rounded-2xl border border-border bg-surface-alt shadow-2xl",
+              "transition-all duration-200",
+              entered ? "opacity-100 scale-100" : "opacity-0 scale-95",
+            ),
       )}
     >
       {/* Header */}
@@ -280,7 +306,23 @@ function FilterPanelDesktop({
           {resultCount !== undefined ? `Ver ${resultCount} ${resultLabel}` : "Aplicar filtros"}
         </button>
       </div>
-    </div>,
+    </div>
+  );
+
+  if (!isDrawer) return createPortal(panel, document.body);
+
+  return createPortal(
+    <>
+      <div
+        aria-hidden="true"
+        onClick={onClose}
+        className={cn(
+          "hidden lg:block fixed inset-0 z-[9998] bg-origen-oscuro/40 transition-opacity duration-200",
+          entered ? "opacity-100" : "opacity-0",
+        )}
+      />
+      {panel}
+    </>,
     document.body,
   );
 }
@@ -406,7 +448,7 @@ export function FilterPanel(props: FilterPanelProps) {
     );
   }
 
-  return <FilterPanelDesktop {...props} />;
+  return <FilterPanelDesktop {...props} variant={props.variant ?? "popover"} />;
 }
 
 FilterPanel.displayName = "FilterPanel";
