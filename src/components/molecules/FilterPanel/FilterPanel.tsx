@@ -135,7 +135,10 @@ function useFilterDraft(isOpen: boolean, sections: FilterSection[]) {
       return { ...p, [sectionId]: { type: "toggles", values: { ...c?.values, [optionId]: v } } };
     });
 
-  return { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle };
+  const setText = (id: string, v: string) =>
+    setDraft((p) => ({ ...p, [id]: { type: "text", value: v } }));
+
+  return { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText };
 }
 
 // ─── FilterPanelDesktop — Popover (≥1024px) ───────────────────────────────────
@@ -151,7 +154,7 @@ function FilterPanelDesktop({
   triggerRef,
   variant = "popover",
 }: FilterPanelProps) {
-  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
+  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText } =
     useFilterDraft(isOpen, sections);
 
   const [mounted, setMounted] = React.useState(false);
@@ -280,6 +283,7 @@ function FilterPanelDesktop({
           onSetNumMin={setNumMin}
           onSetNumMax={setNumMax}
           onSetToggle={setToggle}
+          onSetText={setText}
         />
       </div>
 
@@ -347,7 +351,7 @@ function FilterPanelMobileWrapper({
   resultLabel = "resultados",
   title = "Filtros",
 }: Omit<FilterPanelProps, "triggerRef">) {
-  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
+  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText } =
     useFilterDraft(isOpen, sections);
 
   // Notificar a integraciones del proyecto consumidor (p. ej. BottomTabBar
@@ -405,6 +409,7 @@ function FilterPanelMobileWrapper({
         onSetNumMin={setNumMin}
         onSetNumMax={setNumMax}
         onSetToggle={setToggle}
+        onSetText={setText}
       />
     </FilterPanelMobile>
   );

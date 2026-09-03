@@ -62,6 +62,16 @@ export type FilterSection =
       id: string;
       title: string;
       options: ToggleOption[];
+    }
+  | {
+      type: "text";
+      id: string;
+      title: string;
+      value: string;
+      onChange: (value: string) => void;
+      placeholder?: string;
+      /** Restringe la entrada a dígitos (p. ej. filtrar por un ID numérico). */
+      numeric?: boolean;
     };
 
 // ─── Draft state ──────────────────────────────────────────────────────────────
@@ -70,7 +80,8 @@ export type DraftValue =
   | { type: "chips"; value: string }
   | { type: "daterange"; from: string; to: string }
   | { type: "numberrange"; min: string; max: string }
-  | { type: "toggles"; values: Record<string, boolean> };
+  | { type: "toggles"; values: Record<string, boolean> }
+  | { type: "text"; value: string };
 
 export type Draft = Record<string, DraftValue>;
 
@@ -82,6 +93,7 @@ export function buildDraft(sections: FilterSection[]): Draft {
     if (s.type === "numberrange") d[s.id] = { type: "numberrange", min: s.valueMin, max: s.valueMax };
     if (s.type === "toggles")
       d[s.id] = { type: "toggles", values: Object.fromEntries(s.options.map((o) => [o.id, o.value])) };
+    if (s.type === "text") d[s.id] = { type: "text", value: s.value };
   });
   return d;
 }
@@ -94,6 +106,7 @@ export function clearDraft(sections: FilterSection[]): Draft {
     if (s.type === "numberrange") d[s.id] = { type: "numberrange", min: "", max: "" };
     if (s.type === "toggles")
       d[s.id] = { type: "toggles", values: Object.fromEntries(s.options.map((o) => [o.id, false])) };
+    if (s.type === "text") d[s.id] = { type: "text", value: "" };
   });
   return d;
 }
@@ -114,6 +127,7 @@ export function applyDraft(sections: FilterSection[], draft: Draft): void {
     if (s.type === "toggles" && d.type === "toggles") {
       s.options.forEach((opt) => opt.onChange(d.values[opt.id] ?? false));
     }
+    if (s.type === "text" && d.type === "text") s.onChange(d.value);
   });
 }
 
@@ -123,6 +137,7 @@ export function isDraftActive(draft: Draft): boolean {
     if (d.type === "daterange") return Boolean(d.from || d.to);
     if (d.type === "numberrange") return Boolean(d.min || d.max);
     if (d.type === "toggles") return Object.values(d.values).some(Boolean);
+    if (d.type === "text") return Boolean(d.value);
     return false;
   });
 }
@@ -325,6 +340,38 @@ export function TogglesSection({
   );
 }
 
+// ─── TextSection ──────────────────────────────────────────────────────────────
+
+export function TextSection({
+  section,
+  value,
+  onChange,
+}: {
+  section: FilterSection & { type: "text" };
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div>
+      <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wide mb-3">{section.title}</p>
+      <input
+        type="text"
+        inputMode={section.numeric ? "numeric" : "text"}
+        value={value}
+        placeholder={section.placeholder}
+        onChange={(e) => {
+          const v = section.numeric ? e.target.value.replace(/[^0-9]/g, "") : e.target.value;
+          onChange(v);
+        }}
+        className={cn(
+          "w-full h-12 px-3 text-sm font-medium text-origen-bosque border border-border-subtle bg-surface rounded-xl",
+          "focus:outline-none focus:ring-2 focus:ring-origen-pradera/25 focus:border-origen-pradera transition-colors",
+        )}
+      />
+    </div>
+  );
+}
+
 // ─── SectionList — renderiza todas las secciones de un draft ─────────────────
 
 export function SectionList({
@@ -336,6 +383,7 @@ export function SectionList({
   onSetNumMin,
   onSetNumMax,
   onSetToggle,
+  onSetText,
 }: {
   sections: FilterSection[];
   draft: Draft;
@@ -345,6 +393,7 @@ export function SectionList({
   onSetNumMin: (id: string, v: string) => void;
   onSetNumMax: (id: string, v: string) => void;
   onSetToggle: (sectionId: string, optId: string, v: boolean) => void;
+  onSetText: (id: string, v: string) => void;
 }) {
   return (
     <div className="flex flex-col gap-6">
@@ -395,6 +444,16 @@ export function SectionList({
               section={section}
               values={dt}
               onToggle={(optId, v) => onSetToggle(section.id, optId, v)}
+            />
+          );
+        }
+        if (section.type === "text") {
+          return (
+            <TextSection
+              key={section.id}
+              section={section}
+              value={(d?.type === "text" ? d.value : "") ?? ""}
+              onChange={(v) => onSetText(section.id, v)}
             />
           );
         }

@@ -114,7 +114,10 @@ function useFilterDraft(isOpen: boolean, sections: FilterSection[]) {
       return { ...p, [sectionId]: { type: "toggles", values: { ...c?.values, [optionId]: v } } };
     });
 
-  return { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle };
+  const setText = (id: string, v: string) =>
+    setDraft((p) => ({ ...p, [id]: { type: "text", value: v } }));
+
+  return { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText };
 }
 
 // ─── Componente principal ─────────────────────────────────────────────────────
@@ -130,7 +133,7 @@ export function FilterSheet({
   children,
   hasExternalActiveFilters = false,
 }: FilterSheetProps) {
-  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
+  const { draft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText } =
     useFilterDraft(isOpen, sections);
 
   // Notificar a integraciones del proyecto consumidor (p. ej. BottomTabBar
@@ -191,6 +194,7 @@ export function FilterSheet({
         onSetNumMin={setNumMin}
         onSetNumMax={setNumMax}
         onSetToggle={setToggle}
+        onSetText={setText}
       />
     </FilterPanel>
   );

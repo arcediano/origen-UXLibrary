@@ -4,11 +4,12 @@
  */
 
 import { renderHook, waitFor } from '@testing-library/react';
-import { useReducedMotion } from '../useReducedMotion';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { useReducedMotion } from './useReducedMotion';
 
 describe('useReducedMotion', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('returns false by default (SSR safe)', () => {
@@ -17,20 +18,20 @@ describe('useReducedMotion', () => {
   });
 
   test('respects system preference for reduced motion', () => {
-    const mockMatchMedia = jest.fn().mockImplementation((query: string) => {
+    const mockMatchMedia = vi.fn().mockImplementation((query: string) => {
       if (query === '(prefers-reduced-motion: reduce)') {
         return {
           matches: true,
           media: query,
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
         };
       }
       return {
         matches: false,
         media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     });
 
@@ -42,20 +43,20 @@ describe('useReducedMotion', () => {
   });
 
   test('respects system preference when motion is allowed', () => {
-    const mockMatchMedia = jest.fn().mockImplementation((query: string) => {
+    const mockMatchMedia = vi.fn().mockImplementation((query: string) => {
       if (query === '(prefers-reduced-motion: reduce)') {
         return {
           matches: false,
           media: query,
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
         };
       }
       return {
         matches: false,
         media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     });
 
@@ -68,26 +69,26 @@ describe('useReducedMotion', () => {
 
   test('updates when media query preference changes', async () => {
     let preferReduced = false;
-    let changeListener: ((event: MediaQueryListEvent) => void) | null = null;
+    let changeListener: null | ((event: MediaQueryListEvent) => void) = null;
 
-    const mockMatchMedia = jest.fn().mockImplementation((query: string) => {
+    const mockMatchMedia = vi.fn().mockImplementation((query: string) => {
       if (query === '(prefers-reduced-motion: reduce)') {
         return {
           matches: preferReduced,
           media: query,
-          addEventListener: jest.fn((event: string, listener: (event: MediaQueryListEvent) => void) => {
+          addEventListener: vi.fn((event: string, listener: (event: MediaQueryListEvent) => void) => {
             if (event === 'change') {
               changeListener = listener;
             }
           }),
-          removeEventListener: jest.fn(),
+          removeEventListener: vi.fn(),
         };
       }
       return {
         matches: false,
         media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     });
 
@@ -99,9 +100,7 @@ describe('useReducedMotion', () => {
 
     // Simulate user enabling reduced motion via system settings
     preferReduced = true;
-    if (changeListener) {
-      changeListener({ matches: true } as MediaQueryListEvent);
-    }
+    changeListener?.({ matches: true } as MediaQueryListEvent);
 
     await waitFor(() => {
       expect(result.current).toBe(true);
@@ -109,22 +108,22 @@ describe('useReducedMotion', () => {
   });
 
   test('cleans up event listener on unmount', () => {
-    const removeEventListenerMock = jest.fn();
+    const removeEventListenerMock = vi.fn();
 
-    const mockMatchMedia = jest.fn().mockImplementation((query: string) => {
+    const mockMatchMedia = vi.fn().mockImplementation((query: string) => {
       if (query === '(prefers-reduced-motion: reduce)') {
         return {
           matches: false,
           media: query,
-          addEventListener: jest.fn(),
+          addEventListener: vi.fn(),
           removeEventListener: removeEventListenerMock,
         };
       }
       return {
         matches: false,
         media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     });
 
@@ -138,7 +137,7 @@ describe('useReducedMotion', () => {
   });
 
   test('handles matchMedia errors gracefully', () => {
-    const mockMatchMedia = jest.fn().mockImplementation(() => {
+    const mockMatchMedia = vi.fn().mockImplementation(() => {
       throw new Error('matchMedia not supported');
     });
 
@@ -152,26 +151,26 @@ describe('useReducedMotion', () => {
 
   test('works with DevTools accessibility pane changes', async () => {
     let preferReduced = false;
-    let changeListener: ((event: MediaQueryListEvent) => void) | null = null;
+    let changeListener: null | ((event: MediaQueryListEvent) => void) = null;
 
-    const mockMatchMedia = jest.fn().mockImplementation((query: string) => {
+    const mockMatchMedia = vi.fn().mockImplementation((query: string) => {
       if (query === '(prefers-reduced-motion: reduce)') {
         return {
           matches: preferReduced,
           media: query,
-          addEventListener: jest.fn((event: string, listener: (event: MediaQueryListEvent) => void) => {
+          addEventListener: vi.fn((event: string, listener: (event: MediaQueryListEvent) => void) => {
             if (event === 'change') {
               changeListener = listener;
             }
           }),
-          removeEventListener: jest.fn(),
+          removeEventListener: vi.fn(),
         };
       }
       return {
         matches: false,
         media: query,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     });
 
@@ -182,9 +181,7 @@ describe('useReducedMotion', () => {
 
     // Toggle via DevTools
     preferReduced = true;
-    if (changeListener) {
-      changeListener({ matches: true } as MediaQueryListEvent);
-    }
+    changeListener?.({ matches: true } as MediaQueryListEvent);
 
     await waitFor(() => {
       expect(result.current).toBe(true);
@@ -192,9 +189,7 @@ describe('useReducedMotion', () => {
 
     // Toggle back
     preferReduced = false;
-    if (changeListener) {
-      changeListener({ matches: false } as MediaQueryListEvent);
-    }
+    changeListener?.({ matches: false } as MediaQueryListEvent);
 
     await waitFor(() => {
       expect(result.current).toBe(false);
