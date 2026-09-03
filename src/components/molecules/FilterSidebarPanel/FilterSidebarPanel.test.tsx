@@ -107,6 +107,27 @@ describe("FilterSidebarPanel", () => {
     expect(screen.getByText("Limpiar filtros")).toBeDisabled();
   });
 
+  it("renderiza children (p. ej. un campo de búsqueda) antes de las secciones tipadas", () => {
+    render(
+      <FilterSidebarPanel sections={makeChipsSections("", vi.fn())} onClearAll={vi.fn()}>
+        <input aria-label="Buscar" placeholder="Buscar productos..." />
+      </FilterSidebarPanel>,
+    );
+    expect(screen.getByPlaceholderText("Buscar productos...")).toBeInTheDocument();
+    expect(screen.getByText("Categoría")).toBeInTheDocument();
+  });
+
+  it('hasExternalActiveFilters habilita "Limpiar filtros" aunque el draft esté vacío', () => {
+    render(
+      <FilterSidebarPanel
+        sections={makeChipsSections("", vi.fn())}
+        onClearAll={vi.fn()}
+        hasExternalActiveFilters
+      />,
+    );
+    expect(screen.getByText("Limpiar filtros")).not.toBeDisabled();
+  });
+
   it("renderiza correctamente con secciones numberrange y toggles, ambas siempre visibles", () => {
     const sections: FilterSection[] = [
       {
