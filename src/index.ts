@@ -230,6 +230,9 @@ export type {
   RatingFilterOption,
 } from "./components/molecules/FilterSidebar";
 
+export { FilterSidebarPanel } from "./components/molecules/FilterSidebarPanel";
+export type { FilterSidebarPanelProps } from "./components/molecules/FilterSidebarPanel";
+
 export { FilterToolbar } from "./components/molecules/FilterToolbar";
 export type { FilterToolbarProps } from "./components/molecules/FilterToolbar";
 
