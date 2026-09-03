@@ -18,6 +18,7 @@ import {
   XCircle,
   Package,
   FileText,
+  Calendar,
 } from "lucide-react";
 import { cn } from "../../../lib/utils";
 
@@ -91,7 +92,7 @@ export function Badge({
 // ─── StatusBadge ─────────────────────────────────────────────────────────────
 
 export type StatusType =
-  | "active" | "inactive" | "out_of_stock" | "draft" | "pending_approval"
+  | "active" | "inactive" | "out_of_stock" | "draft" | "pending_approval" | "scheduled"
   | "pending" | "processing" | "shipped" | "delivered" | "cancelled"
   | "confirmed" | "returned" | "refunded"
   | "review_pending" | "review_approved" | "review_rejected" | "review_flagged"
@@ -110,6 +111,7 @@ const STATUS_MAP: Record<StatusType, { variant: BadgeVariant; label: string; ico
   out_of_stock:        { variant: "danger",  label: "Sin stock",               icon: <AlertCircle className="w-3 h-3" /> },
   draft:               { variant: "neutral", label: "Borrador",                icon: <FileText    className="w-3 h-3" /> },
   pending_approval:    { variant: "warning", label: "Pendiente aprobación",    icon: <Clock       className="w-3 h-3" /> },
+  scheduled:           { variant: "info",    label: "Programado",              icon: <Calendar    className="w-3 h-3" /> },
   // Pedido
   pending:             { variant: "warning", label: "Pendiente",               icon: <Clock       className="w-3 h-3" /> },
   processing:          { variant: "info",    label: "Procesando",              icon: <Package     className="w-3 h-3" /> },
