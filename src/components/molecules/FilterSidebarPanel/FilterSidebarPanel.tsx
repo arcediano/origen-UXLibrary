@@ -42,8 +42,9 @@
  *
  * @example
  * ```tsx
- * <div className="hidden lg:grid lg:grid-cols-[280px_1fr] lg:gap-6 lg:items-start">
+ * <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-6 lg:items-start">
  *   <FilterSidebarPanel
+ *     className="hidden lg:flex lg:sticky lg:top-24"
  *     sections={[
  *       { type: 'daterange', id: 'range', title: 'Fecha', valueFrom, valueTo, onChangeFrom, onChangeTo },
  *       { type: 'chips', id: 'status', title: 'Estado', options, value, onChange },
@@ -51,7 +52,9 @@
  *     onClearAll={onClearFilters}
  *     resultCount={total}
  *     resultLabel="pedidos"
- *   />
+ *   >
+ *     <SearchInput value={search} onChange={setSearch} placeholder="Buscar..." />
+ *   </FilterSidebarPanel>
  *   <main>{children}</main>
  * </div>
  * ```
@@ -60,6 +63,7 @@
 "use client";
 
 import * as React from "react";
+import type { ReactNode } from "react";
 import { SlidersHorizontal } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import {
@@ -88,6 +92,16 @@ export interface FilterSidebarPanelProps {
   resultLabel?: string;
   /** Título de la cabecera. Por defecto "Filtros". */
   title?: string;
+  /**
+   * Contenido adicional renderizado entre la cabecera y las `sections`
+   * tipadas — por ejemplo, un campo de búsqueda, un `Select searchable`
+   * de alta cardinalidad, u otro control que no encaja en los 4 tipos de
+   * `FilterSection`. Mismo slot que `FilterSidebar.children`. A diferencia
+   * de las `sections`, lo que se ponga aquí queda fuera del draft: cada
+   * control gestiona su propio estado y aplicación (p. ej. una búsqueda con
+   * debounce que ya aplica sola), no espera al botón "Aplicar filtros".
+   */
+  children?: ReactNode;
   /**
    * Indica si hay algún filtro activo fuera de `sections` (p. ej. un `Select
    * searchable` de alta cardinalidad renderizado aparte por el consumidor).
@@ -168,6 +182,7 @@ export function FilterSidebarPanel({
   resultCount,
   resultLabel = "resultados",
   title = "Filtros",
+  children,
   hasExternalActiveFilters = false,
   className,
 }: FilterSidebarPanelProps) {
@@ -206,19 +221,40 @@ export function FilterSidebarPanel({
         )}
       </div>
 
-      {/* Secciones — mismo motor que FilterPanel, en modo draft */}
-      <div className="px-4">
-        <SectionList
-          sections={sections}
-          draft={draft}
-          onSetChips={setChips}
-          onSetDateFrom={setDateFrom}
-          onSetDateTo={setDateTo}
-          onSetNumMin={setNumMin}
-          onSetNumMax={setNumMax}
-          onSetToggle={setToggle}
-        />
-      </div>
+      {/* Contenido adicional (p. ej. búsqueda, Select searchable) — va antes
+          de las secciones tipadas, igual que en FilterSidebar. */}
+      {children && (
+        <div
+          className={cn(
+            "flex flex-col gap-4 px-4 pt-4",
+            sections.length === 0 && "pb-4",
+          )}
+        >
+          {children}
+        </div>
+      )}
+
+      {/* Secciones — mismo motor que FilterPanel, en modo draft. Solo se
+          renderiza si hay alguna (evita una caja vacía con padding cuando
+          `sections` está vacío y el consumidor filtra solo por `children`).
+          py-4 (no solo px-4) da separación consistente respecto a la
+          cabecera/footer y respecto al bloque de `children`, si lo hay --
+          mismo convenio que usa FilterPanelDesktop al envolver este mismo
+          SectionList. */}
+      {sections.length > 0 && (
+        <div className="px-4 py-4">
+          <SectionList
+            sections={sections}
+            draft={draft}
+            onSetChips={setChips}
+            onSetDateFrom={setDateFrom}
+            onSetDateTo={setDateTo}
+            onSetNumMin={setNumMin}
+            onSetNumMax={setNumMax}
+            onSetToggle={setToggle}
+          />
+        </div>
+      )}
 
       {/* Footer — Limpiar filtros / Aplicar, igual que FilterPanel en escritorio */}
       <div className="flex gap-2 px-4 py-3 border-t border-border-subtle flex-shrink-0">
