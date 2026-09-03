@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.25.0
+
+### Minor Changes
+
+- `FilterPanel`: nueva prop `variant` (`"popover" | "drawer"`, por defecto `"popover"` — sin cambios para consumidores existentes). Con `variant="drawer"`, la presentación en escritorio (`≥lg`) pasa de un popover pequeño anclado bajo el botón "Filtros" a un panel deslizante de altura completa desde el borde derecho, con scrim de fondo — mismas secciones tipadas, mismo estado draft y mismo footer "Limpiar/Aplicar" que ya tenía el popover. El bottom sheet de móvil/tablet no cambia. Pensado para listados de gestión donde el consumidor sustituye una barra de filtros siempre visible en escritorio por un botón "Filtros" bajo demanda también ahí — decisión de diseño validada en vivo por el humano tras revertir un intento anterior de sidebar fijo de 280px.
+
 ## 0.24.1
 
 ### Patch Changes
