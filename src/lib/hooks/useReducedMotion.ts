@@ -49,19 +49,26 @@ export function useReducedMotion(): boolean {
     // Set initial value on mount (client-side only)
     setPrefersReduced(getReducedMotionPreference());
 
-    // Listen for changes (system settings, DevTools accessibility pane)
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Listen for changes (system settings, DevTools accessibility pane).
+    // matchMedia puede no existir o lanzar en algunos entornos — mismo
+    // criterio de fallback que getReducedMotionPreference() de arriba, para
+    // no dejar el efecto sin limpiar si falla antes de suscribirse.
+    try {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    const handleChange = (event: MediaQueryListEvent) => {
-      setPrefersReduced(event.matches);
-    };
+      const handleChange = (event: MediaQueryListEvent) => {
+        setPrefersReduced(event.matches);
+      };
 
-    // Modern browsers: use addEventListener
-    mediaQuery.addEventListener('change', handleChange);
+      // Modern browsers: use addEventListener
+      mediaQuery.addEventListener('change', handleChange);
 
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
+      return () => {
+        mediaQuery.removeEventListener('change', handleChange);
+      };
+    } catch {
+      return undefined;
+    }
   }, []);
 
   return prefersReduced;

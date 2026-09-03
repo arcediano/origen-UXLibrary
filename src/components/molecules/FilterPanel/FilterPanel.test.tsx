@@ -6,12 +6,33 @@
 
 import * as React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 import { FilterPanel, type FilterSection } from "./FilterPanel";
 
 // Stub createPortal para que renderice inline en tests
-jest.mock("react-dom", () => {
-  const real = jest.requireActual("react-dom");
+vi.mock("react-dom", async () => {
+  const real = await vi.importActual<typeof import("react-dom")>("react-dom");
   return { ...real, createPortal: (node: React.ReactNode) => node };
+});
+
+// FilterPanel usa useIsMobile (window.matchMedia) para elegir entre el
+// popover desktop y el bottom sheet móvil — sin este stub, jsdom no
+// implementa matchMedia y el hook lanza. matches: false => rama desktop,
+// que es la que cubren estos tests (mismo patrón que Dialog.test.tsx).
+beforeAll(() => {
+  Object.defineProperty(window, "matchMedia", {
+    writable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
 });
 
 // Helper: sections de chips mínimas
@@ -36,28 +57,28 @@ describe("FilterPanel", () => {
   const triggerRef = React.createRef<HTMLButtonElement>();
 
   it("no renderiza el popover desktop cuando isOpen=false", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <FilterPanel
         isOpen={false}
-        onClose={jest.fn()}
+        onClose={vi.fn()}
         triggerRef={triggerRef}
         sections={makeChipsSections("", onChange)}
-        onClearAll={jest.fn()}
+        onClearAll={vi.fn()}
       />,
     );
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
   it("muestra las secciones de chips en el popover desktop cuando isOpen=true", async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(
       <FilterPanel
         isOpen={true}
-        onClose={jest.fn()}
+        onClose={vi.fn()}
         triggerRef={triggerRef}
         sections={makeChipsSections("", onChange)}
-        onClearAll={jest.fn()}
+        onClearAll={vi.fn()}
         resultCount={5}
         resultLabel="productos"
       />,
@@ -72,15 +93,15 @@ describe("FilterPanel", () => {
   });
 
   it("el botón Aplicar llama a onChange de cada sección con el valor del draft", async () => {
-    const onChange = jest.fn();
-    const onClose = jest.fn();
+    const onChange = vi.fn();
+    const onClose = vi.fn();
     render(
       <FilterPanel
         isOpen={true}
         onClose={onClose}
         triggerRef={triggerRef}
         sections={makeChipsSections("", onChange)}
-        onClearAll={jest.fn()}
+        onClearAll={vi.fn()}
         resultCount={3}
         resultLabel="productos"
       />,
@@ -99,15 +120,15 @@ describe("FilterPanel", () => {
   });
 
   it("el botón Limpiar filtros llama a onClearAll y onClose", async () => {
-    const onClearAll = jest.fn();
-    const onClose = jest.fn();
+    const onClearAll = vi.fn();
+    const onClose = vi.fn();
     // Sección con valor activo para que el botón no esté disabled
     render(
       <FilterPanel
         isOpen={true}
         onClose={onClose}
         triggerRef={triggerRef}
-        sections={makeChipsSections("active", jest.fn())}
+        sections={makeChipsSections("active", vi.fn())}
         onClearAll={onClearAll}
       />,
     );
@@ -120,15 +141,15 @@ describe("FilterPanel", () => {
   });
 
   it("el botón X del header cierra el panel sin aplicar cambios", async () => {
-    const onChange = jest.fn();
-    const onClose = jest.fn();
+    const onChange = vi.fn();
+    const onClose = vi.fn();
     render(
       <FilterPanel
         isOpen={true}
         onClose={onClose}
         triggerRef={triggerRef}
         sections={makeChipsSections("", onChange)}
-        onClearAll={jest.fn()}
+        onClearAll={vi.fn()}
       />,
     );
 
@@ -145,13 +166,75 @@ describe("FilterPanel", () => {
     render(
       <FilterPanel
         isOpen={true}
-        onClose={jest.fn()}
+        onClose={vi.fn()}
         triggerRef={triggerRef}
-        sections={makeChipsSections("", jest.fn())}
-        onClearAll={jest.fn()}
+        sections={makeChipsSections("", vi.fn())}
+        onClearAll={vi.fn()}
       />,
     );
     expect(screen.queryByText(/Ver \d+/)).toBeNull();
     expect(screen.getAllByText("Aplicar filtros").length).toBeGreaterThan(0);
+  });
+
+  it("sección 'text': escribe en el draft y aplica el valor solo al pulsar Aplicar", async () => {
+    const onChange = vi.fn();
+    const onClose = vi.fn();
+    const sections: FilterSection[] = [
+      {
+        type: "text",
+        id: "sellerId",
+        title: "ID vendedor",
+        value: "",
+        onChange,
+        placeholder: "ID vendedor",
+      },
+    ];
+    render(
+      <FilterPanel
+        isOpen={true}
+        onClose={onClose}
+        triggerRef={triggerRef}
+        sections={sections}
+        onClearAll={vi.fn()}
+        resultCount={2}
+        resultLabel="pedidos"
+      />,
+    );
+
+    const input = screen.getAllByPlaceholderText("ID vendedor")[0];
+    fireEvent.change(input, { target: { value: "seller-42" } });
+    expect(onChange).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("Ver 2 pedidos"));
+    expect(onChange).toHaveBeenCalledWith("seller-42");
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it("sección 'text' con numeric=true descarta caracteres no numéricos", async () => {
+    const onChange = vi.fn();
+    const sections: FilterSection[] = [
+      {
+        type: "text",
+        id: "userId",
+        title: "ID comprador",
+        value: "",
+        onChange,
+        placeholder: "ID comprador",
+        numeric: true,
+      },
+    ];
+    render(
+      <FilterPanel
+        isOpen={true}
+        onClose={vi.fn()}
+        triggerRef={triggerRef}
+        sections={sections}
+        onClearAll={vi.fn()}
+      />,
+    );
+
+    const input = screen.getAllByPlaceholderText("ID comprador")[0] as HTMLInputElement;
+    fireEvent.change(input, { target: { value: "12ab34" } });
+    expect(input.value).toBe("1234");
   });
 });

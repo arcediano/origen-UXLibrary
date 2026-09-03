@@ -4,12 +4,13 @@
  */
 
 import { renderHook, waitFor } from '@testing-library/react';
-import { useSafeArea } from '../useSafeArea';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { useSafeArea } from './useSafeArea';
 
 describe('useSafeArea', () => {
   beforeEach(() => {
     // Reset computed styles
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('returns zeros on SSR (server-side)', () => {
@@ -24,7 +25,7 @@ describe('useSafeArea', () => {
 
   test('parses CSS custom properties on client', () => {
     // Mock getComputedStyle
-    const mockGetComputedStyle = jest.fn(() => ({
+    const mockGetComputedStyle = vi.fn(() => ({
       getPropertyValue: (prop: string) => {
         const values: Record<string, string> = {
           '--safe-area-inset-top': '44px',
@@ -47,7 +48,7 @@ describe('useSafeArea', () => {
   });
 
   test('handles non-notched devices (all zeros)', () => {
-    const mockGetComputedStyle = jest.fn(() => ({
+    const mockGetComputedStyle = vi.fn(() => ({
       getPropertyValue: () => '0px',
     }));
 
@@ -64,7 +65,7 @@ describe('useSafeArea', () => {
   });
 
   test('handles malformed values gracefully', () => {
-    const mockGetComputedStyle = jest.fn(() => ({
+    const mockGetComputedStyle = vi.fn(() => ({
       getPropertyValue: (prop: string) => {
         if (prop === '--safe-area-inset-top') return 'invalid';
         if (prop === '--safe-area-inset-bottom') return '';
@@ -88,13 +89,13 @@ describe('useSafeArea', () => {
       '--safe-area-inset-left': '0px',
     };
 
-    const mockGetComputedStyle = jest.fn(() => ({
+    const mockGetComputedStyle = vi.fn(() => ({
       getPropertyValue: (prop: string) => currentInsets[prop as keyof typeof currentInsets] || '0px',
     }));
 
     window.getComputedStyle = mockGetComputedStyle as any;
 
-    const { result, rerender } = renderHook(() => useSafeArea());
+    const { result } = renderHook(() => useSafeArea());
 
     expect(result.current.top).toBe(44);
     expect(result.current.bottom).toBe(34);
@@ -116,7 +117,7 @@ describe('useSafeArea', () => {
   });
 
   test('cleans up event listeners on unmount', () => {
-    const removeEventListenerSpy = jest.spyOn(window, 'removeEventListener');
+    const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener');
 
     const { unmount } = renderHook(() => useSafeArea());
 
@@ -127,7 +128,7 @@ describe('useSafeArea', () => {
   });
 
   test('handles getComputedStyle errors gracefully', () => {
-    const mockGetComputedStyle = jest.fn(() => {
+    const mockGetComputedStyle = vi.fn(() => {
       throw new Error('CSS not available');
     });
 

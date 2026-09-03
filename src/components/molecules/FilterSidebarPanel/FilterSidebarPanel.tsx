@@ -164,7 +164,10 @@ function useSidebarDraft(sections: FilterSection[]) {
       return { ...p, [sectionId]: { type: "toggles", values: { ...c?.values, [optionId]: v } } };
     });
 
-  return { draft, setDraft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle };
+  const setText = (id: string, v: string) =>
+    setDraft((p) => ({ ...p, [id]: { type: "text", value: v } }));
+
+  return { draft, setDraft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText };
 }
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -186,7 +189,7 @@ export function FilterSidebarPanel({
   hasExternalActiveFilters = false,
   className,
 }: FilterSidebarPanelProps) {
-  const { draft, setDraft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle } =
+  const { draft, setDraft, setChips, setDateFrom, setDateTo, setNumMin, setNumMax, setToggle, setText } =
     useSidebarDraft(sections);
 
   const hasActive = isDraftActive(draft) || hasExternalActiveFilters;
@@ -252,6 +255,7 @@ export function FilterSidebarPanel({
             onSetNumMin={setNumMin}
             onSetNumMax={setNumMax}
             onSetToggle={setToggle}
+            onSetText={setText}
           />
         </div>
       )}
