@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.25.1
+
+### Patch Changes
+
+- `Dialog`: en móvil, el contenido que no cabe en `max-h-[90dvh]` ahora se puede desplazar en vez de recortarse en silencio sin forma de llegar a él (bug real: casillas de un código de verificación cortadas al fondo de la pantalla, botón de confirmar inalcanzable). El panel exterior ya no se desplaza — solo recorta y mantiene fijos el tirador y el botón de cerrar; es un wrapper interior el que se desplaza, con `DialogHeader`/`DialogFooter` fijos (`sticky`) arriba/abajo de ese scroll para que el título y las acciones sigan siempre visibles. Sin cambios de comportamiento en escritorio.
+
 ## 0.25.0
 
 ### Minor Changes

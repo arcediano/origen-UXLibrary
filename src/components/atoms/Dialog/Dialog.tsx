@@ -222,7 +222,13 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             "transition-transform duration-300 ease-out",
             isMobile
               ? cn(
-                  "fixed bottom-0 inset-x-0 max-h-[90dvh] rounded-t-3xl",
+                  // El propio panel NO se desplaza -- solo recorta (overflow-hidden) y
+                  // deja fijos el tirador y el botón de cerrar. El contenido que no cabe
+                  // en max-h se desplaza dentro del wrapper de más abajo, no aquí, para
+                  // que el botón de cerrar no se vaya con el scroll (ver bug real: casillas
+                  // del código 2FA cortadas al fondo de la pantalla, sin forma de llegar
+                  // a ellas, en el flujo de verificación en dos pasos).
+                  "fixed bottom-0 inset-x-0 max-h-[90dvh] overflow-hidden rounded-t-3xl flex flex-col",
                   entered ? "translate-y-0" : "translate-y-full"
                 )
               : cn("max-w-lg rounded-2xl", entered ? "translate-y-0" : "translate-y-4"),
@@ -230,7 +236,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           )}
         >
           {isMobile && (
-            <div className="mx-auto mb-2 mt-3 h-1 w-10 rounded-full bg-border-subtle" aria-hidden />
+            <div className="mx-auto mb-2 mt-3 h-1 w-10 rounded-full bg-border-subtle flex-shrink-0" aria-hidden />
           )}
 
           {showCloseButton && (
@@ -244,7 +250,11 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             </button>
           )}
 
-          {children}
+          {isMobile ? (
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
+          ) : (
+            children
+          )}
         </div>
       </div>,
       document.body
@@ -254,7 +264,14 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
 
 const DialogHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("border-b border-border-subtle px-6 pb-3 pt-5", className)} {...props} />
+    <div
+      ref={ref}
+      className={cn(
+        "sticky top-0 z-10 border-b border-border-subtle bg-surface-alt px-6 pb-3 pt-5",
+        className
+      )}
+      {...props}
+    />
   )
 );
 
@@ -278,7 +295,10 @@ const DialogFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex items-center justify-end gap-3 border-t border-border-subtle px-6 py-4", className)}
+      className={cn(
+        "sticky bottom-0 z-10 flex items-center justify-end gap-3 border-t border-border-subtle bg-surface-alt px-6 py-4",
+        className
+      )}
       {...props}
     />
   )
