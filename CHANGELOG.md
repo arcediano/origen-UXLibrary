@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.26.0
+
+### Minor Changes
+
+- `FilterToolbar`: nueva prop `compact` (por defecto `false` — sin cambios para consumidores existentes). Con `compact`, la búsqueda nunca ocupa una fila propia en móvil (siempre `flex-1`, en vez de bajar a una segunda fila en `<sm`) y el botón "Filtros" se muestra solo con icono en `<sm` (el texto reaparece en `sm:` en adelante), con el badge de contador como un círculo superpuesto en la esquina. Pensado para toolbars con más de un botón junto a "Filtros" (p. ej. un botón de "Ordenar" propio vía `actions`) que si no, no caben en una sola línea en el móvil más estrecho.
+
 ## 0.25.1
 
 ### Patch Changes

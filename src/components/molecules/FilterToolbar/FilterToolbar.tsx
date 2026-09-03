@@ -81,6 +81,18 @@ export interface FilterToolbarProps {
    * propio contenido incluya clases `hidden`/`lg:flex`.
    */
   actions?: React.ReactNode;
+  /**
+   * Modo compacto — pensado para toolbars con más de un botón junto al de
+   * "Filtros" (p. ej. un botón de "Ordenar" propio vía `actions`) que si no,
+   * no caben en una sola línea en móvil:
+   * - La búsqueda nunca ocupa una fila propia (`flex-1` en todos los
+   *   breakpoints, en vez de bajar a una segunda fila en `<sm`).
+   * - El botón "Filtros" se muestra solo con icono en `<sm` (el texto
+   *   reaparece en `sm:` en adelante) y el badge de contador pasa a un
+   *   círculo superpuesto en la esquina en vez de inline.
+   * Por defecto `false` — sin cambios para los consumidores existentes.
+   */
+  compact?: boolean;
   className?: string;
 }
 
@@ -96,6 +108,7 @@ export function FilterToolbar({
   filtersLabel = "Filtros",
   filtersButtonRef,
   actions,
+  compact = false,
   className,
 }: FilterToolbarProps) {
   return (
@@ -107,7 +120,7 @@ export function FilterToolbar({
         debounceMs={searchDebounceMs}
         placeholder={searchPlaceholder}
         aria-label={searchAriaLabel ?? searchPlaceholder}
-        className="basis-full sm:flex-1 sm:basis-auto"
+        className={compact ? "flex-1 min-w-0" : "basis-full sm:flex-1 sm:basis-auto"}
         size="md"
       />
 
@@ -119,7 +132,8 @@ export function FilterToolbar({
           aria-expanded={false}
           aria-haspopup="dialog"
           className={cn(
-            "flex items-center gap-1.5 h-10 px-3.5 rounded-xl border text-sm font-medium transition-colors flex-shrink-0",
+            "relative flex items-center gap-1.5 h-10 rounded-xl border text-sm font-medium transition-colors flex-shrink-0",
+            compact ? "w-10 justify-center px-0 sm:w-auto sm:justify-start sm:px-3.5" : "px-3.5",
             activeFilterCount > 0
               ? "bg-origen-bosque border-origen-bosque text-white"
               : "bg-surface-alt border-border text-origen-bosque",
@@ -127,9 +141,16 @@ export function FilterToolbar({
           aria-label={activeFilterCount > 0 ? `Filtros (${activeFilterCount} activos)` : "Abrir filtros"}
         >
           <SlidersHorizontal className="w-4 h-4" />
-          <span>{filtersLabel}</span>
+          <span className={compact ? "hidden sm:inline" : undefined}>{filtersLabel}</span>
           {activeFilterCount > 0 && (
-            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/25 text-[10px] font-bold">
+            <span
+              className={cn(
+                "inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold",
+                compact
+                  ? "absolute -top-1.5 -right-1.5 bg-white text-origen-bosque shadow-sm ring-1 ring-origen-bosque/10 sm:static sm:shadow-none sm:ring-0"
+                  : "bg-white/25",
+              )}
+            >
               {activeFilterCount}
             </span>
           )}

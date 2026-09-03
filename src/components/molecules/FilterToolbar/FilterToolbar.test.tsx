@@ -31,7 +31,7 @@ describe("FilterToolbar", () => {
         activeFilterCount={3}
       />,
     );
-    const button = screen.getByLabelText("Abrir filtros");
+    const button = screen.getByLabelText("Filtros (3 activos)");
     expect(button).toBeInTheDocument();
     expect(screen.getByText("3")).toBeInTheDocument();
 
@@ -48,5 +48,42 @@ describe("FilterToolbar", () => {
       />,
     );
     expect(screen.getByLabelText("Vista cuadrícula")).toBeInTheDocument();
+  });
+
+  describe("compact", () => {
+    it("keeps the search input at flex-1 instead of wrapping to its own row", () => {
+      render(<FilterToolbar searchValue="" onSearchChange={vi.fn()} compact />);
+      const wrapper = screen.getByRole("searchbox").closest("div");
+      expect(wrapper?.className).toContain("flex-1");
+      expect(wrapper?.className).not.toContain("basis-full");
+    });
+
+    it("hides the filters button label behind sm: instead of always showing it", () => {
+      const onOpenFilters = vi.fn();
+      render(
+        <FilterToolbar
+          searchValue=""
+          onSearchChange={vi.fn()}
+          onOpenFilters={onOpenFilters}
+          filtersLabel="Filtros"
+          compact
+        />,
+      );
+      const label = screen.getByText("Filtros");
+      expect(label.className).toContain("hidden");
+      expect(label.className).toContain("sm:inline");
+    });
+
+    it("does not hide the filters button label when compact is off", () => {
+      render(
+        <FilterToolbar
+          searchValue=""
+          onSearchChange={vi.fn()}
+          onOpenFilters={vi.fn()}
+          filtersLabel="Filtros"
+        />,
+      );
+      expect(screen.getByText("Filtros").className).not.toContain("hidden");
+    });
   });
 });
