@@ -1,5 +1,17 @@
 # @arcediano/ux-library
 
+## 0.27.1
+
+### Patch Changes
+
+- Republicación de `0.27.0`: el paquete publicado en npm el 2026-09-04 se
+  empaquetó con un `dist/` obsoleto (de un build anterior a que se añadiera
+  el tipo de sección `"text"` a `FilterPanel`), por publicarse a mano sin
+  reconstruir primero — el código fuente en `main` (commit `f6eefe2`) sí lo
+  tenía, pero el `.d.ts`/JS publicados no. Sin cambios de código: mismo
+  commit, build limpio (`rm -rf dist && npm run build`), verificado que
+  `dist/index.d.ts` incluye el tipo `"text"` antes de publicar.
+
 ## 0.27.0
 
 ### Minor Changes
