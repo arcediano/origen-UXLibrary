@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Settings2 } from "lucide-react";
+import { Settings2, Package2 } from "lucide-react";
 import { Button } from "../../atoms/Button";
 import { PageHeader } from "./PageHeader";
 
@@ -54,6 +54,26 @@ export const ConBadgeYTooltip: Story = {
       description: {
         story:
           "Patrón visual usado en `/dashboard/account` de origen-dashboard: chip de badge (icono + texto) sobre el título y un icono de ayuda con tooltip nativo accesible.",
+      },
+    },
+  },
+};
+
+export const ConBadgeYNumeroDePedido: Story = {
+  name: "Con badge y nº de pedido largo (admin/dashboard orders/[id])",
+  args: {
+    title: "Pedido #ORG-2026-00022",
+    description: "Creado el 05 sept 2026, 10:32",
+    badgeIcon: Package2,
+    badgeText: "Entregado",
+    showBackButton: true,
+    onBack: () => {},
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Mismo patrón que `/admin/orders/[id]` y `/dashboard/orders/[id]`: el estado va en badgeIcon/badgeText (dentro de la columna del título) en vez de `actions`, para que un nº de pedido largo no se corte a mitad de guion en móvil por compartir fila con el badge.",
       },
     },
   },
