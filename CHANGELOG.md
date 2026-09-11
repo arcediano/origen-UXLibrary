@@ -1,5 +1,17 @@
 # @arcediano/ux-library
 
+## 0.27.2
+
+### Patch Changes
+
+- `Input`: nueva prop `containerClassName` para el `<div>` raíz (wrapper de
+  label + input + footer) — hasta ahora `className` solo llegaba al
+  `<input>` interno, así que un consumidor que esperaba controlar el layout
+  del `Input` como hijo `flex`/`grid` (p. ej. `className="flex-1"`) no
+  tenía ningún efecto real sobre el wrapper, que podía desbordar el
+  contenedor junto a un hermano `shrink-0`. Sin cambios de comportamiento
+  para los consumidores existentes.
+
 ## 0.27.1
 
 ### Patch Changes
