@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Mail, Search, Lock } from "lucide-react";
+import { Button } from "../Button";
 import { Input, InputGroup } from "./Input";
 
 const meta: Meta<typeof Input> = {
@@ -44,6 +45,24 @@ export const AllVariants: Story = {
       <Input label="Outline" variant="outline" placeholder="Outline" />
       <Input label="Filled" variant="filled" placeholder="Filled" />
       <Input label="Minimal" variant="minimal" placeholder="Minimal" />
+    </div>
+  ),
+};
+
+export const InFlexRowWithContainerClassName: Story = {
+  name: "En fila flex (containerClassName)",
+  render: () => (
+    <div className="w-80 space-y-3 p-4 bg-white">
+      <p className="text-micro text-text-subtle">
+        Reproduce el caso de `StepNutritional.tsx` (origen-dashboard): un `Input`
+        junto a un botón `shrink-0` dentro de un `flex`. Sin `containerClassName="flex-1"`
+        el wrapper raíz del `Input` (`w-full`) no cede espacio y el botón se desborda;
+        con la prop, el `Input` sí se encoge como hijo flex.
+      </p>
+      <div className="flex gap-2">
+        <Input containerClassName="flex-1" className="h-11 rounded-xl" placeholder="Nombre del ingrediente" />
+        <Button className="shrink-0">Añadir</Button>
+      </div>
     </div>
   ),
 };

@@ -26,4 +26,21 @@ describe("Input", () => {
     expect(onFocus).toHaveBeenCalledTimes(1);
     expect(onBlur).toHaveBeenCalledTimes(1);
   });
+
+  it("aplica containerClassName al wrapper raíz sin afectar al className del input", () => {
+    render(
+      <Input
+        label="Ingrediente"
+        containerClassName="flex-1 custom-container"
+        className="custom-input"
+      />
+    );
+    const input = screen.getByLabelText("Ingrediente");
+    const rootDiv = input.closest(".custom-container");
+
+    expect(rootDiv).toBeInTheDocument();
+    expect(rootDiv).toHaveClass("flex-1", "w-full", "space-y-1.5");
+    expect(input).toHaveClass("custom-input");
+    expect(input).not.toHaveClass("custom-container");
+  });
 });
