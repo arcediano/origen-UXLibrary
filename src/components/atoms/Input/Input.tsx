@@ -39,6 +39,8 @@ export interface InputProps
   tooltip?: string;
   variant?: "default" | "outline" | "filled" | "minimal";
   inputSize?: "sm" | "md" | "lg";
+  /** Clases para el `<div>` raíz (wrapper de label + input + footer), p. ej. para controlar el layout como hijo flex/grid. `className` solo afecta al `<input>` interno. */
+  containerClassName?: string;
 }
 
 // ─── Helpers de estilo ────────────────────────────────────────────────────────
@@ -74,6 +76,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
+      containerClassName,
       type = "text",
       label,
       error,
@@ -147,7 +150,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const variants = variantClasses(error, success);
 
     return (
-      <div className="w-full space-y-1.5">
+      <div className={cn("w-full space-y-1.5", containerClassName)}>
         {/* Label + Tooltip */}
         {(label || tooltip) && (
           <div className="flex items-center gap-2">
