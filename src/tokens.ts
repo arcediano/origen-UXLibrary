@@ -115,7 +115,7 @@ export const gradients = {
 
 // ─── Tipografía ───────────────────────────────────────────────────────────────
 export const typography = {
-  fontSans:  '"Manrope", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif',
+  fontSans:  '"Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif',
   fontSerif: '"Fraunces", "Iowan Old Style", "Palatino Linotype", serif',
   weight: {
     medium:   500,

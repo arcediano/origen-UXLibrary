@@ -1,5 +1,18 @@
 # @arcediano/ux-library
 
+## 0.27.3
+
+### Patch Changes
+
+- `typography.fontSans`/`--font-sans`: eliminada `"Manrope"` de la pila
+  tipográfica sans (petición del humano: "eliminar la tipografía manrope
+  sans, esta no debe existir") — pasa a encabezar la pila `"Plus Jakarta
+  Sans"`, ya presente como segunda opción. Solo cambia el valor por
+  defecto/fallback de este paquete; los consumidores (`origen-admin`,
+  `origen-dashboard`, `origen-web`) cargan su propia fuente vía
+  `next/font/google` y necesitan su propio cambio — ver tareas registradas
+  en `claude-agile` para cada repo.
+
 ## 0.27.2
 
 ### Patch Changes

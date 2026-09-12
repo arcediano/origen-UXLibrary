@@ -111,7 +111,7 @@
     --radius: 0.5rem;        /* 8px */
 
     /* Tipografia comercial */
-    --font-sans: "Manrope", "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
+    --font-sans: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
     --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
 
     /* Escala tipografica responsive */
