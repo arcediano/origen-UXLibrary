@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Toast, ToastClose, ToastProvider, ToastViewport, Toaster, reducer, useToast } from "./Toast";
+import { Toast, ToastClose, ToastProvider, ToastViewport, Toaster, reducer, toastVariants, useToast } from "./Toast";
 
 function ToastTestControls() {
   const { toast, dismiss } = useToast();
@@ -97,5 +97,14 @@ describe("Toast", () => {
     await waitFor(() => {
       expect(screen.queryByText("Saved")).not.toBeInTheDocument();
     });
+  });
+
+  it("variante default usa los tokens de marca origen- (no origin-)", () => {
+    const classes = toastVariants({ variant: "default" });
+
+    expect(classes).toContain("border-origen-pradera/30");
+    expect(classes).toContain("bg-origen-crema");
+    expect(classes).toContain("text-origen-oscuro");
+    expect(classes).not.toMatch(/\borigin-/);
   });
 });

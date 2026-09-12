@@ -33,7 +33,7 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-origin-pradera/30 bg-origin-crema text-origin-oscuro",
+        default: "border-origen-pradera/30 bg-origen-crema text-origen-oscuro",
         success:
           "border-green-200 bg-green-50 text-green-900 [&>svg]:text-green-600",
         error:
@@ -343,6 +343,7 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
+  toastVariants,
 };
 
 export type { ToasterToast };
