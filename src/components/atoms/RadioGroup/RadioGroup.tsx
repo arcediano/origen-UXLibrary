@@ -33,7 +33,7 @@ const RadioGroup = React.forwardRef<
   ) => {
     const variantClasses = {
       default: "",
-      organic: "bg-origin-crema/50 p-3 rounded-xl",
+      organic: "bg-origen-crema/50 p-3 rounded-xl",
       minimal: "",
     };
 
@@ -89,27 +89,27 @@ const RadioGroupItem = React.forwardRef<
 
     const variantClasses = {
       default: cn(
-        "border-origin-pradera/50 text-origin-pradera",
-        "hover:border-origin-hoja hover:bg-origin-crema/30",
-        "data-[state=checked]:border-origin-pradera data-[state=checked]:text-origin-pradera",
+        "border-origen-pradera/50 text-origen-pradera",
+        "hover:border-origen-hoja hover:bg-origen-crema/30",
+        "data-[state=checked]:border-origen-pradera data-[state=checked]:text-origen-pradera",
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
       organic: cn(
-        "border-origin-hoja/40 text-origin-hoja",
-        "hover:border-origin-hoja hover:bg-origin-pastel/30",
-        "data-[state=checked]:border-origin-hoja data-[state=checked]:text-origin-hoja",
+        "border-origen-hoja/40 text-origen-hoja",
+        "hover:border-origen-hoja hover:bg-origen-pastel/30",
+        "data-[state=checked]:border-origen-hoja data-[state=checked]:text-origen-hoja",
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
       forest: cn(
-        "border-origin-bosque/30 text-origin-bosque",
-        "hover:border-origin-bosque hover:bg-origin-bosque/5",
-        "data-[state=checked]:border-origin-bosque data-[state=checked]:text-origin-bosque",
+        "border-origen-bosque/30 text-origen-bosque",
+        "hover:border-origen-bosque hover:bg-origen-bosque/5",
+        "data-[state=checked]:border-origen-bosque data-[state=checked]:text-origen-bosque",
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
       accent: cn(
-        "border-origin-flor/40 text-origin-flor",
-        "hover:border-origin-flor hover:bg-origin-flor/5",
-        "data-[state=checked]:border-origin-flor data-[state=checked]:text-origin-flor",
+        "border-origen-flor/40 text-origen-flor",
+        "hover:border-origen-flor hover:bg-origen-flor/5",
+        "data-[state=checked]:border-origen-flor data-[state=checked]:text-origen-flor",
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
     };
@@ -141,11 +141,11 @@ const RadioGroupItem = React.forwardRef<
         {label && (
           <label
             htmlFor={radioId}
-            className="cursor-pointer text-sm font-medium text-origin-oscuro"
+            className="cursor-pointer text-sm font-medium text-origen-oscuro"
           >
             {label}
             {description && (
-              <p className="text-xs text-origin-oscuro/60">{description}</p>
+              <p className="text-xs text-origen-oscuro/60">{description}</p>
             )}
           </label>
         )}

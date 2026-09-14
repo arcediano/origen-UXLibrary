@@ -4,6 +4,21 @@
 
 ### Patch Changes
 
+- Hallazgo al preparar esta publicación (no relacionado con el resto de esta
+  entrada): typo `origin-*` en vez de `origen-*` en clases de Tailwind de
+  **4 componentes** (`Toast` — segunda ocurrencia no cubierta por el fix
+  anterior de la variante `default`, `RadioGroup`, `Stepper`, `AlertDialog`)
+  — 28 ocurrencias en total. Al no ser un token real de Tailwind, esas
+  clases no aplicaban ningún color: `Toast` y `Stepper` (usados de verdad en
+  `origen-admin`/`origen-dashboard`/`origen-web`) renderizaban sin los
+  colores de marca previstos en esos elementos. Corregido el prefijo en los
+  4 archivos. Hallazgo aparte, sin corregir a ciegas: la variante `accent`
+  de `RadioGroup` usa `origen-flor`, un color que **no existe** en ningún
+  token del design system (no está en `tokens.ts`/`tokens.css`/
+  `tailwind.config.ts`) — `RadioGroup` no tiene consumidores reales todavía,
+  así que queda igual (prefijo ya corregido, color aún sin resolver) hasta
+  que se decida qué color de marca debe representar ese variant — ver tarea
+  registrada en `claude-agile`.
 - `typography.fontSans`/`--font-sans`: eliminada `"Manrope"` de la pila
   tipográfica sans (petición del humano: "eliminar la tipografía manrope
   sans, esta no debe existir") — pasa a encabezar la pila `"Plus Jakarta

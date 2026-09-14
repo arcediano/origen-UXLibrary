@@ -146,7 +146,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
           <Circle
             className={cn(
               iconSize[size],
-              "text-origin-pradera animate-pulse"
+              "text-origen-pradera animate-pulse"
             )}
           />
         );
@@ -156,7 +156,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
         return <AlertCircle className={cn(iconSize[size], "text-red-500")} />;
       }
 
-      return <Circle className={cn(iconSize[size], "text-origin-pradera/30")} />;
+      return <Circle className={cn(iconSize[size], "text-origen-pradera/30")} />;
     };
 
     const stepSizeClasses = {
@@ -205,8 +205,8 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                       steps[index].status === "completed"
                         ? "bg-green-600"
                         : step.status === "active"
-                          ? "bg-origin-pradera"
-                          : "bg-origin-pradera/20"
+                          ? "bg-origen-pradera"
+                          : "bg-origen-pradera/20"
                     )}
                   />
                 )}
@@ -225,10 +225,10 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                     step.status === "completed"
                       ? "bg-green-100 border-green-600"
                       : step.status === "active"
-                        ? "bg-origin-pastel border-origin-pradera ring-2 ring-origin-pradera/20"
+                        ? "bg-origen-pastel border-origen-pradera ring-2 ring-origen-pradera/20"
                         : step.status === "error"
                           ? "bg-red-100 border-red-500"
-                          : "bg-white border-origin-pradera/30",
+                          : "bg-white border-origen-pradera/30",
                     step.disabled && "opacity-50 cursor-not-allowed",
                     isClickable && "hover:shadow-md active:scale-95",
                     !step.disabled && !isClickable && "cursor-default"
@@ -243,14 +243,14 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                     className={cn(
                       "font-semibold",
                       step.status === "active"
-                        ? "text-origin-bosque"
-                        : "text-origin-oscuro/70"
+                        ? "text-origen-bosque"
+                        : "text-origen-oscuro/70"
                     )}
                   >
                     {step.title}
                   </p>
                   {showDescriptions && step.description && (
-                    <p className="text-xs text-origin-oscuro/50 mt-1">
+                    <p className="text-xs text-origen-oscuro/50 mt-1">
                       {step.description}
                     </p>
                   )}
@@ -324,7 +324,7 @@ const StepperFooter = React.forwardRef<HTMLDivElement, StepperFooterProps>(
         type="button"
         onClick={onPrevious}
         disabled={currentStep === 0 || !showPrevious}
-        className="px-4 py-2 rounded-lg border border-origin-pradera/30 text-origin-bosque hover:bg-origin-pastel/30 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 rounded-lg border border-origen-pradera/30 text-origen-bosque hover:bg-origen-pastel/30 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {previousLabel}
       </button>
@@ -333,7 +333,7 @@ const StepperFooter = React.forwardRef<HTMLDivElement, StepperFooterProps>(
         type="button"
         onClick={onNext}
         disabled={nextDisabled || loading}
-        className="px-4 py-2 rounded-lg bg-origin-pradera text-white hover:bg-origin-pradera/90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 rounded-lg bg-origen-pradera text-white hover:bg-origen-pradera/90 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {loading ? "Cargando..." : currentStep === totalSteps - 1 ? finishLabel : nextLabel}
       </button>

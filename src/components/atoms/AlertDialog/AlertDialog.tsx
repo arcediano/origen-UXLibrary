@@ -140,7 +140,7 @@ const AlertDialogContent = React.forwardRef<
 
     const variantClasses = {
       default:
-        "bg-white border border-origin-pradera/30 text-origin-oscuro",
+        "bg-white border border-origen-pradera/30 text-origen-oscuro",
       warning:
         "bg-yellow-50 border border-yellow-200 text-yellow-900",
       success:
