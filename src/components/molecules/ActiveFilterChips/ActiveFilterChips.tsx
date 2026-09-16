@@ -61,7 +61,7 @@ export function ActiveFilterChips({ chips, onClearAll, className }: ActiveFilter
           className={cn(
             "flex-shrink-0 inline-flex items-center gap-1",
             "pl-2.5 pr-1 py-1 rounded-full",
-            "bg-origen-bosque/8 border border-origen-bosque/15",
+            "bg-origen-bosque/[8%] border border-origen-bosque/15",
             "text-xs font-medium text-origen-bosque",
             "transition-colors",
           )}
