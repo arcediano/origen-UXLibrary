@@ -10,14 +10,14 @@ const meta: Meta<typeof Button> = {
     docs: {
       description: {
         component:
-          "Componente Button del Origen Design System. Admite 5 variantes visuales, 5 tamaños y estados de carga.",
+          "Componente Button del Origen Design System. Admite 7 variantes visuales, 5 tamaños y estados de carga.",
       },
     },
   },
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "outline", "ghost", "destructive"],
+      options: ["primary", "secondary", "outline", "ghost", "destructive", "hero", "heroOutline"],
     },
     size: {
       control: "select",
@@ -77,6 +77,33 @@ export const Destructive: Story = {
 
 export const Loading: Story = {
   args: { children: "Guardando...", variant: "primary", loading: true, loadingText: "Procesando..." },
+};
+
+export const Hero: Story = {
+  args: { children: "Empieza gratis", variant: "hero", size: "md" },
+  parameters: {
+    backgrounds: { default: "dark" },
+    docs: {
+      description: {
+        story:
+          "CTA primario sobre fondo oscuro/imagen (hero, banners de marca) — fondo blanco sólido, texto `origen-bosque`.",
+      },
+    },
+  },
+  decorators: [(Story) => <div className="bg-origen-bosque p-8 rounded-2xl"><Story /></div>],
+};
+
+export const HeroOutline: Story = {
+  args: { children: "Conoce los productores", variant: "heroOutline", size: "md" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "CTA secundario sobre fondo oscuro/imagen — transparente con borde y texto blancos. Complementa a `hero`. El ring de foco usa `ring-white` en vez de `ring-origen-pino` (ver comentario de cabecera de `Button.tsx` sobre el hallazgo de contraste).",
+      },
+    },
+  },
+  decorators: [(Story) => <div className="bg-origen-bosque p-8 rounded-2xl"><Story /></div>],
 };
 
 export const WithIcons: Story = {

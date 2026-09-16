@@ -36,6 +36,29 @@ export interface ProducerCardProps {
   isVerified?: boolean;
   /** Si el productor ofrece packaging sostenible. */
   sustainablePackaging?: boolean;
+  /**
+   * Etiqueta de categoría/especialidad — se muestra como pill superpuesta en
+   * la esquina superior-derecha de la imagen (p. ej. "Frutas y verduras").
+   * La esquina superior-izquierda queda reservada para `favoriteButton`.
+   */
+  categoryLabel?: string;
+  /**
+   * Clase Tailwind de fondo para el estado sin imagen (p. ej. `"bg-origen-pino"`,
+   * variable según categoría). Por defecto usa un gradiente de marca neutro.
+   * Siempre se pinta con un scrim oscuro superpuesto (`bg-black/25`) para
+   * garantizar contraste ≥4.5:1 del texto blanco encima, con independencia de
+   * cuán claro sea el color de fondo elegido (p. ej. `origen-mandarina`/`-sol`
+   * no alcanzan ese contraste por sí solos — ver hallazgo de auditoría en
+   * `guia-diseno-ux.md`).
+   */
+  imageFallbackClassName?: string;
+  /**
+   * `"plain"` (por defecto): tagline como texto secundario simple.
+   * `"quote"`: tagline como cita en `font-serif italic` con comillas
+   * tipográficas — usar cuando el tagline es una frase/hook editorial en vez
+   * de una descripción funcional.
+   */
+  taglineVariant?: "plain" | "quote";
   /** Componente de enlace. Por defecto `"a"`. Pasa `Link` de `next/link` en Next.js. */
   linkComponent?: React.ElementType;
   className?: string;
@@ -53,6 +76,9 @@ export function ProducerCard({
   favoriteButton,
   isVerified = false,
   sustainablePackaging = false,
+  categoryLabel,
+  imageFallbackClassName,
+  taglineVariant = "plain",
   linkComponent,
   className,
 }: ProducerCardProps) {
@@ -82,7 +108,31 @@ export function ProducerCard({
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-origen-pradera/40 to-origen-hoja/60" />
+            <div
+              className={cn(
+                "absolute inset-0",
+                imageFallbackClassName ?? "bg-gradient-to-br from-origen-pradera/40 to-origen-hoja/60"
+              )}
+            >
+              {/* Scrim oscuro — garantiza contraste ≥4.5:1 del texto/badges
+                  blancos superpuestos con independencia de cuán claro sea el
+                  color de fondo elegido en `imageFallbackClassName`. */}
+              <div className="absolute inset-0 bg-black/25" />
+            </div>
+          )}
+
+          {/* Pill de categoría/especialidad — esquina superior-derecha (el
+              superior-izquierda queda reservado para `favoriteButton`) */}
+          {categoryLabel && (
+            <div className="absolute right-2 top-2 z-10">
+              <Badge
+                variant="neutral"
+                size="xs"
+                className="border-transparent bg-origen-bosque text-white shadow-sm"
+              >
+                {categoryLabel}
+              </Badge>
+            </div>
           )}
 
           {/* Botón de favoritos — inyectado desde el consumidor */}
@@ -128,9 +178,15 @@ export function ProducerCard({
 
           {/* Tagline — oculto en móvil (2 columnas) */}
           {variant === "featured" && producer.story?.tagline && (
-            <p className="hidden sm:block text-xs text-text-secondary line-clamp-2 mt-0.5">
-              {producer.story.tagline}
-            </p>
+            taglineVariant === "quote" ? (
+              <p className="hidden sm:block font-serif text-xs italic text-text-secondary line-clamp-2 mt-0.5">
+                &ldquo;{producer.story.tagline}&rdquo;
+              </p>
+            ) : (
+              <p className="hidden sm:block text-xs text-text-secondary line-clamp-2 mt-0.5">
+                {producer.story.tagline}
+              </p>
+            )
           )}
 
           {/* Categoría principal */}

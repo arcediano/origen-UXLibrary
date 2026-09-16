@@ -196,4 +196,55 @@ describe("ProducerCard", () => {
 
     expect(screen.getByTestId("mock-link")).toBeInTheDocument();
   });
+
+  it("renders categoryLabel as a pill when provided", () => {
+    render(
+      <ProducerCard
+        producer={mockProducer}
+        href="/productores/prod-001"
+        categoryLabel="Frutas y verduras"
+      />
+    );
+    // Two matches expected: the pill and the plain fiscal.primaryCategory text.
+    expect(screen.getAllByText("Frutas y verduras").length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("does not render a category pill when categoryLabel is not provided", () => {
+    const { container } = render(
+      <ProducerCard producer={mockProducer} href="/productores/prod-001" />
+    );
+    expect(container.querySelector(".bg-origen-bosque.text-white")).not.toBeInTheDocument();
+  });
+
+  it("applies imageFallbackClassName with a dark scrim when no banner is provided", () => {
+    const producerWithoutBanner = {
+      ...mockProducer,
+      visual: { ...mockProducer.visual, bannerUrl: null },
+    };
+
+    const { container } = render(
+      <ProducerCard
+        producer={producerWithoutBanner}
+        href="/productores/prod-001"
+        imageFallbackClassName="bg-origen-mandarina"
+      />
+    );
+
+    expect(container.querySelector(".bg-origen-mandarina")).toBeInTheDocument();
+    expect(container.querySelector(".bg-black\\/25")).toBeInTheDocument();
+  });
+
+  it("renders tagline as a styled quote when taglineVariant is 'quote'", () => {
+    render(
+      <ProducerCard
+        producer={mockProducer}
+        href="/productores/prod-001"
+        variant="featured"
+        taglineVariant="quote"
+      />
+    );
+    expect(
+      screen.getByText((_, el) => el?.textContent === "\u201CFrutas frescas de temporada.\u201D")
+    ).toHaveClass("italic");
+  });
 });

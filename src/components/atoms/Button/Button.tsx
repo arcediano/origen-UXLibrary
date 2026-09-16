@@ -1,7 +1,7 @@
 /**
  * @file Button.tsx
  * @description Componente Button del Origen Design System.
- * Variantes: primary | secondary | outline | ghost | destructive
+ * Variantes: primary | secondary | outline | ghost | destructive | hero | heroOutline
  *
  * Patrón recomendado para icono + texto: usar las props `leftIcon`/`rightIcon`
  * explícitas (no pasar el icono como `children` directo). El componente
@@ -10,10 +10,19 @@
  * alineamiento en código ya existente, pero esa detección no es API pública
  * ni el patrón preferido — úsese `leftIcon`/`rightIcon` en código nuevo.
  *
+ * Accesibilidad del ring de foco (hallazgo de auditoría, ver historial de
+ * `guia-diseno-ux.md`): el ring `focus-visible` NO es un único color fijo
+ * para todas las variantes. `ring-origen-pino` (verde oscuro) es adecuado
+ * sobre las variantes pensadas para fondo claro (`primary`/`secondary`/
+ * `outline`/`ghost`/`destructive`), pero da un contraste insuficiente sobre
+ * las variantes pensadas para fondo oscuro/imagen (`hero`/`heroOutline`),
+ * que usan `ring-white` en su lugar.
+ *
  * @example
  * <Button variant="primary" size="md" loading>Guardar</Button>
  * <Button variant="outline" leftIcon={<PlusIcon />}>Añadir</Button>
  * <Button asChild variant="outline"><a href="/path">Link</a></Button>
+ * <Button variant="heroOutline" asChild><Link href="/productores">Conoce los productores</Link></Button>
  */
 
 "use client";
@@ -30,7 +39,7 @@ const buttonVariants = cva(
   cn(
     "inline-flex items-center justify-center",
     "rounded-xl font-semibold transition-all duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-origen-pino",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:shadow-none",
     "active:scale-[0.98]",
     "w-full sm:w-auto shadow-subtle"
@@ -42,37 +51,51 @@ const buttonVariants = cva(
           "border border-origen-pino/40",
           "bg-origen-bosque text-white",
           "hover:brightness-[1.03] hover:shadow-origen",
+          "focus-visible:ring-origen-pino",
           "disabled:border-origen-bosque/60 disabled:bg-origen-bosque/80 disabled:text-white/85"
         ),
         secondary: cn(
           "border border-origen-pino/35",
           "bg-origen-pastel text-origen-bosque",
           "hover:bg-origen-pradera/35 hover:text-origen-oscuro",
+          "focus-visible:ring-origen-pino",
           "disabled:border-origen-pino/30 disabled:bg-origen-pastel/90 disabled:text-origen-bosque/70"
         ),
         outline: cn(
           "border border-origen-pino/30 bg-surface-alt text-origen-bosque",
           "hover:border-origen-pradera/55 hover:bg-origen-pastel/70",
+          "focus-visible:ring-origen-pino",
           "disabled:border-origen-pino/15 disabled:bg-white disabled:text-origen-bosque/70"
         ),
         ghost: cn(
           "border border-origen-pino/15 bg-transparent text-origen-bosque shadow-none",
           "hover:border-origen-pradera/40 hover:bg-origen-pastel/60 hover:text-origen-pino",
-          "focus-visible:bg-origen-pastel/40",
+          "focus-visible:bg-origen-pastel/40 focus-visible:ring-origen-pino",
           "disabled:border-origen-pino/10 disabled:text-origen-bosque/70"
         ),
         destructive: cn(
           "border border-feedback-danger-border",
           "bg-feedback-danger-subtle text-feedback-danger-text",
           "hover:bg-feedback-danger/15 hover:border-feedback-danger-text/40",
+          "focus-visible:ring-origen-pino",
           "disabled:border-feedback-danger-border/60 disabled:bg-feedback-danger-subtle/70 disabled:text-feedback-danger-text/60"
         ),
         hero: cn(
           "bg-white text-origen-bosque border border-white/20",
           "hover:bg-white/92 hover:scale-[1.03]",
           "shadow-lg shadow-black/15",
+          "focus-visible:ring-white",
           "active:scale-[0.98] transition-all duration-200",
           "disabled:bg-white/60 disabled:text-origen-bosque/50 disabled:border-white/10"
+        ),
+        /** CTA secundario para fondos oscuros/imagen (hero, banners de marca) —
+         * transparente con borde y texto blancos. Complementa a `hero` (que es
+         * el CTA primario blanco sólido sobre esos mismos fondos). */
+        heroOutline: cn(
+          "border border-white/50 bg-white/10 text-white backdrop-blur-sm",
+          "hover:bg-white/18",
+          "focus-visible:ring-white",
+          "disabled:border-white/25 disabled:bg-white/5 disabled:text-white/50"
         ),
       },
       size: {

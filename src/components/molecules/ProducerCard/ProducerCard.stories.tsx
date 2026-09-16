@@ -228,3 +228,47 @@ export const GridDesktop: Story = {
     </div>
   ),
 };
+
+// Story 11: Con pill de categoría (esquina superior-derecha)
+export const WithCategoryLabel: Story = {
+  args: {
+    producer: baseMockProducer,
+    href: "/productores/prod-001",
+    variant: "featured",
+    categoryLabel: "Frutas y verduras",
+    averageRating: 4.5,
+    reviewCount: 23,
+    favoriteButton: <MockFavoriteButton />,
+  },
+};
+
+// Story 12: Sin banner + fallback de color personalizado por categoría (con
+// scrim oscuro garantizando contraste del texto/badges superpuestos)
+export const CustomFallbackColor: Story = {
+  args: {
+    producer: {
+      ...baseMockProducer,
+      visual: { logoUrl: baseMockProducer.visual?.logoUrl },
+    },
+    href: "/productores/prod-001",
+    variant: "featured",
+    categoryLabel: "Frutas y verduras",
+    imageFallbackClassName: "bg-origen-mandarina",
+    isVerified: true,
+    averageRating: 4.3,
+    reviewCount: 20,
+  },
+};
+
+// Story 13: Tagline como cita editorial (font-serif italic)
+export const QuoteTagline: Story = {
+  args: {
+    producer: baseMockProducer,
+    href: "/productores/prod-001",
+    variant: "featured",
+    taglineVariant: "quote",
+    categoryLabel: "Frutas y verduras",
+    averageRating: 4.7,
+    reviewCount: 31,
+  },
+};

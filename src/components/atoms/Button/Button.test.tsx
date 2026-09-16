@@ -105,6 +105,7 @@ describe("Button", () => {
       ["ghost", "text-origen-bosque"],
       ["destructive", "text-feedback-danger-text"],
       ["hero", "text-origen-bosque"],
+      ["heroOutline", "text-white"],
     ])("variant=%s conserva clase de color de texto en size=sm", (variant, colorClass) => {
       render(<Button variant={variant as any} size="sm">Texto</Button>);
       expect(screen.getByRole("button").className).toContain(colorClass);
@@ -117,6 +118,7 @@ describe("Button", () => {
       ["ghost", "text-origen-bosque"],
       ["destructive", "text-feedback-danger-text"],
       ["hero", "text-origen-bosque"],
+      ["heroOutline", "text-white"],
     ])("variant=%s conserva clase de color de texto en size=md", (variant, colorClass) => {
       render(<Button variant={variant as any} size="md">Texto</Button>);
       expect(screen.getByRole("button").className).toContain(colorClass);
@@ -129,9 +131,33 @@ describe("Button", () => {
       ["ghost", "text-origen-bosque"],
       ["destructive", "text-feedback-danger-text"],
       ["hero", "text-origen-bosque"],
+      ["heroOutline", "text-white"],
     ])("variant=%s conserva clase de color de texto en size=lg", (variant, colorClass) => {
       render(<Button variant={variant as any} size="lg">Texto</Button>);
       expect(screen.getByRole("button").className).toContain(colorClass);
+    });
+  });
+
+  describe("ring de foco por variante (contraste sobre fondo claro/oscuro)", () => {
+    it.each([
+      ["primary"],
+      ["secondary"],
+      ["outline"],
+      ["ghost"],
+      ["destructive"],
+    ])("variant=%s usa ring-origen-pino (fondo claro)", (variant) => {
+      render(<Button variant={variant as any}>Texto</Button>);
+      expect(screen.getByRole("button").className).toContain("focus-visible:ring-origen-pino");
+    });
+
+    it.each([
+      ["hero"],
+      ["heroOutline"],
+    ])("variant=%s usa ring-white (fondo oscuro/imagen, evita el bajo contraste de ring-origen-pino)", (variant) => {
+      render(<Button variant={variant as any}>Texto</Button>);
+      const className = screen.getByRole("button").className;
+      expect(className).toContain("focus-visible:ring-white");
+      expect(className).not.toContain("focus-visible:ring-origen-pino");
     });
   });
 });

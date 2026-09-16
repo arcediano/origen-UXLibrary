@@ -1,5 +1,34 @@
 # @arcediano/ux-library
 
+## 0.28.0
+
+### Minor Changes
+
+- `Button`: nueva variante `heroOutline` (CTA secundario translúcido para fondos
+  oscuros/imágenes, `border-white/50 bg-white/10`) y corrección de accesibilidad
+  del anillo de foco — antes **todas** las variantes usaban
+  `focus-visible:ring-origen-pino` (verde oscuro), que sobre `hero`/`heroOutline`
+  (fondos oscuros) apenas era visible. Ahora cada variante define su propio color
+  de anillo: `ring-origen-pino` en variantes de fondo claro
+  (`primary`/`secondary`/`outline`/`ghost`/`destructive`), `ring-white` en
+  `hero`/`heroOutline`.
+
+  `ProducerCard`: 3 props nuevas, todas opcionales y retrocompatibles:
+
+  - `categoryLabel`: pill de categoría superpuesta en la esquina
+    superior-derecha de la imagen.
+  - `imageFallbackClassName`: color de fondo personalizable para el estado sin
+    imagen (antes fijo a un gradiente), con un scrim oscuro (`bg-black/25`)
+    siempre aplicado encima para garantizar contraste ≥4.5:1 del texto/badges
+    blancos independientemente de cuán claro sea el color elegido.
+  - `taglineVariant`: `"plain"` (por defecto, sin cambios) o `"quote"` para
+    presentar el tagline como cita editorial (`font-serif italic` con comillas
+    tipográficas).
+
+  Estos cambios permiten migrar `HomepageProducersCarousel` de `origen-web`
+  (diseño editorial con card local duplicada) al `ProducerCard` compartido de la
+  librería sin perder funcionalidad.
+
 ## 0.27.3
 
 ### Patch Changes
@@ -22,7 +51,7 @@
 - `typography.fontSans`/`--font-sans`: eliminada `"Manrope"` de la pila
   tipográfica sans (petición del humano: "eliminar la tipografía manrope
   sans, esta no debe existir") — pasa a encabezar la pila `"Plus Jakarta
-  Sans"`, ya presente como segunda opción. Solo cambia el valor por
+Sans"`, ya presente como segunda opción. Solo cambia el valor por
   defecto/fallback de este paquete; los consumidores (`origen-admin`,
   `origen-dashboard`, `origen-web`) cargan su propia fuente vía
   `next/font/google` y necesitan su propio cambio — ver tareas registradas
