@@ -107,9 +107,9 @@ const RadioGroupItem = React.forwardRef<
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
       accent: cn(
-        "border-origen-flor/40 text-origen-flor",
-        "hover:border-origen-flor hover:bg-origen-flor/5",
-        "data-[state=checked]:border-origen-flor data-[state=checked]:text-origen-flor",
+        "border-origen-arena/40 text-origen-arena",
+        "hover:border-origen-arena hover:bg-origen-arena/5",
+        "data-[state=checked]:border-origen-arena data-[state=checked]:text-origen-arena",
         error && "border-red-500 data-[state=checked]:border-red-500"
       ),
     };
