@@ -55,6 +55,21 @@ describe("Button", () => {
     expect(screen.getByRole("button", { name: /secundario/i }).className).toContain("focus-visible:ring-origen-pino");
   });
 
+  it.each(["icon", "icon-sm"] as const)(
+    "size=%s mantiene el ancho fijo en escritorio (no colapsa a w-auto vía la base w-full sm:w-auto)",
+    (size) => {
+      render(<Button size={size} aria-label="Cerrar">×</Button>);
+      const button = screen.getByRole("button", { name: /cerrar/i });
+      // Regresión: sin el sm:w-* explícito del tamaño, tailwind-merge dejaba
+      // sobrevivir "sm:w-auto" de la clase base junto al w-10/w-8 sin prefijo,
+      // y "sm:w-auto" ganaba la cascada real en Tailwind a partir de "sm"
+      // (verificado compilando el CSS real), encogiendo el botón icon-only
+      // a su contenido en escritorio en vez de mantenerlo cuadrado.
+      expect(button.className).not.toContain("sm:w-auto");
+      expect(button.className).toMatch(size === "icon" ? /(?:^| )sm:w-10(?: |$)/ : /(?:^| )sm:w-8(?: |$)/);
+    }
+  );
+
   it("mantiene disabled states legibles en outline y ghost", () => {
     render(
       <>

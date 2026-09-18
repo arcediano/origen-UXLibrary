@@ -102,8 +102,17 @@ const buttonVariants = cva(
         sm:      "h-10 px-4 gap-2 rounded-lg text-small",
         md:      "h-11 px-5 gap-2.5 rounded-xl text-small",
         lg:      "h-12 px-6 gap-3 rounded-xl text-body",
-        icon:    "h-10 w-10 p-0 rounded-xl",
-        "icon-sm": "h-8 w-8 p-0 rounded-lg",
+        // sm:w-* repite el ancho fijo del breakpoint base: la clase base del
+        // componente es "w-full sm:w-auto" (pensada para botones con texto,
+        // ancho completo en móvil y automático en escritorio), y sin el
+        // sm:w-* explícito aquí, "sm:w-auto" sobrevive al merge de
+        // tailwind-merge (mismo grupo pero modificador distinto al w-10/w-8
+        // sin prefijo) y gana la cascada a partir de "sm" — cualquier botón
+        // icon-only se volvía "auto" (ancho de su contenido) en escritorio
+        // en vez de mantener el cuadrado fijo. Verificado con tailwind-merge
+        // real: sin esto, "sm:w-auto" queda en el className final.
+        icon:    "h-10 w-10 sm:w-10 p-0 rounded-xl",
+        "icon-sm": "h-8 w-8 sm:w-8 p-0 rounded-lg",
       },
     },
     defaultVariants: {
