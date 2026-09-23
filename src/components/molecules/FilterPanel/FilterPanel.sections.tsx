@@ -243,7 +243,10 @@ export function NumberRangeSection({
       <p className="text-[11px] font-semibold text-text-subtle uppercase tracking-wide mb-3">{section.title}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="text-[10px] font-medium text-text-subtle mb-1.5 block uppercase tracking-wide">
+          <label
+            htmlFor={`${section.id}-min`}
+            className="text-[10px] font-medium text-text-subtle mb-1.5 block uppercase tracking-wide"
+          >
             Mínimo
           </label>
           <div className="relative">
@@ -253,6 +256,7 @@ export function NumberRangeSection({
               </span>
             )}
             <input
+              id={`${section.id}-min`}
               type="number"
               value={min}
               onChange={(e) => onMin(e.target.value)}
@@ -264,7 +268,10 @@ export function NumberRangeSection({
           </div>
         </div>
         <div>
-          <label className="text-[10px] font-medium text-text-subtle mb-1.5 block uppercase tracking-wide">
+          <label
+            htmlFor={`${section.id}-max`}
+            className="text-[10px] font-medium text-text-subtle mb-1.5 block uppercase tracking-wide"
+          >
             Máximo
           </label>
           <div className="relative">
@@ -274,6 +281,7 @@ export function NumberRangeSection({
               </span>
             )}
             <input
+              id={`${section.id}-max`}
               type="number"
               value={max}
               onChange={(e) => onMax(e.target.value)}

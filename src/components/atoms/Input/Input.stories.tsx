@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Mail, Search, Lock } from "lucide-react";
+import { Mail, Search } from "lucide-react";
 import { Button } from "../Button";
 import { Input, InputGroup } from "./Input";
 
@@ -55,7 +55,7 @@ export const InFlexRowWithContainerClassName: Story = {
     <div className="w-80 space-y-3 p-4 bg-white">
       <p className="text-micro text-text-subtle">
         Reproduce el caso de `StepNutritional.tsx` (origen-dashboard): un `Input`
-        junto a un botón `shrink-0` dentro de un `flex`. Sin `containerClassName="flex-1"`
+        junto a un botón `shrink-0` dentro de un `flex`. Sin `containerClassName=&quot;flex-1&quot;`
         el wrapper raíz del `Input` (`w-full`) no cede espacio y el botón se desborda;
         con la prop, el `Input` sí se encoge como hijo flex.
       </p>

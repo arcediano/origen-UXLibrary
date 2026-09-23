@@ -100,7 +100,6 @@ export function ProducerCard({
             overflow-hidden del Card variant="media" en el nivel exterior. */}
         <div className="relative aspect-video bg-origen-pastel">
           {producer.visual?.bannerUrl ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={producer.visual.bannerUrl}
               alt=""
@@ -137,6 +136,9 @@ export function ProducerCard({
 
           {/* Botón de favoritos — inyectado desde el consumidor */}
           {favoriteButton && (
+            // Solo intercepta la propagación del click/tecla hacia la card —
+            // el elemento interactivo real es `favoriteButton`, inyectado
+            // por el consumidor, no este div.
             <div
               className="absolute left-2 top-2 z-10"
               onClick={(e) => e.stopPropagation()}
@@ -152,7 +154,6 @@ export function ProducerCard({
           {logoUrl && (
             <div className="absolute -bottom-5 left-4 z-10">
               <Avatar size="md" shape="rounded" className="ring-2 ring-white shadow-md">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={logoUrl}
                   alt={businessName}

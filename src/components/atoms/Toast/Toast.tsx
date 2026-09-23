@@ -136,6 +136,10 @@ type ToasterToast = React.ComponentPropsWithoutRef<typeof Toast> & {
 const TOAST_LIMIT = 3;
 const TOAST_REMOVE_DELAY = 5000;
 
+// Solo se usa para derivar el tipo `ActionType` vía `typeof` (el resto del
+// fichero compara contra los literales de string directamente, no contra
+// este objeto) — patrón intencional, no código muerto.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const actionTypes = {
   ADD_TOAST: "ADD_TOAST",
   UPDATE_TOAST: "UPDATE_TOAST",

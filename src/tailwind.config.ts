@@ -199,6 +199,9 @@ const config: Config = {
       },
     },
   },
+  // require() en vez de import: el config lo cargan en runtime (Tailwind CLI/consumidores)
+  // vía CJS; un import ESM aquí podría no resolver igual en esos loaders.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 };
 
