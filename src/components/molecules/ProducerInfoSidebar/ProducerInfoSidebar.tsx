@@ -143,7 +143,6 @@ export function ProducerInfoSidebar({
         {/* Contenedor de imagen: ratio corto en movil, cuadrado en md+ */}
         <div className="relative aspect-[16/7] max-h-[200px] md:aspect-[4/3] md:max-h-none">
           {photoUrl ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={photoUrl}
               alt={`Foto de ${businessName}`}
@@ -165,7 +164,6 @@ export function ProducerInfoSidebar({
         {/* Logo superpuesto: esquina inferior derecha */}
         {logoUrl && (
           <div className="absolute bottom-2 right-2 h-12 w-12 overflow-hidden rounded-xl border-2 border-white shadow-md bg-white">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={logoUrl}
               alt={`Logo de ${businessName}`}

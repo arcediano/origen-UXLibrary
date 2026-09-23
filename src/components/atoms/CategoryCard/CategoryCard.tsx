@@ -44,7 +44,7 @@ export interface CategoryCardProps extends Omit<React.ButtonHTMLAttributes<HTMLB
  * />
  */
 export const CategoryCard = React.forwardRef<HTMLButtonElement, CategoryCardProps>(
-  ({ category, icon, isSelected, onSelect, multiple, className, onClick, ...props }, ref) => {
+  ({ category, icon, isSelected, onSelect, multiple: _multiple, className, onClick, ...props }, ref) => {
     return (
       <button
         ref={ref}

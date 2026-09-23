@@ -183,7 +183,12 @@ describe("ProducerCard", () => {
     const MockLinkComponent = React.forwardRef<
       HTMLAnchorElement,
       React.AnchorHTMLAttributes<HTMLAnchorElement>
-    >(({ ...props }, ref) => <a ref={ref} data-testid="mock-link" {...props} />);
+    >(({ ...props }, ref) => (
+      // El contenido llega vía `...props` (children real en tiempo de ejecución);
+      // el linter no puede verlo estáticamente en este mock de test.
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      <a ref={ref} data-testid="mock-link" {...props} />
+    ));
     MockLinkComponent.displayName = "MockLinkComponent";
 
     render(

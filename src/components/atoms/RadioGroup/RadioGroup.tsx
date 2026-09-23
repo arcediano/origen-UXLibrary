@@ -25,7 +25,12 @@ const RadioGroup = React.forwardRef<
     {
       className,
       variant = "default",
-      size = "md",
+      // TODO: `size` está en la API pública (RadioGroupProps) pero el Root
+      // nunca lo propaga a sus `RadioGroupItem` (que tienen su propio `size`
+      // independiente, ver más abajo) — hallazgo registrado en
+      // claude-agile/proyectos/origen-UXLibrary/tareas-pendientes.md, no
+      // corregido aquí para no rediseñar el contrato de tamaño sin decidirlo.
+      size: _size = "md",
       orientation = "vertical",
       ...props
     },

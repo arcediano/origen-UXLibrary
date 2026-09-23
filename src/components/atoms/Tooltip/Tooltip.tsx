@@ -72,7 +72,6 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
       window.removeEventListener("scroll", calculatePosition, true);
       window.removeEventListener("resize", calculatePosition);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   return (

@@ -1,7 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { ProducerCard, type ProducerCardProps } from "./ProducerCard";
-import { Badge } from "../../atoms/Badge";
+import { ProducerCard } from "./ProducerCard";
 
 const meta: Meta<typeof ProducerCard> = {
   title: "Molecules/ProducerCard",

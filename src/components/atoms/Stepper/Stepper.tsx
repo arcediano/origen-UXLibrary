@@ -55,7 +55,12 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       steps,
       currentStep,
       onStepChange,
-      variant = "default",
+      // TODO: `variant` está en la API pública (StepperProps) pero nunca se
+      // aplica al render (sin estilos "minimal"/"card" implementados) —
+      // hallazgo registrado en
+      // claude-agile/proyectos/origen-UXLibrary/tareas-pendientes.md, no
+      // corregido aquí (implicaría diseñar 2 variantes visuales nuevas).
+      variant: _variant = "default",
       orientation = "horizontal",
       showDescriptions = true,
       allowBackwardNavigation = true,

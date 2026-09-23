@@ -16,6 +16,7 @@ interface ToggleGroupContextValue {
   orientation?: "horizontal" | "vertical";
   size?: "sm" | "md" | "lg";
   variant?: "default" | "outline" | "segmented" | "pill";
+  disabled?: boolean;
 }
 
 const ToggleGroupContext = React.createContext<ToggleGroupContextValue | undefined>(
@@ -91,6 +92,7 @@ const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
       orientation,
       size,
       variant,
+      disabled,
     };
 
     const isSegmented = variant === "segmented";
@@ -172,16 +174,20 @@ const ToggleGroupItem = React.forwardRef<
       ? context.value[0] === value
       : context.value.includes(value);
 
+  // `disabled` a nivel de item gana sobre el `disabled` heredado del `ToggleGroup` raíz.
+  const isDisabled = props.disabled ?? context.disabled;
+
   return (
     <button
       ref={ref}
       {...props}
       type="button"
+      disabled={isDisabled}
       aria-pressed={isPressed}
       data-state={isPressed ? "on" : "off"}
       onClick={(event) => {
         onClick?.(event);
-        if (event.defaultPrevented || props.disabled) return;
+        if (event.defaultPrevented || isDisabled) return;
         context.onValueChange(value);
       }}
       className={cn(
