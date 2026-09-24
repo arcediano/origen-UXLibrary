@@ -17,6 +17,14 @@ export interface RadioGroupProps
   orientation?: "horizontal" | "vertical";
 }
 
+interface RadioGroupContextValue {
+  size: "sm" | "md" | "lg";
+}
+
+const RadioGroupContext = React.createContext<RadioGroupContextValue | undefined>(
+  undefined
+);
+
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   RadioGroupProps
@@ -25,12 +33,7 @@ const RadioGroup = React.forwardRef<
     {
       className,
       variant = "default",
-      // TODO: `size` está en la API pública (RadioGroupProps) pero el Root
-      // nunca lo propaga a sus `RadioGroupItem` (que tienen su propio `size`
-      // independiente, ver más abajo) — hallazgo registrado en
-      // claude-agile/proyectos/origen-UXLibrary/tareas-pendientes.md, no
-      // corregido aquí para no rediseñar el contrato de tamaño sin decidirlo.
-      size: _size = "md",
+      size = "md",
       orientation = "vertical",
       ...props
     },
@@ -48,16 +51,18 @@ const RadioGroup = React.forwardRef<
     };
 
     return (
-      <RadioGroupPrimitive.Root
-        {...props}
-        ref={ref}
-        role="radiogroup"
-        className={cn(
-          orientationClasses[orientation],
-          variantClasses[variant],
-          className
-        )}
-      />
+      <RadioGroupContext.Provider value={{ size }}>
+        <RadioGroupPrimitive.Root
+          {...props}
+          ref={ref}
+          role="radiogroup"
+          className={cn(
+            orientationClasses[orientation],
+            variantClasses[variant],
+            className
+          )}
+        />
+      </RadioGroupContext.Provider>
     );
   }
 );
@@ -80,7 +85,7 @@ const RadioGroupItem = React.forwardRef<
     {
       className,
       variant = "default",
-      size = "md",
+      size,
       label,
       description,
       error,
@@ -89,6 +94,8 @@ const RadioGroupItem = React.forwardRef<
     },
     ref
   ) => {
+    const context = React.useContext(RadioGroupContext);
+    const resolvedSize = size ?? context?.size ?? "md";
     const generatedId = React.useId();
     const radioId = id || generatedId;
 
@@ -134,13 +141,13 @@ const RadioGroupItem = React.forwardRef<
           role="radio"
           className={cn(
             "aspect-square rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-            sizeClasses[size],
+            sizeClasses[resolvedSize],
             variantClasses[variant],
             className
           )}
         >
           <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-            <Circle className={cn("fill-current", sizeClasses[size])} />
+            <Circle className={cn("fill-current", sizeClasses[resolvedSize])} />
           </RadioGroupPrimitive.Indicator>
         </RadioGroupPrimitive.Item>
         {label && (
