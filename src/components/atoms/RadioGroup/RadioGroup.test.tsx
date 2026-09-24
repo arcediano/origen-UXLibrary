@@ -39,4 +39,24 @@ describe("RadioGroup", () => {
 
     expect(onValueChange).toHaveBeenCalledWith("b");
   });
+
+  it("propaga size del RadioGroup a sus RadioGroupItem", () => {
+    render(
+      <RadioGroup defaultValue="a" size="lg">
+        <RadioGroupItem value="a" label="Opcion A" />
+      </RadioGroup>
+    );
+
+    expect(screen.getByRole("radio", { name: "Opcion A" })).toHaveClass("h-6", "w-6");
+  });
+
+  it("el size del RadioGroupItem individual gana sobre el heredado del RadioGroup", () => {
+    render(
+      <RadioGroup defaultValue="a" size="lg">
+        <RadioGroupItem value="a" label="Opcion A" size="sm" />
+      </RadioGroup>
+    );
+
+    expect(screen.getByRole("radio", { name: "Opcion A" })).toHaveClass("h-4", "w-4");
+  });
 });
