@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ShoppingBag, TrendingUp, Users, Package } from "lucide-react";
 import { StatGrid } from "./StatGrid";
 

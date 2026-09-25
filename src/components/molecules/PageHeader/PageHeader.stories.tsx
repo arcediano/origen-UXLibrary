@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Settings2, Package2 } from "lucide-react";
 import { Button } from "../../atoms/Button";
 import { PageHeader } from "./PageHeader";

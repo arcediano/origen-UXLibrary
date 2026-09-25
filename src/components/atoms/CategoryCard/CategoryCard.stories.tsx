@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Apple, Milk, Wheat, Fish } from "lucide-react";
 import { CategoryCard, type CategoryCardCategory } from "./CategoryCard";

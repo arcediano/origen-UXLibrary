@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CheckCircle, ThumbsUp, ImageIcon } from "lucide-react";
 import { FilterPanel, type FilterSection } from "./FilterPanel";
 import { FilterToolbar } from "../FilterToolbar";

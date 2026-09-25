@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CheckCircle, ThumbsUp, ImageIcon, SlidersHorizontal } from "lucide-react";
 import { Button } from "../../atoms/Button";
 import { FilterSheet, type FilterSection } from "./FilterSheet";
