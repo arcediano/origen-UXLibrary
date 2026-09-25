@@ -37,7 +37,7 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
   const [mounted, setMounted]   = React.useState(false);
   const tooltipId               = React.useId();
   const triggerRef = React.useRef<HTMLDivElement>(null);
-  const timerRef   = React.useRef<ReturnType<typeof setTimeout>>();
+  const timerRef   = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   React.useEffect(() => {
     setMounted(true);
