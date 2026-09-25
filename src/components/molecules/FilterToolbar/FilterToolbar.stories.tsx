@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Grid3x3, List } from "lucide-react";
 import { FilterToolbar } from "./FilterToolbar";
 import { cn } from "../../../lib/utils";

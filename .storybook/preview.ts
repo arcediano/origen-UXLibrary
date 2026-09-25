@@ -1,17 +1,16 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 import "../src/styles/tokens.css";
 
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: "crema",
-      values: [
-        { name: "crema", value: "#FCF9F2" },
-        { name: "nube", value: "#F8FCF9" },
-        { name: "blanco", value: "#FFFFFF" },
-        { name: "bosque", value: "#215A42" },
-        { name: "pastel", value: "#E4F4EB" },
-      ],
+      options: {
+        crema: { name: "crema", value: "#FCF9F2" },
+        nube: { name: "nube", value: "#F8FCF9" },
+        blanco: { name: "blanco", value: "#FFFFFF" },
+        bosque: { name: "bosque", value: "#215A42" },
+        pastel: { name: "pastel", value: "#E4F4EB" }
+      }
     },
     controls: {
       matchers: {
@@ -42,6 +41,12 @@ const preview: Preview = {
       },
     },
   },
+
+  initialGlobals: {
+    backgrounds: {
+      value: "crema"
+    }
+  }
 };
 
 export default preview;

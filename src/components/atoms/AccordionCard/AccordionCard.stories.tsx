@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Camera, FlaskConical, ShieldCheck } from "lucide-react";
 import { Badge } from "../Badge";
 import { AccordionCard } from "./AccordionCard";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SlidersHorizontal, Sparkles } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
 import { FilterBottomSheet } from "./FilterBottomSheet";

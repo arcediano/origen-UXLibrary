@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Leaf, Sprout, Heart, ShieldCheck, Wheat, Milk } from "lucide-react";
 import { SelectableCard } from "./SelectableCard";

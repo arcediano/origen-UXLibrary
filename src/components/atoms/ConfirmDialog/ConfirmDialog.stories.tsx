@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { AlertCircle } from "lucide-react";
 import { ConfirmDialog } from "./ConfirmDialog";

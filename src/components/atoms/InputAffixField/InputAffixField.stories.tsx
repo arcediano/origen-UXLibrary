@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Euro, Percent } from "lucide-react";
 import { InputAffixField } from "./InputAffixField";
 
