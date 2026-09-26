@@ -217,7 +217,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "flex w-full rounded-xl transition-all duration-200",
               "text-origen-oscuro placeholder:text-text-subtle",
               "disabled:cursor-not-allowed disabled:bg-origen-nube disabled:opacity-50",
-              "focus:outline-none focus:ring-2 focus:ring-origen-pradera/45",
+              "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/45",
               variants[variant],
               sizeClasses[inputSize],
               paddingLeft,

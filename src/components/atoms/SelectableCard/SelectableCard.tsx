@@ -42,7 +42,7 @@ export interface SelectableCardProps
 }
 
 const toneSelectedBorder: Record<SelectableCardTone, string> = {
-  brand: "border-origen-pradera bg-gradient-to-br from-origen-pradera/5 to-origen-hoja/5 shadow-md",
+  brand: "border-origen-pradera bg-linear-to-br from-origen-pradera/5 to-origen-hoja/5 shadow-md",
   danger: "border-feedback-danger bg-feedback-danger-subtle shadow-md",
   warning: "border-feedback-warning bg-feedback-warning-subtle shadow-md",
 };
@@ -97,7 +97,7 @@ const SelectableCard = React.forwardRef<HTMLButtonElement, SelectableCardProps>(
           aria-pressed={selected}
           className={cn(
             "relative flex items-start gap-3 rounded-xl border-2 p-3.5 text-left transition-all",
-            "hover:shadow-md focus:outline-none focus-visible:ring-2",
+            "hover:shadow-md focus:outline-hidden focus-visible:ring-2",
             toneFocusRing[tone],
             "disabled:cursor-not-allowed disabled:opacity-50",
             selected
@@ -134,7 +134,7 @@ const SelectableCard = React.forwardRef<HTMLButtonElement, SelectableCardProps>(
         aria-pressed={selected}
         className={cn(
           "group relative rounded-xl border-2 bg-surface-alt p-2.5 transition-all",
-          "hover:shadow-lg hover:scale-[1.02] focus:outline-none focus-visible:ring-2",
+          "hover:shadow-lg hover:scale-[1.02] focus:outline-hidden focus-visible:ring-2",
           toneFocusRing[tone],
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100",
           selected ? toneSelectedBorder[tone] : "border-border-subtle hover:border-origen-pradera",

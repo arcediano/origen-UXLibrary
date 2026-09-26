@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CheckCircle, ThumbsUp, ImageIcon, SlidersHorizontal } from "lucide-react";
 import { Button } from "../../atoms/Button";
 import { FilterSheet, type FilterSection } from "./FilterSheet";
@@ -78,7 +78,7 @@ export const AllSectionTypes: Story = {
 
     return (
       <div className="min-h-[520px] bg-origen-nube px-4 py-6">
-        <div className="mx-auto max-w-md rounded-[2rem] border border-border-subtle bg-surface-alt p-5 shadow-subtle">
+        <div className="mx-auto max-w-md rounded-4xl border border-border-subtle bg-surface-alt p-5 shadow-subtle">
           <p className="text-micro uppercase tracking-[0.18em] text-text-subtle">Mobile commerce</p>
           <h2 className="mt-2 text-h3 text-origen-bosque">FilterSheet — 4 tipos de sección</h2>
           <p className="mt-2 text-small text-text-subtle">

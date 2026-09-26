@@ -132,7 +132,7 @@ export function FilterToolbar({
           aria-expanded={false}
           aria-haspopup="dialog"
           className={cn(
-            "relative flex items-center gap-1.5 h-10 rounded-xl border text-sm font-medium transition-colors flex-shrink-0",
+            "relative flex items-center gap-1.5 h-10 rounded-xl border text-sm font-medium transition-colors shrink-0",
             compact ? "w-10 justify-center px-0 sm:w-auto sm:justify-start sm:px-3.5" : "px-3.5",
             activeFilterCount > 0
               ? "bg-origen-bosque border-origen-bosque text-white"
@@ -147,7 +147,7 @@ export function FilterToolbar({
               className={cn(
                 "inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold",
                 compact
-                  ? "absolute -top-1.5 -right-1.5 bg-white text-origen-bosque shadow-sm ring-1 ring-origen-bosque/10 sm:static sm:shadow-none sm:ring-0"
+                  ? "absolute -top-1.5 -right-1.5 bg-white text-origen-bosque shadow-xs ring-1 ring-origen-bosque/10 sm:static sm:shadow-none sm:ring-0"
                   : "bg-white/25",
               )}
             >

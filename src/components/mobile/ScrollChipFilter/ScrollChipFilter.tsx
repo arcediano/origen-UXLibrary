@@ -95,7 +95,7 @@ export const ScrollChipFilter = React.forwardRef<HTMLDivElement, ScrollChipFilte
         "relative inline-flex shrink-0 items-center gap-1.5 rounded-full",
         SIZE_CLASSES[size],
         "text-small font-medium transition-all duration-200",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-1",
+        "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-1",
         active
           ? "bg-gradient-origen text-white shadow-subtle"
           : "bg-surface-alt text-origen-bosque hover:bg-origen-pastel/60 border border-border-subtle",

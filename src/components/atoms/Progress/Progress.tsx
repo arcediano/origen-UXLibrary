@@ -120,21 +120,21 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
       },
       leaf: {
         track: "bg-origen-pastel",
-        indicator: "bg-gradient-to-r from-origen-pradera to-origen-hoja",
+        indicator: "bg-linear-to-r from-origen-pradera to-origen-hoja",
         icon: <Leaf className="h-4 w-4" aria-hidden="true" />,
         label: "text-origen-bosque",
         valueLabel: "text-origen-hoja",
       },
       fruit: {
         track: "bg-amber-50",
-        indicator: "bg-gradient-to-r from-amber-400 to-orange-500",
+        indicator: "bg-linear-to-r from-amber-400 to-orange-500",
         icon: <Flower className="h-4 w-4" aria-hidden="true" />,
         label: "text-origen-bosque",
         valueLabel: "text-amber-600",
       },
       forest: {
         track: "bg-origen-bosque/10",
-        indicator: "bg-gradient-to-r from-origen-pino to-origen-bosque",
+        indicator: "bg-linear-to-r from-origen-pino to-origen-bosque",
         icon: <Sprout className="h-4 w-4 text-white" aria-hidden="true" />,
         label: "text-origen-bosque",
         valueLabel: "text-origen-bosque",
@@ -182,7 +182,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
             className={cn(
               "h-full rounded-full transition-[width] duration-500 ease-out",
               config.indicator,
-              animated && "after:absolute after:inset-0 after:animate-shimmer after:bg-gradient-to-r after:from-transparent after:via-white/20 after:to-transparent"
+              animated && "after:absolute after:inset-0 after:animate-shimmer after:bg-linear-to-r after:from-transparent after:via-white/20 after:to-transparent"
             )}
             style={{ width: `${percentage}%` }}
           />

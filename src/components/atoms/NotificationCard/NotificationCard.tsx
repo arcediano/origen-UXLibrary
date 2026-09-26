@@ -152,7 +152,7 @@ export function NotificationCard({
         {/* Avatar de icono */}
         <div
           className={cn(
-            "flex-shrink-0 rounded-xl flex items-center justify-center",
+            "shrink-0 rounded-xl flex items-center justify-center",
             compact ? "w-8 h-8" : "w-9 h-9",
             iconConfig.bg,
             // Leído: icono desaturado para que el ojo priorice lo pendiente
@@ -177,7 +177,7 @@ export function NotificationCard({
               {title}
             </p>
 
-            <span className="flex-shrink-0 flex items-center gap-1.5">
+            <span className="shrink-0 flex items-center gap-1.5">
               {showPriorityBadge && (
                 priority === "URGENT" ? (
                   <Badge variant="danger" size="xs">URGENTE</Badge>
@@ -203,7 +203,7 @@ export function NotificationCard({
                     // que se usa igual en móvil que en escritorio.
                     "flex items-center justify-center w-11 h-11 -m-2 rounded-full",
                     "hover:bg-origen-pradera/15 active:scale-90 transition-all duration-200",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera",
+                    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera",
                   )}
                   aria-label={`Marcar como leída: ${title}`}
                   title="Marcar como leída"

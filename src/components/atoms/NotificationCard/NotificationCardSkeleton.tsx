@@ -35,7 +35,7 @@ export function NotificationCardSkeleton({ className, compact = false }: Notific
     >
       <div className="flex gap-3 items-start">
         {/* Avatar esqueleto */}
-        <div className={cn("flex-shrink-0 rounded-xl bg-surface-alt animate-pulse", compact ? "w-8 h-8" : "w-9 h-9")} />
+        <div className={cn("shrink-0 rounded-xl bg-surface-alt animate-pulse", compact ? "w-8 h-8" : "w-9 h-9")} />
 
         {/* Contenido esqueleto */}
         <div className="flex-1 min-w-0 space-y-0">

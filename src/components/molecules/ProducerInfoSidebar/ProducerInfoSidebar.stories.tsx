@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Heart } from "lucide-react";
 import { Button } from "../../atoms/Button";
 import { ProducerInfoSidebar } from "./ProducerInfoSidebar";

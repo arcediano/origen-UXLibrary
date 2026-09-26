@@ -152,7 +152,7 @@ const PercentageInput = React.forwardRef<HTMLInputElement, PercentageInputProps>
               "flex h-11 w-full rounded-xl border bg-white px-3 py-2 pr-9",
               "text-sm sm:text-base placeholder:text-text-disabled",
               "transition-all duration-200",
-              "focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+              "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/50",
               "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
               error
                 ? "border-feedback-danger hover:border-red-600 focus:ring-feedback-danger/50"

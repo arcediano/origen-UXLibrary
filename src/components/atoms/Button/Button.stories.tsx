@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Plus, Save, Trash2 } from "lucide-react";
 import { Button } from "./Button";
 
@@ -81,16 +81,23 @@ export const Loading: Story = {
 
 export const Hero: Story = {
   args: { children: "Empieza gratis", variant: "hero", size: "md" },
+
   parameters: {
-    backgrounds: { default: "dark" },
     docs: {
       description: {
         story:
           "CTA primario sobre fondo oscuro/imagen (hero, banners de marca) — fondo blanco sólido, texto `origen-bosque`.",
       },
-    },
+    }
   },
+
   decorators: [(Story) => <div className="bg-origen-bosque p-8 rounded-2xl"><Story /></div>],
+
+  globals: {
+    backgrounds: {
+      value: "dark"
+    }
+  }
 };
 
 export const HeroOutline: Story = {
@@ -99,7 +106,7 @@ export const HeroOutline: Story = {
     docs: {
       description: {
         story:
-          "CTA secundario sobre fondo oscuro/imagen — transparente con borde y texto blancos. Complementa a `hero`. El ring de foco usa `ring-white` en vez de `ring-origen-pino` (ver comentario de cabecera de `Button.tsx` sobre el hallazgo de contraste).",
+          "CTA secundario sobre fondo oscuro/imagen — transparente con borde y texto blancos. Complementa a `hero`. El ring-3 de foco usa `ring-white` en vez de `ring-origen-pino` (ver comentario de cabecera de `Button.tsx` sobre el hallazgo de contraste).",
       },
     },
   },

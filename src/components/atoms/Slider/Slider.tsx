@@ -110,7 +110,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       "[&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none",
       "[&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md",
       "[&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:shadow-md",
-      "focus-visible:outline-none",
+      "focus-visible:outline-hidden",
       `[&::-webkit-slider-thumb]:${sizeConfig.thumb} [&::-moz-range-thumb]:${sizeConfig.thumb}`,
       `[&::-webkit-slider-thumb]:${config.thumb} [&::-moz-range-thumb]:${config.thumb}`,
       disabled && "opacity-60"

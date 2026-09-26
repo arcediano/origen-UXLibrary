@@ -175,7 +175,7 @@ export function FilterSheet({
       </button>
       <button
         onClick={handleApply}
-        className="flex-[2] h-12 rounded-2xl bg-origen-bosque text-white text-sm font-semibold active:scale-95 transition-all hover:bg-origen-pino"
+        className="flex-2 h-12 rounded-2xl bg-origen-bosque text-white text-sm font-semibold active:scale-95 transition-all hover:bg-origen-pino"
       >
         {resultCount !== undefined ? `Ver ${resultCount} ${resultLabel}` : "Aplicar filtros"}
       </button>

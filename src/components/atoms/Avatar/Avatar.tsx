@@ -116,7 +116,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             ref={ref}
             className={cn(
               "relative flex shrink-0 overflow-hidden",
-              "bg-gradient-to-br from-origen-pradera/10 to-origen-hoja/10",
+              "bg-linear-to-br from-origen-pradera/10 to-origen-hoja/10",
               "text-origen-bosque font-medium",
               SIZE_CLASSES[size],
               SHAPE_CLASSES[shape],

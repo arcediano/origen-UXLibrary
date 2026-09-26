@@ -57,9 +57,9 @@ export const CategoryCard = React.forwardRef<HTMLButtonElement, CategoryCardProp
           "group relative w-full rounded-xl border-2 bg-surface-alt p-3",
           "transition-all duration-200",
           "hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
-          "focus:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/50",
+          "focus:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/50",
           isSelected
-            ? "border-origen-pradera bg-origen-pradera/[0.03] shadow-md"
+            ? "border-origen-pradera bg-origen-pradera/3 shadow-md"
             : "border-border-subtle hover:border-origen-pradera",
           className
         )}
@@ -68,7 +68,7 @@ export const CategoryCard = React.forwardRef<HTMLButtonElement, CategoryCardProp
       >
         {isSelected && (
           <div className="absolute right-2 top-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-origen-pradera shadow-sm">
+            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-origen-pradera shadow-xs">
               <CheckCircle2 className="h-3.5 w-3.5 text-white" aria-hidden="true" />
             </div>
           </div>
@@ -80,7 +80,7 @@ export const CategoryCard = React.forwardRef<HTMLButtonElement, CategoryCardProp
               "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all",
               isSelected
                 ? "bg-origen-bosque text-white shadow-md"
-                : "bg-gradient-to-br from-origen-crema to-origen-pastel text-origen-bosque group-hover:scale-110"
+                : "bg-linear-to-br from-origen-crema to-origen-pastel text-origen-bosque group-hover:scale-110"
             )}
             aria-hidden="true"
           >

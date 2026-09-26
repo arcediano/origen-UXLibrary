@@ -50,7 +50,7 @@ describe("Button", () => {
     expect(button.className).toContain("focus-visible:bg-origen-pastel/40");
   });
 
-  it("usa un focus ring visible para estados claros", () => {
+  it("usa un focus ring-3 visible para estados claros", () => {
     render(<Button variant="secondary">Secundario</Button>);
     expect(screen.getByRole("button", { name: /secundario/i }).className).toContain("focus-visible:ring-origen-pino");
   });
@@ -153,7 +153,7 @@ describe("Button", () => {
     });
   });
 
-  describe("ring de foco por variante (contraste sobre fondo claro/oscuro)", () => {
+  describe("ring-3 de foco por variante (contraste sobre fondo claro/oscuro)", () => {
     it.each([
       ["primary"],
       ["secondary"],

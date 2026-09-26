@@ -59,7 +59,7 @@ export function MobileScrollSlider({
         className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-3 pb-3 px-4"
       >
         {children.map((child, i) => (
-          <div key={i} className={cn("snap-start flex-shrink-0", cardWidthClass)}>
+          <div key={i} className={cn("snap-start shrink-0", cardWidthClass)}>
             {child}
           </div>
         ))}

@@ -108,9 +108,9 @@ export function FilterBottomSheet({
         tabIndex={-1}
         onPointerDown={(e) => e.stopPropagation()}
         className={cn(
-          "fixed inset-x-0 bottom-0 z-[51]",
+          "fixed inset-x-0 bottom-0 z-51",
           "flex flex-col max-h-[92dvh]",
-          "bg-surface-alt rounded-t-3xl shadow-origen-lg focus:outline-none",
+          "bg-surface-alt rounded-t-3xl shadow-origen-lg focus:outline-hidden",
           className
         )}
         style={{
@@ -120,13 +120,13 @@ export function FilterBottomSheet({
         }}
       >
         {/* Drag handle */}
-        <div className="flex justify-center pt-3 pb-1 flex-shrink-0">
+        <div className="flex justify-center pt-3 pb-1 shrink-0">
           <div className="h-1 w-10 rounded-full bg-border-subtle" />
         </div>
 
         {/* Header */}
         {title && (
-          <div className="flex-shrink-0 px-6 pt-2 pb-4 border-b border-border-subtle">
+          <div className="shrink-0 px-6 pt-2 pb-4 border-b border-border-subtle">
             <h2 className="text-base font-semibold text-origen-bosque">{title}</h2>
             {description && (
               <p className="text-sm text-text-subtle mt-0.5">{description}</p>
@@ -145,7 +145,7 @@ export function FilterBottomSheet({
         {/* Footer with iOS safe-area */}
         {footer && (
           <div
-            className="flex-shrink-0 px-6 pt-4 border-t border-border-subtle bg-surface-alt"
+            className="shrink-0 px-6 pt-4 border-t border-border-subtle bg-surface-alt"
             style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
           >
             {footer}

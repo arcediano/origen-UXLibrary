@@ -244,7 +244,7 @@ function FilterPanelDesktop({
         "hidden lg:flex flex-col",
         isDrawer
           ? cn(
-              "fixed top-0 right-0 bottom-0 z-[9999] w-[360px] max-w-[90vw]",
+              "fixed top-0 right-0 bottom-0 z-9999 w-[360px] max-w-[90vw]",
               "rounded-l-2xl border-l border-border bg-surface-alt shadow-2xl",
               "transition-transform duration-200",
               entered ? "translate-x-0" : "translate-x-full",
@@ -257,7 +257,7 @@ function FilterPanelDesktop({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle shrink-0">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="w-4 h-4 text-origen-bosque" />
           <span className="text-sm font-semibold text-origen-bosque">{title}</span>
@@ -288,7 +288,7 @@ function FilterPanelDesktop({
       </div>
 
       {/* Footer */}
-      <div className="flex gap-2 px-4 py-3 border-t border-border-subtle flex-shrink-0">
+      <div className="flex gap-2 px-4 py-3 border-t border-border-subtle shrink-0">
         <button
           type="button"
           onClick={handleClear}
@@ -305,7 +305,7 @@ function FilterPanelDesktop({
         <button
           type="button"
           onClick={handleApply}
-          className="flex-[2] h-9 rounded-xl bg-origen-bosque text-white text-sm font-semibold transition-all hover:bg-origen-pino active:scale-95"
+          className="flex-2 h-9 rounded-xl bg-origen-bosque text-white text-sm font-semibold transition-all hover:bg-origen-pino active:scale-95"
         >
           {resultCount !== undefined ? `Ver ${resultCount} ${resultLabel}` : "Aplicar filtros"}
         </button>
@@ -321,7 +321,7 @@ function FilterPanelDesktop({
         aria-hidden="true"
         onClick={onClose}
         className={cn(
-          "hidden lg:block fixed inset-0 z-[9998] bg-origen-oscuro/40 transition-opacity duration-200",
+          "hidden lg:block fixed inset-0 z-9998 bg-origen-oscuro/40 transition-opacity duration-200",
           entered ? "opacity-100" : "opacity-0",
         )}
       />
@@ -391,7 +391,7 @@ function FilterPanelMobileWrapper({
       </button>
       <button
         onClick={handleApply}
-        className="flex-[2] h-12 rounded-2xl bg-origen-bosque text-white text-sm font-semibold active:scale-95 transition-all hover:bg-origen-pino"
+        className="flex-2 h-12 rounded-2xl bg-origen-bosque text-white text-sm font-semibold active:scale-95 transition-all hover:bg-origen-pino"
       >
         {resultCount !== undefined ? `Ver ${resultCount} ${resultLabel}` : "Aplicar filtros"}
       </button>

@@ -307,7 +307,7 @@ export function AuthFooter({
               <div className="bg-surface-alt/10 rounded-xl p-5 space-y-3 border border-white/10">
                 {CONTACT_INFO.map(({ icon: Icon, label, value }) => (
                   <div key={label} className="flex items-center gap-3 text-sm">
-                    <div className="w-8 h-8 rounded-lg bg-surface-alt/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-surface-alt/10 flex items-center justify-center shrink-0">
                       <Icon className="w-4 h-4 text-origen-pradera" />
                     </div>
                     <div>

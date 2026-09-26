@@ -37,7 +37,7 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
   const [mounted, setMounted]   = React.useState(false);
   const tooltipId               = React.useId();
   const triggerRef = React.useRef<HTMLDivElement>(null);
-  const timerRef   = React.useRef<ReturnType<typeof setTimeout>>();
+  const timerRef   = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   React.useEffect(() => {
     setMounted(true);
@@ -81,7 +81,7 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
     >
       <button
         type="button"
-        className="inline-flex items-center justify-center cursor-help text-text-subtle transition-colors hover:text-origen-pradera focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2"
+        className="inline-flex items-center justify-center cursor-help text-text-subtle transition-colors hover:text-origen-pradera focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2"
         aria-label="Mostrar ayuda"
         aria-describedby={isOpen ? tooltipId : undefined}
         onMouseEnter={open}
@@ -99,10 +99,10 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
 
       {isOpen && mounted &&
         createPortal(
-          <div className="fixed inset-0 pointer-events-none z-[9999999]">
+          <div className="fixed inset-0 pointer-events-none z-9999999">
             <div style={styles} className="absolute w-72">
               <div id={tooltipId} role="tooltip" className="relative bg-origen-oscuro rounded-xl shadow-2xl border border-origen-pradera/20 overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
+                <div className="absolute top-0 left-0 right-0 h-8 bg-linear-to-b from-white/10 to-transparent pointer-events-none" />
                 <div className="p-4">
                   <p className="text-sm font-semibold text-origen-crema mb-1">{content}</p>
                   {detailed && <p className="text-xs text-origen-crema/80 leading-relaxed">{detailed}</p>}
@@ -110,7 +110,7 @@ export function Tooltip({ content, detailed, size = "md", className }: TooltipPr
                 <div
                   className={cn(
                     "absolute w-4 h-4 bg-origen-oscuro border-l border-t border-origen-pradera/20 rotate-45",
-                    position === "bottom" ? "-top-2 left-4" : "-bottom-2 left-4 -rotate-[135deg]"
+                    position === "bottom" ? "-top-2 left-4" : "-bottom-2 left-4 rotate-[-135deg]"
                   )}
                 />
               </div>

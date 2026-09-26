@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FilterSidebar, RatingFilterSection, type FilterSection } from "./FilterSidebar";
 
 const meta: Meta<typeof FilterSidebar> = {

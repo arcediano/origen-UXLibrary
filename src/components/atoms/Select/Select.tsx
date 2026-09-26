@@ -196,7 +196,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         }}
         className={cn(
           "flex min-h-[44px] w-full items-center justify-between gap-2 rounded-xl border bg-white px-3 py-2 text-left transition-all duration-200 sm:px-4 sm:py-3",
-          "focus:outline-none focus:ring-2 focus:ring-origen-pradera/50 focus:ring-offset-2",
+          "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/50 focus:ring-offset-2",
           "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
           error
             ? "border-feedback-danger hover:border-red-600"
@@ -343,10 +343,10 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
           "transition-transform duration-300 ease-out",
           isMobile
             ? cn(
-                "fixed bottom-0 inset-x-0 z-[90] rounded-t-3xl",
+                "fixed bottom-0 inset-x-0 z-90 rounded-t-3xl",
                 entered ? "translate-y-0" : "translate-y-full"
               )
-            : "z-[90] max-h-80 rounded-xl",
+            : "z-90 max-h-80 rounded-xl",
           className
         )}
         {...props}
@@ -362,7 +362,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, SelectContentProps>(
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Buscar..."
-                className="w-full rounded-lg border border-border bg-surface py-2 pl-10 pr-9 text-sm outline-none focus:border-origen-pradera focus:ring-1 focus:ring-origen-pradera/50"
+                className="w-full rounded-lg border border-border bg-surface py-2 pl-10 pr-9 text-sm outline-hidden focus:border-origen-pradera focus:ring-1 focus:ring-origen-pradera/50"
                 onClick={(event) => event.stopPropagation()}
               />
               {searchTerm && (
@@ -417,9 +417,9 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
         {...props}
         type="button"
         className={cn(
-          "relative flex min-h-[52px] w-full cursor-pointer select-none items-center rounded-lg py-2 pl-3 pr-9 text-sm outline-none transition-all duration-150 sm:min-h-[44px]",
+          "relative flex min-h-[52px] w-full cursor-pointer select-none items-center rounded-lg py-2 pl-3 pr-9 text-sm outline-hidden transition-all duration-150 sm:min-h-[44px]",
           "hover:bg-origen-crema hover:text-origen-bosque",
-          "focus:bg-origen-crema focus:text-origen-bosque focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+          "focus:bg-origen-crema focus:text-origen-bosque focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/50",
           disabled && "pointer-events-none opacity-50",
           isSelected && "bg-origen-crema/80 font-medium text-origen-bosque",
           className

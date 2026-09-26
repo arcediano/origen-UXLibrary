@@ -81,7 +81,7 @@ const Label = React.forwardRef<
       <div className="group relative inline-flex">
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-full text-text-subtle transition-colors hover:text-origen-pradera focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-1"
+          className="inline-flex items-center justify-center rounded-full text-text-subtle transition-colors hover:text-origen-pradera focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-1"
           aria-label="información adicional"
         >
           <Info className="h-3.5 w-3.5 cursor-help" aria-hidden="true" />

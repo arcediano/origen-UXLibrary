@@ -17,9 +17,204 @@
  *   }
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-origen-bosque: hsl(var(--bosque));
+  --color-origen-pino: hsl(var(--pino));
+  --color-origen-hoja: hsl(var(--hoja));
+  --color-origen-pradera: hsl(var(--pradera));
+  --color-origen-menta: hsl(var(--menta));
+  --color-origen-crema: hsl(var(--crema));
+  --color-origen-oscuro: hsl(var(--oscuro));
+  --color-origen-pastel: hsl(var(--pastel));
+  --color-origen-mandarina: hsl(var(--mandarina));
+  --color-origen-sol: hsl(var(--sol));
+  --color-origen-cereza: hsl(var(--cereza));
+  --color-origen-nube: hsl(var(--nube));
+  --color-origen-tierra: hsl(var(--tierra));
+  --color-origen-arena: hsl(var(--arena));
+  --color-origen-hoja-tinta: hsl(var(--hoja-tinta));
+  --color-origen-data-anterior: hsl(var(--data-anterior));
+  --color-origen-texto-suave: hsl(var(--texto-suave));
+
+  --color-hover-bosque: hsl(var(--hover-bosque));
+  --color-hover-pradera: hsl(var(--hover-pradera));
+  --color-hover-menta: hsl(var(--hover-menta));
+  --color-hover-tierra: hsl(var(--hover-tierra));
+
+  --color-surface: hsl(var(--surface));
+  --color-surface-alt: hsl(var(--surface-alt));
+  --color-surface-raised: hsl(var(--surface-raised));
+
+  --color-border-subtle: hsl(var(--border-subtle));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-border-container: hsl(var(--border-container));
+  --color-text-subtle: hsl(var(--text-subtle));
+  --color-text-disabled: hsl(var(--text-disabled));
+  --color-hoja-tinta: hsl(var(--hoja-tinta));
+  --color-data-anterior: hsl(var(--data-anterior));
+
+  --color-feedback-success: hsl(var(--hoja));
+  --color-feedback-success-subtle: hsl(var(--pastel));
+  --color-feedback-success-text: hsl(var(--hoja));
+  --color-feedback-danger: #ef4444;
+  --color-feedback-danger-subtle: #fef2f2;
+  --color-feedback-danger-text: #b91c1c;
+  --color-feedback-danger-border: rgba(239, 68, 68, 0.55);
+  --color-feedback-warning: #d97706;
+  --color-feedback-warning-subtle: #fffbeb;
+  --color-feedback-warning-text: #92400e;
+  --color-feedback-info: #3b82f6;
+  --color-feedback-info-subtle: #eff6ff;
+  --color-feedback-info-text: #1e40af;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --breakpoint-xs: 475px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+
+  --font-sans: var(--font-sans), sans-serif;
+  --font-serif: var(--font-serif), serif;
+
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: var(--lh-tight);
+  --text-h1--font-weight: var(--fw-bold);
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: var(--lh-heading);
+  --text-h2--font-weight: var(--fw-bold);
+  --text-h2--letter-spacing: -0.015em;
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: var(--lh-heading);
+  --text-h3--font-weight: var(--fw-semibold);
+  --text-h3--letter-spacing: -0.01em;
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-body);
+  --text-body--font-weight: var(--fw-medium);
+  --text-small: var(--fs-small);
+  --text-small--line-height: var(--lh-body);
+  --text-small--font-weight: var(--fw-medium);
+  --text-micro: var(--fs-micro);
+  --text-micro--line-height: var(--lh-body);
+  --text-micro--font-weight: var(--fw-medium);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --shadow-origen: 0 4px 20px hsla(var(--bosque) / 0.1);
+  --shadow-origen-lg: 0 10px 40px hsla(var(--bosque) / 0.15);
+  --shadow-origen-inner: inset 0 2px 4px hsla(var(--bosque) / 0.06);
+  --shadow-subtle: 0 2px 8px hsla(var(--bosque) / 0.08);
+  --shadow-card-hover: 0 20px 30px hsla(var(--bosque) / 0.15);
+  --shadow-menta-glow: 0 0 8px hsl(var(--menta));
+  --shadow-menta-glow-lg: 0 2px 8px hsla(var(--menta) / 0.4);
+
+  --background-image-gradient-origen: linear-gradient(
+    135deg,
+    hsl(var(--bosque)) 0%,
+    hsl(var(--pino)) 50%,
+    hsl(var(--pradera)) 100%
+  );
+  --background-image-gradient-menta: linear-gradient(
+    135deg,
+    hsl(var(--menta)) 0%,
+    hsl(var(--hoja)) 100%
+  );
+  --background-image-gradient-crema: linear-gradient(
+    135deg,
+    hsl(var(--crema)) 0%,
+    #ffffff 100%
+  );
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-card-hover: card-hover 0.3s ease-out forwards;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  --transition-property-card: transform, box-shadow, border-color;
+  --transition-property-gradient: opacity, transform;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes card-hover {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 @layer base {
   :root {

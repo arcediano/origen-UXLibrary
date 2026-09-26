@@ -33,7 +33,7 @@ export function ProductMobileHeader({
   return (
     <div
       className={cn(
-        "lg:hidden fixed top-0 inset-x-0 z-40 bg-white/95 backdrop-blur-sm border-b border-border-subtle",
+        "lg:hidden fixed top-0 inset-x-0 z-40 bg-white/95 backdrop-blur-xs border-b border-border-subtle",
         className
       )}
     >

@@ -162,11 +162,11 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         tabIndex={isActive ? 0 : -1}
         className={cn(
           "relative inline-flex min-h-11 items-center justify-center rounded-xl px-4 py-2.5 text-small font-semibold transition-all duration-200",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:ring-offset-2",
+          "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:ring-offset-2",
           "disabled:cursor-not-allowed disabled:text-origen-bosque/65 disabled:hover:bg-transparent disabled:hover:text-origen-bosque/65",
           "whitespace-nowrap",
           isActive
-            ? "bg-white text-origen-bosque shadow-sm"
+            ? "bg-white text-origen-bosque shadow-xs"
             : "text-origen-pino/80 hover:bg-white/60 hover:text-origen-bosque",
           className
         )}
@@ -241,7 +241,7 @@ const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
         id={`${baseId}-panel-${value}`}
         aria-labelledby={`${baseId}-tab-${value}`}
         tabIndex={0}
-        className={cn("mt-4 outline-none animate-fade-in", className)}
+        className={cn("mt-4 outline-hidden animate-fade-in", className)}
       >
         {children}
       </div>

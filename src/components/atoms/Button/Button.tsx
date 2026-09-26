@@ -39,7 +39,7 @@ const buttonVariants = cva(
   cn(
     "inline-flex items-center justify-center",
     "rounded-xl font-semibold transition-all duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+    "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:shadow-none",
     "active:scale-[0.98]",
     "w-full sm:w-auto shadow-subtle"
@@ -92,7 +92,7 @@ const buttonVariants = cva(
          * transparente con borde y texto blancos. Complementa a `hero` (que es
          * el CTA primario blanco sólido sobre esos mismos fondos). */
         heroOutline: cn(
-          "border border-white/50 bg-white/10 text-white backdrop-blur-sm",
+          "border border-white/50 bg-white/10 text-white backdrop-blur-xs",
           "hover:bg-white/18",
           "focus-visible:ring-white",
           "disabled:border-white/25 disabled:bg-white/5 disabled:text-white/50"

@@ -59,9 +59,9 @@ export function ActiveFilterChips({ chips, onClearAll, className }: ActiveFilter
         <div
           key={chip.id}
           className={cn(
-            "flex-shrink-0 inline-flex items-center gap-1",
+            "shrink-0 inline-flex items-center gap-1",
             "pl-2.5 pr-1 py-1 rounded-full",
-            "bg-origen-bosque/[8%] border border-origen-bosque/15",
+            "bg-origen-bosque/8 border border-origen-bosque/15",
             "text-xs font-medium text-origen-bosque",
             "transition-colors",
           )}
@@ -88,7 +88,7 @@ export function ActiveFilterChips({ chips, onClearAll, className }: ActiveFilter
         <button
           type="button"
           onClick={onClearAll}
-          className="flex-shrink-0 text-xs text-text-subtle hover:text-origen-bosque underline-offset-2 hover:underline transition-colors whitespace-nowrap ml-0.5"
+          className="shrink-0 text-xs text-text-subtle hover:text-origen-bosque underline-offset-2 hover:underline transition-colors whitespace-nowrap ml-0.5"
           aria-label="Limpiar todos los filtros activos"
         >
           Limpiar todo

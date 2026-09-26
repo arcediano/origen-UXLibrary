@@ -9,7 +9,8 @@
  *   - Utilidades que generan clases dinámicas
  *
  * PARA PROYECTOS TAILWIND:
- *   Usa `@arcediano/ux-library/tailwind.config` como preset en su lugar.
+ *   No hay preset publicado — replica estos tokens en tu propio
+ *   `tailwind.config.ts`/`@theme` (ver `src/styles/tokens.css` de este repo).
  *
  * PARA CSS GLOBAL:
  *   Importa `@arcediano/ux-library/styles` para las custom properties.

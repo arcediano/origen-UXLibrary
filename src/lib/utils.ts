@@ -7,8 +7,9 @@ import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 /**
- * Nombres de fontSize personalizados definidos en theme.extend.fontSize
- * de origen-UXLibrary/src/tailwind.config.ts Y replicados de forma
+ * Nombres de fontSize personalizados definidos en `@theme` de
+ * origen-UXLibrary/src/styles/tokens.css (antes en theme.extend.fontSize
+ * de src/tailwind.config.ts, migrado a Tailwind v4) Y replicados de forma
  * identica en los tailwind.config.ts forkeados de los 3 consumidores
  * (origen-admin, origen-dashboard, origen-web) a fecha 2026-08-06.
  *
@@ -17,10 +18,9 @@ import { extendTailwindMerge } from "tailwind-merge";
  * combinarla con una de estas (bug real, ver
  * .claude/requirements/bug-fusion-clases-tailwind-merge-button.md).
  *
- * IMPORTANTE: si algun consumidor anade una clave nueva a fontSize en su
- * tailwind.config.ts, anadela tambien aqui (y ejecuta de nuevo la
- * verificacion empirica de esta tarea) o volvera a reproducirse este
- * bug para esa clave.
+ * IMPORTANTE: si algun consumidor anade una clave nueva de tipografia,
+ * anadela tambien aqui (y ejecuta de nuevo la verificacion empirica de
+ * esta tarea) o volvera a reproducirse este bug para esa clave.
  */
 const CUSTOM_FONT_SIZE_NAMES = ["h1", "h2", "h3", "body", "small", "micro"];
 

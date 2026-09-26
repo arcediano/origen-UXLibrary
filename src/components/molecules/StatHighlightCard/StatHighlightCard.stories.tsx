@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { TrendingUp, Clock, ShieldCheck, Globe, Users, ShoppingBag } from "lucide-react";
 import { StatHighlightCard } from "./StatHighlightCard";
 
@@ -21,7 +21,7 @@ const meta: Meta<typeof StatHighlightCard> = {
   },
   decorators: [
     (Story) => (
-      <div className="bg-gradient-to-br from-origen-bosque to-origen-pino p-8">
+      <div className="bg-linear-to-br from-origen-bosque to-origen-pino p-8">
         <Story />
       </div>
     ),

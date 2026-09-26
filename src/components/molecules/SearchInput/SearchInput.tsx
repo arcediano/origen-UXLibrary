@@ -135,7 +135,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             // base
             "w-full rounded-xl border border-border-subtle bg-surface-alt text-origen-oscuro",
             "placeholder:text-text-subtle transition-colors duration-200",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:border-transparent",
+            "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:border-transparent",
             "disabled:pointer-events-none disabled:opacity-50",
             // quitar UI nativa de type=search
             "[&::-webkit-search-cancel-button]:appearance-none",

@@ -136,7 +136,7 @@ export function TagsInput({
           placeholder={value.length >= maxTags ? "Limite alcanzado" : placeholder}
           disabled={value.length >= maxTags}
           className={cn(
-            "min-h-[44px] min-w-[120px] flex-1 border-0 bg-transparent outline-none",
+            "min-h-[44px] min-w-[120px] flex-1 border-0 bg-transparent outline-hidden",
             "text-xs sm:text-sm placeholder:text-text-disabled",
             "focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50"
           )}

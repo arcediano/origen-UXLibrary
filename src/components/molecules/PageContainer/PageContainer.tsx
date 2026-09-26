@@ -32,7 +32,7 @@ export interface PageContainerProps {
   /**
    * Variante de fondo de la página.
    * - `default`: `bg-surface` (blanco/crema claro — secciones internas)
-   * - `gradient`: `bg-gradient-to-b from-white to-origen-crema` (overview principal)
+   * - `gradient`: `bg-linear-to-b from-white to-origen-crema` (overview principal)
    * - `crema`: `bg-origen-crema/40` (fondos secundarios suaves)
    * - `transparent`: sin fondo (hereda del layout)
    * @default "default"
@@ -52,7 +52,7 @@ export interface PageContainerProps {
 
 const variantClasses: Record<PageContainerVariant, string> = {
   default:     "",
-  gradient:    "bg-gradient-to-b from-white to-origen-crema",
+  gradient:    "bg-linear-to-b from-white to-origen-crema",
   crema:       "bg-origen-crema/40",
   transparent: "",
 };

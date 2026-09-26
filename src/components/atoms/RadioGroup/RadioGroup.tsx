@@ -140,7 +140,7 @@ const RadioGroupItem = React.forwardRef<
           id={radioId}
           role="radio"
           className={cn(
-            "aspect-square rounded-full border-2 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+            "aspect-square rounded-full border-2 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-offset-2",
             sizeClasses[resolvedSize],
             variantClasses[variant],
             className

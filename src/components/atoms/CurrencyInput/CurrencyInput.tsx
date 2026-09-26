@@ -253,7 +253,7 @@ const CurrencyInput = React.forwardRef<HTMLInputElement, CurrencyInputProps>(
               "flex w-full rounded-xl border bg-white pl-10",
               "text-origen-oscuro placeholder:text-text-disabled",
               "transition-all duration-200",
-              "focus:border-origen-pradera focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+              "focus:border-origen-pradera focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/50",
               "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
               sizeClasses[inputSize],
               error

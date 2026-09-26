@@ -172,7 +172,7 @@ export function ChipsSection({
                   : "bg-surface border-border-subtle text-origen-bosque",
               )}
             >
-              {Icon && <Icon className="w-4 h-4 flex-shrink-0" />}
+              {Icon && <Icon className="w-4 h-4 shrink-0" />}
               {opt.label}
               {opt.count !== undefined && opt.count > 0 && (
                 <span className={cn("text-xs font-bold", active ? "text-white/70" : "text-text-subtle")}>
@@ -235,7 +235,7 @@ export function NumberRangeSection({
 }) {
   const inputCls = cn(
     "w-full h-12 text-sm font-medium text-origen-bosque border border-border-subtle bg-surface rounded-xl",
-    "focus:outline-none focus:ring-2 focus:ring-origen-pradera/25 focus:border-origen-pradera transition-colors",
+    "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/25 focus:border-origen-pradera transition-colors",
     section.prefix ? "pl-7 pr-3" : "px-3",
   );
   return (
@@ -325,7 +325,7 @@ export function TogglesSection({
                 active ? "bg-origen-bosque/10 text-origen-bosque" : "bg-surface text-origen-bosque/70",
               )}
             >
-              {Icon && <Icon className="w-4 h-4 flex-shrink-0" />}
+              {Icon && <Icon className="w-4 h-4 shrink-0" />}
               <span className="flex-1 text-left">{opt.label}</span>
               <div
                 className={cn(
@@ -335,7 +335,7 @@ export function TogglesSection({
               >
                 <div
                   className={cn(
-                    "w-5 h-5 rounded-full bg-white shadow-sm transition-transform",
+                    "w-5 h-5 rounded-full bg-white shadow-xs transition-transform",
                     active ? "translate-x-4" : "translate-x-0",
                   )}
                 />
@@ -373,7 +373,7 @@ export function TextSection({
         }}
         className={cn(
           "w-full h-12 px-3 text-sm font-medium text-origen-bosque border border-border-subtle bg-surface rounded-xl",
-          "focus:outline-none focus:ring-2 focus:ring-origen-pradera/25 focus:border-origen-pradera transition-colors",
+          "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/25 focus:border-origen-pradera transition-colors",
         )}
       />
     </div>

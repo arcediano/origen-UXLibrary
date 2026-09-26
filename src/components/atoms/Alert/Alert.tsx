@@ -21,7 +21,7 @@ const variantClasses: Record<AlertVariant, string> = {
   error: "border-feedback-danger/50 bg-feedback-danger-subtle text-feedback-danger-text",
   info: "border-feedback-info/40 bg-feedback-info-subtle text-feedback-info-text",
   organic:
-    "border-origen-pradera/30 bg-gradient-to-br from-origen-pastel to-origen-crema text-origen-oscuro shadow-md shadow-origen-pradera/10",
+    "border-origen-pradera/30 bg-linear-to-br from-origen-pastel to-origen-crema text-origen-oscuro shadow-md shadow-origen-pradera/10",
 };
 
 const variantIcons: Record<AlertVariant, React.ReactNode> = {
@@ -55,7 +55,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       >
         <span className="shrink-0 text-current">{variantIcons[variant]}</span>
 
-        <div className="flex-1 min-w-0 space-y-1 break-words">{children}</div>
+        <div className="flex-1 min-w-0 space-y-1 wrap-break-word">{children}</div>
 
         {trailing && <div className="shrink-0">{trailing}</div>}
 
@@ -70,7 +70,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
             className={cn(
               "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg",
               "text-current/70 transition-colors hover:bg-black/5 hover:text-current",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pino"
+              "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pino"
             )}
           >
             <X className="h-4 w-4" aria-hidden="true" />

@@ -20,7 +20,7 @@ const cardVariants = cva(
          * de formulario multi-paso, con sombra suave que aumenta al hover y
          * borde que se tine de color de marca al pasar el raton.
          */
-        section: "bg-surface-alt shadow-sm hover:shadow-md hover:border-origen-pradera/30",
+        section: "bg-surface-alt shadow-xs hover:shadow-md hover:border-origen-pradera/30",
         /**
          * Media Card — para cards con imagen (ProductCard, ProducerCard).
          * overflow-hidden para contener la imagen, elevación al hover.
@@ -34,7 +34,7 @@ const cardVariants = cva(
       interactive: {
         true: cn(
           "cursor-pointer min-h-[44px]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2"
+          "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2"
         ),
         false: "",
       },
@@ -143,7 +143,7 @@ const CardIconHeader = React.forwardRef<HTMLDivElement, CardIconHeaderProps>(
              * `text-hoja-tinta` (≥5.9:1, token correcto para iconos/texto
              * informativo sobre fondo claro).
              */
-            "bg-gradient-to-br from-origen-pradera/20 to-origen-hoja/20 text-hoja-tinta"
+            "bg-linear-to-br from-origen-pradera/20 to-origen-hoja/20 text-hoja-tinta"
           )}
           aria-hidden="true"
         >

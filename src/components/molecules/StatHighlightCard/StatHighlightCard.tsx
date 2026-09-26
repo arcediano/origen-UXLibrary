@@ -91,7 +91,7 @@ export function StatHighlightCard({
       <div className="flex items-center gap-3">
         <div
           className={cn(
-            "flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br shadow-lg md:h-12 md:w-12 md:rounded-xl",
+            "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br shadow-lg md:h-12 md:w-12 md:rounded-xl",
             "[&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white md:[&>svg]:h-6 md:[&>svg]:w-6",
             gradientMap[gradient],
           )}
@@ -100,7 +100,7 @@ export function StatHighlightCard({
           {icon}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="mb-0.5 text-xl font-bold text-white drop-shadow-sm md:text-2xl">
+          <div className="mb-0.5 text-xl font-bold text-white drop-shadow-xs md:text-2xl">
             {value}
           </div>
           <div className="text-sm font-medium text-white/90">{label}</div>

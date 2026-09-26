@@ -27,8 +27,6 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   currentStep: number;
   /** Callback cuando se cambia de paso */
   onStepChange?: (step: number) => void;
-  /** Variante visual */
-  variant?: "default" | "minimal" | "card";
   /**
    * Orientación.
    * - `horizontal` / `vertical`: stepper completo con circulos, titulos y
@@ -55,12 +53,6 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       steps,
       currentStep,
       onStepChange,
-      // TODO: `variant` está en la API pública (StepperProps) pero nunca se
-      // aplica al render (sin estilos "minimal"/"card" implementados) —
-      // hallazgo registrado en
-      // claude-agile/proyectos/origen-UXLibrary/tareas-pendientes.md, no
-      // corregido aquí (implicaría diseñar 2 variantes visuales nuevas).
-      variant: _variant = "default",
       orientation = "horizontal",
       showDescriptions = true,
       allowBackwardNavigation = true,
@@ -94,7 +86,7 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
                   aria-label={step.title}
                   aria-current={isActive ? "step" : undefined}
                   className={cn(
-                    "flex flex-shrink-0 items-center justify-center rounded-full transition-all duration-300",
+                    "flex shrink-0 items-center justify-center rounded-full transition-all duration-300",
                     isCompleted && "h-5 w-5 bg-origen-hoja",
                     isActive && "h-5 w-5 bg-origen-pradera ring-2 ring-origen-pradera/30",
                     !isCompleted && !isActive && "h-2.5 w-2.5 bg-border"

@@ -5,7 +5,7 @@
  * badges de certificacion y CTA para expandir el perfil editorial.
  *
  * Layout responsive:
- * - Movil (<md): bloque full-width, sin sticky. Foto aspect-[16/7] max-h-[200px].
+ * - Movil (<md): bloque full-width, sin sticky. Foto aspect-16/7 max-h-[200px].
  * - Tablet (md-lg): columna 280px, sin sticky. Foto aspect-[4/3].
  * - Desktop (>=lg): columna 320px, sticky top-24. Foto aspect-[4/3].
  *
@@ -141,7 +141,7 @@ export function ProducerInfoSidebar({
       {/* ── 1. Bloque foto/banner ─────────────────────────────────────── */}
       <div className="relative overflow-hidden rounded-2xl">
         {/* Contenedor de imagen: ratio corto en movil, cuadrado en md+ */}
-        <div className="relative aspect-[16/7] max-h-[200px] md:aspect-[4/3] md:max-h-none">
+        <div className="relative aspect-16/7 max-h-[200px] md:aspect-4/3 md:max-h-none">
           {photoUrl ? (
             <img
               src={photoUrl}
@@ -153,12 +153,12 @@ export function ProducerInfoSidebar({
             <div
               role="img"
               aria-label={`Foto de ${businessName}`}
-              className="absolute inset-0 bg-gradient-to-br from-origen-pastel via-origen-nube to-origen-pradera/20"
+              className="absolute inset-0 bg-linear-to-br from-origen-pastel via-origen-nube to-origen-pradera/20"
             />
           )}
 
           {/* Gradiente de lectura en la parte inferior de la imagen */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/30 to-transparent pointer-events-none" />
         </div>
 
         {/* Logo superpuesto: esquina inferior derecha */}
