@@ -103,8 +103,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         data-state={stateValue}
         className={cn(
           "relative inline-flex shrink-0 items-center justify-center",
-          "has-[:focus-visible]:outline-none has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-origen-pradera/50 has-[:focus-visible]:ring-offset-2",
-          "has-[:disabled]:cursor-not-allowed has-[:disabled]:opacity-50",
+          "has-focus-visible:outline-hidden has-focus-visible:ring-2 has-focus-visible:ring-origen-pradera/50 has-focus-visible:ring-offset-2",
+          "has-disabled:cursor-not-allowed has-disabled:opacity-50",
           className
         )}
       >

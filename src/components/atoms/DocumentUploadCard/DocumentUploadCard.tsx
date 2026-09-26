@@ -66,7 +66,7 @@ const DocumentUploadCard = React.forwardRef<HTMLDivElement, DocumentUploadCardPr
       <div ref={ref} className={cn("space-y-3", className)}>
         <div className="flex items-start gap-3">
           <div
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-origen-pradera/20 to-origen-hoja/20 text-origen-pradera"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-origen-pradera/20 to-origen-hoja/20 text-origen-pradera"
             aria-hidden="true"
           >
             {icon}

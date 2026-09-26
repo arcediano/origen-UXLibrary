@@ -201,7 +201,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
 
     return createPortal(
       <div
-        className="fixed inset-0 z-[80] flex items-center justify-center bg-origen-oscuro/60 p-4 backdrop-blur-sm"
+        className="fixed inset-0 z-80 flex items-center justify-center bg-origen-oscuro/60 p-4 backdrop-blur-xs"
         onMouseDown={
           closeOnOutsideClick
             ? (event) => {
@@ -236,7 +236,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           )}
         >
           {isMobile && (
-            <div className="mx-auto mb-2 mt-3 h-1 w-10 rounded-full bg-border-subtle flex-shrink-0" aria-hidden />
+            <div className="mx-auto mb-2 mt-3 h-1 w-10 rounded-full bg-border-subtle shrink-0" aria-hidden />
           )}
 
           {showCloseButton && (

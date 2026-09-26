@@ -77,7 +77,7 @@ const InputAffixField = React.forwardRef<HTMLInputElement, InputAffixFieldProps>
             id={inputId}
             required={required}
             disabled={disabled}
-            className="h-full w-full bg-transparent px-1 pr-3 text-origen-oscuro placeholder:text-text-subtle focus:outline-none"
+            className="h-full w-full bg-transparent px-1 pr-3 text-origen-oscuro placeholder:text-text-subtle focus:outline-hidden"
             aria-invalid={!!error}
             {...props}
           />

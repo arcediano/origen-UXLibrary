@@ -55,7 +55,7 @@ const variantStyles: Record<BadgeVariant, string> = {
   neutral: "bg-gray-100 text-gray-700 border-gray-400",
   leaf:    "bg-origen-pastel text-origen-bosque border-origen-hoja",
   outline: "bg-white text-gray-700 border-gray-400",
-  warm:    "bg-origen-mandarina/[12%] text-origen-mandarina border-origen-mandarina/30",
+  warm:    "bg-origen-mandarina/12 text-origen-mandarina border-origen-mandarina/30",
 };
 
 const sizeStyles: Record<BadgeSize, string> = {

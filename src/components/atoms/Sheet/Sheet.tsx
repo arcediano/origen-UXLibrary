@@ -251,8 +251,8 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
     return createPortal(
       <div
         className={cn(
-          "fixed inset-0 z-[80]",
-          "bg-origen-oscuro/60 backdrop-blur-sm",
+          "fixed inset-0 z-80",
+          "bg-origen-oscuro/60 backdrop-blur-xs",
           entered ? "opacity-100" : "opacity-0",
           "transition-opacity duration-300"
         )}
@@ -273,7 +273,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           className={cn(
-            "fixed z-[81] bg-white p-4 shadow-2xl transition-transform duration-300 ease-out sm:p-6",
+            "fixed z-81 bg-white p-4 shadow-2xl transition-transform duration-300 ease-out sm:p-6",
             sidePositionClasses[side],
             getTranslateClass(side, entered),
             className
@@ -287,7 +287,7 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
               className={cn(
                 "absolute right-3 top-3 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg",
                 "text-muted-foreground transition-colors hover:bg-origen-crema hover:text-foreground",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-origen-pradera/45"
+                "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45"
               )}
               aria-label="Cerrar"
             >

@@ -90,7 +90,7 @@ export function ProducerCard({
   return (
     <LinkEl
       href={href}
-      className={cn("group block focus-visible:outline-none", className)}
+      className={cn("group block focus-visible:outline-hidden", className)}
       aria-label={`Ver perfil de ${businessName}`}
     >
       <Card variant="media" padding="none" className="h-full flex flex-col">
@@ -110,7 +110,7 @@ export function ProducerCard({
             <div
               className={cn(
                 "absolute inset-0",
-                imageFallbackClassName ?? "bg-gradient-to-br from-origen-pradera/40 to-origen-hoja/60"
+                imageFallbackClassName ?? "bg-linear-to-br from-origen-pradera/40 to-origen-hoja/60"
               )}
             >
               {/* Scrim oscuro — garantiza contraste ≥4.5:1 del texto/badges
@@ -127,7 +127,7 @@ export function ProducerCard({
               <Badge
                 variant="neutral"
                 size="xs"
-                className="border-transparent bg-origen-bosque text-white shadow-sm"
+                className="border-transparent bg-origen-bosque text-white shadow-xs"
               >
                 {categoryLabel}
               </Badge>

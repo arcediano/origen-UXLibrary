@@ -150,7 +150,7 @@ export function FilterSidebar({
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle shrink-0">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="w-4 h-4 text-origen-bosque" aria-hidden="true" />
           <span className="text-sm font-semibold text-origen-bosque">{title}</span>
@@ -222,7 +222,7 @@ export function FilterSidebar({
       </div>
 
       {/* Footer — único punto de limpieza, deshabilitado si no hay filtros activos */}
-      <div className="px-4 py-3 border-t border-border-subtle flex-shrink-0">
+      <div className="px-4 py-3 border-t border-border-subtle shrink-0">
         <button
           type="button"
           onClick={onClearAll}

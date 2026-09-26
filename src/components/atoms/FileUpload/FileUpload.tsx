@@ -296,7 +296,7 @@ export function FileUpload({
         />
 
         <div className="text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-origen-bosque to-origen-pino shadow-md">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-linear-to-br from-origen-bosque to-origen-pino shadow-md">
             <Upload className="h-8 w-8 text-white" aria-hidden="true" />
           </div>
 
@@ -341,7 +341,7 @@ export function FileUpload({
                   <img src={file.preview} alt={file.name} className="h-full w-full object-cover" />
                 </div>
               ) : (
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-origen-crema to-origen-pastel">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-linear-to-br from-origen-crema to-origen-pastel">
                   {isImageFile(file.type) ? (
                     <ImageIcon className="h-8 w-8 text-origen-bosque" aria-hidden="true" />
                   ) : (

@@ -92,7 +92,7 @@ function StatCardSkeleton({ className }: { className?: string }) {
       )}
     >
       <div className="flex items-start gap-2 sm:gap-4">
-        <div className="h-9 w-9 sm:h-11 sm:w-11 lg:h-14 lg:w-14 rounded-lg sm:rounded-xl bg-gray-200 flex-shrink-0" />
+        <div className="h-9 w-9 sm:h-11 sm:w-11 lg:h-14 lg:w-14 rounded-lg sm:rounded-xl bg-gray-200 shrink-0" />
         <div className="flex-1 min-w-0 flex flex-col gap-2 pt-1">
           <div className="h-3 w-20 rounded bg-gray-200" />
           <div className="h-7 w-16 rounded bg-gray-200 sm:h-8 lg:h-9" />
@@ -146,8 +146,8 @@ export function StatCard({
             <div
               className={cn(
                 "w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14",
-                "rounded-lg sm:rounded-xl bg-gradient-to-br",
-                "flex items-center justify-center flex-shrink-0 shadow-subtle",
+                "rounded-lg sm:rounded-xl bg-linear-to-br",
+                "flex items-center justify-center shrink-0 shadow-subtle",
                 iconGrad,
               )}
               aria-hidden

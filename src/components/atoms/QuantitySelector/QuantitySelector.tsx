@@ -50,7 +50,7 @@ export function QuantitySelector({
       </Button>
 
       <span
-        className="min-w-[2.5rem] text-center text-sm font-semibold tabular-nums px-2"
+        className="min-w-10 text-center text-sm font-semibold tabular-nums px-2"
         aria-live="polite"
         aria-atomic="true"
       >

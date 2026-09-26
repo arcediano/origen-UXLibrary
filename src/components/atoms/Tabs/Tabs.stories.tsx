@@ -20,7 +20,7 @@ type Story = StoryObj<typeof Tabs>;
 
 export const Horizontal: Story = {
   render: () => (
-    <div className="max-w-xl rounded-[2rem] bg-origen-nube p-6">
+    <div className="max-w-xl rounded-4xl bg-origen-nube p-6">
       <Tabs defaultValue="destacados">
         <TabsList>
           <TabsTrigger value="destacados">Destacados</TabsTrigger>
@@ -43,7 +43,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div className="max-w-3xl rounded-[2rem] bg-origen-nube p-6">
+    <div className="max-w-3xl rounded-4xl bg-origen-nube p-6">
       <Tabs defaultValue="stock" orientation="vertical" className="grid gap-4 md:grid-cols-[220px_1fr]">
         <TabsList fullWidth className="h-fit">
           <TabsTrigger value="stock">Stock</TabsTrigger>

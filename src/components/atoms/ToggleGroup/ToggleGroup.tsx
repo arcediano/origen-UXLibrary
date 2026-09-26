@@ -122,7 +122,7 @@ const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(
 ToggleGroup.displayName = "ToggleGroup";
 
 const toggleGroupItemVariants = cva(
-  "inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+  "inline-flex items-center justify-center rounded-lg font-medium transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pradera/45 focus-visible:ring-offset-2",
   {
     variants: {
       size: {

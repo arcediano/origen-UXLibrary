@@ -37,13 +37,14 @@ import '@origen/ux-library/styles';
 
 ### 2. Configurar Tailwind CSS
 
-En tu `tailwind.config.ts`:
+Esta librería no publica un preset de Tailwind para importar — cada proyecto
+consumidor mantiene su propio `tailwind.config.ts`/`@theme` con la misma
+paleta de tokens (ver `src/styles/tokens.css` en este repo como referencia).
+Solo hace falta añadir la ruta de este paquete al escaneo de clases para que
+las utilidades ya usadas en los componentes compilados se generen:
 
 ```ts
-import origenPreset from '@origen/ux-library/tailwind.config';
-
 export default {
-  presets: [origenPreset],
   content: [
     // ...tus rutas
     './node_modules/@origen/ux-library/dist/**/*.{js,mjs}',

@@ -106,7 +106,7 @@ export const HeroOutline: Story = {
     docs: {
       description: {
         story:
-          "CTA secundario sobre fondo oscuro/imagen — transparente con borde y texto blancos. Complementa a `hero`. El ring de foco usa `ring-white` en vez de `ring-origen-pino` (ver comentario de cabecera de `Button.tsx` sobre el hallazgo de contraste).",
+          "CTA secundario sobre fondo oscuro/imagen — transparente con borde y texto blancos. Complementa a `hero`. El ring-3 de foco usa `ring-white` en vez de `ring-origen-pino` (ver comentario de cabecera de `Button.tsx` sobre el hallazgo de contraste).",
       },
     },
   },

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Separator>;
 
 export const Horizontal: Story = {
   render: () => (
-    <div className="w-full max-w-lg rounded-[2rem] bg-surface-alt p-6 shadow-subtle">
+    <div className="w-full max-w-lg rounded-4xl bg-surface-alt p-6 shadow-subtle">
       <p className="text-small text-origen-oscuro">Cabecera del bloque</p>
       <Separator className="my-4" />
       <p className="text-small text-text-subtle">Contenido secundario separado visualmente con bajo peso cromático.</p>
@@ -22,7 +22,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div className="inline-flex h-16 items-center gap-4 rounded-[2rem] bg-surface-alt px-6 shadow-subtle">
+    <div className="inline-flex h-16 items-center gap-4 rounded-4xl bg-surface-alt px-6 shadow-subtle">
       <span className="text-small text-origen-oscuro">Origen</span>
       <Separator orientation="vertical" className="h-8" />
       <span className="text-small text-text-subtle">Marketplace</span>

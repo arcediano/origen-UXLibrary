@@ -69,7 +69,7 @@ export const BrandSystem: Story = {
         </div>
       </section>
 
-      <section className="space-y-3 rounded-[2rem] border border-border-subtle bg-surface-alt p-6 shadow-subtle">
+      <section className="space-y-3 rounded-4xl border border-border-subtle bg-surface-alt p-6 shadow-subtle">
         <div>
           <p className="text-micro uppercase tracking-[0.18em] text-text-subtle">Tipografía</p>
           <h2 className="text-h3 text-origen-bosque">Escala responsive</h2>

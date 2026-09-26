@@ -162,7 +162,7 @@ export function SwipeableRow({
               disabled={action.disabled}
               style={{ width: actionWidth }}
               className={cn(
-                'flex flex-col items-center justify-center gap-1 flex-shrink-0',
+                'flex flex-col items-center justify-center gap-1 shrink-0',
                 'transition-opacity',
                 colors.bg,
                 colors.text,

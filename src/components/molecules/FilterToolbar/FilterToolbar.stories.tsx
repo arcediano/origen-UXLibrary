@@ -64,7 +64,7 @@ export const WithViewModeActions: Story = {
               onClick={() => setViewMode("list")}
               className={cn(
                 "p-2 rounded-lg transition-colors",
-                viewMode === "list" ? "bg-surface shadow-sm text-origen-bosque" : "text-text-subtle hover:text-origen-bosque",
+                viewMode === "list" ? "bg-surface shadow-xs text-origen-bosque" : "text-text-subtle hover:text-origen-bosque",
               )}
               aria-label="Vista tabla"
               aria-pressed={viewMode === "list"}
@@ -75,7 +75,7 @@ export const WithViewModeActions: Story = {
               onClick={() => setViewMode("grid")}
               className={cn(
                 "p-2 rounded-lg transition-colors",
-                viewMode === "grid" ? "bg-surface shadow-sm text-origen-bosque" : "text-text-subtle hover:text-origen-bosque",
+                viewMode === "grid" ? "bg-surface shadow-xs text-origen-bosque" : "text-text-subtle hover:text-origen-bosque",
               )}
               aria-label="Vista cuadrícula"
               aria-pressed={viewMode === "grid"}

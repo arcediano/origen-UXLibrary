@@ -81,14 +81,14 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           aria-hidden="true"
           className={cn(
             "inline-flex items-center rounded-full border-2 border-transparent p-0.5 transition-colors duration-200",
-            "peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-origen-pradera/40 peer-focus-visible:ring-offset-2",
+            "peer-focus-visible:outline-hidden peer-focus-visible:ring-2 peer-focus-visible:ring-origen-pradera/40 peer-focus-visible:ring-offset-2",
             styles.track,
             isChecked ? trackCheckedColor : trackColor
           )}
         >
           <span
             className={cn(
-              "block rounded-full shadow-sm transition-transform duration-200",
+              "block rounded-full shadow-xs transition-transform duration-200",
               styles.thumb,
               thumbColor,
               isChecked && styles.translate

@@ -113,8 +113,8 @@ export function ConfirmDialog({
     /* ── Overlay — always centered, mx-4 prevents touching screen edges ── */
     <div
       className={cn(
-        "fixed inset-0 z-[80] flex items-center justify-center p-4",
-        "bg-origen-oscuro/60 backdrop-blur-sm",
+        "fixed inset-0 z-80 flex items-center justify-center p-4",
+        "bg-origen-oscuro/60 backdrop-blur-xs",
         "transition-opacity duration-200",
         entered ? "opacity-100" : "opacity-0"
       )}
@@ -210,7 +210,7 @@ export function ConfirmDialog({
                 "h-11 rounded-xl px-5 text-sm font-semibold text-white",
                 "bg-feedback-danger hover:bg-feedback-danger/90",
                 "transition-all duration-200 active:scale-[0.98]",
-                "border-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-feedback-danger/50 focus-visible:ring-offset-2",
+                "border-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-feedback-danger/50 focus-visible:ring-offset-2",
                 "disabled:pointer-events-none disabled:opacity-60"
               )}
             >

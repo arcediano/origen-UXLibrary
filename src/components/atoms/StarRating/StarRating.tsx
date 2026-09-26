@@ -106,7 +106,7 @@ export function StarRating({
               onMouseEnter={() => setHovered(starValue)}
               onMouseLeave={() => setHovered(null)}
               className={cn(
-                "rounded transition-transform duration-150 focus:outline-none",
+                "rounded transition-transform duration-150 focus:outline-hidden",
                 "focus-visible:ring-2 focus-visible:ring-origen-pino focus-visible:ring-offset-1",
                 "hover:scale-110 active:scale-95",
                 (hovered !== null ? hovered >= starValue : value >= starValue)

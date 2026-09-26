@@ -133,7 +133,7 @@ export function RichTextEditor({
         >
           <EditorContent
             editor={editor}
-            className="[&_.ProseMirror]:outline-none [&_.ProseMirror]:px-3 [&_.ProseMirror]:py-2
+            className="[&_.ProseMirror]:outline-hidden [&_.ProseMirror]:px-3 [&_.ProseMirror]:py-2
               [&_.ProseMirror_strong]:font-semibold
               [&_.ProseMirror_em]:italic
               [&_.ProseMirror_ul]:list-disc [&_.ProseMirror_ul]:pl-4 [&_.ProseMirror_ul]:space-y-1

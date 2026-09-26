@@ -37,7 +37,7 @@ const baseMockProducer = {
 // Botón de favoritos mock
 const MockFavoriteButton = ({ isFavorited = false }: { isFavorited?: boolean }) => (
   <button
-    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-origen-oscuro shadow-sm"
+    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-origen-oscuro shadow-xs"
     aria-label="Guardar en favoritos"
     aria-pressed={isFavorited}
   >

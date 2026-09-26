@@ -135,7 +135,7 @@ describe("Tabs", () => {
 
     const activeTab = screen.getByRole("tab", { name: "Uno" });
     expect(activeTab.className).toContain("bg-white");
-    expect(activeTab.className).toContain("shadow-sm");
+    expect(activeTab.className).toContain("shadow-xs");
     expect(activeTab.className).toContain("text-origen-bosque");
     expect(activeTab.className).not.toContain("bg-gradient-origen");
   });

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Label>;
 
 export const States: Story = {
   render: () => (
-    <div className="space-y-4 rounded-[2rem] bg-surface-alt p-6 shadow-subtle">
+    <div className="space-y-4 rounded-4xl bg-surface-alt p-6 shadow-subtle">
       <Label htmlFor="nombre" required>Nombre del productor</Label>
       <Label htmlFor="categoria" optional>Categoria comercial</Label>
       <Label htmlFor="stock" variant="success">Stock validado</Label>
@@ -24,7 +24,7 @@ export const States: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="space-y-3 rounded-[2rem] bg-surface-alt p-6 shadow-subtle">
+    <div className="space-y-3 rounded-4xl bg-surface-alt p-6 shadow-subtle">
       <Label size="sm">Label pequeño</Label>
       <Label size="default">Label estándar</Label>
       <Label size="lg">Label grande</Label>

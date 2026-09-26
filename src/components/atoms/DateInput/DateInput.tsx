@@ -161,10 +161,10 @@ const DateInput = React.forwardRef<HTMLInputElement, DateInputProps>(
               !error && !disabled && [
                 "border-border-subtle",
                 "hover:border-origen-pradera/55",
-                "focus:border-origen-pradera focus:ring-2 focus:ring-origen-pradera/20 focus:outline-none",
+                "focus:border-origen-pradera focus:ring-2 focus:ring-origen-pradera/20 focus:outline-hidden",
               ],
               // Estado error
-              error && "border-feedback-danger focus:border-feedback-danger focus:ring-2 focus:ring-feedback-danger/20 focus:outline-none",
+              error && "border-feedback-danger focus:border-feedback-danger focus:ring-2 focus:ring-feedback-danger/20 focus:outline-hidden",
               // Estado disabled
               disabled && "opacity-40 cursor-not-allowed bg-surface border-border-subtle",
               // Oculta el render nativo del valor cuando se muestra el overlay

@@ -211,7 +211,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
               "text-origen-oscuro placeholder:text-text-disabled",
               "transition-all duration-200",
               "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-50",
-              "focus:outline-none focus:ring-2 focus:ring-origen-pradera/50",
+              "focus:outline-hidden focus:ring-2 focus:ring-origen-pradera/50",
               resizable ? "resize-y" : "resize-none",
               variantClasses[variant],
               sizeClasses[textareaSize],

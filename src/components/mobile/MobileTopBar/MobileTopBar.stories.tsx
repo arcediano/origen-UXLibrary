@@ -39,7 +39,7 @@ export const CommerceHeader: Story = {
         }
       />
       <div className="mx-auto max-w-md px-4 py-6">
-        <div className="rounded-[2rem] border border-border-subtle bg-surface-alt p-5 shadow-subtle">
+        <div className="rounded-4xl border border-border-subtle bg-surface-alt p-5 shadow-subtle">
           <p className="text-body text-origen-oscuro">Header preparado para flujos mobile-first con safe area y acciones compactas.</p>
         </div>
       </div>
@@ -58,7 +58,7 @@ export const BrandCenter: Story = {
         sticky
         center={
           <div className="flex items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-origen-bosque via-origen-pino to-origen-hoja text-white shadow-origen">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-linear-to-br from-origen-bosque via-origen-pino to-origen-hoja text-white shadow-origen">
               <Leaf className="h-4 w-4" aria-hidden="true" />
             </span>
             <div className="min-w-0">

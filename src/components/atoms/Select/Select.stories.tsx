@@ -129,7 +129,7 @@ export const SubtleInTabs: Story = {
     docs: {
       description: {
         story:
-          "`SelectTrigger tone=\"subtle\"`: sin borde visible y fondo `bg-muted/50` en reposo, integrado visualmente en el mismo \"carril\" que `TabsList` rediseñado. Al abrirse recupera fondo blanco y ring de marca.",
+          "`SelectTrigger tone=\"subtle\"`: sin borde visible y fondo `bg-muted/50` en reposo, integrado visualmente en el mismo \"carril\" que `TabsList` rediseñado. Al abrirse recupera fondo blanco y ring-3 de marca.",
       },
     },
   },

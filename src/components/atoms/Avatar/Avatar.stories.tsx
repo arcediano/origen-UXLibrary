@@ -69,7 +69,7 @@ export const BrandInitialsFallback: Story = {
   render: () => (
     <div className="flex items-center gap-3 p-4 bg-white">
       <Avatar size="lg" bordered>
-        <AvatarFallback className="bg-gradient-to-br from-origen-pradera to-origen-hoja text-white">
+        <AvatarFallback className="bg-linear-to-br from-origen-pradera to-origen-hoja text-white">
           OB
         </AvatarFallback>
       </Avatar>

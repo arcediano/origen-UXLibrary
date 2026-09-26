@@ -123,7 +123,7 @@ export const AllSectionTypes: Story = {
 
         {activeChips.length > 0 && (
           <div className="flex items-center gap-2 bg-origen-nube border border-dashed border-origen-bosque/20 rounded-xl px-3 py-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap flex-shrink-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap shrink-0">
               Activos:
             </span>
             <ActiveFilterChips chips={activeChips} onClearAll={clearAll} />
@@ -216,7 +216,7 @@ export const ChipsOnly: Story = {
         />
         {activeChips.length > 0 && (
           <div className="flex items-center gap-2 bg-origen-nube border border-dashed border-origen-bosque/20 rounded-xl px-3 py-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap flex-shrink-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap shrink-0">
               Activos:
             </span>
             <ActiveFilterChips chips={activeChips} onClearAll={clearAll} />
@@ -315,7 +315,7 @@ export const ReviewsPanel: Story = {
         />
         {activeChips.length > 0 && (
           <div className="flex items-center gap-2 bg-origen-nube border border-dashed border-origen-bosque/20 rounded-xl px-3 py-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap flex-shrink-0">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-text-subtle whitespace-nowrap shrink-0">
               Activos:
             </span>
             <ActiveFilterChips chips={activeChips} onClearAll={clearAll} />
