@@ -131,6 +131,7 @@ const VARIANT_CONFIG: Record<AuthFooterVariant, {
 };
 
 const LEGAL_LINKS = [
+  { href: "/terminos",     label: "Términos" },
   { href: "/privacidad",   label: "Privacidad" },
   { href: "/cookies",      label: "Cookies" },
   { href: "/aviso-legal",  label: "Aviso Legal" },
