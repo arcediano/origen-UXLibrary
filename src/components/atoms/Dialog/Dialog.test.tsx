@@ -168,4 +168,22 @@ describe("Dialog", () => {
       expect(footer).toHaveClass("bottom-0");
     });
   });
+  describe("en escritorio, contenido más alto que la pantalla", () => {
+    it("el panel recorta (esquinas redondeadas) y el contenido se desplaza en un wrapper interno", () => {
+      render(
+        <Dialog open>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Titulo</DialogTitle>
+            </DialogHeader>
+            <div data-testid="cuerpo">Cuerpo largo</div>
+          </DialogContent>
+        </Dialog>
+      );
+
+      const panel = screen.getByRole("dialog");
+      expect(panel).toHaveClass("overflow-hidden", "rounded-2xl", "max-h-[85dvh]");
+      expect(screen.getByTestId("cuerpo").parentElement).toHaveClass("overflow-y-auto");
+    });
+  });
 });
