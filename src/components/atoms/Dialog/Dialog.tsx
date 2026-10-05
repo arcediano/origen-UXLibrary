@@ -231,7 +231,13 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
                   "fixed bottom-0 inset-x-0 max-h-[90dvh] overflow-hidden rounded-t-3xl flex flex-col",
                   entered ? "translate-y-0" : "translate-y-full"
                 )
-              : cn("max-w-lg rounded-2xl", entered ? "translate-y-0" : "translate-y-4"),
+              : cn(
+                  // Escritorio: mismo patrón que móvil -- el panel recorta (esquinas
+                  // redondeadas también bajo DialogHeader/DialogFooter sticky) y el
+                  // contenido alto se desplaza dentro del wrapper, no se queda inaccesible.
+                  "max-w-lg max-h-[85dvh] overflow-hidden rounded-2xl flex flex-col",
+                  entered ? "translate-y-0" : "translate-y-4"
+                ),
             className
           )}
         >
@@ -250,11 +256,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             </button>
           )}
 
-          {isMobile ? (
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
-          ) : (
-            children
-          )}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
         </div>
       </div>,
       document.body
