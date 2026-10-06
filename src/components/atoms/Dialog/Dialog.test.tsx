@@ -32,6 +32,24 @@ beforeAll(() => {
 });
 
 describe("Dialog", () => {
+  it("en escritorio recorta el panel y desplaza el contenido alto en un wrapper interno", () => {
+    render(
+      <Dialog open>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Titulo</DialogTitle>
+          </DialogHeader>
+          <p>Contenido</p>
+        </DialogContent>
+      </Dialog>
+    );
+
+    const dialog = screen.getByRole("dialog");
+    expect(dialog.className).toContain("overflow-hidden");
+    expect(dialog.className).toContain("max-h-[85dvh]");
+    expect(screen.getByText("Contenido").parentElement?.className).toContain("overflow-y-auto");
+  });
+
   it("no permite sobrescribir role ni aria-modal en DialogContent", () => {
     render(
       <Dialog open>
