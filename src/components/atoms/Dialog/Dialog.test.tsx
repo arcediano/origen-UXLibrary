@@ -168,4 +168,77 @@ describe("Dialog", () => {
       expect(footer).toHaveClass("bottom-0");
     });
   });
+
+  describe("en escritorio, contenido más alto que la pantalla", () => {
+    afterEach(() => {
+      mockMatchMedia(false);
+    });
+
+    it("el panel recorta y limita su altura -- esquinas de DialogHeader no quedan tapadas por un fondo recto", () => {
+      mockMatchMedia(false);
+
+      render(
+        <Dialog open>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Titulo</DialogTitle>
+            </DialogHeader>
+            <div data-testid="cuerpo">Cuerpo largo</div>
+            <DialogFooter>
+              <button type="button">Confirmar</button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      );
+
+      const panel = screen.getByRole("dialog");
+      expect(panel).toHaveClass("overflow-hidden");
+      expect(panel).toHaveClass("max-h-[85dvh]");
+      expect(panel).toHaveClass("rounded-2xl");
+    });
+
+    it("el contenido queda dentro de un contenedor con overflow-y-auto, no recortado sin scroll (mismo patrón que móvil)", () => {
+      mockMatchMedia(false);
+
+      render(
+        <Dialog open>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Titulo</DialogTitle>
+            </DialogHeader>
+            <div data-testid="cuerpo">Cuerpo largo</div>
+            <DialogFooter>
+              <button type="button">Confirmar</button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      );
+
+      const body = screen.getByTestId("cuerpo");
+      const scrollWrapper = body.parentElement;
+      expect(scrollWrapper).toHaveClass("overflow-y-auto");
+    });
+
+    it("el botón de confirmar (footer) sigue siendo accesible -- sticky, no se pierde con el scroll", () => {
+      mockMatchMedia(false);
+
+      render(
+        <Dialog open>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Titulo</DialogTitle>
+            </DialogHeader>
+            <div>Cuerpo</div>
+            <DialogFooter>
+              <button type="button">Confirmar</button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      );
+
+      const footer = screen.getByRole("button", { name: "Confirmar" }).closest("div");
+      expect(footer).toHaveClass("sticky");
+      expect(footer).toHaveClass("bottom-0");
+    });
+  });
 });
