@@ -70,7 +70,7 @@ export function ReviewCard({
           </AvatarFallback>
         </Avatar>
         <div className="min-w-0">
-          <p className="text-sm font-semibold text-text-primary leading-tight truncate">
+          <p className="text-sm font-semibold text-foreground leading-tight truncate">
             {review.authorName}
           </p>
           {review.verifiedPurchase && (
@@ -84,11 +84,11 @@ export function ReviewCard({
 
       {/* Título de la reseña */}
       {review.title && (
-        <p className="text-sm font-semibold text-text-primary">{review.title}</p>
+        <p className="text-sm font-semibold text-foreground">{review.title}</p>
       )}
 
       {/* Contenido */}
-      <p className={cn("font-serif text-sm italic text-text-primary flex-1", lineClampClass)}>
+      <p className={cn("font-serif text-sm italic text-foreground flex-1", lineClampClass)}>
         &ldquo;{review.content}&rdquo;
       </p>
 

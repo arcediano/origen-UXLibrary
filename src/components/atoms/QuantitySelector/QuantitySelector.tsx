@@ -15,7 +15,25 @@ export interface QuantitySelectorProps {
   max?: number;
   disabled?: boolean;
   className?: string;
+  /**
+   * Nombre del artículo cuya cantidad se edita. Con él los botones se anuncian como
+   * «Reducir cantidad de {itemLabel}» / «Aumentar cantidad de {itemLabel}»: imprescindible cuando
+   * hay varios selectores en la misma pantalla (carrito).
+   */
+  itemLabel?: string;
+  /**
+   * `md` (por defecto): botones de 44 px, objetivo táctil recomendado.
+   * `sm`: botones de 36 px para filas densas en escritorio; sigue por encima del mínimo de
+   * 24 px de WCAG 2.2 (2.5.8). En pantallas táctiles usar `md`.
+   * @default "md"
+   */
+  size?: "sm" | "md";
 }
+
+const SIZE_CLASSES = {
+  md: "min-h-[44px] min-w-[44px]",
+  sm: "min-h-9 min-w-9",
+} as const;
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
@@ -26,9 +44,12 @@ export function QuantitySelector({
   max,
   disabled = false,
   className,
+  itemLabel,
+  size = "md",
 }: QuantitySelectorProps) {
   const canDecrement = value > min;
   const canIncrement = max === undefined || value < max;
+  const suffix = itemLabel ? ` de ${itemLabel}` : "";
 
   return (
     <div
@@ -40,10 +61,10 @@ export function QuantitySelector({
       <Button
         variant="ghost"
         size="icon"
-        className="min-h-[44px] min-w-[44px] rounded-none"
+        className={cn(SIZE_CLASSES[size], "rounded-none")}
         onClick={() => onChange(value - 1)}
         disabled={disabled || !canDecrement}
-        aria-label="Reducir cantidad"
+        aria-label={`Reducir cantidad${suffix}`}
         type="button"
       >
         <Minus className="h-4 w-4" aria-hidden="true" />
@@ -60,10 +81,10 @@ export function QuantitySelector({
       <Button
         variant="ghost"
         size="icon"
-        className="min-h-[44px] min-w-[44px] rounded-none"
+        className={cn(SIZE_CLASSES[size], "rounded-none")}
         onClick={() => onChange(value + 1)}
         disabled={disabled || !canIncrement}
-        aria-label="Aumentar cantidad"
+        aria-label={`Aumentar cantidad${suffix}`}
         type="button"
       >
         <Plus className="h-4 w-4" aria-hidden="true" />

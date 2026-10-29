@@ -118,7 +118,7 @@ export function NutritionDonut({
           className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
           aria-hidden="true"
         >
-          <span className="text-sm font-semibold text-text-primary leading-none">
+          <span className="text-sm font-semibold text-foreground leading-none">
             {centerLabel}
           </span>
           {hasData && (
@@ -139,7 +139,7 @@ export function NutritionDonut({
             <span className="text-xs text-text-subtle">
               {seg.label}
               {hasData && (
-                <span className="ml-1 font-medium text-text-primary">
+                <span className="ml-1 font-medium text-foreground">
                   {seg.value}g
                 </span>
               )}

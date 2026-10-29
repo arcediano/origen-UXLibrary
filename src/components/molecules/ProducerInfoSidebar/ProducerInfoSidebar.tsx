@@ -10,7 +10,7 @@
  * - Desktop (>=lg): columna 320px, sticky top-24. Foto aspect-[4/3].
  *
  * Tokens usados: origen-bosque, origen-hoja, origen-pino, origen-pradera,
- * origen-pastel, origen-nube, text-text-primary, text-text-subtle,
+ * origen-pastel, origen-nube, text-foreground, text-text-subtle,
  * border-border-subtle, surface-alt, shadow-subtle, font-serif.
  *
  * Accesibilidad:
@@ -196,7 +196,7 @@ export function ProducerInfoSidebar({
         )}
 
         {/* Nombre del productor */}
-        <h2 className="font-serif font-bold text-2xl leading-tight text-text-primary">
+        <h2 className="font-serif font-bold text-2xl leading-tight text-foreground">
           {businessName}
         </h2>
 
