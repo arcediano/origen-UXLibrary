@@ -47,34 +47,41 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
         role={isAssertive ? "alert" : "status"}
         aria-live={isAssertive ? "assertive" : "polite"}
         className={cn(
-          "relative flex w-full items-center gap-3 rounded-xl border p-4",
+          "relative flex w-full flex-col gap-3 rounded-xl border p-4",
+          "sm:flex-row sm:items-center",
           "transition-all duration-200",
           variantClasses[variant],
           className
         )}
       >
-        <span className="shrink-0 text-current">{variantIcons[variant]}</span>
+        <div className="flex min-w-0 items-start gap-3 sm:flex-1 sm:items-center">
+          <span className="shrink-0 text-current">{variantIcons[variant]}</span>
 
-        <div className="flex-1 min-w-0 space-y-1 wrap-break-word">{children}</div>
+          <div className="flex-1 min-w-0 space-y-1 wrap-break-word">{children}</div>
+        </div>
 
-        {trailing && <div className="shrink-0">{trailing}</div>}
+        {(trailing || dismissible) && (
+          <div className="flex shrink-0 items-center gap-2 sm:ml-auto">
+            {trailing}
 
-        {dismissible && (
-          <button
-            type="button"
-            aria-label="Cerrar alerta"
-            onClick={() => {
-              setVisible(false);
-              onDismiss?.();
-            }}
-            className={cn(
-              "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg",
-              "text-current/70 transition-colors hover:bg-black/5 hover:text-current",
-              "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pino"
+            {dismissible && (
+              <button
+                type="button"
+                aria-label="Cerrar alerta"
+                onClick={() => {
+                  setVisible(false);
+                  onDismiss?.();
+                }}
+                className={cn(
+                  "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg",
+                  "text-current/70 transition-colors hover:bg-black/5 hover:text-current",
+                  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-origen-pino"
+                )}
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
             )}
-          >
-            <X className="h-4 w-4" aria-hidden="true" />
-          </button>
+          </div>
         )}
       </div>
     );

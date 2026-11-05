@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.31.1
+
+### Patch Changes
+
+- `Alert`: con `trailing` (botón/acción) y texto largo, en móvil el contenido se comprimía en una columna estrecha junto al botón en vez de apilarse (reportado por el humano, 2026-11-05, ej. el aviso "Tu correo electrónico aún no está verificado" en `origen-web`). El icono+texto y el bloque de acciones (`trailing` + botón de cerrar si es `dismissible`) ahora se apilan en columna por debajo de `sm`, y vuelven a la fila original en pantallas más anchas. Sin cambios de API ni de aspecto cuando no hay `trailing`.
+
 ## 0.31.0
 
 ### Minor Changes
