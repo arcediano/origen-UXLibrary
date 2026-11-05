@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import {
   Select,
@@ -64,5 +64,59 @@ describe("Select", () => {
 
     fireEvent.click(screen.getByRole("button"));
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it("un SelectItem con contenido mixto (icono + texto) muestra su etiqueta en SelectValue, no el value en crudo (hallazgo del humano, 2026-11-05)", () => {
+    render(
+      <Select defaultValue="frutas-verduras" placeholder="Categoría">
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="frutas-verduras">
+            <span>
+              <img src="/fruta.png" alt="" />
+              <span>Frutas y Verduras</span>
+            </span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    );
+
+    // Antes del fix, getLabel() nunca se rellenaba para children no-string y
+    // SelectValue mostraba el value en crudo ("frutas-verduras").
+    const trigger = screen.getByRole('button');
+    expect(within(trigger).getByText('Frutas y Verduras')).toBeInTheDocument();
+    expect(within(trigger).queryByText('frutas-verduras')).toBeNull();
+  });
+
+  it("un Select searchable filtra ítems con contenido mixto igual que los de solo texto", () => {
+    render(
+      <Select defaultValue="" placeholder="Categoría" searchable>
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="frutas-verduras">
+            <span>
+              <img src="/fruta.png" alt="" />
+              <span>Frutas y Verduras</span>
+            </span>
+          </SelectItem>
+          <SelectItem value="lacteos-huevos">
+            <span>
+              <img src="/lacteos.png" alt="" />
+              <span>Lácteos y Huevos</span>
+            </span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    );
+
+    fireEvent.click(screen.getByRole("button"));
+    fireEvent.change(screen.getByPlaceholderText("Buscar..."), { target: { value: "fruta" } });
+
+    expect(screen.getByText('Frutas y Verduras')).toBeInTheDocument();
+    expect(screen.queryByText('Lácteos y Huevos')).toBeNull();
   });
 });

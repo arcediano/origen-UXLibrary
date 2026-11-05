@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.31.2
+
+### Patch Changes
+
+- `Select`: un `SelectItem` con contenido mixto (icono/imagen + nombre, no solo un string suelto -- p. ej. una categoría con miniatura) ahora registra correctamente su etiqueta de texto. Antes, `SelectValue` mostraba el `value` en crudo (p. ej. un slug) en vez del nombre, y en un `Select` `searchable` el buscador no filtraba esos ítems (siempre quedaban visibles, escribiera lo que escribiera el usuario). `getLabel()`/el filtro de búsqueda ahora recorren `children` recursivamente para extraer el texto, en vez de exigir que `children` sea un string literal. Sin cambios para los `SelectItem` que ya usaban solo texto.
+
 ## 0.31.1
 
 ### Patch Changes

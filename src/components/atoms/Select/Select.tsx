@@ -24,6 +24,28 @@ interface SelectContextType {
 
 const SelectContext = React.createContext<SelectContextType | undefined>(undefined);
 
+/**
+ * Texto plano de un `children` de React, recorriendo elementos anidados --
+ * necesario porque un `SelectItem` puede llevar contenido mixto (icono/imagen
+ * + nombre, p. ej. una categoría con miniatura) y no solo un string suelto.
+ * Antes de esto, `SelectItem` solo registraba una etiqueta buscable cuando
+ * `children` era un string literal: con contenido mixto `getLabel()` nunca se
+ * rellenaba, así que el texto mostrado en `SelectValue` caía al `value` en
+ * crudo (p. ej. un slug) y, en un `Select` `searchable`, ningún ítem se
+ * ocultaba al escribir en el buscador (todos los ítems con contenido mixto
+ * quedaban siempre visibles, el filtro de texto dejaba de funcionar para
+ * ellos).
+ */
+function getTextContent(node: React.ReactNode): string {
+  if (node === null || node === undefined || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getTextContent).join(" ");
+  if (React.isValidElement<{ children?: React.ReactNode }>(node)) {
+    return getTextContent(node.props.children);
+  }
+  return "";
+}
+
 function useSelect(): SelectContextType {
   const context = React.useContext(SelectContext);
   if (!context) throw new Error("Select components must be used inside Select");
@@ -399,7 +421,7 @@ const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
     const { value: selectedValue, onValueChange, searchTerm, registerLabel } = useSelect();
     const isSelected = selectedValue === value;
 
-    const textLabel = typeof children === "string" ? children : undefined;
+    const textLabel = getTextContent(children) || undefined;
 
     React.useEffect(() => {
       if (textLabel) {
