@@ -1,5 +1,13 @@
 # @arcediano/ux-library
 
+## 0.31.0
+
+### Minor Changes
+
+- Se retira la tipografía serif (Fraunces) de la identidad de marca (petición del humano, 2026-11-05): se percibía como cursiva/poco legible en títulos grandes. `typography.fontSerif` y el token CSS `--font-serif` pasan a ser idénticos a `typography.fontSans`/`--font-sans` (Plus Jakarta Sans) en vez de cargar una familia tipográfica aparte.
+
+  Las clases `font-serif` ya existentes en componentes consumidores (p. ej. `ProducerCard`, `ReviewCard`, `ProducerInfoSidebar`) no necesitan cambios — resuelven el nuevo valor automáticamente al actualizar esta dependencia.
+
 ## 0.30.0
 
 ### Minor Changes
