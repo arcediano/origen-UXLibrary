@@ -117,7 +117,10 @@ export const gradients = {
 // ─── Tipografía ───────────────────────────────────────────────────────────────
 export const typography = {
   fontSans:  '"Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif',
-  fontSerif: '"Fraunces", "Iowan Old Style", "Palatino Linotype", serif',
+  // Sin tipografía serif propia en la identidad de marca (petición del humano,
+  // 2026-11-05) -- igual que fontSans. Antes: "Fraunces", "Iowan Old Style",
+  // "Palatino Linotype", serif.
+  fontSerif: '"Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif',
   weight: {
     medium:   500,
     semibold: 600,
