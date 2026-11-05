@@ -1,5 +1,39 @@
 # @arcediano/ux-library
 
+## 0.31.1
+
+### Patch Changes
+
+- `Alert`: con `trailing` (botón/acción) y texto largo, en móvil el contenido se comprimía en una columna estrecha junto al botón en vez de apilarse (reportado por el humano, 2026-11-05, ej. el aviso "Tu correo electrónico aún no está verificado" en `origen-web`). El icono+texto y el bloque de acciones (`trailing` + botón de cerrar si es `dismissible`) ahora se apilan en columna por debajo de `sm`, y vuelven a la fila original en pantallas más anchas. Sin cambios de API ni de aspecto cuando no hay `trailing`.
+
+## 0.31.0
+
+### Minor Changes
+
+- Se retira la tipografía serif (Fraunces) de la identidad de marca (petición del humano, 2026-11-05): se percibía como cursiva/poco legible en títulos grandes. `typography.fontSerif` y el token CSS `--font-serif` pasan a ser idénticos a `typography.fontSans`/`--font-sans` (Plus Jakarta Sans) en vez de cargar una familia tipográfica aparte.
+
+  Las clases `font-serif` ya existentes en componentes consumidores (p. ej. `ProducerCard`, `ReviewCard`, `ProducerInfoSidebar`) no necesitan cambios — resuelven el nuevo valor automáticamente al actualizar esta dependencia.
+
+## 0.30.0
+
+### Minor Changes
+
+- bf09932: `QuantitySelector`: dos props nuevas, opcionales y retrocompatibles.
+
+  - `itemLabel`: nombre del artículo; los botones se anuncian como «Reducir/Aumentar cantidad de {itemLabel}»
+    (necesario con varios selectores en pantalla, p. ej. un carrito).
+  - `size`: `"md"` (por defecto, 44 px) o `"sm"` (36 px) para filas densas en escritorio.
+    Añadidos tests y stories (antes no tenía).
+
+  `Progress`: nueva prop `valueText` para que los lectores de pantalla lean un valor con sentido
+  («12,50 € de 40,00 €») en lugar del porcentaje. Las variantes `sprout`, `fruit`, `warning` y el modo
+  `char-count` dejan de usar colores de la paleta de Tailwind (`amber-*`, `green-*`, `orange-*`, `white`)
+  y pasan a los tokens `feedback-*` / `origen-*` / `primary-foreground`.
+
+  Correcciones de tokens: `Breadcrumb`, `NutritionDonut`, `ReviewCard`, `ProducerInfoSidebar` y
+  `ProductMobileHeader` usaban la clase `text-text-primary`, que no existe en ningún tema (no tenía efecto);
+  ahora usan `text-foreground`. `--background-image-gradient-crema` deja de llevar `#ffffff` fijo.
+
 ## 0.28.0
 
 ### Minor Changes

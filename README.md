@@ -1,4 +1,4 @@
-# @origen/ux-library
+# @arcediano/ux-library
 
 > **Origen Design System** — Librería de componentes React reutilizables para todos los proyectos de la empresa.
 
@@ -11,16 +11,16 @@
 Añade un archivo `.npmrc` en la raíz de tu proyecto con:
 
 ```
-@origen:registry=https://npm.pkg.github.com
+@arcediano:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
 Luego instala el paquete:
 
 ```bash
-npm install @origen/ux-library
+npm install @arcediano/ux-library
 # o con pnpm
-pnpm add @origen/ux-library
+pnpm add @arcediano/ux-library
 ```
 
 ---
@@ -32,7 +32,7 @@ pnpm add @origen/ux-library
 En tu `layout.tsx` (Next.js) o `main.tsx` (Vite):
 
 ```ts
-import '@origen/ux-library/styles';
+import '@arcediano/ux-library/styles';
 ```
 
 ### 2. Configurar Tailwind CSS
@@ -47,7 +47,7 @@ las utilidades ya usadas en los componentes compilados se generen:
 export default {
   content: [
     // ...tus rutas
-    './node_modules/@origen/ux-library/dist/**/*.{js,mjs}',
+    './node_modules/@arcediano/ux-library/dist/**/*.{js,mjs}',
   ],
 };
 ```
@@ -57,7 +57,7 @@ export default {
 ## Uso
 
 ```tsx
-import { Button, Badge, Input, StatusBadge } from '@origen/ux-library';
+import { Button, Badge, Input, StatusBadge } from '@arcediano/ux-library';
 
 export function MiPagina() {
   return (

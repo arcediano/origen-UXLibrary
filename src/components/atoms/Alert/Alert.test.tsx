@@ -79,6 +79,37 @@ describe("Alert", () => {
     expect(screen.getByRole("status").className).toContain("border-origen-hoja");
   });
 
+  it("apila el contenido en columna en móvil cuando hay trailing, y en fila desde sm (bug reportado por el humano, 2026-11-05: el texto quedaba comprimido en una columna estrecha junto al botón)", () => {
+    render(
+      <Alert variant="warning" trailing={<button type="button">Reenviar email</button>}>
+        Tu correo electrónico aún no está verificado.
+      </Alert>
+    );
+
+    const alert = screen.getByRole("status");
+    expect(alert.className).toContain("flex-col");
+    expect(alert.className).toContain("sm:flex-row");
+    expect(screen.getByRole("button", { name: "Reenviar email" })).toBeInTheDocument();
+  });
+
+  it("agrupa trailing y el botón de cerrar en el mismo bloque de acciones", () => {
+    const onDismiss = vi.fn();
+    render(
+      <Alert
+        variant="warning"
+        trailing={<button type="button">Acción</button>}
+        dismissible
+        onDismiss={onDismiss}
+      >
+        Mensaje
+      </Alert>
+    );
+
+    const accionButton = screen.getByRole("button", { name: "Acción" });
+    const closeButton = screen.getByRole("button", { name: /cerrar alerta/i });
+    expect(accionButton.parentElement).toBe(closeButton.parentElement);
+  });
+
   it("permite cerrar una alerta dismissible", async () => {
     const onDismiss = vi.fn();
     const user = userEvent.setup();

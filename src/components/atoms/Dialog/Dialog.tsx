@@ -232,9 +232,14 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
                   entered ? "translate-y-0" : "translate-y-full"
                 )
               : cn(
-                  // Mismo patrón que en móvil: el panel recorta (esquinas redondeadas
-                  // visibles bajo el header/footer sticky) y el contenido alto se
-                  // desplaza en el wrapper interno, no se queda inaccesible.
+                  // Mismo patrón que la rama móvil: el panel recorta (overflow-hidden,
+                  // necesario para que rounded-2xl no quede tapado por el fondo recto de
+                  // DialogHeader/DialogFooter, sticky dentro del wrapper de scroll de más
+                  // abajo) y limita su altura (max-h) para que el contenido que no cabe
+                  // tenga scroll interno en vez de quedar cortado e inalcanzable (bug
+                  // real: Payment Element de Stripe con varios métodos de pago, o un
+                  // formulario largo, sin forma de llegar al final con
+                  // document.body.style.overflow fijado en "hidden").
                   "max-w-lg max-h-[85dvh] overflow-hidden rounded-2xl flex flex-col",
                   entered ? "translate-y-0" : "translate-y-4"
                 ),
@@ -256,6 +261,10 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             </button>
           )}
 
+          {/* Wrapper de scroll interno en ambas ramas: DialogHeader/DialogFooter son
+              sticky dentro de este contenedor (no del panel exterior, que solo recorta)
+              para que título y acciones sigan siempre visibles mientras el contenido
+              intermedio se desplaza. */}
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
         </div>
       </div>,

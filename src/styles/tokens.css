@@ -151,7 +151,7 @@
   --background-image-gradient-crema: linear-gradient(
     135deg,
     hsl(var(--crema)) 0%,
-    #ffffff 100%
+    hsl(var(--surface-alt)) 100%
   );
 
   --animate-float: float 3s ease-in-out infinite;
@@ -307,7 +307,10 @@
 
     /* Tipografia comercial */
     --font-sans: "Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif;
-    --font-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+    /* Sin tipografía serif propia en la identidad de marca (petición del humano,
+       2026-11-05) -- font-serif resuelve a la misma sans en toda la app. Antes
+       era "Fraunces", "Iowan Old Style", "Palatino Linotype", serif. */
+    --font-serif: var(--font-sans);
 
     /* Escala tipografica responsive */
     --fs-h1: clamp(2rem, 5vw, 3.25rem);

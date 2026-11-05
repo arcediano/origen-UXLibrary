@@ -24,12 +24,12 @@ export interface BreadcrumbProps {
 // ─── Estilos ──────────────────────────────────────────────────────────────────
 
 const variantLink: Record<"default" | "hero", string> = {
-  default: "text-text-subtle hover:text-text-primary transition-colors",
+  default: "text-text-subtle hover:text-foreground transition-colors",
   hero:    "text-white/80 hover:text-white transition-colors",
 };
 
 const variantCurrent: Record<"default" | "hero", string> = {
-  default: "text-text-primary font-medium",
+  default: "text-foreground font-medium",
   hero:    "text-white font-medium",
 };
 

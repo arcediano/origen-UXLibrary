@@ -43,13 +43,13 @@ export function ProductMobileHeader({
           type="button"
           onClick={onBack}
           aria-label="Volver"
-          className="flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-alt text-text-primary transition-colors shrink-0"
+          className="flex items-center justify-center h-10 w-10 rounded-full hover:bg-surface-alt text-foreground transition-colors shrink-0"
         >
           <ChevronLeft className="h-5 w-5" aria-hidden="true" />
         </button>
 
         {/* Título centrado */}
-        <p className="flex-1 text-sm font-semibold text-text-primary truncate text-center">
+        <p className="flex-1 text-sm font-semibold text-foreground truncate text-center">
           {productName}
         </p>
 
