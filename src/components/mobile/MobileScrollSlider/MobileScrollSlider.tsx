@@ -53,10 +53,17 @@ export function MobileScrollSlider({
 
   return (
     <div className={cn("w-full", className)}>
+      {/* `scroll-px-4` a juego con `px-4` (hallazgo real, 2026-11-08, consumidor
+          `HomepageProducersCarousel` en origen-web): sin `scroll-padding` a
+          juego, el motor de scroll-snap puede adelantar el `scrollLeft`
+          inicial exactamente el valor del padding, "comiéndoselo" visualmente
+          -- la primera tarjeta queda pegada al borde real de la pantalla en
+          vez de respetar el margen del propio `px-4`. Mismo patrón ya
+          aplicado en `RelatedProducts` de origen-web. */}
       <div
         ref={sliderRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-3 pb-3 px-4"
+        className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-3 pb-3 px-4 scroll-px-4"
       >
         {children.map((child, i) => (
           <div key={i} className={cn("snap-start shrink-0", cardWidthClass)}>
