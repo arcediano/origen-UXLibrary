@@ -93,7 +93,7 @@ export function MiPagina() {
 3. `npm run storybook` — Visualiza los componentes
 4. `npm run test:watch` — Tests en modo watch
 5. Crea un changeset: `npm run changeset`
-6. Abre un Pull Request a `develop`
+6. Abre un Pull Request a `dev`
 
 ---
 
