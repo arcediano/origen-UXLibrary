@@ -1,8 +1,8 @@
 /**
  * @file StatCard.tsx
  * @description Componente StatCard del Origen Design System.
- * Tarjeta KPI reutilizable con icono (gradiente), label, valor, tendencia y subtexto.
- * Diseño unificado con el dashboard principal — icono con gradiente CSS, tamaños
+ * Tarjeta KPI reutilizable con icono (color sólido), label, valor, tendencia y subtexto.
+ * Diseño unificado con el dashboard principal — icono con fondo de color sólido, tamaños
  * responsive aumentados y tendencia con `isPositive` explícito.
  *
  * @example
@@ -61,23 +61,23 @@ export interface StatCardProps {
 }
 
 // ─── Variantes de color ───────────────────────────────────────────────────────
-// Cada variante define el gradiente del contenedor del icono (icono siempre blanco)
+// Cada variante define el color SÓLIDO del contenedor del icono (sin degradado; icono siempre blanco)
 // y el borde de hover. Fondo de la card: siempre bg-surface-alt.
 
 const variantMap: Record<
   NonNullable<StatCardProps["variant"]>,
-  { iconGrad: string; hoverBorder: string }
+  { iconBg: string; hoverBorder: string }
 > = {
   // pradera→hoja falla contraste de icono (pradera ~1.87:1 con blanco, bajo
   // el umbral 3:1 de UI) — sustituido por pino→hoja (ambos ≥3.86:1). Ver auditoría v6.
-  pradera:   { iconGrad: "from-origen-pino to-origen-hoja",                 hoverBorder: "group-hover:border-origen-pradera/50" },
-  hoja:      { iconGrad: "from-origen-hoja to-origen-pino",                 hoverBorder: "group-hover:border-origen-hoja/60" },
-  bosque:    { iconGrad: "from-origen-pino to-origen-bosque",               hoverBorder: "group-hover:border-origen-bosque/50" },
-  mandarina: { iconGrad: "from-origen-mandarina to-origen-mandarina/70",    hoverBorder: "group-hover:border-origen-mandarina/50" },
-  arena:     { iconGrad: "from-origen-arena to-origen-arena/70",            hoverBorder: "group-hover:border-origen-arena/60" },
-  neutral:   { iconGrad: "from-text-subtle to-text-secondary",              hoverBorder: "group-hover:border-gray-400" },
-  oscuro:    { iconGrad: "from-origen-bosque to-origen-pino",               hoverBorder: "group-hover:border-origen-oscuro/40" },
-  danger:    { iconGrad: "from-feedback-danger to-feedback-danger/70",      hoverBorder: "group-hover:border-feedback-danger/50" },
+  pradera:   { iconBg: "bg-origen-pino",                 hoverBorder: "group-hover:border-origen-pradera/50" },
+  hoja:      { iconBg: "bg-origen-hoja",                 hoverBorder: "group-hover:border-origen-hoja/60" },
+  bosque:    { iconBg: "bg-origen-pino",               hoverBorder: "group-hover:border-origen-bosque/50" },
+  mandarina: { iconBg: "bg-origen-mandarina",    hoverBorder: "group-hover:border-origen-mandarina/50" },
+  arena:     { iconBg: "bg-origen-arena",            hoverBorder: "group-hover:border-origen-arena/60" },
+  neutral:   { iconBg: "bg-text-subtle",              hoverBorder: "group-hover:border-gray-400" },
+  oscuro:    { iconBg: "bg-origen-bosque",               hoverBorder: "group-hover:border-origen-oscuro/40" },
+  danger:    { iconBg: "bg-feedback-danger",      hoverBorder: "group-hover:border-feedback-danger/50" },
 };
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ export function StatCard({
 }: StatCardProps) {
   if (loading) return <StatCardSkeleton className={className} />;
 
-  const { iconGrad, hoverBorder } = variantMap[variant];
+  const { iconBg, hoverBorder } = variantMap[variant];
 
   // Determinar positividad: usa `isPositive` explícito si viene; si no, deduce de value > 0
   const trendPositive = trend
@@ -141,14 +141,14 @@ export function StatCard({
         )}
       >
         <div className="flex items-start gap-2 sm:gap-4 flex-1">
-          {/* Icono con gradiente — tamaños responsive aumentados a lg:w-14/h-14 */}
+          {/* Icono sobre color sólido — tamaños responsive aumentados a lg:w-14/h-14 */}
           {icon && (
             <div
               className={cn(
                 "w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14",
-                "rounded-lg sm:rounded-xl bg-linear-to-br",
+                "rounded-lg sm:rounded-xl",
                 "flex items-center justify-center shrink-0 shadow-subtle",
-                iconGrad,
+                iconBg,
               )}
               aria-hidden
             >
