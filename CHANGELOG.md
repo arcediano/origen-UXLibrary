@@ -1,5 +1,11 @@
 # @arcediano/ux-library
 
+## 0.31.4
+
+### Patch Changes
+
+- `StatCard` y `StatHighlightCard`: el icono ya no lleva degradado, sino un color sólido de la variante (petición del humano, 2026-11-17: "el icono de los stats no puede tener degradado"). Sin cambios de API; solo cambia el fondo del contenedor del icono (el icono sigue en blanco).
+
 ## 0.31.2
 
 ### Patch Changes

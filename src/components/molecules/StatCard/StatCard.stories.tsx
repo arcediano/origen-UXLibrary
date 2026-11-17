@@ -11,7 +11,7 @@ const meta: Meta<typeof StatCard> = {
     docs: {
       description: {
         component:
-          "Tarjeta KPI para fondos claros (dashboards). Icono con gradiente CSS, " +
+          "Tarjeta KPI para fondos claros (dashboards). Icono con fondo de color sólido, " +
           "tamaños responsive (móvil → tablet → desktop) y tendencia con `isPositive` " +
           "explícito o deducido del signo de `value`. " +
           "Para tarjetas sobre fondos oscuros/imágenes (hero de marketing), " +

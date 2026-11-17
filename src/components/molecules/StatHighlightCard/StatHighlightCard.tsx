@@ -1,6 +1,6 @@
 /**
  * @file StatHighlightCard.tsx
- * @description Tarjeta "stat" con icono y gradiente, pensada para fondos
+ * @description Tarjeta "stat" con icono sobre color sólido, pensada para fondos
  * oscuros o imágenes (hero de marketing, páginas de auth). Replica el patrón
  * visual usado en `HeroSection` (`/auth/register`) y `/auth/login` de
  * origen-dashboard, parametrizado.
@@ -9,7 +9,7 @@
  * - `StatCard` (molecules/StatCard): tarjeta KPI para fondos CLAROS tipo
  *   dashboard (fondo `bg-white`/gris claro + borde + tinte de color sutil).
  * - `StatHighlightCard`: tarjeta "glass" (semitransparente + blur) para usar
- *   SOBRE fondos oscuros o imágenes — badge de icono con gradiente sólido,
+ *   SOBRE fondos oscuros o imágenes — badge de icono con color sólido,
  *   valor en blanco. NO usar sobre fondos claros (el texto blanco perdería
  *   contraste).
  *
@@ -44,7 +44,8 @@ export interface StatHighlightCardProps {
   /** Texto secundario opcional, debajo del label */
   sublabel?: string;
   /**
-   * Gradiente de marca para el badge del icono.
+   * Color de marca (sólido) para el badge del icono. El nombre `gradient` se
+   * mantiene por compatibilidad.
    * @default "hoja"
    */
   gradient?: StatHighlightCardGradient;
@@ -52,22 +53,22 @@ export interface StatHighlightCardProps {
   className?: string;
 }
 
-// ─── Mapa de gradientes (badge de icono) ──────────────────────────────────────
+// ─── Mapa de colores sólidos (badge de icono) ──────────────────────────────────────
 
 // Este componente lleva texto real (valor + label) directamente sobre el
-// gradiente, en blanco — pradera→hoja fallaba WCAG AA en el extremo pradera
-// (~1.87:1). Sustituido por pino→bosque (ambos ≥5.4:1 con blanco). Ver auditoría v6.
+// color, en blanco — pradera falla WCAG AA con blanco (~1.87:1), por eso la
+// variante `pradera` usa pino (≥5.4:1). Ver auditoría v6.
 const gradientMap: Record<StatHighlightCardGradient, string> = {
-  hoja: "from-origen-hoja/95 to-origen-hoja/80",
-  pradera: "from-origen-pino to-origen-bosque",
-  bosque: "from-origen-bosque to-origen-pino",
-  mandarina: "from-origen-mandarina to-origen-mandarina/80",
+  hoja: "bg-origen-hoja",
+  pradera: "bg-origen-pino",
+  bosque: "bg-origen-bosque",
+  mandarina: "bg-origen-mandarina",
 };
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
 /**
- * Tarjeta "glass" de stat con icono y gradiente, para fondos oscuros o
+ * Tarjeta "glass" de stat con icono sobre color sólido, para fondos oscuros o
  * imágenes. Ver diferenciación con `StatCard` en la documentación del
  * archivo.
  */
@@ -91,7 +92,7 @@ export function StatHighlightCard({
       <div className="flex items-center gap-3">
         <div
           className={cn(
-            "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-linear-to-br shadow-lg md:h-12 md:w-12 md:rounded-xl",
+            "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg shadow-lg md:h-12 md:w-12 md:rounded-xl",
             "[&>svg]:h-5 [&>svg]:w-5 [&>svg]:text-white md:[&>svg]:h-6 md:[&>svg]:w-6",
             gradientMap[gradient],
           )}
